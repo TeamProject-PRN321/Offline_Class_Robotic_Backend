@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "IdQWnxxZi8o21EPJ2Thq6Rs/9KNWXK21ohLIMFcOcTIjQ8/r8UIARI5kbPextCoEkfb7DnhEytW8QacUtdNWBA==",
+  "success": true,
+  "projectFilePath": "E:\\FPT Edu\\SEP 8\\PRN231\\Offline_Class_Robotic_Backend\\OfficeClassRobotic_Api\\OfficeClassRobotic\\OfficeClassRobotic.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\duy48\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.10\\microsoft.aspnetcore.openapi.7.0.10.nupkg.sha512",
+    "C:\\Users\\duy48\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\duy48\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
+    "C:\\Users\\duy48\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
+    "C:\\Users\\duy48\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "C:\\Users\\duy48\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
+    "C:\\Users\\duy48\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
