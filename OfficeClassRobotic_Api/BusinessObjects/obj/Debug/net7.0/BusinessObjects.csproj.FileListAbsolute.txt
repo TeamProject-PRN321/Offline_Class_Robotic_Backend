@@ -1,0 +1,14 @@
+E:\FPT Edu\SEP 8\PRN231\Offline_Class_Robotic_Backend\OfficeClassRobotic_Api\BusinessObjects\bin\Debug\net7.0\BusinessObjects.deps.json
+E:\FPT Edu\SEP 8\PRN231\Offline_Class_Robotic_Backend\OfficeClassRobotic_Api\BusinessObjects\bin\Debug\net7.0\BusinessObjects.runtimeconfig.json
+E:\FPT Edu\SEP 8\PRN231\Offline_Class_Robotic_Backend\OfficeClassRobotic_Api\BusinessObjects\bin\Debug\net7.0\BusinessObjects.dll
+E:\FPT Edu\SEP 8\PRN231\Offline_Class_Robotic_Backend\OfficeClassRobotic_Api\BusinessObjects\bin\Debug\net7.0\BusinessObjects.pdb
+E:\FPT Edu\SEP 8\PRN231\Offline_Class_Robotic_Backend\OfficeClassRobotic_Api\BusinessObjects\obj\Debug\net7.0\BusinessObjects.csproj.AssemblyReference.cache
+E:\FPT Edu\SEP 8\PRN231\Offline_Class_Robotic_Backend\OfficeClassRobotic_Api\BusinessObjects\obj\Debug\net7.0\BusinessObjects.GeneratedMSBuildEditorConfig.editorconfig
+E:\FPT Edu\SEP 8\PRN231\Offline_Class_Robotic_Backend\OfficeClassRobotic_Api\BusinessObjects\obj\Debug\net7.0\BusinessObjects.AssemblyInfoInputs.cache
+E:\FPT Edu\SEP 8\PRN231\Offline_Class_Robotic_Backend\OfficeClassRobotic_Api\BusinessObjects\obj\Debug\net7.0\BusinessObjects.AssemblyInfo.cs
+E:\FPT Edu\SEP 8\PRN231\Offline_Class_Robotic_Backend\OfficeClassRobotic_Api\BusinessObjects\obj\Debug\net7.0\BusinessObjects.csproj.CoreCompileInputs.cache
+E:\FPT Edu\SEP 8\PRN231\Offline_Class_Robotic_Backend\OfficeClassRobotic_Api\BusinessObjects\obj\Debug\net7.0\BusinessObjects.dll
+E:\FPT Edu\SEP 8\PRN231\Offline_Class_Robotic_Backend\OfficeClassRobotic_Api\BusinessObjects\obj\Debug\net7.0\refint\BusinessObjects.dll
+E:\FPT Edu\SEP 8\PRN231\Offline_Class_Robotic_Backend\OfficeClassRobotic_Api\BusinessObjects\obj\Debug\net7.0\BusinessObjects.pdb
+E:\FPT Edu\SEP 8\PRN231\Offline_Class_Robotic_Backend\OfficeClassRobotic_Api\BusinessObjects\obj\Debug\net7.0\BusinessObjects.genruntimeconfig.cache
+E:\FPT Edu\SEP 8\PRN231\Offline_Class_Robotic_Backend\OfficeClassRobotic_Api\BusinessObjects\obj\Debug\net7.0\ref\BusinessObjects.dll

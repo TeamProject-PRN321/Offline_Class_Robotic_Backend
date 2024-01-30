@@ -43,6 +43,22 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.11, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -217,6 +233,9 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
+              "E:\\FPT Edu\\SEP 8\\PRN231\\Offline_Class_Robotic_Backend\\OfficeClassRobotic_Api\\BusinessObjects\\BusinessObjects.csproj": {
+                "projectPath": "E:\\FPT Edu\\SEP 8\\PRN231\\Offline_Class_Robotic_Backend\\OfficeClassRobotic_Api\\BusinessObjects\\BusinessObjects.csproj"
+              },
               "E:\\FPT Edu\\SEP 8\\PRN231\\Offline_Class_Robotic_Backend\\OfficeClassRobotic_Api\\OfficeClassRoboticRepository\\OfficeClassRoboticRepository.csproj": {
                 "projectPath": "E:\\FPT Edu\\SEP 8\\PRN231\\Offline_Class_Robotic_Backend\\OfficeClassRobotic_Api\\OfficeClassRoboticRepository\\OfficeClassRoboticRepository.csproj"
               }
@@ -236,6 +255,24 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.11, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.11, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[7.0.9, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
