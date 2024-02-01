@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeClassRobotic", "OfficeClassRobotic\OfficeClassRobotic.csproj", "{B2BD2019-1C45-411B-9673-E24268434835}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OfficeClassRobotic.Api", "OfficeClassRobotic\OfficeClassRobotic.Api.csproj", "{B2BD2019-1C45-411B-9673-E24268434835}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessObjects", "BusinessObjects\BusinessObjects.csproj", "{FB7ACCDF-26EE-4538-8293-5A05E1D9D872}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OfficeClassRobotic.DataTier", "BusinessObjects\OfficeClassRobotic.DataTier.csproj", "{FB7ACCDF-26EE-4538-8293-5A05E1D9D872}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeClassRoboticDAO", "OfficeClassRoboticDAO\OfficeClassRoboticDAO.csproj", "{D705746D-7086-4E09-A07E-793FA920021B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeClassRoboticRepository", "OfficeClassRoboticRepository\OfficeClassRoboticRepository.csproj", "{8337C51F-0D9C-4927-9EEA-BE1683FFBD0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OfficeClassRobotic.BuisnessTier", "OfficeClassRoboticDAO\OfficeClassRobotic.BuisnessTier.csproj", "{D705746D-7086-4E09-A07E-793FA920021B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +27,6 @@ Global
 		{D705746D-7086-4E09-A07E-793FA920021B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D705746D-7086-4E09-A07E-793FA920021B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D705746D-7086-4E09-A07E-793FA920021B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8337C51F-0D9C-4927-9EEA-BE1683FFBD0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8337C51F-0D9C-4927-9EEA-BE1683FFBD0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8337C51F-0D9C-4927-9EEA-BE1683FFBD0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8337C51F-0D9C-4927-9EEA-BE1683FFBD0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
