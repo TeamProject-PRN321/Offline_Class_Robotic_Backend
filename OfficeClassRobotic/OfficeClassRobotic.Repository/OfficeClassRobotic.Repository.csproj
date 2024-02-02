@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OfficeClassRobotic.DataTier\OfficeClassRobotic.DataTier.csproj" />
+    <ProjectReference Include="..\OfficeClassRobotic.DAO\OfficeClassRobotic.DAO.csproj" />
   </ItemGroup>
 
 </Project>

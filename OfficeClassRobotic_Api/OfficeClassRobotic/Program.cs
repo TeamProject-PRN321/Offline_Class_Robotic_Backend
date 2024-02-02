@@ -1,7 +1,7 @@
+using BusinessObjects;
 using Microsoft.EntityFrameworkCore;
 using OfficeClassRobotic.BuisnessTier.Implement;
 using OfficeClassRobotic.BuisnessTier.Interfaces;
-using OfficeClassRobotic.DataTier.DBContext;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+//cau hinh dbcontext
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -28,8 +29,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

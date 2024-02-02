@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Models.DataAccess;
 
-namespace OfficeClassRobotic.DataTier
+namespace BusinessObjects
 {
     public class ApplicationDBContext : DbContext
     {

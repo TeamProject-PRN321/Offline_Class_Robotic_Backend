@@ -1,4 +1,4 @@
-namespace OfficeClassRobotic.API
+namespace OfficeClassRobotic
 {
     public class WeatherForecast
     {

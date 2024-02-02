@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace OfficeClassRobotic.DataTier.Migrations
+namespace BusinessObjects.Migrations
 {
     /// <inheritdoc />
-    public partial class initdb : Migration
+    public partial class CreateDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,7 +30,7 @@ namespace OfficeClassRobotic.DataTier.Migrations
                 name: "Parents",
                 columns: table => new
                 {
-                    ParentID = table.Column<int>(type: "int", nullable: false)
+                    ParnetID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -39,7 +39,7 @@ namespace OfficeClassRobotic.DataTier.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Parents", x => x.ParentID);
+                    table.PrimaryKey("PK_Parents", x => x.ParnetID);
                 });
 
             migrationBuilder.CreateTable(
@@ -98,7 +98,7 @@ namespace OfficeClassRobotic.DataTier.Migrations
                         name: "FK_Students_Parents_ParentID",
                         column: x => x.ParentID,
                         principalTable: "Parents",
-                        principalColumn: "ParentID",
+                        principalColumn: "ParnetID",
                         onDelete: ReferentialAction.Cascade);
                 });
 

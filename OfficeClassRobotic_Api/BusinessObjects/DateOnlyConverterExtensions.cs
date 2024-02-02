@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace OfficeClassRobotic.DataTier
+namespace BusinessObjects
 {
     public class DateOnlyConverterExtensions: ValueConverter<DateOnly, DateTime>
     {
