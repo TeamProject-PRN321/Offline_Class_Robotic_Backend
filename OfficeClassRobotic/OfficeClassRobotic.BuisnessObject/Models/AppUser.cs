@@ -11,8 +11,7 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         public byte[] PassWordSalt { get; set; }
         public DateOnly DateOfBirth { get; set; }
         public string Gender { get; set; }
-        public string Introduction { get; set; }
         public string Address { get; set; }
-        public List<Photo> Photos { get; set; } = new();
+        public string? PhotoUrl { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<TrungTamRobotic> TrungTamRobotics { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
         }
@@ -33,6 +34,10 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
         {
 
+        }
+
+        public ApplicationDBContext()
+        {
         }
     }
 }

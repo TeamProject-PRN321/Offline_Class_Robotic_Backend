@@ -10,7 +10,7 @@ namespace Models.OfficeClassRobotic.BuisnessObject
     {
         public int ClassRoomID { get; set; }
         public string ClassName { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
         public virtual ICollection<Device> Devices { get; set; }
     }
 }

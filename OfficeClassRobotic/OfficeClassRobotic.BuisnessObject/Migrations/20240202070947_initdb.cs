@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace BusinessObjects.Migrations
+namespace OfficeClassRobotic.BuisnessObject.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateDB : Migration
+    public partial class initdb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,10 +27,32 @@ namespace BusinessObjects.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AppUsers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PassWordHash = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    PassWordSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "date", nullable: false),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Introduction = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhotoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Parents",
                 columns: table => new
                 {
-                    ParnetID = table.Column<int>(type: "int", nullable: false)
+                    ParentID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -39,7 +61,7 @@ namespace BusinessObjects.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Parents", x => x.ParnetID);
+                    table.PrimaryKey("PK_Parents", x => x.ParentID);
                 });
 
             migrationBuilder.CreateTable(
@@ -98,7 +120,7 @@ namespace BusinessObjects.Migrations
                         name: "FK_Students_Parents_ParentID",
                         column: x => x.ParentID,
                         principalTable: "Parents",
-                        principalColumn: "ParnetID",
+                        principalColumn: "ParentID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -369,6 +391,9 @@ namespace BusinessObjects.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AppUsers");
+
             migrationBuilder.DropTable(
                 name: "Attendances");
 

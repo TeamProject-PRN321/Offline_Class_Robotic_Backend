@@ -1,0 +1,88 @@
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Models.OfficeClassRobotic.BuisnessObject;
+using OfficeClassRobotic.API.DTOs;
+using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
+using OfficeClassRobotic.Repository.Interfaces;
+using System.Security.Cryptography;
+using System.Text;
+
+namespace OfficeClassRobotic.API.Controllers
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class AccountController : ControllerBase
+    {
+        private readonly ApplicationDBContext _context;
+        private readonly ITokenService _tokenService;
+        private readonly IMapper _mapper;
+
+        public AccountController(ApplicationDBContext context, ITokenService tokenService, IMapper mapper)
+        {
+            _context = context;
+            _tokenService = tokenService;
+            _mapper = mapper;
+        }
+
+        [HttpPost("register")]
+        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
+        {
+
+            if (await UserExists(registerDto.Username))
+            {
+                return BadRequest("Username is already taken");
+            }
+
+            var user = _mapper.Map<AppUser>(registerDto);
+
+            using var hmac = new HMACSHA512();
+
+            user.UserName = registerDto.Username.ToLower();
+            user.PassWordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
+            user.PassWordSalt = hmac.Key;
+
+            _context.AppUsers.Add(user);
+            await _context.SaveChangesAsync();
+
+            return new UserDto
+            {
+                Username = user.UserName,
+                TokenKey = _tokenService.CreateToken(user),
+                Gender = user.Gender
+            };
+        }
+
+        [HttpPost("login")]
+        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
+        {
+            var user = await _context.AppUsers
+                .SingleOrDefaultAsync(x => x.UserName == loginDto.Username);
+
+            if (user == null) return Unauthorized("Invalid user name");
+
+            using var hmac = new HMACSHA512(user.PassWordSalt);
+            var computeHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
+            for (int i = 0; i < computeHash.Length; i++)
+            {
+                if (computeHash[i] != user.PassWordHash[i])
+                {
+                    return Unauthorized("Invalid password");
+                }
+            }
+
+            return new UserDto
+            {
+                Username = user.UserName,
+                TokenKey = _tokenService.CreateToken(user),
+                PhotoUrl = user.PhotoUrl,
+                Gender = user.Gender
+            };
+        }
+
+        private async Task<bool> UserExists(string username)
+        {
+            return await _context.AppUsers.AnyAsync(x => x.UserName.ToLower() == username.ToLower());
+        }
+    }
+}

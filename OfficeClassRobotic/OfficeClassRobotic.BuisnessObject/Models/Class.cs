@@ -12,7 +12,7 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         public string ClassName { get; set; }
         public DateTime DayStudy { get; set; }
         public int NumberOfSudent { get; set; }
-        public double MarkOfStudent { get; set; }
+        public double? MarkOfStudent { get; set; }
         public int SubjectID { get; set; }
         public virtual Subject Subject { get; set; }
         public int TeacherID {  get; set; }

@@ -10,7 +10,7 @@ namespace Models.OfficeClassRobotic.BuisnessObject
     {
         public int FeedbackID { get; set; }
         public string FeedBackName { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
         public int StudentID { get; set; }
         public virtual Student Student { get; set; }
         public int TeacherID { get; set; }
