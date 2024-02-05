@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using OfficeClassRobotic.BuisnessTier.Implement;
-using OfficeClassRobotic.BuisnessTier.Interfaces;
-using OfficeClassRobotic.DataTier.DBContext;
+using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
+using OfficeClassRobotic.Repository.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
