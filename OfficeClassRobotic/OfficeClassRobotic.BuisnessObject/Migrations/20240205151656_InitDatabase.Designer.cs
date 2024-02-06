@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
 
@@ -11,9 +12,11 @@ using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
 namespace OfficeClassRobotic.BuisnessObject.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240205151656_InitDatabase")]
+    partial class InitDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,7 +177,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TrungTamRoboticID")
+                    b.Property<int?>("TrungTamRoboticID")
                         .HasColumnType("int");
 
                     b.HasKey("ClassRoomID");
@@ -376,6 +379,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("SubjectName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TotalSlots")
@@ -486,13 +490,9 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Classroom", b =>
                 {
-                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.TrungTamRobotic", "TrungTamRobotic")
+                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.TrungTamRobotic", null)
                         .WithMany("Classrooms")
-                        .HasForeignKey("TrungTamRoboticID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("TrungTamRobotic");
+                        .HasForeignKey("TrungTamRoboticID");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Device", b =>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Models.OfficeClassRobotic.BuisnessObject;
 using OfficeClassRobotic.DataTier.ConvertTer;
 
@@ -21,6 +22,18 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
         public DbSet<AppUser> AppUsers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                     .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                     .AddJsonFile("appsettings.json", true, true)
+                     .Build();
+            if (!optionsBuilder.IsConfigured) {
+                optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+            }
         }
 
         protected override void ConfigureConventions(ModelConfigurationBuilder builder)
@@ -40,4 +53,5 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
         {
         }
     }
+    
 }

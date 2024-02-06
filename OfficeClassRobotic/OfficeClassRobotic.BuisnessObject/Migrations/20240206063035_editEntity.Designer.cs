@@ -12,8 +12,8 @@ using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
 namespace OfficeClassRobotic.BuisnessObject.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240202102628_updateDb")]
-    partial class updateDb
+    [Migration("20240206063035_editEntity")]
+    partial class editEntity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -114,8 +114,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
                     b.HasKey("AttendanceID");
 
-                    b.HasIndex("ClassID")
-                        .IsUnique();
+                    b.HasIndex("ClassID");
 
                     b.ToTable("Attendances");
                 });
@@ -152,8 +151,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
                     b.HasKey("ClassID");
 
-                    b.HasIndex("SubjectID")
-                        .IsUnique();
+                    b.HasIndex("SubjectID");
 
                     b.HasIndex("TeacherID");
 
@@ -177,7 +175,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TrungTamRoboticID")
+                    b.Property<int>("TrungTamRoboticID")
                         .HasColumnType("int");
 
                     b.HasKey("ClassRoomID");
@@ -271,8 +269,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
                     b.HasKey("GiaoTrinhID");
 
-                    b.HasIndex("SubjectID")
-                        .IsUnique();
+                    b.HasIndex("SubjectID");
 
                     b.ToTable("GiaoTrinhs");
                 });
@@ -379,7 +376,6 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("SubjectName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TotalSlots")
@@ -453,8 +449,8 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Attendance", b =>
                 {
                     b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Class", "Class")
-                        .WithOne("Attendance")
-                        .HasForeignKey("Models.OfficeClassRobotic.BuisnessObject.Attendance", "ClassID")
+                        .WithMany()
+                        .HasForeignKey("ClassID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -464,8 +460,8 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Class", b =>
                 {
                     b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Subject", "Subject")
-                        .WithOne("Class")
-                        .HasForeignKey("Models.OfficeClassRobotic.BuisnessObject.Class", "SubjectID")
+                        .WithMany()
+                        .HasForeignKey("SubjectID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -490,9 +486,13 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Classroom", b =>
                 {
-                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.TrungTamRobotic", null)
+                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.TrungTamRobotic", "TrungTamRobotic")
                         .WithMany("Classrooms")
-                        .HasForeignKey("TrungTamRoboticID");
+                        .HasForeignKey("TrungTamRoboticID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TrungTamRobotic");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Device", b =>
@@ -528,8 +528,8 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.GiaoTrinh", b =>
                 {
                     b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Subject", "Subject")
-                        .WithOne("GiaoTrinh")
-                        .HasForeignKey("Models.OfficeClassRobotic.BuisnessObject.GiaoTrinh", "SubjectID")
+                        .WithMany()
+                        .HasForeignKey("SubjectID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -585,12 +585,6 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Navigation("Robotics");
                 });
 
-            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Class", b =>
-                {
-                    b.Navigation("Attendance")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Classroom", b =>
                 {
                     b.Navigation("Devices");
@@ -606,15 +600,6 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Navigation("Feedbacks");
 
                     b.Navigation("Subjects");
-                });
-
-            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Subject", b =>
-                {
-                    b.Navigation("Class")
-                        .IsRequired();
-
-                    b.Navigation("GiaoTrinh")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Teacher", b =>
