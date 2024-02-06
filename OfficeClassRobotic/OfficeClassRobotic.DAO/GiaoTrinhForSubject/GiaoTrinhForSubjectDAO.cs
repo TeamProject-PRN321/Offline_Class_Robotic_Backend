@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Models.OfficeClassRobotic.BuisnessObject;
+using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
 using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
+using OfficeClassRobotic.Service.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,8 +25,7 @@ namespace OfficeClassRobotic.DAO.GiaoTrinhForSubject
         {
             get
             {
-                if (instance == null)
-                {
+                if (instance == null) {
                     instance = new GiaoTrinhForSubjectDAO();
                 }
                 return instance;
@@ -32,37 +33,53 @@ namespace OfficeClassRobotic.DAO.GiaoTrinhForSubject
             private set => instance = value;
         }
 
-        public async Task CreateGiaoTrinhForSubject(GiaoTrinhDTO giaotrinh)
+        public async Task CreateSubjectForListStudentWithGiaoTrinh(SubjectDTO subject)
         {
             try {
-
-                /*var subject = await dBContext.Subjects.Where(s => s.StudentID.Equals(giaotrinh.SubjectDTO.StudentID)).SingleOrDefaultAsync();
-                if (subject != null) {
-                    throw new Exception("BadRequest");
-                }*/
-                var subject = new Subject();
-                subject.SubjectName = giaotrinh.SubjectDTO.SubjectName;
-                subject.TotalSlots = giaotrinh.SubjectDTO.TotalSlots;
-                subject.StudentID = giaotrinh.SubjectDTO.StudentID;
-                dBContext.Subjects.Add(subject);
-                await dBContext.SaveChangesAsync();
-
-                var giaotrinhEntity = new GiaoTrinh
+                // new giaoTrinh
+                var giaoTrinh = new GiaoTrinh
                 {
-                    GiaoTrinhName = giaotrinh.GiaoTrinhName,
-                    Description = giaotrinh.Description,
-                    FilePDF = giaotrinh.FilePDF,
-                    SubjectID = subject.SubjectID,
+                    GiaoTrinhName = subject.GiaoTrinhDTO.GiaoTrinhName,
+                    Description = subject.GiaoTrinhDTO.Description,
+                    FilePDF = subject.GiaoTrinhDTO.FilePDF,
+                    Created = DateTime.Now,
                 };
-                dBContext.GiaoTrinhs.Add(giaotrinhEntity);
+                dBContext.GiaoTrinhs.Add(giaoTrinh);
+                await dBContext.SaveChangesAsync();
+
+                // check studentId into Subject
+                var studentList = subject.StudentList.Select(s => s.StudentID).ToList();
+                var studentExistWithSubject = await dBContext.Subjects
+                    .Where(s => studentList.Contains(s.StudentID) && s.GiaoTrinhID == giaoTrinh.GiaoTrinhID && !s.IsDeleted)
+                    .ToListAsync();
+                if (studentExistWithSubject.Count() != 0) {
+                    throw new BadRequestException("Student Id already existed");
+                }
+                foreach (var student in studentList) {
+                    var studentExist = await dBContext.Students
+                        .Where(s => s.StudentID == student && !s.IsDeleted)
+                        .SingleOrDefaultAsync();
+                    if (studentExist == null)
+                    {
+                        throw new BadRequestException($"StudentId: {student} doesn't existed");
+                    }
+                    var newSubject = new Subject
+                    {
+                        SubjectName = subject.SubjectName,
+                        TotalSlots = subject.TotalSlots,
+                        Created = DateTime.Now,
+                        GiaoTrinhID = giaoTrinh.GiaoTrinhID,
+                        StudentID = student
+                    };
+                    dBContext.Subjects.Add(newSubject);
+                }
 
                 await dBContext.SaveChangesAsync();
-                
             }
             catch (Exception ex) {
-                throw new Exception(ex.ToString());
+                throw new BadRequestException(ex.ToString());
             }
-            
+
         }
     }
 }

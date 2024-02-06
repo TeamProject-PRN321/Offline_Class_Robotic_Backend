@@ -15,6 +15,11 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         public int TrungTamRoboticID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
+        public bool IsDeleted { get; set; } = false;
+        public DateTime? Created { get; set; }
+        public string? CreatedBy { get; set; }
+        public DateTime? LastModified { get; set; }
+        public string? LastModifiedBy { get; set; }
         [ForeignKey("Admin")]
         public int AdminID { get; set; }
 

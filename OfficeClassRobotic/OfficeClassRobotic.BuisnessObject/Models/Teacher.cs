@@ -18,6 +18,11 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         public string Address { get; set; }
         public string Major { get; set; }
         public string Certification { get; set; }
+        public bool IsDeleted { get; set; } = false;
+        public DateTime? Created { get; set; }
+        public string? CreatedBy { get; set; }
+        public DateTime? LastModified { get; set; }
+        public string? LastModifiedBy { get; set; }
 
         public virtual IList<FeedBack> Feedbacks { get; set; }
         public virtual IList<Class> Classes { get; set; }

@@ -5,11 +5,11 @@ VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OfficeClassRobotic.API", "OfficeClassRobotic.API\OfficeClassRobotic.API.csproj", "{2F1DE525-F137-464F-8C38-A4F641178772}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeClassRobotic.DAO", "OfficeClassRobotic.DAO\OfficeClassRobotic.DAO.csproj", "{1200BE85-3C11-4CA8-AD2D-8CCF689E634D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OfficeClassRobotic.DAO", "OfficeClassRobotic.DAO\OfficeClassRobotic.DAO.csproj", "{1200BE85-3C11-4CA8-AD2D-8CCF689E634D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeClassRobotic.Repository", "OfficeClassRobotic.Repository\OfficeClassRobotic.Repository.csproj", "{50BF87AD-AFF2-4AAA-9019-3B3002071614}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OfficeClassRobotic.Repository", "OfficeClassRobotic.Repository\OfficeClassRobotic.Repository.csproj", "{50BF87AD-AFF2-4AAA-9019-3B3002071614}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OfficeClassRobotic.BuisnessObject", "OfficeClassRobotic.BuisnessObject\OfficeClassRobotic.BuisnessObject.csproj", "{7689F571-7994-4B23-BDF8-7724A5E14097}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OfficeClassRobotic.BuisnessObject", "OfficeClassRobotic.BuisnessObject\OfficeClassRobotic.BuisnessObject.csproj", "{7689F571-7994-4B23-BDF8-7724A5E14097}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

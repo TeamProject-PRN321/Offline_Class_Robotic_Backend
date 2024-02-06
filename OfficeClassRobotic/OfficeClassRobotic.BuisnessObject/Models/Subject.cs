@@ -15,12 +15,18 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         public int SubjectID { get; set; }
         public string? SubjectName { get; set; }
         public int TotalSlots { get; set; }
-
+        [ForeignKey("GiaoTrinh")]
+        public int GiaoTrinhID { get; set; }
         [ForeignKey("Student")]
         public int StudentID { get; set; }
+        public bool IsDeleted { get; set; } = false;
+        public DateTime? Created { get; set; }
+        public string? CreatedBy { get; set; }
+        public DateTime? LastModified { get; set; }
+        public string? LastModifiedBy { get; set; }
 
         public virtual Student? Student { get; set; }
-        public virtual Class Class { get; set; }
-        public virtual GiaoTrinh GiaoTrinh { get; set; }
+        public virtual Class? Class { get; set; }
+        public virtual GiaoTrinh? GiaoTrinh { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
 using OfficeClassRobotic.DAO.Parents;
 using OfficeClassRobotic.DAO.Students;
 using OfficeClassRobotic.Repository.Parents;
@@ -11,17 +12,49 @@ namespace OfficeClassRobotic.API.Controllers.Students
     [ApiController]
     public class StudentsController : ControllerBase
     {
-        private readonly IStudentRepository studentRepository;
-        public StudentsController()
+        private readonly IStudentRepository _studentRepository;
+        public StudentsController(IStudentRepository studentRepository)
         {
-            studentRepository = new StudentRepository();
+            _studentRepository = studentRepository;
         }
 
         [HttpPost]
         [Route("add")]
-        public Task Create(StudentDTO request)
+        public Task<ClassRoboticResponse> Create(CreateStudentCommand request)
         {
-            var result = studentRepository.CreateStudent(request);
+            var result = _studentRepository.CreateStudent(request);
+            return result;
+        }
+
+        [HttpPut]
+        [Route("edit")]
+        public Task<ClassRoboticResponse> Update(UpdateStudentCommand request)
+        {
+            var result = _studentRepository.UpdateStudent(request);
+            return result;
+        }
+
+        [HttpDelete]
+        [Route("remove")]
+        public Task<ClassRoboticResponse> Delete(DeleteStudentCommand request)
+        {
+            var result = _studentRepository.DeleteStudent(request);
+            return result;
+        }
+
+        [HttpGet]
+        [Route("all")]
+        public Task<List<StudentResponse>> GetAll()
+        {
+            var result = _studentRepository.GetAllStudent();
+            return result;
+        }
+
+        [HttpGet]
+        [Route("{parentId}")]
+        public Task<StudentResponse> GetById(int parentId)
+        {
+            var result = _studentRepository.GetStudentById(parentId);
             return result;
         }
     }

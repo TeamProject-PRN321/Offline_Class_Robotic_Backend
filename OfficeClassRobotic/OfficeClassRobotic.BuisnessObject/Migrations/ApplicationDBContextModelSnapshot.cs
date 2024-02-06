@@ -36,6 +36,21 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("date");
 
+                    b.Property<DateTime?>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -106,7 +121,22 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<int>("ClassID")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AttendanceID");
@@ -129,8 +159,23 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("DayStudy")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double?>("MarkOfStudent")
                         .HasColumnType("float");
@@ -171,7 +216,22 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TrungTamRoboticID")
@@ -195,11 +255,26 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<int>("ClassRoomID")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DeviceName")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double?>("PriceOfDevice")
@@ -223,11 +298,26 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FeedbackID"));
 
+                    b.Property<DateTime?>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FeedBackName")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StudentID")
@@ -253,6 +343,12 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GiaoTrinhID"));
 
+                    b.Property<DateTime?>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -260,16 +356,18 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("GiaoTrinhName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SubjectID")
-                        .HasColumnType("int");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("GiaoTrinhID");
-
-                    b.HasIndex("SubjectID")
-                        .IsUnique();
 
                     b.ToTable("GiaoTrinhs");
                 });
@@ -288,6 +386,21 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("date");
+
+                    b.Property<DateTime?>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -316,6 +429,21 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("date");
+
+                    b.Property<DateTime?>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -350,6 +478,21 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("date");
 
+                    b.Property<DateTime?>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -372,6 +515,24 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubjectID"));
 
+                    b.Property<DateTime?>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GiaoTrinhID")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("StudentID")
                         .HasColumnType("int");
 
@@ -382,6 +543,9 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("SubjectID");
+
+                    b.HasIndex("GiaoTrinhID")
+                        .IsUnique();
 
                     b.HasIndex("StudentID");
 
@@ -405,6 +569,21 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
                     b.Property<string>("Certification")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Major")
@@ -434,6 +613,21 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
                     b.Property<int>("AdminID")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -525,17 +719,6 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Navigation("Teacher");
                 });
 
-            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.GiaoTrinh", b =>
-                {
-                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Subject", "Subject")
-                        .WithOne("GiaoTrinh")
-                        .HasForeignKey("Models.OfficeClassRobotic.BuisnessObject.GiaoTrinh", "SubjectID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Subject");
-                });
-
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Staff", b =>
                 {
                     b.HasOne("Models.OfficeClassRobotic.BuisnessObject.TrungTamRobotic", "TrungTamRobotic")
@@ -560,11 +743,19 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Subject", b =>
                 {
+                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.GiaoTrinh", "GiaoTrinh")
+                        .WithOne("Subject")
+                        .HasForeignKey("Models.OfficeClassRobotic.BuisnessObject.Subject", "GiaoTrinhID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Student", "Student")
                         .WithMany("Subjects")
                         .HasForeignKey("StudentID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("GiaoTrinh");
 
                     b.Navigation("Student");
                 });
@@ -596,6 +787,11 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Navigation("Devices");
                 });
 
+            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.GiaoTrinh", b =>
+                {
+                    b.Navigation("Subject");
+                });
+
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Parent", b =>
                 {
                     b.Navigation("Students");
@@ -610,11 +806,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Subject", b =>
                 {
-                    b.Navigation("Class")
-                        .IsRequired();
-
-                    b.Navigation("GiaoTrinh")
-                        .IsRequired();
+                    b.Navigation("Class");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Teacher", b =>

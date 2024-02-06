@@ -1,4 +1,6 @@
-﻿using OfficeClassRobotic.DAO.Students;
+﻿using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
+using OfficeClassRobotic.DAO.Parents;
+using OfficeClassRobotic.DAO.Students;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,10 @@ namespace OfficeClassRobotic.Repository.Students
 {
     public interface IStudentRepository
     {
-        public Task CreateStudent(StudentDTO student);
+        public Task<ClassRoboticResponse> CreateStudent(CreateStudentCommand student);
+        public Task<ClassRoboticResponse> UpdateStudent(UpdateStudentCommand student);
+        public Task<ClassRoboticResponse> DeleteStudent(DeleteStudentCommand student);
+        public Task<List<StudentResponse>> GetAllStudent();
+        public Task<StudentResponse> GetStudentById(int studentId);
     }
 }

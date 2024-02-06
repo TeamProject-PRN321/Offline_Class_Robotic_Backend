@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
 using OfficeClassRobotic.DAO.GiaoTrinhForSubject;
 using OfficeClassRobotic.Repository.GiaoTrinhForSubject;
 
@@ -17,9 +18,9 @@ namespace OfficeClassRobotic.API.Controllers.GiaoTrinhs
 
         [HttpPost]
         [Route("add")]
-        public Task Create(GiaoTrinhDTO request)
+        public Task<ClassRoboticResponse> Create(SubjectDTO request)
         {
-            var result = _giaoTrinhForSubjectsRepository.CreateGiaoTrinhForSubject(request);
+            var result = _giaoTrinhForSubjectsRepository.CreateSubjectForListStudentWithGiaoTrinh(request);
             return result;
         }
     }

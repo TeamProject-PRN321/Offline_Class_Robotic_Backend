@@ -1,4 +1,5 @@
-﻿using OfficeClassRobotic.DAO.Parents;
+﻿using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
+using OfficeClassRobotic.DAO.Parents;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,10 @@ namespace OfficeClassRobotic.Repository.Parents
 {
     public interface IParentRepostitory
     {
-        public Task CreateParent(ParentDTO parent);
+        public Task<ClassRoboticResponse> CreateParent(CreateParentCommand parent);
+        public Task<ClassRoboticResponse> UpdateParent(UpdateParentCommand parent);
+        public Task<ClassRoboticResponse> DeleteParent(DeleteParentCommand parent);
+        public Task<List<ParentResponse>> GetAllParent();
+        public Task<ParentResponse> GetParentById(int parentId);
     }
 }

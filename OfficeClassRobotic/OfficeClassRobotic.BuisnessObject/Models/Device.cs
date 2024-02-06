@@ -17,6 +17,11 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         public string? Description { get; set; }
         public double? PriceOfDevice { get; set; }
         public bool? StatusOfDevice { get; set; }
+        public bool IsDeleted { get; set; } = false;
+        public DateTime? Created { get; set; }
+        public string? CreatedBy { get; set; }
+        public DateTime? LastModified { get; set; }
+        public string? LastModifiedBy { get; set; }
         [ForeignKey("Classroom")]
         public int ClassRoomID { get; set; }
 

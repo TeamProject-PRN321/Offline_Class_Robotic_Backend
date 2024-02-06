@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Models.OfficeClassRobotic.BuisnessObject;
+using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
 using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
+using OfficeClassRobotic.Service.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,24 +31,105 @@ namespace OfficeClassRobotic.DAO.Students
             private set => instance = value;
         }
 
-        public async Task CreateStudent(StudentDTO student)
+        public async Task CreateStudent(CreateStudentCommand student)
         {
-            var studentExist = await dbContext.Students
+            try {
+                var parentExist = await dbContext.Parents.Where(p => p.ParentID == student.ParentID && !p.IsDeleted).SingleOrDefaultAsync();
+                if(parentExist == null) {
+                    throw new NotFoundException("Parent doesn't existed");
+                }
+                var studentExist = await dbContext.Students
                 .Where(s => s.Name == student.Name && s.ParentID == student.ParentID)
                 .SingleOrDefaultAsync();
-            if (studentExist != null) {
-                throw new Exception("BadRequest");
-            }
-            var newStudent = new Student
-            {
-                Name = student.Name,
-                Address = student.Address,
-                Birthday = student.Birthday,
-                ParentID = student.ParentID
-            };
+                if (studentExist != null) {
+                    throw new BadRequestException("Student is existed");
+                }
+                var newStudent = new Student
+                {
+                    Name = student.Name,
+                    Address = student.Address,
+                    Birthday = student.Birthday,
+                    ParentID = student.ParentID
+                };
 
-            dbContext.Students.Add(newStudent);
-            await dbContext.SaveChangesAsync();
+                dbContext.Students.Add(newStudent);
+                await dbContext.SaveChangesAsync();
+            }
+            catch (Exception ex) {
+                throw new BadRequestException(ex.Message);
+            }
+        }
+
+        public async Task UpdateStudent(UpdateStudentCommand student)
+        {
+            try {
+                var studentExist = await dbContext.Students
+                .Where(s => s.StudentID == student.StudentId && !s.IsDeleted)
+                .SingleOrDefaultAsync();
+                if (studentExist == null) {
+                    throw new NotFoundException("StudentId does not exist to update");
+                }
+                studentExist.Name = student.Name;
+                studentExist.Address = student.Address;
+                studentExist.Birthday = student.Birthday;
+                studentExist.ParentID = student.ParentID;
+
+                dbContext.Students.Update(studentExist);
+                await dbContext.SaveChangesAsync();
+            }
+            catch (Exception ex) {
+                throw new BadRequestException(ex.Message);
+            }
+        }
+
+        public async Task DeleteStudent(DeleteStudentCommand student)
+        {
+            try {
+                var studentExist = await dbContext.Students
+                .Where(s => s.StudentID == student.StudentId && !s.IsDeleted)
+                .SingleOrDefaultAsync();
+                if (studentExist == null) {
+                    throw new NotFoundException("StudentId does not exist to delete");
+                }
+                studentExist.IsDeleted = true;
+
+                dbContext.Students.Update(studentExist);
+                await dbContext.SaveChangesAsync();
+            }
+            catch (Exception ex) {
+                throw new BadRequestException(ex.Message);
+            }
+        }
+
+        public async Task<List<Student>> GetAllStudent()
+        {
+            try {
+                var studentList = await dbContext.Students
+                .Where(s => !s.IsDeleted)
+                .ToListAsync();
+                
+                return studentList;
+            }
+            catch (Exception ex) {
+                throw new BadRequestException(ex.Message);
+            }
+        }
+
+        public async Task<Student> GetStudentById(int student)
+        {
+            try {
+                var studentExist = await dbContext.Students
+                .Where(s => s.StudentID == student && !s.IsDeleted)
+                .SingleOrDefaultAsync();
+                if (studentExist == null) {
+                    throw new NotFoundException("Student Id does not existed");
+                }
+
+                return studentExist;
+            }
+            catch (Exception ex) {
+                throw new BadRequestException(ex.Message);
+            }
         }
     }
 }
