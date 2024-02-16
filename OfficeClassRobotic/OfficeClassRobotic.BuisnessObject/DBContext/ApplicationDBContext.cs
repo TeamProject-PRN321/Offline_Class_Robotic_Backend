@@ -53,7 +53,8 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                      .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                      .AddJsonFile("appsettings.json", true, true)
                      .Build();
-            if (!optionsBuilder.IsConfigured) {
+            if (!optionsBuilder.IsConfigured)
+            {
                 optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             }
         }
@@ -90,5 +91,5 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
         {
         }
     }
-    
+
 }

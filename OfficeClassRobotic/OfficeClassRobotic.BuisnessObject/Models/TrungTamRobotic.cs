@@ -20,7 +20,6 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         public Guid AdminId { get; set; }
 
         public virtual Admin Admin { get; set; }
-        public virtual IList<Class> Classes { get; set; }
         public virtual IList<Staff> Staffs { get; set; }
         public virtual IList<Classroom> Classrooms { get; set; }
     }

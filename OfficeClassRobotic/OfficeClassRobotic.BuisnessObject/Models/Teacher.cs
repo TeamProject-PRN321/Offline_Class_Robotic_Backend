@@ -21,6 +21,5 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         public string Certification { get; set; }
 
         public virtual IList<FeedBack> Feedbacks { get; set; }
-        public virtual IList<Class> Classes { get; set; }
     }
 }

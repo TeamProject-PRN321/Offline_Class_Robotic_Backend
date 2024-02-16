@@ -21,5 +21,6 @@ namespace Models.OfficeClassRobotic.BuisnessObject
 
         public virtual TrungTamRobotic TrungTamRobotic { get; set; }
         public virtual IList<Device> Devices { get; set; }
+        public virtual IList<ClassSchedule> ClassSchedules { get; set; }
     }
 }

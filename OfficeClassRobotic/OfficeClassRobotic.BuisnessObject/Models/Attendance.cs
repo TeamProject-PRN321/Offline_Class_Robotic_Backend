@@ -19,6 +19,6 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         [ForeignKey("Class")]
         public Guid ClassId { get; set; }
 
-        public virtual Class Class { get; set; }
+        public virtual ClassSubject ClassSubject { get; set; }
     }
 }
