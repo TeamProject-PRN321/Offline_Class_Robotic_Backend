@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OfficeClassRobotic.BuisnessObject.Models.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,25 +9,19 @@ using System.Threading.Tasks;
 
 namespace Models.OfficeClassRobotic.BuisnessObject
 {
-    public class Subject
+    public class Subject : BaseAuditableEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int SubjectID { get; set; }
+        /*[Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]*/
+        //public int SubjectID { get; set; }
         public string? SubjectName { get; set; }
         public int TotalSlots { get; set; }
         [ForeignKey("GiaoTrinh")]
-        public int GiaoTrinhID { get; set; }
-        [ForeignKey("Student")]
-        public int StudentID { get; set; }
-        public bool IsDeleted { get; set; } = false;
-        public DateTime? Created { get; set; }
-        public string? CreatedBy { get; set; }
-        public DateTime? LastModified { get; set; }
-        public string? LastModifiedBy { get; set; }
-
-        public virtual Student? Student { get; set; }
+        public Guid GiaoTrinhId { get; set; }
+        
         public virtual Class? Class { get; set; }
         public virtual GiaoTrinh? GiaoTrinh { get; set; }
+
+        public ICollection<StudentSubject> StudentSubjects { get; set; }
     }
 }

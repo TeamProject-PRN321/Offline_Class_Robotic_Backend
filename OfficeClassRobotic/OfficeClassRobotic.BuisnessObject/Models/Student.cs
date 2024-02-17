@@ -6,27 +6,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OfficeClassRobotic.BuisnessObject.Models.Common;
 
 namespace Models.OfficeClassRobotic.BuisnessObject
 {
-    public class Student
+    public class Student : BaseAuditableEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int StudentID { get; set; }
+        /*[Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]*/
+        //public int StudentID { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public DateOnly Birthday { get; set; }
-        public bool IsDeleted { get; set; } = false;
-        public DateTime? Created { get; set; }
-        public string? CreatedBy { get; set; }
-        public DateTime? LastModified { get; set; }
-        public string? LastModifiedBy { get; set; }
         [ForeignKey("Parent")]
-        public int ParentID { get; set; }
+        public Guid ParentId { get; set; }
 
         public virtual Parent Parent { get; set; }
-        public virtual IList<Subject> Subjects { get; set; }
         public virtual IList<FeedBack> Feedbacks { get; set; }
+
+        public ICollection<StudentSubject> StudentSubjects { get; set; }
     }
 }

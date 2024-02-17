@@ -34,12 +34,12 @@ namespace OfficeClassRobotic.DAO.Students
         public async Task CreateStudent(CreateStudentCommand student)
         {
             try {
-                var parentExist = await dbContext.Parents.Where(p => p.ParentID == student.ParentID && !p.IsDeleted).SingleOrDefaultAsync();
+                var parentExist = await dbContext.Parents.Where(p => p.Id == Guid.Parse(student.ParentID) && !p.IsDeleted).SingleOrDefaultAsync();
                 if(parentExist == null) {
                     throw new NotFoundException("Parent doesn't existed");
                 }
                 var studentExist = await dbContext.Students
-                .Where(s => s.Name == student.Name && s.ParentID == student.ParentID)
+                .Where(s => s.Name == student.Name && s.ParentId == Guid.Parse(student.ParentID))
                 .SingleOrDefaultAsync();
                 if (studentExist != null) {
                     throw new BadRequestException("Student is existed");
@@ -49,7 +49,7 @@ namespace OfficeClassRobotic.DAO.Students
                     Name = student.Name,
                     Address = student.Address,
                     Birthday = student.Birthday,
-                    ParentID = student.ParentID
+                    ParentId = Guid.Parse(student.ParentID)
                 };
 
                 dbContext.Students.Add(newStudent);
@@ -64,7 +64,7 @@ namespace OfficeClassRobotic.DAO.Students
         {
             try {
                 var studentExist = await dbContext.Students
-                .Where(s => s.StudentID == student.StudentId && !s.IsDeleted)
+                .Where(s => s.Id == Guid.Parse(student.StudentId) && !s.IsDeleted)
                 .SingleOrDefaultAsync();
                 if (studentExist == null) {
                     throw new NotFoundException("StudentId does not exist to update");
@@ -72,7 +72,7 @@ namespace OfficeClassRobotic.DAO.Students
                 studentExist.Name = student.Name;
                 studentExist.Address = student.Address;
                 studentExist.Birthday = student.Birthday;
-                studentExist.ParentID = student.ParentID;
+                studentExist.ParentId = Guid.Parse(student.ParentID);
 
                 dbContext.Students.Update(studentExist);
                 await dbContext.SaveChangesAsync();
@@ -86,7 +86,7 @@ namespace OfficeClassRobotic.DAO.Students
         {
             try {
                 var studentExist = await dbContext.Students
-                .Where(s => s.StudentID == student.StudentId && !s.IsDeleted)
+                .Where(s => s.Id == Guid.Parse(student.StudentId) && !s.IsDeleted)
                 .SingleOrDefaultAsync();
                 if (studentExist == null) {
                     throw new NotFoundException("StudentId does not exist to delete");
@@ -115,11 +115,11 @@ namespace OfficeClassRobotic.DAO.Students
             }
         }
 
-        public async Task<Student> GetStudentById(int student)
+        public async Task<Student> GetStudentById(string student)
         {
             try {
                 var studentExist = await dbContext.Students
-                .Where(s => s.StudentID == student && !s.IsDeleted)
+                .Where(s => s.Id == Guid.Parse(student) && !s.IsDeleted)
                 .SingleOrDefaultAsync();
                 if (studentExist == null) {
                     throw new NotFoundException("Student Id does not existed");

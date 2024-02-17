@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OfficeClassRobotic.BuisnessObject.Models.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,26 +9,21 @@ using System.Threading.Tasks;
 
 namespace Models.OfficeClassRobotic.BuisnessObject
 {
-    public class Class
+    public class Class : BaseAuditableEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ClassID { get; set; }
+        /*[Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]*/
+        //public int ClassID { get; set; }
         public string ClassName { get; set; }
         public DateTime DayStudy { get; set; }
         public int NumberOfSudent { get; set; }
         public double? MarkOfStudent { get; set; }
-        public bool IsDeleted { get; set; } = false;
-        public DateTime? Created { get; set; }
-        public string? CreatedBy { get; set; }
-        public DateTime? LastModified { get; set; }
-        public string? LastModifiedBy { get; set; }
         [ForeignKey("Subject")]
-        public int SubjectID { get; set; }
+        public Guid SubjectId { get; set; }
         [ForeignKey("Teacher")]
-        public int TeacherID {  get; set; }
+        public Guid TeacherId { get; set; }
         [ForeignKey("TrungTamRobotic")]
-        public int TrungTamRoboticID { get; set; }
+        public Guid TrungTamRoboticId { get; set; }
 
         public virtual Subject Subject { get; set; }
         public virtual TrungTamRobotic TrungTamRobotic { get; set; }

@@ -13,32 +13,32 @@ namespace OfficeClassRobotic.DAO.Students
         public string? Address { get; set; }
         public DateOnly Birthday { get; set; }
         
-        public int ParentID { get; set; }
+        public string ParentID { get; set; }
     }
 
     public class DeleteStudentCommand
     {
-        public int StudentId { get; set; }
+        public string StudentId { get; set; }
     }
 
     public class UpdateStudentCommand
     {
-        public int StudentId { get; set; }
+        public string StudentId { get; set; }
         public string? Name { get; set; }
         public string? Address { get; set; }
         public DateOnly Birthday { get; set; }
 
-        public int ParentID { get; set; }
+        public string ParentID { get; set; }
     }
 
     public class StudentResponse
     {
-        public int StudentId { get; set; }
+        public Guid Id { get; set; }
         public string? Name { get; set; }
         public string? Address { get; set; }
         public DateOnly Birthday { get; set; }
 
-        public int ParentID { get; set; }
+        public Guid ParentId { get; set; }
         public DateTime? Created {  get; set; }
     }
 }

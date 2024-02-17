@@ -2,6 +2,7 @@
 using OfficeClassRobotic.BuisnessTier.Implement;
 using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
 using OfficeClassRobotic.Repository.GiaoTrinhForSubject;
+using OfficeClassRobotic.Repository.GiaoTrinhs;
 using OfficeClassRobotic.Repository.Interfaces;
 using OfficeClassRobotic.Repository.Parents;
 using OfficeClassRobotic.Repository.Students;
@@ -19,9 +20,10 @@ namespace OfficeClassRobotic.API.Extensions
             services.AddCors();
             //add jwt
             services.AddScoped<ITokenService, TokenService>();
-            services.AddScoped<IGiaoTrinhForSubjectRepository, GiaoTrinhForSubjectRepository>();
+            services.AddScoped<ISubjectRepository, SubjectRepository>();
             services.AddScoped<IParentRepostitory, ParentRepostitory>();
             services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<IGiaoTrinhRepository, GiaoTrinhRepository>();
 
 
             return services;

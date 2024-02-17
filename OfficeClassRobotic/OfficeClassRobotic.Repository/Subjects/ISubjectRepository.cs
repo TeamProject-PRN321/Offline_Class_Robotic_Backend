@@ -1,15 +1,11 @@
 ﻿using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
-using OfficeClassRobotic.DAO.GiaoTrinhForSubject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OfficeClassRobotic.DAO.Subjects;
 
 namespace OfficeClassRobotic.Repository.GiaoTrinhForSubject
 {
-    public interface IGiaoTrinhForSubjectRepository
+    public interface ISubjectRepository
     {
         public Task<ClassRoboticResponse> CreateSubjectForListStudentWithGiaoTrinh(SubjectDTO subject);
+        public Task<ClassRoboticResponse> UpdateSubjectWithListStudent(UpdateSubjectDTO subject);
     }
 }

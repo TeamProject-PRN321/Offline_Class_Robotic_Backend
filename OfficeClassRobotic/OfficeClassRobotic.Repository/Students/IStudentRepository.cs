@@ -15,6 +15,6 @@ namespace OfficeClassRobotic.Repository.Students
         public Task<ClassRoboticResponse> UpdateStudent(UpdateStudentCommand student);
         public Task<ClassRoboticResponse> DeleteStudent(DeleteStudentCommand student);
         public Task<List<StudentResponse>> GetAllStudent();
-        public Task<StudentResponse> GetStudentById(int studentId);
+        public Task<StudentResponse> GetStudentById(string studentId);
     }
 }

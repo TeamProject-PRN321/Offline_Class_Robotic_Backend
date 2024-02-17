@@ -14,6 +14,6 @@ namespace OfficeClassRobotic.Repository.Parents
         public Task<ClassRoboticResponse> UpdateParent(UpdateParentCommand parent);
         public Task<ClassRoboticResponse> DeleteParent(DeleteParentCommand parent);
         public Task<List<ParentResponse>> GetAllParent();
-        public Task<ParentResponse> GetParentById(int parentId);
+        public Task<ParentResponse> GetParentById(string parentId);
     }
 }

@@ -39,7 +39,7 @@ namespace OfficeClassRobotic.Repository.Students
             return response;
         }
 
-        public async Task<StudentResponse> GetStudentById(int studentId)
+        public async Task<StudentResponse> GetStudentById(string studentId)
         {
             var student = await studentDAO.GetStudentById(studentId);
             var response = _mapper.Map<StudentResponse>(student);

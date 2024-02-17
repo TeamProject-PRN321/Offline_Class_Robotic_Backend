@@ -52,7 +52,7 @@ namespace OfficeClassRobotic.API.Controllers.Students
 
         [HttpGet]
         [Route("{parentId}")]
-        public Task<StudentResponse> GetById(int parentId)
+        public Task<StudentResponse> GetById(string parentId)
         {
             var result = _studentRepository.GetStudentById(parentId);
             return result;

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
-using OfficeClassRobotic.DAO.GiaoTrinhForSubject;
+using OfficeClassRobotic.DAO.GiaoTrinhs;
+using OfficeClassRobotic.DAO.Subjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace OfficeClassRobotic.Repository.GiaoTrinhForSubject
 {
-    public class GiaoTrinhForSubjectRepository : IGiaoTrinhForSubjectRepository
+    public class SubjectRepository : ISubjectRepository
     {
-        private GiaoTrinhForSubjectDAO _giaoTrinhDAO;
+        private SubjectDAO _giaoTrinhDAO;
         private readonly IMapper _mapper;
-        public GiaoTrinhForSubjectRepository(IMapper mapper)
+        public SubjectRepository(IMapper mapper)
         {
-            _giaoTrinhDAO = new GiaoTrinhForSubjectDAO();
+            _giaoTrinhDAO = new SubjectDAO();
             _mapper = mapper;
         }
 
@@ -25,6 +26,15 @@ namespace OfficeClassRobotic.Repository.GiaoTrinhForSubject
             return new ClassRoboticResponse
             {
                 Message = "Create Successfully"
+            };
+        }
+
+        public async Task<ClassRoboticResponse> UpdateSubjectWithListStudent(UpdateSubjectDTO subject)
+        {
+            await _giaoTrinhDAO.UpdateSubjectWithListStudent(subject);
+            return new ClassRoboticResponse
+            {
+                Message = "Udpate Successfully"
             };
         }
     }

@@ -54,7 +54,7 @@ namespace OfficeClassRobotic.DAO.Parents
         {
             try {
                 var parentExist = await _dbContext.Parents
-                .Where(p => p.ParentID == parent.ParentId)
+                .Where(p => p.Id == Guid.Parse(parent.ParentId) && !p.IsDeleted)
                 .SingleOrDefaultAsync();
                 if (parentExist == null) {
                     throw new NotFoundException("ParentId not exist");
@@ -77,7 +77,7 @@ namespace OfficeClassRobotic.DAO.Parents
         {
             try {
                 var parentExist = await _dbContext.Parents
-                .Where(p => p.ParentID == parent.ParentId && !p.IsDeleted)
+                .Where(p => p.Id == Guid.Parse(parent.ParentId) && !p.IsDeleted)
                 .SingleOrDefaultAsync();
                 if (parentExist == null) {
                     throw new NotFoundException("ParentId not exist");
@@ -85,7 +85,7 @@ namespace OfficeClassRobotic.DAO.Parents
 
                 // check coi phụ huynh này có còn học sinh ko, ko còn thì mới xóa, còn thì ko được xóa
                 var studentExistParent = await _dbContext.Students
-                    .Where(s => s.ParentID == parent.ParentId && !s.IsDeleted)
+                    .Where(s => s.ParentId == Guid.Parse(parent.ParentId) && !s.IsDeleted)
                     .SingleOrDefaultAsync();
                 if (studentExistParent != null) {
                     throw new BadRequestException("Parent have student already Exist, and you can not delete Parent");
@@ -113,11 +113,11 @@ namespace OfficeClassRobotic.DAO.Parents
             }
         }
 
-        public async Task<Parent> GetParentById(int parentId)
+        public async Task<Parent> GetParentById(string parentId)
         {
             try {
                 var parentExist = await _dbContext.Parents
-                .Where(p => p.ParentID == parentId && !p.IsDeleted)
+                .Where(p => p.Id == Guid.Parse(parentId) && !p.IsDeleted)
                 .SingleOrDefaultAsync();
                 if (parentExist == null) {
                     throw new NotFoundException("ParentId not exist");

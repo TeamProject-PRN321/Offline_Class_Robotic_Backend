@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
-using OfficeClassRobotic.DAO.GiaoTrinhForSubject;
 using OfficeClassRobotic.DAO.Parents;
 using OfficeClassRobotic.Repository.Parents;
 
@@ -51,7 +49,7 @@ namespace OfficeClassRobotic.API.Controllers.Parents
 
         [HttpGet]
         [Route("{parentId}")]
-        public Task<ParentResponse> GetById(int parentId)
+        public Task<ParentResponse> GetById(string parentId)
         {
             var result = _parentRepostitory.GetParentById(parentId);
             return result;

@@ -12,7 +12,7 @@ using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
 namespace OfficeClassRobotic.BuisnessObject.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240206140727_InitDatabase")]
+    [Migration("20240217170718_InitDatabase")]
     partial class InitDatabase
     {
         /// <inheritdoc />
@@ -27,11 +27,9 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Admin", b =>
                 {
-                    b.Property<int>("AdminID")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AdminID"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -39,11 +37,11 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("date");
 
-                    b.Property<DateTime?>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
+                    b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -57,7 +55,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("AdminID");
+                    b.HasKey("Id");
 
                     b.ToTable("Admins");
                 });
@@ -111,24 +109,22 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Attendance", b =>
                 {
-                    b.Property<int>("AttendanceID")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AttendanceID"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("AttendaceName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ClassID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ClassId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
+                    b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -142,31 +138,29 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("AttendanceID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("ClassID")
+                    b.HasIndex("ClassId")
                         .IsUnique();
 
-                    b.ToTable("Attendances");
+                    b.ToTable("Attendance");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Class", b =>
                 {
-                    b.Property<int>("ClassID")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClassID"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ClassName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
+                    b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DayStudy")
                         .HasColumnType("datetime2");
@@ -186,44 +180,42 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<int>("NumberOfSudent")
                         .HasColumnType("int");
 
-                    b.Property<int>("SubjectID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("SubjectId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("TeacherID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("TeacherId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("TrungTamRoboticID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("TrungTamRoboticId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("ClassID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("SubjectID")
+                    b.HasIndex("SubjectId")
                         .IsUnique();
 
-                    b.HasIndex("TeacherID");
+                    b.HasIndex("TeacherId");
 
-                    b.HasIndex("TrungTamRoboticID");
+                    b.HasIndex("TrungTamRoboticId");
 
                     b.ToTable("Classes");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Classroom", b =>
                 {
-                    b.Property<int>("ClassRoomID")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClassRoomID"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ClassName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
+                    b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -237,32 +229,30 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TrungTamRoboticID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("TrungTamRoboticId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("ClassRoomID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("TrungTamRoboticID");
+                    b.HasIndex("TrungTamRoboticId");
 
                     b.ToTable("Classrooms");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Device", b =>
                 {
-                    b.Property<int>("DeviceID")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DeviceID"));
+                    b.Property<Guid>("ClassRoomId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("ClassRoomID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
+                    b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -286,26 +276,24 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<bool?>("StatusOfDevice")
                         .HasColumnType("bit");
 
-                    b.HasKey("DeviceID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("ClassRoomID");
+                    b.HasIndex("ClassRoomId");
 
                     b.ToTable("Devices");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.FeedBack", b =>
                 {
-                    b.Property<int>("FeedbackID")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FeedbackID"));
-
-                    b.Property<DateTime?>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
+                    b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -323,34 +311,32 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StudentID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("TeacherID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("TeacherId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("FeedbackID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("StudentID");
+                    b.HasIndex("StudentId");
 
-                    b.HasIndex("TeacherID");
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("FeedBacks");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.GiaoTrinh", b =>
                 {
-                    b.Property<int>("GiaoTrinhID")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GiaoTrinhID"));
-
-                    b.Property<DateTime?>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
+                    b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -370,18 +356,16 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("GiaoTrinhID");
+                    b.HasKey("Id");
 
                     b.ToTable("GiaoTrinhs");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Parent", b =>
                 {
-                    b.Property<int>("ParentID")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ParentID"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -390,11 +374,11 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("date");
 
-                    b.Property<DateTime?>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
+                    b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -413,18 +397,16 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ParentID");
+                    b.HasKey("Id");
 
                     b.ToTable("Parents");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Staff", b =>
                 {
-                    b.Property<int>("StaffID")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StaffID"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -433,11 +415,11 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("date");
 
-                    b.Property<DateTime?>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
+                    b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -456,23 +438,21 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TrungTamRoboticID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("TrungTamRoboticId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("StaffID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("TrungTamRoboticID");
+                    b.HasIndex("TrungTamRoboticId");
 
                     b.ToTable("Staffs");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Student", b =>
                 {
-                    b.Property<int>("StudentID")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentID"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -481,11 +461,11 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("date");
 
-                    b.Property<DateTime?>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
+                    b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -500,32 +480,45 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ParentID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ParentId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("StudentID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("ParentID");
+                    b.HasIndex("ParentId");
 
                     b.ToTable("Students");
                 });
 
+            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.StudentSubject", b =>
+                {
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SubjectId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("StudentId", "SubjectId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("StudentSubject");
+                });
+
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Subject", b =>
                 {
-                    b.Property<int>("SubjectID")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SubjectID"));
-
-                    b.Property<DateTime?>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
+                    b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GiaoTrinhID")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("GiaoTrinhId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -536,32 +529,25 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StudentID")
-                        .HasColumnType("int");
-
                     b.Property<string>("SubjectName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TotalSlots")
                         .HasColumnType("int");
 
-                    b.HasKey("SubjectID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("GiaoTrinhID")
+                    b.HasIndex("GiaoTrinhId")
                         .IsUnique();
-
-                    b.HasIndex("StudentID");
 
                     b.ToTable("Subjects");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Teacher", b =>
                 {
-                    b.Property<int>("TeacherID")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TeacherID"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -574,11 +560,11 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
+                    b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -597,31 +583,29 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("TeacherID");
+                    b.HasKey("Id");
 
                     b.ToTable("Teacher");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.TrungTamRobotic", b =>
                 {
-                    b.Property<int>("TrungTamRoboticID")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TrungTamRoboticID"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("AdminID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("AdminId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
+                    b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -636,9 +620,9 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("TrungTamRoboticID");
+                    b.HasKey("Id");
 
-                    b.HasIndex("AdminID");
+                    b.HasIndex("AdminId");
 
                     b.ToTable("TrungTamRobotics");
                 });
@@ -647,7 +631,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                 {
                     b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Class", "Class")
                         .WithOne("Attendance")
-                        .HasForeignKey("Models.OfficeClassRobotic.BuisnessObject.Attendance", "ClassID")
+                        .HasForeignKey("Models.OfficeClassRobotic.BuisnessObject.Attendance", "ClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -658,19 +642,19 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                 {
                     b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Subject", "Subject")
                         .WithOne("Class")
-                        .HasForeignKey("Models.OfficeClassRobotic.BuisnessObject.Class", "SubjectID")
+                        .HasForeignKey("Models.OfficeClassRobotic.BuisnessObject.Class", "SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Teacher", "Teacher")
                         .WithMany("Classes")
-                        .HasForeignKey("TeacherID")
+                        .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.OfficeClassRobotic.BuisnessObject.TrungTamRobotic", "TrungTamRobotic")
                         .WithMany("Classes")
-                        .HasForeignKey("TrungTamRoboticID")
+                        .HasForeignKey("TrungTamRoboticId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -685,7 +669,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                 {
                     b.HasOne("Models.OfficeClassRobotic.BuisnessObject.TrungTamRobotic", "TrungTamRobotic")
                         .WithMany("Classrooms")
-                        .HasForeignKey("TrungTamRoboticID")
+                        .HasForeignKey("TrungTamRoboticId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -696,7 +680,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                 {
                     b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Classroom", "Classroom")
                         .WithMany("Devices")
-                        .HasForeignKey("ClassRoomID")
+                        .HasForeignKey("ClassRoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -707,13 +691,13 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                 {
                     b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Student", "Student")
                         .WithMany("Feedbacks")
-                        .HasForeignKey("StudentID")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Teacher", "Teacher")
                         .WithMany("Feedbacks")
-                        .HasForeignKey("TeacherID")
+                        .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -726,7 +710,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                 {
                     b.HasOne("Models.OfficeClassRobotic.BuisnessObject.TrungTamRobotic", "TrungTamRobotic")
                         .WithMany("Staffs")
-                        .HasForeignKey("TrungTamRoboticID")
+                        .HasForeignKey("TrungTamRoboticId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -737,37 +721,48 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                 {
                     b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Parent", "Parent")
                         .WithMany("Students")
-                        .HasForeignKey("ParentID")
+                        .HasForeignKey("ParentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Parent");
                 });
 
+            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.StudentSubject", b =>
+                {
+                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Student", "Student")
+                        .WithMany("StudentSubjects")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Subject", "Subject")
+                        .WithMany("StudentSubjects")
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Student");
+
+                    b.Navigation("Subject");
+                });
+
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Subject", b =>
                 {
                     b.HasOne("Models.OfficeClassRobotic.BuisnessObject.GiaoTrinh", "GiaoTrinh")
                         .WithOne("Subject")
-                        .HasForeignKey("Models.OfficeClassRobotic.BuisnessObject.Subject", "GiaoTrinhID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Student", "Student")
-                        .WithMany("Subjects")
-                        .HasForeignKey("StudentID")
+                        .HasForeignKey("Models.OfficeClassRobotic.BuisnessObject.Subject", "GiaoTrinhId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("GiaoTrinh");
-
-                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.TrungTamRobotic", b =>
                 {
                     b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Admin", "Admin")
-                        .WithMany("Robotics")
-                        .HasForeignKey("AdminID")
+                        .WithMany("TrungTamRobotic")
+                        .HasForeignKey("AdminId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -776,7 +771,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Admin", b =>
                 {
-                    b.Navigation("Robotics");
+                    b.Navigation("TrungTamRobotic");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Class", b =>
@@ -804,12 +799,14 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                 {
                     b.Navigation("Feedbacks");
 
-                    b.Navigation("Subjects");
+                    b.Navigation("StudentSubjects");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Subject", b =>
                 {
                     b.Navigation("Class");
+
+                    b.Navigation("StudentSubjects");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Teacher", b =>

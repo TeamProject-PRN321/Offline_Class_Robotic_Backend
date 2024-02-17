@@ -38,7 +38,7 @@ namespace OfficeClassRobotic.Repository.Parents
             return response;
         }
 
-        public async Task<ParentResponse> GetParentById(int parentId)
+        public async Task<ParentResponse> GetParentById(string parentId)
         {
             var parent = await parentDAO.GetParentById(parentId);
             var response = _mapper.Map<ParentResponse>(parent);
