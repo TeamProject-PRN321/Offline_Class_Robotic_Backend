@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OfficeClassRobotic.BuisnessObject.Models;
+using OfficeClassRobotic.BuisnessObject.Models.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,11 +14,9 @@ namespace Models.OfficeClassRobotic.BuisnessObject
     /// <summary>
     /// Clas Schedule
     /// </summary>
-    public class ClassSchedule
+    public class ClassSchedule : BaseAuditableEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ClassID { get; set; }
+        public string? ClassName { get; set; }
         /// <summary>
         /// Ngày học
         /// </summary>
@@ -36,10 +35,10 @@ namespace Models.OfficeClassRobotic.BuisnessObject
 
         // Khóa ngoại
         [ForeignKey("ClassSubject")]
-        public int ClassSubjectID { get; set; }
+        public Guid ClassSubjectID { get; set; }
 
         [ForeignKey("ClassRoom")]
-        public int ClassRoomID { get; set; }
+        public Guid ClassRoomID { get; set; }
 
         // Quan hệ
         public virtual ClassSubject ClassSubject { get; set; }
@@ -47,7 +46,4 @@ namespace Models.OfficeClassRobotic.BuisnessObject
     }
 }
 
-//  public string ClassName { get; set; }
-//  public virtual TrungTamRobotic TrungTamRobotic { get; set; }
-//  public double? MarkOfStudent { get; set; }
 

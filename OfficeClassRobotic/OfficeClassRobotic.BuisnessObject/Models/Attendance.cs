@@ -1,4 +1,5 @@
-﻿using OfficeClassRobotic.BuisnessObject.Models.Common;
+﻿using OfficeClassRobotic.BuisnessObject.Models;
+using OfficeClassRobotic.BuisnessObject.Models.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,14 +12,11 @@ namespace Models.OfficeClassRobotic.BuisnessObject
 {
     public class Attendance : BaseAuditableEntity
     {
-        /*[Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]*/
-        //public int AttendanceID { get; set; }
         public string AttendaceName { get; set; }
         public string? Description { get; set; }
-        [ForeignKey("Class")]
-        public Guid ClassId { get; set; }
+        [ForeignKey("ClassSchedule")]
+        public Guid ClassScheduleID { get; set; }
 
-        public virtual ClassSubject ClassSubject { get; set; }
+        public virtual ClassSchedule ClassSchedule { get; set; }
     }
 }

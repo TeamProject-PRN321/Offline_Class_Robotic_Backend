@@ -12,7 +12,7 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
         public DbSet<Admin> Admins { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Attendance> Attendance { get; set; }
-        public DbSet<Class> Classes { get; set; }
+        //public DbSet<Class> Classes { get; set; }
         public DbSet<Classroom> Classrooms { get; set; }
         public DbSet<Device> Devices { get; set; }
         public DbSet<FeedBack> FeedBacks { get; set; }
@@ -31,11 +31,16 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
 
             modelBuilder.Entity<StudentSubject>(entity =>
             {
-                entity.HasKey(ss => new { ss.StudentId, ss.SubjectId});
+                entity.HasKey(ss => new { ss.StudentId, ss.SubjectId, ss.ClassSubjectID});
 
                 entity.HasOne(ss => ss.Student)
                 .WithMany(s => s.StudentSubjects)
                 .HasForeignKey(ss => ss.StudentId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+                entity.HasOne(ss => ss.ClassSubject)
+                .WithMany(s => s.StudentSubjects)
+                .HasForeignKey(ss => ss.ClassSubjectID)
                 .OnDelete(DeleteBehavior.NoAction);
 
                 entity.HasOne(ss => ss.Subject)

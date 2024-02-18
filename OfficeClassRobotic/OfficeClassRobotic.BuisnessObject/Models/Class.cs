@@ -1,4 +1,4 @@
-﻿using OfficeClassRobotic.BuisnessObject.Models.Common;
+﻿/*using OfficeClassRobotic.BuisnessObject.Models.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,9 +11,6 @@ namespace Models.OfficeClassRobotic.BuisnessObject
 {
     public class Class : BaseAuditableEntity
     {
-        /*[Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]*/
-        //public int ClassID { get; set; }
         public string ClassName { get; set; }
         public DateTime DayStudy { get; set; }
         public int NumberOfSudent { get; set; }
@@ -31,3 +28,4 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         public virtual Attendance Attendance { get; set; }
     }
 }
+*/

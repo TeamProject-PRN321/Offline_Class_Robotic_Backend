@@ -11,15 +11,12 @@ namespace Models.OfficeClassRobotic.BuisnessObject
 {
     public class Subject : BaseAuditableEntity
     {
-        /*[Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]*/
-        //public int SubjectID { get; set; }
         public string? SubjectName { get; set; }
         public int TotalSlots { get; set; }
         [ForeignKey("GiaoTrinh")]
         public Guid GiaoTrinhId { get; set; }
         
-        public virtual Class? Class { get; set; }
+      //  public virtual Class? Class { get; set; }
         public virtual GiaoTrinh? GiaoTrinh { get; set; }
 
         public ICollection<StudentSubject> StudentSubjects { get; set; }
