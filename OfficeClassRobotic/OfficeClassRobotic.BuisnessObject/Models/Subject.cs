@@ -1,4 +1,5 @@
-﻿using OfficeClassRobotic.BuisnessObject.Models.Common;
+﻿using OfficeClassRobotic.BuisnessObject.Models;
+using OfficeClassRobotic.BuisnessObject.Models.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,5 +21,7 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         public virtual GiaoTrinh? GiaoTrinh { get; set; }
 
         public ICollection<StudentSubject> StudentSubjects { get; set; }
+        public ICollection<TeacherSubject> TeacherSubjects { get; set; }
+
     }
 }

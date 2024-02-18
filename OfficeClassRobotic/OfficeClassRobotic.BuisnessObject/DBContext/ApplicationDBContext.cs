@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Models.OfficeClassRobotic.BuisnessObject;
 using OfficeClassRobotic.BuisnessObject.ConvertTer;
+using OfficeClassRobotic.BuisnessObject.Models;
 using OfficeClassRobotic.BuisnessObject.Models.Common;
 using OfficeClassRobotic.DataTier.ConvertTer;
 
@@ -31,7 +32,7 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
 
             modelBuilder.Entity<StudentSubject>(entity =>
             {
-                entity.HasKey(ss => new { ss.StudentId, ss.SubjectId, ss.ClassSubjectID});
+                entity.HasKey(ss => new { ss.StudentId, ss.SubjectId, ss.ClassSubjectID });
 
                 entity.HasOne(ss => ss.Student)
                 .WithMany(s => s.StudentSubjects)
@@ -49,6 +50,20 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                 .OnDelete(DeleteBehavior.NoAction);
             });
 
+            modelBuilder.Entity<TeacherSubject>(entity =>
+            {
+                entity.HasKey(tS => new { tS.SubjectId, tS.TeacherId });
+
+                entity.HasOne(tS => tS.Teacher)
+                .WithMany(s => s.TeacherSubjects)
+                .HasForeignKey(tS => tS.TeacherId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+                entity.HasOne(tS => tS.Subject)
+                .WithMany(s => s.TeacherSubjects)
+                .HasForeignKey(tS => tS.SubjectId)
+                .OnDelete(DeleteBehavior.NoAction);
+            });
             base.OnModelCreating(modelBuilder);
         }
 
@@ -66,12 +81,15 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var entry in base.ChangeTracker.Entries<BaseAuditableEntity>()
-                .Where(q => q.State == EntityState.Added || q.State == EntityState.Modified)) {
-                if (entry.State == EntityState.Added) {
+                .Where(q => q.State == EntityState.Added || q.State == EntityState.Modified))
+            {
+                if (entry.State == EntityState.Added)
+                {
                     entry.Entity.Created = DateTime.Now;
                     entry.Entity.CreateBy = CustomSessionManager.GetString("username");
                 }
-                if (entry.State == EntityState.Modified || entry.State == EntityState.Deleted) {
+                if (entry.State == EntityState.Modified || entry.State == EntityState.Deleted)
+                {
                     entry.Entity.LastModified = DateTime.Now;
                     entry.Entity.LastModifiedBy = CustomSessionManager.GetString("username");
                 }
