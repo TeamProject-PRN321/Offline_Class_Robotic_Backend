@@ -25,6 +25,7 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
         public DbSet<Teacher> Teacher { get; set; }
         public DbSet<TrungTamRobotic> TrungTamRobotics { get; set; }
         public DbSet<StudentSubject> StudentSubject { get; set; }
+        public DbSet<TeacherSubject> TeacherSubjects { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
