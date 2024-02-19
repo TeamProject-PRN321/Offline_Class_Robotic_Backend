@@ -6,6 +6,7 @@ using OfficeClassRobotic.Repository.GiaoTrinhs;
 using OfficeClassRobotic.Repository.Interfaces;
 using OfficeClassRobotic.Repository.Parents;
 using OfficeClassRobotic.Repository.Students;
+using OfficeClassRobotic.Repository.Teachers;
 
 namespace OfficeClassRobotic.API.Extensions
 {
@@ -24,6 +25,7 @@ namespace OfficeClassRobotic.API.Extensions
             services.AddScoped<IParentRepostitory, ParentRepostitory>();
             services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<IGiaoTrinhRepository, GiaoTrinhRepository>();
+            services.AddScoped<ITeacherRepository, TeacherRepository>();
 
 
             return services;

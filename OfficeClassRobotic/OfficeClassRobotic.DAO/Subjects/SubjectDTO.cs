@@ -36,4 +36,10 @@ namespace OfficeClassRobotic.DAO.Subjects
         public string? Description { get; set; }
         public string? FilePDF { get; set; }
     }
+    public class SubjectData
+    {
+        public string? SubjectName { get; set; }
+        public int TotalSlots { get; set; }
+        public GiaoTrinhDTO? GiaoTrinhDTO { get; set; }
+    }
 }

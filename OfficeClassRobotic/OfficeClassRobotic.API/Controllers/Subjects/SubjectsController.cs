@@ -22,6 +22,12 @@ namespace OfficeClassRobotic.API.Controllers.Subjects
             var result = _subjectsRepository.CreateSubjectForListStudentWithGiaoTrinh(request);
             return result;
         }
+        [HttpPost]
+        public Task<ClassRoboticResponse> CreateSubject(SubjectData request)
+        {
+            var result = _subjectsRepository.CreateSubject(request);
+            return result;
+        }
 
         [HttpPut]
         [Route("edit")]

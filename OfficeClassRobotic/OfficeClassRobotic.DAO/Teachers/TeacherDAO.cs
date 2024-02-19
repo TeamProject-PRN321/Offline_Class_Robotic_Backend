@@ -34,7 +34,7 @@ namespace OfficeClassRobotic.DAO.Teachers
         /// <param name="request"></param>
         /// <returns></returns>
         /// <exception cref="NotFoundException"></exception>
-        public async Task<ClassRoboticResponse> CreateTeacher(CreateTeacherDTO request)
+        public async Task CreateTeacher(CreateTeacherDTO request)
         {
             if (request.ListSubjectId != null && request.ListSubjectId.Any())
             {
@@ -70,11 +70,6 @@ namespace OfficeClassRobotic.DAO.Teachers
                 }
             }
             await _dbContext.SaveChangesAsync();
-
-            return new ClassRoboticResponse
-            {
-                Message = ClassRoboticMessage.CreateSuccessfully
-            };
         }
         /// <summary>
         /// Update Teacher
@@ -82,7 +77,7 @@ namespace OfficeClassRobotic.DAO.Teachers
         /// <param name="request"></param>
         /// <returns></returns>
         /// <exception cref="NotFoundException"></exception>
-        public async Task<ClassRoboticResponse> UpdateTeacher(UpdateTeacherDTO request)
+        public async Task UpdateTeacher(UpdateTeacherDTO request)
         {
             if (request.ListSubjectId != null && request.ListSubjectId.Any())
             {
@@ -119,11 +114,6 @@ namespace OfficeClassRobotic.DAO.Teachers
             }
 
             await _dbContext.SaveChangesAsync();
-
-            return new ClassRoboticResponse
-            {
-                Message = ClassRoboticMessage.CreateSuccessfully
-            };
         }
         /// <summary>
         /// Get All teacher
@@ -211,7 +201,7 @@ namespace OfficeClassRobotic.DAO.Teachers
             return result;
         }
         /// <summary>
-        /// 
+        /// Get Teacher By Subject ID
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>

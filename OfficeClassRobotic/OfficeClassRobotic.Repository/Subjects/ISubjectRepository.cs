@@ -7,5 +7,6 @@ namespace OfficeClassRobotic.Repository.GiaoTrinhForSubject
     {
         public Task<ClassRoboticResponse> CreateSubjectForListStudentWithGiaoTrinh(SubjectDTO subject);
         public Task<ClassRoboticResponse> UpdateSubjectWithListStudent(UpdateSubjectDTO subject);
+        public Task<ClassRoboticResponse> CreateSubject(SubjectData request);
     }
 }

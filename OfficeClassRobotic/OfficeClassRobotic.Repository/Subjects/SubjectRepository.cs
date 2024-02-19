@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Models.OfficeClassRobotic.BuisnessObject;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
 using OfficeClassRobotic.DAO.GiaoTrinhs;
 using OfficeClassRobotic.DAO.Subjects;
@@ -35,6 +36,15 @@ namespace OfficeClassRobotic.Repository.GiaoTrinhForSubject
             return new ClassRoboticResponse
             {
                 Message = "Udpate Successfully"
+            };
+        }
+
+        public async Task<ClassRoboticResponse> CreateSubject(SubjectData request)
+        {
+            await _giaoTrinhDAO.CreateSubject(request);
+            return new ClassRoboticResponse
+            {
+                Message = "Create Successfully"
             };
         }
     }

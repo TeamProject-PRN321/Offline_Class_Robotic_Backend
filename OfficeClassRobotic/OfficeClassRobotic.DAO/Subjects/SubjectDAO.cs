@@ -27,6 +27,30 @@ namespace OfficeClassRobotic.DAO.Subjects
             private set => instance = value;
         }
 
+        public async Task CreateSubject(SubjectData request)
+        {
+            var checkExist = await dBContext.Subjects.Where(x => x.SubjectName == request.SubjectName).FirstOrDefaultAsync();
+            if(checkExist != null)
+            {
+                throw new BadRequestException($"Subject has been existed!");
+            }
+            var giaoTrinh = new GiaoTrinh
+            {
+                GiaoTrinhName = request.GiaoTrinhDTO.GiaoTrinhName,
+                Description = request.GiaoTrinhDTO.Description,
+                FilePDF = request.GiaoTrinhDTO.FilePDF,
+            };
+            dBContext.GiaoTrinhs.Add(giaoTrinh);
+            var newSubject = new Subject
+            {
+                SubjectName = request.SubjectName,
+                TotalSlots = request.TotalSlots,
+                GiaoTrinhId = giaoTrinh.Id,
+            };
+            dBContext.Subjects.Add(newSubject);
+            await dBContext.SaveChangesAsync();
+        }
+
         public async Task CreateSubjectForListStudentWithGiaoTrinh(SubjectDTO subject)
         {
             try {
