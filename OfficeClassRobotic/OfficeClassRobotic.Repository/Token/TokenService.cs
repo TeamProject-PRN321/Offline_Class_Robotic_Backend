@@ -1,12 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Models.OfficeClassRobotic.BuisnessObject;
-using OfficeClassRobotic.Repository.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace OfficeClassRobotic.BuisnessTier.Implement
+namespace OfficeClassRobotic.Repository.Token
 {
     public class TokenService : ITokenService
     {

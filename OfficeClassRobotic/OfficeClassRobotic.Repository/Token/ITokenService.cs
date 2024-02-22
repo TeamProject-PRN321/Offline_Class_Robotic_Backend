@@ -1,7 +1,7 @@
 ﻿
 using Models.OfficeClassRobotic.BuisnessObject;
 
-namespace OfficeClassRobotic.Repository.Interfaces
+namespace OfficeClassRobotic.Repository.Token
 {
     public interface ITokenService
     {
