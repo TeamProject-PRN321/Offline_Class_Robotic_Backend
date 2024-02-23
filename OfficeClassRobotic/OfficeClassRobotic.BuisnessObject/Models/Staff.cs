@@ -21,6 +21,8 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         [ForeignKey("TrungTamRobotic")]
         public Guid TrungTamRoboticId { get; set; }
 
+        [Required]
+        public Guid AppUserId { get; set; }
         public virtual TrungTamRobotic TrungTamRobotic { get; set; }
     }
 }

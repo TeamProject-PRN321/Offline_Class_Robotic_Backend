@@ -22,6 +22,8 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         public virtual Parent Parent { get; set; }
         public virtual IList<FeedBack> Feedbacks { get; set; }
 
+        [Required]
+        public Guid AppUserId { get; set; }
         public ICollection<StudentSubject> StudentSubjects { get; set; }
     }
 }

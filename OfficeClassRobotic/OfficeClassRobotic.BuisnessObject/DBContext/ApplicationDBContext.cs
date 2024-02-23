@@ -26,6 +26,8 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
         public DbSet<TrungTamRobotic> TrungTamRobotics { get; set; }
         public DbSet<StudentSubject> StudentSubject { get; set; }
         public DbSet<TeacherSubject> TeacherSubjects { get; set; }
+        public DbSet<AppUserRole> AppUserRoles { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -51,6 +53,21 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                 .OnDelete(DeleteBehavior.NoAction);
             });
 
+            modelBuilder.Entity<AppUserRole>(entity =>
+            {
+                entity.HasKey(ss => new { ss.RoleId, ss.AppUserId });
+
+                entity.HasOne(ss => ss.Role)
+                .WithMany(ss => ss.AppUserRoles)
+                .HasForeignKey(ss => ss.RoleId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+                entity.HasOne(ss => ss.AppUser)
+                .WithMany(ss => ss.AppUserRoles)
+                .HasForeignKey(ss => ss.AppUserId)
+                .OnDelete(DeleteBehavior.NoAction);
+            });
+
             modelBuilder.Entity<TeacherSubject>(entity =>
             {
                 entity.HasKey(tS => new { tS.SubjectId, tS.TeacherId });
@@ -65,6 +82,39 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                 .HasForeignKey(tS => tS.SubjectId)
                 .OnDelete(DeleteBehavior.NoAction);
             });
+
+            modelBuilder.Entity<Role>().HasData(
+                new Role
+                {
+                    Id = Guid.Parse("B308C9A8-9A44-4662-B010-E4688FB8E019"),
+                    RoleName = "Student"
+                },
+                new Role
+                {
+                    Id = Guid.Parse("1C477667-FBC0-4C85-9D2F-1F5A6DA3EDAC"),
+                    RoleName = "Parent"
+                },
+                new Role
+                {
+                    Id = Guid.Parse("DC1C58F1-326B-43C0-A750-263BCEEE32BE"),
+                    RoleName = "Staff"
+                },
+                new Role
+                {
+                    Id = Guid.Parse("891E4E1C-BED5-4992-A978-FC969FDAF128"),
+                    RoleName = "Admin"
+                },
+                new Role
+                {
+                    Id = Guid.Parse("433CA17D-2BB8-4A98-91E6-5703365CB2FD"),
+                    RoleName = "Teacher"
+                },
+                new Role
+                {
+                    Id = Guid.Parse("A53D0CCA-65D1-4B81-AFE2-E735FACD6C38"),
+                    RoleName = "TrungTamRobotic"
+                });
+                
             base.OnModelCreating(modelBuilder);
         }
 

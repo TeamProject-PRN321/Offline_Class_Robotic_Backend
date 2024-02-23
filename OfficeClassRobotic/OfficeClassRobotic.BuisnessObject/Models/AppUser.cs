@@ -1,9 +1,11 @@
 ﻿
+using OfficeClassRobotic.BuisnessObject.Models;
+
 namespace Models.OfficeClassRobotic.BuisnessObject
 {
     public class AppUser
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string UserName { get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }
@@ -13,5 +15,9 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         public string Gender { get; set; }
         public string Address { get; set; }
         public string? PhotoUrl { get; set; }
+        public AppUser() => Id = Guid.NewGuid();
+
+        public IList<AppUserRole> AppUserRoles { get; set; }
+
     }
 }

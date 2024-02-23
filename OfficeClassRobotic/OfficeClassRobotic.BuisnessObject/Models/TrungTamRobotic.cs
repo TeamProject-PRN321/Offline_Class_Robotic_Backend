@@ -18,6 +18,8 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         public string Address { get; set; }
         [ForeignKey("Admin")]
         public Guid AdminId { get; set; }
+        [Required]
+        public Guid AppUserId { get; set; }
 
         public virtual Admin Admin { get; set; }
         public virtual IList<Staff> Staffs { get; set; }
