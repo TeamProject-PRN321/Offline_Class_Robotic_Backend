@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
+using OfficeClassRobotic.DAO.GiaoTrinhs;
 using OfficeClassRobotic.DAO.Subjects;
 using OfficeClassRobotic.Repository.GiaoTrinhForSubject;
 
@@ -15,15 +16,9 @@ namespace OfficeClassRobotic.API.Controllers.Subjects
             _subjectsRepository = subjectsRepository;
         }
 
-        /*[HttpPost]
-        [Route("add")]
-        public Task<ClassRoboticResponse> Create(SubjectDTO request)
-        {
-            var result = _subjectsRepository.CreateSubjectForListStudentWithGiaoTrinh(request);
-            return result;
-        }
         [HttpPost]
-        public Task<ClassRoboticResponse> CreateSubject(SubjectData request)
+        [Route("add")]
+        public Task<ClassRoboticResponse> CreateSubject(CreateSubjectCommand request)
         {
             var result = _subjectsRepository.CreateSubject(request);
             return result;
@@ -31,10 +26,34 @@ namespace OfficeClassRobotic.API.Controllers.Subjects
 
         [HttpPut]
         [Route("edit")]
-        public Task<ClassRoboticResponse> Update(UpdateSubjectDTO request)
+        public Task<ClassRoboticResponse> UpdateSubject(UpdateSubjectCommand request)
         {
-            var result = _subjectsRepository.UpdateSubjectWithListStudent(request);
+            var result = _subjectsRepository.UpdateSubject(request);
             return result;
-        }*/
+        }
+
+        [HttpDelete]
+        [Route("remove")]
+        public Task<ClassRoboticResponse> Delete(DeleteSubjectCommand request)
+        {
+            var result = _subjectsRepository.DeleteSubject(request);
+            return result;
+        }
+
+        [HttpGet]
+        [Route("all")]
+        public Task<List<SubjectResponse>> GetAll()
+        {
+            var result = _subjectsRepository.GetAllSubject();
+            return result;
+        }
+
+        [HttpGet]
+        [Route("{subjectId}")]
+        public Task<SubjectResponse> GetById(string subjectId)
+        {
+            var result = _subjectsRepository.GetSubjectById(subjectId);
+            return result;
+        }
     }
 }

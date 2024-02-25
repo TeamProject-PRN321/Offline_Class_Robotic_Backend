@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Azure.Core;
 using Models.OfficeClassRobotic.BuisnessObject;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
 using OfficeClassRobotic.DAO.GiaoTrinhs;
@@ -13,39 +14,68 @@ namespace OfficeClassRobotic.Repository.GiaoTrinhForSubject
 {
     public class SubjectRepository : ISubjectRepository
     {
-        /*private SubjectDAO _giaoTrinhDAO;
+        private SubjectDAO _subjectDAO;
         private readonly IMapper _mapper;
         public SubjectRepository(IMapper mapper)
         {
-            _giaoTrinhDAO = new SubjectDAO();
+            _subjectDAO = new SubjectDAO();
             _mapper = mapper;
         }
-
-        public async Task<ClassRoboticResponse> CreateSubjectForListStudentWithGiaoTrinh(SubjectDTO subject)
+        public async Task<ClassRoboticResponse> UpdateSubject(UpdateSubjectCommand subject)
         {
-            await _giaoTrinhDAO.CreateSubjectForListStudentWithGiaoTrinh(subject);
-            return new ClassRoboticResponse
-            {
-                Message = "Create Successfully"
-            };
-        }
-
-        public async Task<ClassRoboticResponse> UpdateSubjectWithListStudent(UpdateSubjectDTO subject)
-        {
-            await _giaoTrinhDAO.UpdateSubjectWithListStudent(subject);
+            await _subjectDAO.UpdateSubject(subject);
             return new ClassRoboticResponse
             {
                 Message = "Udpate Successfully"
             };
         }
 
-        public async Task<ClassRoboticResponse> CreateSubject(SubjectData request)
+        public async Task<ClassRoboticResponse> CreateSubject(CreateSubjectCommand request)
         {
-            await _giaoTrinhDAO.CreateSubject(request);
+            await _subjectDAO.CreateSubject(request);
             return new ClassRoboticResponse
             {
                 Message = "Create Successfully"
             };
-        }*/
+        }
+
+        public async Task<ClassRoboticResponse> DeleteSubject(DeleteSubjectCommand request)
+        {
+            await _subjectDAO.DeleteSubject(request);
+            return new ClassRoboticResponse
+            {
+                Message = "Delete Successfully"
+            };
+        }
+
+        public async Task<List<SubjectResponse>> GetAllSubject()
+        {
+            var subjects = await _subjectDAO.GetAllSubject();
+            var subjectListResponse = new List<SubjectResponse>();
+            foreach (var subject in subjects) {
+                var subjectResponse = new SubjectResponse
+                {
+                    Id = subject.Id,
+                    SubjectName = subject.SubjectName,
+                    TotalSlots = subject.TotalSlots,
+                    GiaoTrinhData = _mapper.Map<GiaoTrinhResponse>(await _subjectDAO.GetGiaoTrinhById(subject.GiaoTrinhId))
+                };
+                subjectListResponse.Add(subjectResponse);
+            }
+            return subjectListResponse;
+        }
+
+        public async Task<SubjectResponse> GetSubjectById(string subjectId)
+        {
+            var subject = await _subjectDAO.GetSubjectById(subjectId);
+            var subjectResponse = new SubjectResponse
+            {
+                Id = subject.Id,
+                SubjectName = subject.SubjectName,
+                TotalSlots = subject.TotalSlots,
+                GiaoTrinhData = _mapper.Map<GiaoTrinhResponse>(await _subjectDAO.GetGiaoTrinhById(subject.GiaoTrinhId))
+            };
+            return subjectResponse;
+        }
     }
 }

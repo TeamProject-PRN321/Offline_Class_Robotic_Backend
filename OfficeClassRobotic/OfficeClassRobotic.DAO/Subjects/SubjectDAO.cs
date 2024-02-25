@@ -27,70 +27,113 @@ namespace OfficeClassRobotic.DAO.Subjects
             private set => instance = value;
         }
 
-        public async Task CreateSubject(SubjectData request)
-        {
-            var checkExist = await dBContext.Subjects.Where(x => x.SubjectName == request.SubjectName).FirstOrDefaultAsync();
-            if (checkExist != null) {
-                throw new BadRequestException($"Subject has been existed!");
-            }
-            var giaoTrinh = new GiaoTrinh
-            {
-                GiaoTrinhName = request.GiaoTrinhDTO.GiaoTrinhName,
-                Description = request.GiaoTrinhDTO.Description,
-                FilePDF = request.GiaoTrinhDTO.FilePDF,
-            };
-            dBContext.GiaoTrinhs.Add(giaoTrinh);
-            var newSubject = new Subject
-            {
-                SubjectName = request.SubjectName,
-                TotalSlots = request.TotalSlots,
-                GiaoTrinhId = giaoTrinh.Id,
-            };
-            dBContext.Subjects.Add(newSubject);
-            await dBContext.SaveChangesAsync();
-        }
-
-        /*public async Task CreateSubjectForListStudentWithGiaoTrinh(SubjectDTO subject)
+        public async Task CreateSubject(CreateSubjectCommand request)
         {
             try {
-                // new giaoTrinh
+                var checkExist = await dBContext.Subjects.Where(x => x.SubjectName == request.SubjectName && !x.IsDeleted).FirstOrDefaultAsync();
+                if (checkExist != null) {
+                    throw new BadRequestException($"Subject has been existed!");
+                }
                 var giaoTrinh = new GiaoTrinh
                 {
-                    GiaoTrinhName = subject.GiaoTrinhDTO.GiaoTrinhName,
-                    Description = subject.GiaoTrinhDTO.Description,
-                    FilePDF = subject.GiaoTrinhDTO.FilePDF,
+                    GiaoTrinhName = request.GiaoTrinhDTO.GiaoTrinhName,
+                    Description = request.GiaoTrinhDTO.Description,
+                    FilePDF = request.GiaoTrinhDTO.FilePDF,
                 };
                 dBContext.GiaoTrinhs.Add(giaoTrinh);
-
-                // check studentId into Subject
-                var studentList = subject.StudentList.Select(s => s.StudentID).ToList();
-                var studentExistWithSubject = await dBContext.Students
-                    .Where(s => studentList.Contains(s.Id.ToString()) && !s.IsDeleted)
-                    .ToListAsync();
-                if (studentExistWithSubject.Count() == 0) {
-                    throw new BadRequestException($"StudentId:  doesn't existed");
-                }
                 var newSubject = new Subject
                 {
-                    SubjectName = subject.SubjectName,
-                    TotalSlots = subject.TotalSlots,
+                    SubjectName = request.SubjectName,
+                    TotalSlots = request.TotalSlots,
                     GiaoTrinhId = giaoTrinh.Id,
                 };
                 dBContext.Subjects.Add(newSubject);
-
-                foreach (var student in studentExistWithSubject) {
-                    var newListStudentForSubject = new StudentSubject
-                    {
-                        SubjectId = newSubject.Id,
-                        StudentId = student.Id,
-                    };
-                    dBContext.StudentSubject.Add(newListStudentForSubject);
-                }
                 await dBContext.SaveChangesAsync();
             }
             catch (Exception ex) {
-                throw new BadRequestException(ex.ToString());
+                throw new BadRequestException(ex.Message);
             }
-        }*/
+        }
+
+        public async Task UpdateSubject(UpdateSubjectCommand request)
+        {
+            try {
+                var checkSubjectExist = await dBContext.Subjects
+                .Where(s => s.Id == Guid.Parse(request.SubjectId) && !s.IsDeleted)
+                .SingleOrDefaultAsync();
+                if (checkSubjectExist == null) {
+                    throw new NotFoundException("Does not exist SubjectId");
+                }
+                checkSubjectExist.SubjectName = request.SubjectName;
+                checkSubjectExist.TotalSlots = request.TotalSlots;
+                checkSubjectExist.GiaoTrinhId = Guid.Parse(request.GiaoTrinhId);
+                dBContext.Subjects.Update(checkSubjectExist);
+                await dBContext.SaveChangesAsync();
+            }
+            catch (Exception ex) {
+                throw new BadRequestException(ex.Message);
+            }
+        }
+
+        public async Task DeleteSubject(DeleteSubjectCommand request)
+        {
+            try {
+                var checkSubjectExist = await dBContext.Subjects
+                            .Where(s => s.Id == Guid.Parse(request.SubjectId) && !s.IsDeleted)
+                            .SingleOrDefaultAsync();
+                if (checkSubjectExist == null) {
+                    throw new NotFoundException("Does not exist SubjectId");
+                }
+                checkSubjectExist.IsDeleted = true;
+                dBContext.Subjects.Update(checkSubjectExist);
+                await dBContext.SaveChangesAsync();
+            }
+            catch (Exception ex) {
+                throw new BadRequestException(ex.Message);
+            }
+        }
+
+        public async Task<List<Subject>> GetAllSubject()
+        {
+            try {
+                var subjectList = await dBContext.Subjects.Where(g => !g.IsDeleted).ToListAsync();
+                return subjectList;
+            }
+            catch (Exception ex) {
+                throw new BadRequestException(ex.Message);
+            }
+        }
+
+        public async Task<GiaoTrinh> GetGiaoTrinhById(Guid giaoTrinhId)
+        {
+            try {
+                var giaoTrinhExist = await dBContext.GiaoTrinhs
+                    .Where(g => g.Id == giaoTrinhId && !g.IsDeleted)
+                    .SingleOrDefaultAsync();
+                if (giaoTrinhExist == null) {
+                    throw new NotFoundException("Does not existed giaoTrinhId");
+                }
+                return giaoTrinhExist;
+            }
+            catch (Exception ex) {
+                throw new BadRequestException(ex.Message);
+            }
+        }
+
+        public async Task<Subject> GetSubjectById(string subjectId)
+        {
+            try {
+                var subjectExist = await dBContext.Subjects
+                    .Where(g => g.Id == Guid.Parse(subjectId) && !g.IsDeleted)
+                    .SingleOrDefaultAsync();
+                if (subjectExist == null) {
+                    throw new NotFoundException("Does not existed subjectId");
+                }
+                return subjectExist;
+            }
+            catch (Exception ex) {
+                throw new BadRequestException(ex.Message);
+            }
+        }
     }
 }
