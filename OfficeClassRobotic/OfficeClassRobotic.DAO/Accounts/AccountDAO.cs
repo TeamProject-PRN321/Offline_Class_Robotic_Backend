@@ -75,10 +75,7 @@ namespace OfficeClassRobotic.DAO.Accounts
             // Add Student Table 
             var student = new Student
             {
-                Name = request.FullName,
-                Address = request.Address,
                 AppUserId = user.Id,
-                Birthday = request.DateOfBirth,
                 //Parent ID co cung duoc, khong co cung duoc
                 ParentId = Guid.Parse(request.ParentID)
             };
@@ -126,10 +123,7 @@ namespace OfficeClassRobotic.DAO.Accounts
             // Add Student Table 
             var staff = new Staff
             {
-                Name = request.FullName,
-                Address = request.Address,
                 AppUserId = user.Id,
-                Birthday = request.DateOfBirth,
                 //Parent ID co cung duoc, khong co cung duoc
             };
             _dbContext.Staffs.Add(staff);
@@ -175,10 +169,7 @@ namespace OfficeClassRobotic.DAO.Accounts
             // Add account Table 
             var admin = new Admin
             {
-                Name = request.FullName,
-                Address = request.Address,
                 AppUserId = user.Id,
-                Birthday = request.DateOfBirth,
                 //Parent ID co cung duoc, khong co cung duoc
             };
             _dbContext.Admins.Add(admin);
@@ -224,10 +215,7 @@ namespace OfficeClassRobotic.DAO.Accounts
             // Add account Table 
             var parent = new Parent
             {
-                Name = request.FullName,
-                Address = request.Address,
                 AppUserId = user.Id,
-                Birthday = request.DateOfBirth,
             };
             _dbContext.Parents.Add(parent);
 
@@ -272,10 +260,7 @@ namespace OfficeClassRobotic.DAO.Accounts
             // Add account Table 
             var teacher = new Teacher
             {
-                Name = request.FullName,
-                Address = request.Address,
                 AppUserId = user.Id,
-                Birthday = request.DateOfBirth,
             };
             _dbContext.Teacher.Add(teacher);
 

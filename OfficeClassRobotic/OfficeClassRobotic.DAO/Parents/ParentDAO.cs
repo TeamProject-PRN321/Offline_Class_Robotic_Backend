@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿/*using Microsoft.EntityFrameworkCore;
 using Models.OfficeClassRobotic.BuisnessObject;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
 using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
@@ -130,3 +130,4 @@ namespace OfficeClassRobotic.DAO.Parents
         }
     }
 }
+*/

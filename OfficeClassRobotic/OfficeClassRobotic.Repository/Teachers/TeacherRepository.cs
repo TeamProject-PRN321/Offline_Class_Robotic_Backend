@@ -1,4 +1,4 @@
-﻿using Azure.Core;
+﻿/*using Azure.Core;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
 using OfficeClassRobotic.DAO.Teachers;
 using OfficeClassRobotic.Service.Exceptions;
@@ -72,3 +72,4 @@ namespace OfficeClassRobotic.Repository.Teachers
         }
     }
 }
+*/

@@ -107,7 +107,6 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                 .HasForeignKey(tS => tS.SubjectId)
                 .OnDelete(DeleteBehavior.NoAction);
             });
-            using var hmac = new HMACSHA512();
             var passWordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("Password1@"));
             var passWordSalt = hmac.Key;
             modelBuilder.Entity<AppUser>().HasData(
@@ -132,9 +131,9 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
             modelBuilder.Entity<Admin>().HasData(new Admin
             {
                 AppUserId = Guid.Parse("DA053AF4-CDF1-4A6B-8506-2E3939EF6351"),
-                Address = "Long An",
+/*                Address = "Long An",
                 Birthday = DateOnly.MinValue,
-                Name = "Nguyễn Ngọc Thái Vĩ"
+                Name = "Nguyễn Ngọc Thái Vĩ"*/
             });
             modelBuilder.Entity<Role>().HasData(
                 new Role

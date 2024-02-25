@@ -7,9 +7,6 @@ namespace Models.OfficeClassRobotic.BuisnessObject
 {
     public class Teacher : BaseAuditableEntity
     {
-        public string Name { get; set; } = null!;
-        public DateOnly Birthday { get; set; }
-        public string Address { get; set; }
         [ForeignKey("AppUser")]
         public Guid AppUserId { get; set; }
 

@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿/*using Microsoft.EntityFrameworkCore;
 using Models.OfficeClassRobotic.BuisnessObject;
 using OfficeClassRobotic.BuisnessObject.Models;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
@@ -50,8 +50,8 @@ namespace OfficeClassRobotic.DAO.Teachers
             {
                 Address = request.Address,
                 Birthday = request.Birthday,
-/*                Certification = request.Certification,
-                Major = request.Major,*/
+*//*                Certification = request.Certification,
+                Major = request.Major,*//*
                 Name = request.Name,
             };
             _dbContext.Teacher.Add(teacher);
@@ -91,11 +91,6 @@ namespace OfficeClassRobotic.DAO.Teachers
             var teacher = _dbContext.Teacher.Where(x => x.Id == request.TeacherId).FirstOrDefault();
             if (teacher != null)
             {
-                teacher.Birthday = request.Birthday;
-                //teacher.Major = request.Major;
-                teacher.Address = request.Address;
-               // teacher.Certification = request.Certification;
-                teacher.Name = request.Name;
                 if (request.ListSubjectId != null && request.ListSubjectId.Any())
                 {
                     //Xóa cũ thay mới
@@ -146,11 +141,6 @@ namespace OfficeClassRobotic.DAO.Teachers
                     var result = new TeacherDTO()
                     {
                         ListSubjectOfTeacher = listSubjectOfTeacher,
-                        Address = teacher.Address,
-                        Birthday = teacher.Birthday,
-                   /*     Certification = teacher.Certification,
-                        Major = teacher.Major,*/
-                        Name = teacher.Name,
                         TeacherId = teacher.Id
                     };
                     listResult.Add(result);
@@ -190,12 +180,9 @@ namespace OfficeClassRobotic.DAO.Teachers
             }
             var result = new TeacherDTO
             {
-                Address = teacher.Address,
-                Birthday = teacher.Birthday,
              //   Certification = teacher.Certification,
                 ListSubjectOfTeacher = listTeacherSubject,
                // Major = teacher.Major,
-                Name = teacher.Name,
                 TeacherId = teacher.Id
             };
             return result;
@@ -224,3 +211,4 @@ namespace OfficeClassRobotic.DAO.Teachers
         }
     }
 }
+*/

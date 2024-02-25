@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿/*using AutoMapper;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
 using OfficeClassRobotic.DAO.Parents;
 
@@ -55,3 +55,4 @@ namespace OfficeClassRobotic.Repository.Parents
         }
     }
 }
+*/
