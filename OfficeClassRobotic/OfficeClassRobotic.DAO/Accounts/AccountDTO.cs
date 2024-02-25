@@ -7,21 +7,6 @@ namespace OfficeClassRobotic.DAO.Accounts
 {
     public class AccountDTO
     {
-        /*
-         *         [Required]
-        public string Username { get; set; }
-        [Required]
-        public string Gender { get; set; }
-        [Required]
-        public DateOnly DateOfBirth { get; set; }
-        [Required]
-        [StringLength(8, MinimumLength = 4)]
-        public string Password { get; set; }
-        public string Address { get; set; }
-        public string FullName { get; set; }
-        public string Email { get; set; }
-        public string PhotoUrl { get; set; }
-         */
         [Required]
         public string UserName { get; set; }
         [Required]
@@ -30,25 +15,33 @@ namespace OfficeClassRobotic.DAO.Accounts
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }
-        /*
-                public byte[] PassWordHash { get; set; }
-                public byte[] PassWordSalt { get; set; }*/
         public DateOnly DateOfBirth { get; set; }
         public string Gender { get; set; }
         public string Address { get; set; }
         public string? PhotoUrl { get; set; }
     }
+    public class AccountStaffDTO : AccountDTO { }
+    public class AccountAdminDTO : AccountDTO { }
     public class AccountStudentDTO : AccountDTO
     {
+        public string ParentID { get; set; }
+    }
+    public class AccountParentDTO : AccountDTO { }
+    public class AccountTeacher : AccountDTO { }
 
-        public CreateStudentCommand StudentInfor { get; set; }
-    }
-    public class AccountParentDTO : AccountDTO
+    public class LoginModel
     {
-        public CreateParentCommand ParentInfor { get; set; }
+        public string UserNameOrEmail { get; set; }
+        public string Password { get; set; }
+
+
     }
-    public class AccountTeacher : AccountDTO
+    public class TokenModel
     {
-        public CreateTeacherDTO TeacherInfor { get; set;}
+        public string? AccessToken { get; set; }
+        public string? RefreshToken { get; set; }
+
+        // ngay het han
+        public DateTime Expires { get; set; }
     }
 }
