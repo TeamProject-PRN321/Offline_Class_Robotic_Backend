@@ -20,7 +20,7 @@ namespace Models.OfficeClassRobotic.BuisnessObject
       //  public virtual Class? Class { get; set; }
         public virtual GiaoTrinh? GiaoTrinh { get; set; }
 
-        public ICollection<StudentSubject> StudentSubjects { get; set; }
+        public ICollection<Class> Class { get; set; }
         public ICollection<TeacherSubject> TeacherSubjects { get; set; }
 
     }

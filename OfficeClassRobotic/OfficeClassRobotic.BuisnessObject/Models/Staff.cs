@@ -18,12 +18,9 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
         public DateOnly Birthday { get; set; }
-        [ForeignKey("TrungTamRobotic")]
-        public Guid TrungTamRoboticId { get; set; }
         [ForeignKey("AppUser")]
         public Guid AppUserId { get; set; }
 
         public virtual AppUser AppUser { get; set; }
-        public virtual TrungTamRobotic TrungTamRobotic { get; set; }
     }
 }

@@ -15,6 +15,5 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         public Guid AppUserId { get; set; }
 
         public virtual AppUser AppUser { get; set; }
-        public virtual IList<TrungTamRobotic> TrungTamRobotic { get; set; }
     }
 }

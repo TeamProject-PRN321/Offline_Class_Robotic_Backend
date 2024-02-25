@@ -1,4 +1,4 @@
-﻿using Models.OfficeClassRobotic.BuisnessObject;
+﻿/*using Models.OfficeClassRobotic.BuisnessObject;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using OfficeClassRobotic.BuisnessObject.Models.Common;
@@ -25,3 +25,4 @@ namespace OfficeClassRobotic.BuisnessObject.Models
         public IList<ClassSchedule> ClassSchedules { get; set; }
     }
 }
+*/

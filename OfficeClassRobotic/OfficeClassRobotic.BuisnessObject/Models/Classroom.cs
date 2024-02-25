@@ -11,10 +11,7 @@ namespace Models.OfficeClassRobotic.BuisnessObject
 {
     public class Classroom : BaseAuditableEntity
     {
-        /*[Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]*/
-        //public int ClassRoomID { get; set; }
-        public string ClassName { get; set; }
+        public string ClassRoomName { get; set; }
         public string? Description { get; set; }
         [ForeignKey("TrungTamRobotic")]
         public Guid TrungTamRoboticId { get; set; }

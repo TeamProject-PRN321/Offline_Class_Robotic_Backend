@@ -50,8 +50,8 @@ namespace OfficeClassRobotic.DAO.Teachers
             {
                 Address = request.Address,
                 Birthday = request.Birthday,
-                Certification = request.Certification,
-                Major = request.Major,
+/*                Certification = request.Certification,
+                Major = request.Major,*/
                 Name = request.Name,
             };
             _dbContext.Teacher.Add(teacher);
@@ -92,9 +92,9 @@ namespace OfficeClassRobotic.DAO.Teachers
             if (teacher != null)
             {
                 teacher.Birthday = request.Birthday;
-                teacher.Major = request.Major;
+                //teacher.Major = request.Major;
                 teacher.Address = request.Address;
-                teacher.Certification = request.Certification;
+               // teacher.Certification = request.Certification;
                 teacher.Name = request.Name;
                 if (request.ListSubjectId != null && request.ListSubjectId.Any())
                 {
@@ -148,8 +148,8 @@ namespace OfficeClassRobotic.DAO.Teachers
                         ListSubjectOfTeacher = listSubjectOfTeacher,
                         Address = teacher.Address,
                         Birthday = teacher.Birthday,
-                        Certification = teacher.Certification,
-                        Major = teacher.Major,
+                   /*     Certification = teacher.Certification,
+                        Major = teacher.Major,*/
                         Name = teacher.Name,
                         TeacherId = teacher.Id
                     };
@@ -192,9 +192,9 @@ namespace OfficeClassRobotic.DAO.Teachers
             {
                 Address = teacher.Address,
                 Birthday = teacher.Birthday,
-                Certification = teacher.Certification,
+             //   Certification = teacher.Certification,
                 ListSubjectOfTeacher = listTeacherSubject,
-                Major = teacher.Major,
+               // Major = teacher.Major,
                 Name = teacher.Name,
                 TeacherId = teacher.Id
             };

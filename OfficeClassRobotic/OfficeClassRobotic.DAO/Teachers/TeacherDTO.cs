@@ -19,9 +19,9 @@
     {
         public string Name { get; set; } = null!;
         public DateOnly Birthday { get; set; }
-        public string? Address { get; set; }
+        public string? Address { get; set; }/*
         public string? Major { get; set; }
-        public string? Certification { get; set; }
+        public string? Certification { get; set; }*/
         public List<Guid>? ListSubjectId { get; set; }
     }
 

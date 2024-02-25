@@ -9,11 +9,11 @@ namespace OfficeClassRobotic.BuisnessObject.Models
     {
         public string? AssesessmentType { get; set; }
 
-        [ForeignKey("StudentSubject")]
-        public int StudentSubjectID { get; set; }
+        [ForeignKey("ClassId")]
+        public int ClassId { get; set; }
 
         public double Grade { get; set; }
 
-        public virtual StudentSubject StudentSubject { get; set; }
+        public virtual Class Class { get; set; }
     }
 }

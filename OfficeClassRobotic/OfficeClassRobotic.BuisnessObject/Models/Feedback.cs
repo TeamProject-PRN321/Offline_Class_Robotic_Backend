@@ -16,12 +16,12 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         //public int FeedbackID { get; set; }
         public string FeedBackName { get; set; }
         public string? Description { get; set; }
-        [ForeignKey("Student")]
+        //[ForeignKey("Student")]
         public Guid StudentId { get; set; }
         [ForeignKey("Teacher")]
         public Guid TeacherId { get; set; }
  
-        public virtual Student Student { get; set; }
+       // public virtual Student Student { get; set; }
         public virtual Teacher Teacher { get; set; }
     }
 }

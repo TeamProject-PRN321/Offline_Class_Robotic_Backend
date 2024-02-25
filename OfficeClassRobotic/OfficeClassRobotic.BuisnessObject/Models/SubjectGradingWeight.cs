@@ -8,7 +8,7 @@ namespace OfficeClassRobotic.BuisnessObject.Models
     public class SubjectGradingWeight : BaseAuditableEntity
     {
         [ForeignKey("Subject")]
-        public int SubjectID { get; set; }
+        public Guid SubjectID { get; set; }
         /// <summary>
         /// Dạng kiểm tra : Kiểm tra 15P, Kiểm tra kết thúc môn
         /// </summary>

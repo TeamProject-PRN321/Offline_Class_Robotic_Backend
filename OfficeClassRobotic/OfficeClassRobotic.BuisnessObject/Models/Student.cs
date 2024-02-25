@@ -16,15 +16,12 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         public string Name { get; set; }
         public string Address { get; set; }
         public DateOnly Birthday { get; set; }
-        [ForeignKey("Parent")]
         public Guid ParentId { get; set; }
 
-        public virtual Parent Parent { get; set; }
-        public virtual IList<FeedBack> Feedbacks { get; set; }
         [ForeignKey("AppUser")]
         public Guid AppUserId { get; set; }
 
         public virtual AppUser AppUser { get; set; }
-        public ICollection<StudentSubject> StudentSubjects { get; set; }
+        public ICollection<Class> Classs { get; set; }
     }
 }

@@ -16,7 +16,6 @@ namespace Models.OfficeClassRobotic.BuisnessObject
     /// </summary>
     public class ClassSchedule : BaseAuditableEntity
     {
-        public string? ClassName { get; set; }
         /// <summary>
         /// Ngày học
         /// </summary>
@@ -26,17 +25,16 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         /// </summary>
         public int NumberOfSudent { get; set; }
 
-        //   public int SubjectID { get; set; }
-
         // Khóa ngoại
-        [ForeignKey("ClassSubject")]
-        public Guid ClassSubjectID { get; set; }
+        [ForeignKey("ClassId")]
+        public Guid ClassId { get; set; }
+
+        public Guid TeacherId { get; set; }
 
         [ForeignKey("ClassRoom")]
         public Guid ClassRoomID { get; set; }
 
         // Quan hệ
-        public virtual ClassSubject ClassSubject { get; set; }
         public virtual Classroom Classroom { get; set; }
     }
 }
