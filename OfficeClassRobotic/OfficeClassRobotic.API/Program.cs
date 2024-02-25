@@ -7,6 +7,15 @@ using OfficeClassRobotic.Repository.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("*").AllowAnyHeader().AllowAnyMethod();
+                      });
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -25,6 +34,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+app.UseCors(MyAllowSpecificOrigins);
 app.UseMiddleware<ExceptionMiddleware>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

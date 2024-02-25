@@ -11,7 +11,9 @@ namespace Models.OfficeClassRobotic.BuisnessObject
 {
     public class Class : BaseAuditableEntity
     {
-        public string ClassName { get; set; }
+        public string? ClassName { get; set; }
+        public List<string>? DayStudy {  get; set; }
+        public TimeSpan? TimeStudy { get; set; }
         [ForeignKey("Student")]
         public Guid StudentId { get; set; }
         [ForeignKey("Subject")]

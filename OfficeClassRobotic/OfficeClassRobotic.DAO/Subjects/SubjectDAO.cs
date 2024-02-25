@@ -30,8 +30,7 @@ namespace OfficeClassRobotic.DAO.Subjects
         public async Task CreateSubject(SubjectData request)
         {
             var checkExist = await dBContext.Subjects.Where(x => x.SubjectName == request.SubjectName).FirstOrDefaultAsync();
-            if(checkExist != null)
-            {
+            if (checkExist != null) {
                 throw new BadRequestException($"Subject has been existed!");
             }
             var giaoTrinh = new GiaoTrinh
@@ -51,7 +50,7 @@ namespace OfficeClassRobotic.DAO.Subjects
             await dBContext.SaveChangesAsync();
         }
 
-        public async Task CreateSubjectForListStudentWithGiaoTrinh(SubjectDTO subject)
+        /*public async Task CreateSubjectForListStudentWithGiaoTrinh(SubjectDTO subject)
         {
             try {
                 // new giaoTrinh
@@ -92,36 +91,6 @@ namespace OfficeClassRobotic.DAO.Subjects
             catch (Exception ex) {
                 throw new BadRequestException(ex.ToString());
             }
-        }
-
-        public async Task UpdateSubjectWithListStudent(UpdateSubjectDTO request)
-        {
-            try {
-                var subjectExist = await dBContext.Subjects
-                    .Where(s => s.Id == Guid.Parse(request.SubjectId) && !s.IsDeleted)
-                    .SingleOrDefaultAsync();
-                if (subjectExist == null) {
-                    throw new NotFoundException($"Does not existed subjectId: {request.SubjectId}");
-                }
-                subjectExist.SubjectName = request.SubjectName;
-                subjectExist.TotalSlots = request.TotalSlots;
-                subjectExist.GiaoTrinhId = Guid.Parse(request.GiaoTrinhId);
-                dBContext.Update(subjectExist);
-
-                var studentList = request.StudentList.Select(s => s.StudentID).ToList();
-                foreach (var student in studentList) {
-                    var studentExist = await dBContext.Students.Where(s => s.Id == Guid.Parse(student) && !s.IsDeleted).SingleOrDefaultAsync();
-                    if (studentExist == null) {
-                        throw new NotFoundException($"StudentId: {student} does not existed");
-                    }
-                    
-                }
-
-                await dBContext.SaveChangesAsync();
-            }
-            catch (Exception ex) {
-                throw new BadRequestException(ex.ToString());
-            }
-        }
+        }*/
     }
 }

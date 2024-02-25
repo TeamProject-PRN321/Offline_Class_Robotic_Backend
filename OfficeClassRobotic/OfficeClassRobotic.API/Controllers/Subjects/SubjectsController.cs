@@ -15,7 +15,7 @@ namespace OfficeClassRobotic.API.Controllers.Subjects
             _subjectsRepository = subjectsRepository;
         }
 
-        [HttpPost]
+        /*[HttpPost]
         [Route("add")]
         public Task<ClassRoboticResponse> Create(SubjectDTO request)
         {
@@ -35,6 +35,6 @@ namespace OfficeClassRobotic.API.Controllers.Subjects
         {
             var result = _subjectsRepository.UpdateSubjectWithListStudent(request);
             return result;
-        }
+        }*/
     }
 }

@@ -13,7 +13,7 @@ namespace OfficeClassRobotic.Repository.GiaoTrinhForSubject
 {
     public class SubjectRepository : ISubjectRepository
     {
-        private SubjectDAO _giaoTrinhDAO;
+        /*private SubjectDAO _giaoTrinhDAO;
         private readonly IMapper _mapper;
         public SubjectRepository(IMapper mapper)
         {
@@ -46,6 +46,6 @@ namespace OfficeClassRobotic.Repository.GiaoTrinhForSubject
             {
                 Message = "Create Successfully"
             };
-        }
+        }*/
     }
 }

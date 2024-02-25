@@ -1,10 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Configuration;
 using Models.OfficeClassRobotic.BuisnessObject;
 using OfficeClassRobotic.BuisnessObject.ConvertTer;
 using OfficeClassRobotic.BuisnessObject.Models;
 using OfficeClassRobotic.BuisnessObject.Models.Common;
 using OfficeClassRobotic.DataTier.ConvertTer;
+using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
 {
@@ -34,6 +38,45 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDBContext).Assembly);
 
+            #region class
+            modelBuilder.Entity<Class>(x =>
+            {
+                x.Property(y => y.DayStudy)
+                    .HasConversion(
+                        from => string.Join(";", from),
+                        to => string.IsNullOrEmpty(to) ? new List<string>() : to.Split(';', StringSplitOptions.RemoveEmptyEntries).ToList(),
+                        new ValueComparer<List<string>>(
+                            (c1, c2) => c1.SequenceEqual(c2),
+                            c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
+                            c => c.ToList()
+                    )
+                );
+            });
+            #endregion
+            using var hmac = new HMACSHA512();
+            modelBuilder.Entity<AppUser>().HasData(
+                new AppUser
+                {
+                    Id = Guid.Parse("2A22D7F6-6D94-4587-84D2-921C78970A91"),
+                    UserName = "nhannt",
+                    FullName = "Nguyen Thanh Nhan",
+                    Email = "nguyenthanhn537@gmail.com",
+                    PassWordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("P@ssw0rd11")),
+                    PassWordSalt = hmac.Key,
+                    DateOfBirth = new DateOnly(1990, 1, 1),
+                    Gender = "Male",
+                    Address = "23 Hcm",
+                    PhotoUrl = "132564487asjdhkahsdkj",
+                }
+                );
+
+            modelBuilder.Entity<Student>().HasData(
+                new Student
+                {
+                    //ParentId = Guid.Parse(""),
+                    AppUserId = Guid.Parse("2A22D7F6-6D94-4587-84D2-921C78970A91")
+                }
+            );
             modelBuilder.Entity<AppUserRole>(entity =>
             {
                 entity.HasKey(ss => new { ss.RoleId, ss.AppUserId });
@@ -95,7 +138,7 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                     Id = Guid.Parse("A53D0CCA-65D1-4B81-AFE2-E735FACD6C38"),
                     RoleName = "TrungTamRobotic"
                 });
-                
+
             base.OnModelCreating(modelBuilder);
         }
 
@@ -105,23 +148,19 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                      .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                      .AddJsonFile("appsettings.json", true, true)
                      .Build();
-            if (!optionsBuilder.IsConfigured)
-            {
+            if (!optionsBuilder.IsConfigured) {
                 optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             }
         }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var entry in base.ChangeTracker.Entries<BaseAuditableEntity>()
-                .Where(q => q.State == EntityState.Added || q.State == EntityState.Modified))
-            {
-                if (entry.State == EntityState.Added)
-                {
+                .Where(q => q.State == EntityState.Added || q.State == EntityState.Modified)) {
+                if (entry.State == EntityState.Added) {
                     entry.Entity.Created = DateTime.Now;
                     entry.Entity.CreateBy = CustomSessionManager.GetString("username");
                 }
-                if (entry.State == EntityState.Modified || entry.State == EntityState.Deleted)
-                {
+                if (entry.State == EntityState.Modified || entry.State == EntityState.Deleted) {
                     entry.Entity.LastModified = DateTime.Now;
                     entry.Entity.LastModifiedBy = CustomSessionManager.GetString("username");
                 }

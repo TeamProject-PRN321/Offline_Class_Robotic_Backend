@@ -12,7 +12,7 @@ using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
 namespace OfficeClassRobotic.BuisnessObject.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240217170718_InitDatabase")]
+    [Migration("20240225091434_InitDatabase")]
     partial class InitDatabase
     {
         /// <inheritdoc />
@@ -33,6 +33,9 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("date");
@@ -57,16 +60,16 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AppUserId");
+
                     b.ToTable("Admins");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.AppUser", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -117,7 +120,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ClassId")
+                    b.Property<Guid>("ClassScheduleID")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CreateBy")
@@ -140,8 +143,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClassId")
-                        .IsUnique();
+                    b.HasIndex("ClassScheduleID");
 
                     b.ToTable("Attendance");
                 });
@@ -153,7 +155,6 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ClassName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreateBy")
@@ -162,7 +163,55 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DayStudy")
+                    b.Property<string>("DayStudy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SubjectId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<TimeSpan?>("TimeStudy")
+                        .HasColumnType("time");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("Classes");
+                });
+
+            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.ClassSchedule", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ClassId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ClassRoomID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreateBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateStudy")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
@@ -174,31 +223,17 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("MarkOfStudent")
-                        .HasColumnType("float");
-
                     b.Property<int>("NumberOfSudent")
                         .HasColumnType("int");
-
-                    b.Property<Guid>("SubjectId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("TeacherId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("TrungTamRoboticId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("SubjectId")
-                        .IsUnique();
+                    b.HasIndex("ClassRoomID");
 
-                    b.HasIndex("TeacherId");
-
-                    b.HasIndex("TrungTamRoboticId");
-
-                    b.ToTable("Classes");
+                    b.ToTable("ClassSchedule");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Classroom", b =>
@@ -207,7 +242,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ClassName")
+                    b.Property<string>("ClassRoomName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -319,8 +354,6 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StudentId");
-
                     b.HasIndex("TeacherId");
 
                     b.ToTable("FeedBacks");
@@ -368,8 +401,10 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("date");
@@ -390,14 +425,14 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("Parents");
                 });
@@ -411,6 +446,9 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("date");
@@ -438,12 +476,9 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("TrungTamRoboticId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("TrungTamRoboticId");
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("Staffs");
                 });
@@ -457,6 +492,9 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("date");
@@ -485,24 +523,9 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ParentId");
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("Students");
-                });
-
-            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.StudentSubject", b =>
-                {
-                    b.Property<Guid>("StudentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("SubjectId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("StudentId", "SubjectId");
-
-                    b.HasIndex("SubjectId");
-
-                    b.ToTable("StudentSubject");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Subject", b =>
@@ -553,12 +576,11 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("Birthday")
                         .HasColumnType("date");
-
-                    b.Property<string>("Certification")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
@@ -575,15 +597,13 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Major")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("Teacher");
                 });
@@ -598,7 +618,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("AdminId")
+                    b.Property<Guid>("AppUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CreateBy")
@@ -622,47 +642,242 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AdminId");
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("TrungTamRobotics");
                 });
 
-            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Attendance", b =>
+            modelBuilder.Entity("OfficeClassRobotic.BuisnessObject.Models.AppUserRole", b =>
                 {
-                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Class", "Class")
-                        .WithOne("Attendance")
-                        .HasForeignKey("Models.OfficeClassRobotic.BuisnessObject.Attendance", "ClassId")
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("RoleId", "AppUserId");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("AppUserRoles");
+                });
+
+            modelBuilder.Entity("OfficeClassRobotic.BuisnessObject.Models.Role", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreateBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("b308c9a8-9a44-4662-b010-e4688fb8e019"),
+                            Created = new DateTime(2024, 2, 25, 16, 14, 34, 654, DateTimeKind.Local).AddTicks(4966),
+                            IsDeleted = false,
+                            RoleName = "Student"
+                        },
+                        new
+                        {
+                            Id = new Guid("1c477667-fbc0-4c85-9d2f-1f5a6da3edac"),
+                            Created = new DateTime(2024, 2, 25, 16, 14, 34, 654, DateTimeKind.Local).AddTicks(5000),
+                            IsDeleted = false,
+                            RoleName = "Parent"
+                        },
+                        new
+                        {
+                            Id = new Guid("dc1c58f1-326b-43c0-a750-263bceee32be"),
+                            Created = new DateTime(2024, 2, 25, 16, 14, 34, 654, DateTimeKind.Local).AddTicks(5003),
+                            IsDeleted = false,
+                            RoleName = "Staff"
+                        },
+                        new
+                        {
+                            Id = new Guid("891e4e1c-bed5-4992-a978-fc969fdaf128"),
+                            Created = new DateTime(2024, 2, 25, 16, 14, 34, 654, DateTimeKind.Local).AddTicks(5005),
+                            IsDeleted = false,
+                            RoleName = "Admin"
+                        },
+                        new
+                        {
+                            Id = new Guid("433ca17d-2bb8-4a98-91e6-5703365cb2fd"),
+                            Created = new DateTime(2024, 2, 25, 16, 14, 34, 654, DateTimeKind.Local).AddTicks(5007),
+                            IsDeleted = false,
+                            RoleName = "Teacher"
+                        },
+                        new
+                        {
+                            Id = new Guid("a53d0cca-65d1-4b81-afe2-e735facd6c38"),
+                            Created = new DateTime(2024, 2, 25, 16, 14, 34, 654, DateTimeKind.Local).AddTicks(5024),
+                            IsDeleted = false,
+                            RoleName = "TrungTamRobotic"
+                        });
+                });
+
+            modelBuilder.Entity("OfficeClassRobotic.BuisnessObject.Models.StudentGrade", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AssesessmentType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ClassId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("ClassId1")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreateBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Grade")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassId1");
+
+                    b.ToTable("StudentGrades");
+                });
+
+            modelBuilder.Entity("OfficeClassRobotic.BuisnessObject.Models.SubjectGradingWeight", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AssesessmentType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreateBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("SubjectID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("WeightPercentage")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubjectID");
+
+                    b.ToTable("SubjectGradingWeights");
+                });
+
+            modelBuilder.Entity("OfficeClassRobotic.BuisnessObject.Models.TeacherSubject", b =>
+                {
+                    b.Property<Guid>("SubjectId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TeacherId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("SubjectId", "TeacherId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("TeacherSubjects");
+                });
+
+            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Admin", b =>
+                {
+                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Class");
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Attendance", b =>
+                {
+                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.ClassSchedule", "ClassSchedule")
+                        .WithMany()
+                        .HasForeignKey("ClassScheduleID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ClassSchedule");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Class", b =>
                 {
+                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Student", "Student")
+                        .WithMany("Classs")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Subject", "Subject")
-                        .WithOne("Class")
-                        .HasForeignKey("Models.OfficeClassRobotic.BuisnessObject.Class", "SubjectId")
+                        .WithMany("Class")
+                        .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Teacher", "Teacher")
-                        .WithMany("Classes")
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.TrungTamRobotic", "TrungTamRobotic")
-                        .WithMany("Classes")
-                        .HasForeignKey("TrungTamRoboticId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Student");
 
                     b.Navigation("Subject");
+                });
 
-                    b.Navigation("Teacher");
+            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.ClassSchedule", b =>
+                {
+                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Classroom", "Classroom")
+                        .WithMany("ClassSchedules")
+                        .HasForeignKey("ClassRoomID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("TrungTamRobotic");
+                    b.Navigation("Classroom");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Classroom", b =>
@@ -689,62 +904,46 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.FeedBack", b =>
                 {
-                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Student", "Student")
-                        .WithMany("Feedbacks")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Teacher", "Teacher")
                         .WithMany("Feedbacks")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Student");
-
                     b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Parent", b =>
+                {
+                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Staff", b =>
                 {
-                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.TrungTamRobotic", "TrungTamRobotic")
-                        .WithMany("Staffs")
-                        .HasForeignKey("TrungTamRoboticId")
+                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("TrungTamRobotic");
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Student", b =>
                 {
-                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Parent", "Parent")
-                        .WithMany("Students")
-                        .HasForeignKey("ParentId")
+                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Parent");
-                });
-
-            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.StudentSubject", b =>
-                {
-                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Student", "Student")
-                        .WithMany("StudentSubjects")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Subject", "Subject")
-                        .WithMany("StudentSubjects")
-                        .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Student");
-
-                    b.Navigation("Subject");
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Subject", b =>
@@ -758,30 +957,97 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Navigation("GiaoTrinh");
                 });
 
-            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.TrungTamRobotic", b =>
+            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Teacher", b =>
                 {
-                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Admin", "Admin")
-                        .WithMany("TrungTamRobotic")
-                        .HasForeignKey("AdminId")
+                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Admin");
+                    b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Admin", b =>
+            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.TrungTamRobotic", b =>
                 {
-                    b.Navigation("TrungTamRobotic");
-                });
-
-            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Class", b =>
-                {
-                    b.Navigation("Attendance")
+                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("OfficeClassRobotic.BuisnessObject.Models.AppUserRole", b =>
+                {
+                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.AppUser", "AppUser")
+                        .WithMany("AppUserRoles")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("OfficeClassRobotic.BuisnessObject.Models.Role", "Role")
+                        .WithMany("AppUserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("OfficeClassRobotic.BuisnessObject.Models.StudentGrade", b =>
+                {
+                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Class", "Class")
+                        .WithMany()
+                        .HasForeignKey("ClassId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Class");
+                });
+
+            modelBuilder.Entity("OfficeClassRobotic.BuisnessObject.Models.SubjectGradingWeight", b =>
+                {
+                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Subject", "Subject")
+                        .WithMany()
+                        .HasForeignKey("SubjectID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Subject");
+                });
+
+            modelBuilder.Entity("OfficeClassRobotic.BuisnessObject.Models.TeacherSubject", b =>
+                {
+                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Subject", "Subject")
+                        .WithMany("TeacherSubjects")
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Teacher", "Teacher")
+                        .WithMany("TeacherSubjects")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Subject");
+
+                    b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.AppUser", b =>
+                {
+                    b.Navigation("AppUserRoles");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Classroom", b =>
                 {
+                    b.Navigation("ClassSchedules");
+
                     b.Navigation("Devices");
                 });
 
@@ -790,39 +1056,33 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Navigation("Subject");
                 });
 
-            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Parent", b =>
-                {
-                    b.Navigation("Students");
-                });
-
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Student", b =>
                 {
-                    b.Navigation("Feedbacks");
-
-                    b.Navigation("StudentSubjects");
+                    b.Navigation("Classs");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Subject", b =>
                 {
                     b.Navigation("Class");
 
-                    b.Navigation("StudentSubjects");
+                    b.Navigation("TeacherSubjects");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Teacher", b =>
                 {
-                    b.Navigation("Classes");
-
                     b.Navigation("Feedbacks");
+
+                    b.Navigation("TeacherSubjects");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.TrungTamRobotic", b =>
                 {
-                    b.Navigation("Classes");
-
                     b.Navigation("Classrooms");
+                });
 
-                    b.Navigation("Staffs");
+            modelBuilder.Entity("OfficeClassRobotic.BuisnessObject.Models.Role", b =>
+                {
+                    b.Navigation("AppUserRoles");
                 });
 #pragma warning restore 612, 618
         }

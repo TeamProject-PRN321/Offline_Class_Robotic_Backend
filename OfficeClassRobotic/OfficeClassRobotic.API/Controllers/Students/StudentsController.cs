@@ -12,7 +12,7 @@ namespace OfficeClassRobotic.API.Controllers.Students
     [ApiController]
     public class StudentsController : ControllerBase
     {
-        private readonly IStudentRepository _studentRepository;
+        /*private readonly IStudentRepository _studentRepository;
         public StudentsController(IStudentRepository studentRepository)
         {
             _studentRepository = studentRepository;
@@ -56,6 +56,6 @@ namespace OfficeClassRobotic.API.Controllers.Students
         {
             var result = _studentRepository.GetStudentById(parentId);
             return result;
-        }
+        }*/
     }
 }

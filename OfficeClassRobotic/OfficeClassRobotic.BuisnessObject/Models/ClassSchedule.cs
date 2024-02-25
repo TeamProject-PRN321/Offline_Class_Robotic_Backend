@@ -19,7 +19,7 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         /// <summary>
         /// Ngày học
         /// </summary>
-        public DateTime DayStudy { get; set; }
+        public DateTime DateStudy { get; set; }
         /// <summary>
         /// Số lượng học sinh
         /// </summary>

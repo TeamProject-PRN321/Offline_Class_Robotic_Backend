@@ -13,7 +13,7 @@ namespace OfficeClassRobotic.DAO.Students
 {
     public class StudentDAO
     {
-        private static StudentDAO instance;
+        /*private static StudentDAO instance;
         private static ApplicationDBContext dbContext;
         public StudentDAO()
         {
@@ -130,6 +130,6 @@ namespace OfficeClassRobotic.DAO.Students
             catch (Exception ex) {
                 throw new BadRequestException(ex.Message);
             }
-        }
+        }*/
     }
 }

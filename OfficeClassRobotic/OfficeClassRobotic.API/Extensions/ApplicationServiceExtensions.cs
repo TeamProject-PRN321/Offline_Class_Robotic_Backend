@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OfficeClassRobotic.BuisnessTier.Implement;
 using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
+using OfficeClassRobotic.Repository.Classess;
 using OfficeClassRobotic.Repository.GiaoTrinhForSubject;
 using OfficeClassRobotic.Repository.GiaoTrinhs;
 using OfficeClassRobotic.Repository.Interfaces;
@@ -26,7 +27,7 @@ namespace OfficeClassRobotic.API.Extensions
             services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<IGiaoTrinhRepository, GiaoTrinhRepository>();
             services.AddScoped<ITeacherRepository, TeacherRepository>();
-
+            services.AddScoped<IClassRepository, ClassRepository>();
 
             return services;
         }

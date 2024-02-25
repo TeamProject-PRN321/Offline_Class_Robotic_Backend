@@ -7,7 +7,7 @@ namespace OfficeClassRobotic.Repository.Students
 {
     public class StudentRepository : IStudentRepository
     {
-        private StudentDAO studentDAO;
+        /*private StudentDAO studentDAO;
         private readonly IMapper _mapper;
         public StudentRepository(IMapper mapper)
         {
@@ -53,6 +53,6 @@ namespace OfficeClassRobotic.Repository.Students
             {
                 Message = "Update Successfully"
             };
-        }
+        }*/
     }
 }
