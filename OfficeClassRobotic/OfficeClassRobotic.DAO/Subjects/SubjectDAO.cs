@@ -80,12 +80,12 @@ namespace OfficeClassRobotic.DAO.Subjects
                 dBContext.Subjects.Add(newSubject);
 
                 foreach (var student in studentExistWithSubject) {
-                    /*var newListStudentForSubject = new StudentSubject
+                    var newListStudentForSubject = new StudentSubject
                     {
                         SubjectId = newSubject.Id,
                         StudentId = student.Id,
                     };
-                    dBContext.StudentSubject.Add(newListStudentForSubject);*/
+                    dBContext.StudentSubject.Add(newListStudentForSubject);
                 }
                 await dBContext.SaveChangesAsync();
             }
@@ -103,6 +103,10 @@ namespace OfficeClassRobotic.DAO.Subjects
                 if (subjectExist == null) {
                     throw new NotFoundException($"Does not existed subjectId: {request.SubjectId}");
                 }
+                subjectExist.SubjectName = request.SubjectName;
+                subjectExist.TotalSlots = request.TotalSlots;
+                subjectExist.GiaoTrinhId = Guid.Parse(request.GiaoTrinhId);
+                dBContext.Update(subjectExist);
 
                 var studentList = request.StudentList.Select(s => s.StudentID).ToList();
                 foreach (var student in studentList) {
@@ -110,10 +114,7 @@ namespace OfficeClassRobotic.DAO.Subjects
                     if (studentExist == null) {
                         throw new NotFoundException($"StudentId: {student} does not existed");
                     }
-                    subjectExist.SubjectName = request.SubjectName;
-                    subjectExist.TotalSlots = request.TotalSlots;
-                    subjectExist.GiaoTrinhId = Guid.Parse(request.GiaoTrinhId);
-                    dBContext.Update(subjectExist);
+                    
                 }
 
                 await dBContext.SaveChangesAsync();
