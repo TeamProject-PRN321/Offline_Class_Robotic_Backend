@@ -1,8 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Models.OfficeClassRobotic.BuisnessObject;
 using OfficeClassRobotic.BuisnessObject.Models;
 using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
 using OfficeClassRobotic.Service.Exceptions;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -12,6 +17,11 @@ namespace OfficeClassRobotic.DAO.Accounts
     {
         private ApplicationDBContext _dbContext;
         private AccountDAO _instance;
+
+        public AccountDAO()
+        {
+            _dbContext = new ApplicationDBContext();
+        }
 
         public AccountDAO Instance
         {
@@ -271,13 +281,19 @@ namespace OfficeClassRobotic.DAO.Accounts
 
             await _dbContext.SaveChangesAsync();
         }
-
-        public async Task<TokenModel> Login(LoginModel request)
+        /// <summary>
+        /// Đăng nhập để check User
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        /// <exception cref="NotFoundException"></exception>
+        /// <exception cref="BadRequestException"></exception>
+        public async Task<AppUserModel> Login(LoginModel request)
         {
             var user = await _dbContext.AppUsers.Where(x => (x.UserName.ToLower() == request.UserNameOrEmail.ToLower() || x.Email.ToLower() == request.UserNameOrEmail.ToLower())).FirstOrDefaultAsync();
             if (user == null)
             {
-                throw new KeyNotFoundException($"Không tìm thấy tên đăng nhập hoặc địa chỉ email '{request.UserNameOrEmail}'");
+                throw new NotFoundException($"Không tìm thấy tên đăng nhập hoặc địa chỉ email '{request.UserNameOrEmail}'");
             }
 
             var enteredPasswordBytes = Encoding.UTF8.GetBytes(request.Password);
@@ -290,24 +306,141 @@ namespace OfficeClassRobotic.DAO.Accounts
             bool passwordsMatch = enteredPasswordHash.SequenceEqual(user.PassWordHash);
             if (!passwordsMatch)
             {
-                throw new InvalidOperationException("Sai mật khẩu. Vui lòng nhập lại!");
+                throw new BadRequestException("Sai mật khẩu. Vui lòng nhập lại!");
             }
-
-
-
-            return null;
+            var response = new AppUserModel();
+            var listRole = await _dbContext.AppUserRoles.Where(x => x.AppUserId == user.Id).Select(x => x.RoleId).ToListAsync();
+            response.AppUser = user;
+            response.ListRole = new List<string>();
+            foreach (var item in listRole)
+            {
+                var role = _dbContext.Roles.Where(x => x.Id == item).Select(x => x.RoleName).FirstOrDefault();
+                if (role != null)
+                {
+                    response.ListRole.Add(role);
+                }
+            }
+            return response;
         }
-        private async Task<TokenModel> GenerateToken(AppUser user)
+        public async Task<string> GenerateRefreshToken(AppUser user, JwtSecurityToken token)
         {
+            var refreshToken = GenerateRefreshToken();
+
+            //Lưu RefreshToken vào Database
+            var refreshTokenEntity = new RefreshToken
+            {
+                AppUserId = user.Id,
+                JwtId = token.Id,
+                RefreshTOken = refreshToken,
+                IsUsed = false,
+                IsRevoked = false,
+                IssuedAt = DateTime.Now,
+                ExpiredAt = DateTime.Now.AddDays(30),
+            };
+            _dbContext.RefreshToken.Add(refreshTokenEntity);
+            await _dbContext.SaveChangesAsync();
+
+            return refreshToken;
+        }
+        public async Task<AppUserModel> RenewToken(TokenModel model, byte[] key)
+        {
+            var jwtTokenHandler = new JwtSecurityTokenHandler();
+            var tokenValidateParam = new TokenValidationParameters
+            {
+                //Tự cấp Token
+                ValidateIssuer = false,
+                ValidateAudience = false,
+
+                //Ký vào token
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+
+                ValidateLifetime = false,//Kh kiểm tra token hết hạn
+            };
             try
             {
+                //Check 1: AccessToken Valid Format
+                var tokenInverification = jwtTokenHandler.ValidateToken(model.AccessToken, tokenValidateParam, out var validateToken);
 
+                //Check 2: Check Alg
+                if (validateToken is JwtSecurityToken jwtSecurityToken)
+                {
+                    var result = jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha512Signature, StringComparison.InvariantCultureIgnoreCase);
+                    if (!result)
+                    {
+                        throw new BadRequestException("Có lỗi xãy ra trong quá trình refresh token!!!!");
+                    }
+                }
+                //Check 3: Check accessToken expire?
+                var utcExpireDate = long.Parse(tokenInverification.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Exp)!.Value);
+
+                var expireDate = ConvertUnixTimeToDateTime(utcExpireDate);
+                if (expireDate > DateTime.Now)
+                {
+                    throw new BadRequestException("Token chưa hết hạn!!!!");
+                }
+                //Check 4: Check refreshtoken exist in DB
+                var storedToken = _dbContext.RefreshToken.FirstOrDefault(x => x.RefreshTOken == model.RefreshToken);
+                if (storedToken == null)
+                {
+                    throw new BadRequestException("Token chưa từng tồn tại!!!");
+                }
+                if (storedToken.IsRevoked)
+                {
+                    throw new BadRequestException("Token đã được sử dụng!!!");
+                }
+                //Check 6: Accesstoken id 
+                var jti = tokenInverification.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Jti)!.Value;
+                if (storedToken.JwtId != jti)
+                {
+                    throw new BadRequestException("Token có vấn đề!!!!");
+                }
+                //Update token is used
+                storedToken.IsRevoked = true;
+                storedToken.IsUsed = true;
+                _dbContext.RefreshToken.Update(storedToken);
+                await _dbContext.SaveChangesAsync();
+
+                //Create new token
+                var user = await _dbContext.AppUsers.FirstOrDefaultAsync(x => x.Id == storedToken.AppUserId);
+
+                var response = new AppUserModel();
+                response.AppUser = user!;
+                response.ListRole = new List<string>();
+
+                var listRole = await _dbContext.AppUserRoles.Where(x => x.AppUserId == user!.Id).Select(x => x.RoleId).ToListAsync();
+                foreach (var item in listRole)
+                {
+                    var role = _dbContext.Roles.Where(x => x.Id == item).Select(x => x.RoleName).FirstOrDefault();
+                    if (role != null)
+                    {
+                        response.ListRole.Add(role);
+                    }
+                }
+                return response;
             }
             catch
             {
-                throw new InvalidOperationException("Sai mật khẩu. Vui lòng nhập lại!");
+                throw new BadRequestException("Đăng nhập thất bại!!!");
             }
-            return null;
+        }
+        private DateTime ConvertUnixTimeToDateTime(long utcExpireDate)
+        {
+            var dateTimeOffset = DateTimeOffset.FromFileTime(utcExpireDate);
+            var test = dateTimeOffset.DateTime;
+            var dateTimeInterval = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            var result = dateTimeInterval.AddHours(7).AddSeconds(utcExpireDate).ToUniversalTime();
+            return result;
+        }
+        private string GenerateRefreshToken()
+        {
+            var random = new byte[32];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(random);
+                return Convert.ToBase64String(random);
+            }
         }
     }
+
 }

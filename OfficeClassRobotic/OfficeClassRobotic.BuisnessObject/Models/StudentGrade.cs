@@ -9,8 +9,8 @@ namespace OfficeClassRobotic.BuisnessObject.Models
     {
         public string? AssesessmentType { get; set; }
 
-        [ForeignKey("ClassId")]
-        public int ClassId { get; set; }
+        [ForeignKey("Class")]
+        public Guid ClassId { get; set; }
 
         public double Grade { get; set; }
 

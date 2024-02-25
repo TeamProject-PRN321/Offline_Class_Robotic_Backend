@@ -5,6 +5,8 @@ using OfficeClassRobotic.BuisnessObject.ConvertTer;
 using OfficeClassRobotic.BuisnessObject.Models;
 using OfficeClassRobotic.BuisnessObject.Models.Common;
 using OfficeClassRobotic.DataTier.ConvertTer;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
 {
@@ -29,6 +31,7 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
         public DbSet<StudentGrade> StudentGrades { get; set; }
         public DbSet<SubjectGradingWeight> SubjectGradingWeights { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<RefreshToken> RefreshToken { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -63,7 +66,35 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                 .HasForeignKey(tS => tS.SubjectId)
                 .OnDelete(DeleteBehavior.NoAction);
             });
-
+            using var hmac = new HMACSHA512();
+            var passWordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("Password1@"));
+            var passWordSalt = hmac.Key;
+            modelBuilder.Entity<AppUser>().HasData(
+                new AppUser
+                {
+                    Id = Guid.Parse("DA053AF4-CDF1-4A6B-8506-2E3939EF6351"),
+                    Address = "Long An",
+                    DateOfBirth = DateOnly.MinValue,
+                    Email = "vinnt060402@gmail.com",
+                    FullName = "Nguyễn Ngọc Thái Vĩ",
+                    Gender = "Male",
+                    PhotoUrl = "abc",
+                    UserName = "vinnt060402",
+                    PassWordHash = passWordHash,
+                    PassWordSalt = passWordSalt,
+                });
+            modelBuilder.Entity<AppUserRole>().HasData(new AppUserRole
+            {
+                AppUserId = Guid.Parse("DA053AF4-CDF1-4A6B-8506-2E3939EF6351"),
+                RoleId = Guid.Parse("891E4E1C-BED5-4992-A978-FC969FDAF128")
+            });
+            modelBuilder.Entity<Admin>().HasData(new Admin
+            {
+                AppUserId = Guid.Parse("DA053AF4-CDF1-4A6B-8506-2E3939EF6351"),
+                Address = "Long An",
+                Birthday = DateOnly.MinValue,
+                Name = "Nguyễn Ngọc Thái Vĩ"
+            });
             modelBuilder.Entity<Role>().HasData(
                 new Role
                 {
@@ -95,7 +126,7 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                     Id = Guid.Parse("A53D0CCA-65D1-4B81-AFE2-E735FACD6C38"),
                     RoleName = "TrungTamRobotic"
                 });
-                
+
             base.OnModelCreating(modelBuilder);
         }
 

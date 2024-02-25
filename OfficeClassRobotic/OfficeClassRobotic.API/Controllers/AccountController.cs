@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Models.OfficeClassRobotic.BuisnessObject;
 using OfficeClassRobotic.API.DTOs;
+using OfficeClassRobotic.DAO.Accounts;
 using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
+using OfficeClassRobotic.Repository.Accounts;
 using OfficeClassRobotic.Repository.Interfaces;
 using System.Security.Cryptography;
 using System.Text;
@@ -17,9 +19,11 @@ namespace OfficeClassRobotic.API.Controllers
         private readonly ApplicationDBContext _context;
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
+        private readonly IAccountRepository _accountRepository;
 
-        public AccountController(ApplicationDBContext context, ITokenService tokenService, IMapper mapper)
+        public AccountController(ApplicationDBContext context, ITokenService tokenService, IMapper mapper, IAccountRepository accountRepository)
         {
+            _accountRepository = accountRepository;
             _context = context;
             _tokenService = tokenService;
             _mapper = mapper;
@@ -54,30 +58,20 @@ namespace OfficeClassRobotic.API.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
+        public async Task<ActionResult<TokenModel>> Login(LoginDto loginDto)
         {
-            var user = await _context.AppUsers
-                .SingleOrDefaultAsync(x => x.UserName == loginDto.Username);
-
-            if (user == null) return Unauthorized("Invalid user name");
-
-            using var hmac = new HMACSHA512(user.PassWordSalt);
-            var computeHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
-            for (int i = 0; i < computeHash.Length; i++)
+            var response =await _accountRepository.Login(new LoginModel
             {
-                if (computeHash[i] != user.PassWordHash[i])
-                {
-                    return Unauthorized("Invalid password");
-                }
-            }
-
-            return new UserDto
-            {
-                Username = user.UserName,
-                TokenKey = _tokenService.CreateToken(user),
-                PhotoUrl = user.PhotoUrl,
-                Gender = user.Gender
-            };
+                UserNameOrEmail = loginDto.Username,
+                Password = loginDto.Password,
+            });
+            return response;
+        }
+        [HttpPost("refresh")]
+        public async Task<ActionResult<TokenModel>> Refresh(TokenModel model)
+        {
+            var response = await _accountRepository.RefreshToken(model);
+            return response;
         }
 
         private async Task<bool> UserExists(string username)
