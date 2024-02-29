@@ -11,20 +11,9 @@ namespace Models.OfficeClassRobotic.BuisnessObject
 {
     public class TrungTamRobotic : BaseAuditableEntity
     {
-        /*[Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]*/
-        //public int TrungTamRoboticID { get; set; }
         public string Name { get; set; }
-        public string Address { get; set; }/*
-        [ForeignKey("Admin")]
-        public Guid AdminId { get; set; }*/
-        [ForeignKey("AppUser")]
-        public Guid AppUserId { get; set; }
-
-        public virtual AppUser AppUser { get; set; }/*
-
-        public virtual Admin Admin { get; set; }
-        public virtual IList<Staff> Staffs { get; set; }*/
+        public string Address { get; set; }
+        
         public virtual IList<Classroom> Classrooms { get; set; }
     }
 }

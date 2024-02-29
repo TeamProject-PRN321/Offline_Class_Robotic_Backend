@@ -19,13 +19,19 @@ namespace OfficeClassRobotic.Repository.Classess
             _classDAO = new ClassDAO();
             _mapper = mapper;
         }
-        public async Task<ClassRoboticResponse> CreateClass(ClassDTO request)
+        public async Task<ClassRoboticResponse> CreateClass(CreateClassesCommand request)
         {
             await _classDAO.CreateClassess(request);
             return new ClassRoboticResponse
             {
                 Message = "Create Successfully"
             };
+        }
+
+        public async Task<CheckDataResponse> CheckSchedularTeacher(CheckData request)
+        {
+            var response = await _classDAO.CheckSchedularTeacher(request);
+            return response;
         }
     }
 }

@@ -14,11 +14,20 @@ namespace OfficeClassRobotic.API.Controllers.Classess
         {
             _classRepository = classRepository;
         }
+
         [HttpPost]
         [Route("add")]
-        public Task<ClassRoboticResponse> Create(ClassDTO request)
+        public Task<ClassRoboticResponse> Create(CreateClassesCommand request)
         {
             var result = _classRepository.CreateClass(request);
+            return result;
+        }
+
+        [HttpPost]
+        [Route("check-schedular-teacher")]
+        public Task<CheckDataResponse> Check(CheckData request)
+        {
+            var result = _classRepository.CheckSchedularTeacher(request);
             return result;
         }
     }

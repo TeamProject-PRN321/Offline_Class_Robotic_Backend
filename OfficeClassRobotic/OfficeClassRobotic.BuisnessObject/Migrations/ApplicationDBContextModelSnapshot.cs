@@ -28,14 +28,8 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("AppUserId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Birthday")
-                        .HasColumnType("date");
 
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
@@ -52,14 +46,20 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
 
                     b.ToTable("Admins");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("34521f3a-a7bf-4262-be95-63a247371583"),
+                            AppUserId = new Guid("da053af4-cdf1-4a6b-8506-2e3939ef6351"),
+                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 155, DateTimeKind.Local).AddTicks(6938),
+                            IsDeleted = false
+                        });
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.AppUser", b =>
@@ -95,6 +95,10 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PhotoUrl")
                         .HasColumnType("nvarchar(max)");
 
@@ -115,10 +119,53 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                             Email = "nguyenthanhn537@gmail.com",
                             FullName = "Nguyen Thanh Nhan",
                             Gender = "Male",
-                            PassWordHash = new byte[] { 12, 36, 242, 127, 55, 29, 106, 167, 199, 93, 155, 55, 205, 252, 203, 201, 90, 15, 141, 93, 42, 169, 226, 238, 61, 69, 5, 147, 23, 70, 206, 7, 50, 4, 220, 171, 47, 74, 168, 12, 111, 202, 200, 231, 69, 39, 176, 165, 200, 55, 73, 247, 104, 202, 112, 191, 253, 234, 168, 20, 182, 175, 247, 138 },
-                            PassWordSalt = new byte[] { 133, 141, 34, 31, 126, 156, 31, 82, 43, 128, 60, 77, 1, 42, 109, 244, 196, 132, 70, 55, 174, 82, 173, 75, 194, 201, 185, 173, 172, 158, 115, 29, 92, 63, 30, 190, 231, 96, 104, 174, 160, 214, 54, 7, 38, 254, 195, 247, 59, 125, 84, 9, 99, 115, 161, 152, 164, 98, 144, 19, 189, 228, 47, 191, 187, 113, 204, 202, 177, 17, 55, 212, 224, 117, 187, 95, 57, 96, 236, 65, 128, 11, 28, 253, 130, 74, 71, 40, 35, 167, 226, 58, 215, 29, 111, 137, 234, 196, 34, 210, 136, 171, 51, 52, 177, 163, 108, 161, 18, 9, 201, 7, 104, 104, 54, 45, 58, 133, 103, 98, 229, 237, 16, 255, 116, 71, 140, 246 },
+                            PassWordHash = new byte[] { 157, 36, 79, 129, 21, 225, 228, 127, 150, 245, 31, 82, 201, 250, 49, 201, 72, 232, 149, 212, 156, 158, 247, 133, 172, 230, 109, 132, 119, 198, 148, 184, 146, 213, 179, 173, 149, 17, 28, 203, 123, 72, 180, 220, 159, 161, 117, 71, 61, 8, 150, 19, 212, 42, 25, 133, 216, 205, 8, 191, 107, 43, 198, 100 },
+                            PassWordSalt = new byte[] { 214, 232, 177, 145, 246, 92, 117, 85, 91, 69, 159, 245, 51, 93, 94, 85, 89, 2, 114, 128, 83, 255, 51, 221, 83, 141, 121, 131, 145, 240, 50, 149, 30, 139, 33, 82, 140, 46, 59, 174, 176, 66, 127, 26, 128, 88, 6, 210, 74, 13, 185, 14, 140, 34, 176, 19, 196, 146, 60, 172, 24, 196, 149, 16, 66, 208, 158, 1, 112, 160, 198, 214, 76, 70, 167, 122, 98, 140, 44, 255, 128, 49, 115, 137, 119, 1, 100, 103, 201, 40, 179, 254, 35, 203, 195, 40, 241, 169, 59, 102, 123, 97, 57, 125, 110, 225, 193, 159, 112, 198, 32, 202, 80, 6, 1, 43, 157, 31, 18, 193, 198, 202, 13, 21, 107, 242, 240, 138 },
+                            PhoneNumber = "0912345678",
                             PhotoUrl = "132564487asjdhkahsdkj",
                             UserName = "nhannt"
+                        },
+                        new
+                        {
+                            Id = new Guid("bf835a7d-d002-4c9f-8bd6-0e2d321447c4"),
+                            Address = "23 Hcm",
+                            DateOfBirth = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "vinnt537@gmail.com",
+                            FullName = "Nguyen Ngoc Thai Vi",
+                            Gender = "Male",
+                            PassWordHash = new byte[] { 157, 36, 79, 129, 21, 225, 228, 127, 150, 245, 31, 82, 201, 250, 49, 201, 72, 232, 149, 212, 156, 158, 247, 133, 172, 230, 109, 132, 119, 198, 148, 184, 146, 213, 179, 173, 149, 17, 28, 203, 123, 72, 180, 220, 159, 161, 117, 71, 61, 8, 150, 19, 212, 42, 25, 133, 216, 205, 8, 191, 107, 43, 198, 100 },
+                            PassWordSalt = new byte[] { 214, 232, 177, 145, 246, 92, 117, 85, 91, 69, 159, 245, 51, 93, 94, 85, 89, 2, 114, 128, 83, 255, 51, 221, 83, 141, 121, 131, 145, 240, 50, 149, 30, 139, 33, 82, 140, 46, 59, 174, 176, 66, 127, 26, 128, 88, 6, 210, 74, 13, 185, 14, 140, 34, 176, 19, 196, 146, 60, 172, 24, 196, 149, 16, 66, 208, 158, 1, 112, 160, 198, 214, 76, 70, 167, 122, 98, 140, 44, 255, 128, 49, 115, 137, 119, 1, 100, 103, 201, 40, 179, 254, 35, 203, 195, 40, 241, 169, 59, 102, 123, 97, 57, 125, 110, 225, 193, 159, 112, 198, 32, 202, 80, 6, 1, 43, 157, 31, 18, 193, 198, 202, 13, 21, 107, 242, 240, 138 },
+                            PhoneNumber = "0912345678",
+                            PhotoUrl = "132564487asjdhkahsdkj",
+                            UserName = "vinnt"
+                        },
+                        new
+                        {
+                            Id = new Guid("45b82e13-b1fc-425d-a2b3-8b821405bfd0"),
+                            Address = "23 Hcm",
+                            DateOfBirth = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "lylynp537@gmail.com",
+                            FullName = "Nguyen Phuong LyLy",
+                            Gender = "Female",
+                            PassWordHash = new byte[] { 157, 36, 79, 129, 21, 225, 228, 127, 150, 245, 31, 82, 201, 250, 49, 201, 72, 232, 149, 212, 156, 158, 247, 133, 172, 230, 109, 132, 119, 198, 148, 184, 146, 213, 179, 173, 149, 17, 28, 203, 123, 72, 180, 220, 159, 161, 117, 71, 61, 8, 150, 19, 212, 42, 25, 133, 216, 205, 8, 191, 107, 43, 198, 100 },
+                            PassWordSalt = new byte[] { 214, 232, 177, 145, 246, 92, 117, 85, 91, 69, 159, 245, 51, 93, 94, 85, 89, 2, 114, 128, 83, 255, 51, 221, 83, 141, 121, 131, 145, 240, 50, 149, 30, 139, 33, 82, 140, 46, 59, 174, 176, 66, 127, 26, 128, 88, 6, 210, 74, 13, 185, 14, 140, 34, 176, 19, 196, 146, 60, 172, 24, 196, 149, 16, 66, 208, 158, 1, 112, 160, 198, 214, 76, 70, 167, 122, 98, 140, 44, 255, 128, 49, 115, 137, 119, 1, 100, 103, 201, 40, 179, 254, 35, 203, 195, 40, 241, 169, 59, 102, 123, 97, 57, 125, 110, 225, 193, 159, 112, 198, 32, 202, 80, 6, 1, 43, 157, 31, 18, 193, 198, 202, 13, 21, 107, 242, 240, 138 },
+                            PhoneNumber = "0912345678",
+                            PhotoUrl = "132564487asjdhkahsdkj",
+                            UserName = "lylynp"
+                        },
+                        new
+                        {
+                            Id = new Guid("da053af4-cdf1-4a6b-8506-2e3939ef6351"),
+                            Address = "Long An",
+                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "vinnt060402@gmail.com",
+                            FullName = "Nguyễn Ngọc Thái Vĩ",
+                            Gender = "Male",
+                            PassWordHash = new byte[] { 155, 5, 184, 160, 50, 126, 28, 32, 187, 154, 24, 158, 194, 115, 53, 189, 236, 80, 121, 211, 4, 41, 175, 41, 172, 150, 113, 131, 147, 24, 24, 113, 86, 121, 129, 71, 51, 136, 242, 166, 148, 56, 60, 35, 42, 226, 240, 12, 180, 242, 227, 227, 127, 88, 123, 144, 53, 101, 119, 89, 25, 97, 10, 70 },
+                            PassWordSalt = new byte[] { 214, 232, 177, 145, 246, 92, 117, 85, 91, 69, 159, 245, 51, 93, 94, 85, 89, 2, 114, 128, 83, 255, 51, 221, 83, 141, 121, 131, 145, 240, 50, 149, 30, 139, 33, 82, 140, 46, 59, 174, 176, 66, 127, 26, 128, 88, 6, 210, 74, 13, 185, 14, 140, 34, 176, 19, 196, 146, 60, 172, 24, 196, 149, 16, 66, 208, 158, 1, 112, 160, 198, 214, 76, 70, 167, 122, 98, 140, 44, 255, 128, 49, 115, 137, 119, 1, 100, 103, 201, 40, 179, 254, 35, 203, 195, 40, 241, 169, 59, 102, 123, 97, 57, 125, 110, 225, 193, 159, 112, 198, 32, 202, 80, 6, 1, 43, 157, 31, 18, 193, 198, 202, 13, 21, 107, 242, 240, 138 },
+                            PhoneNumber = "0123456789",
+                            PhotoUrl = "abc",
+                            UserName = "vinnt060402"
                         });
                 });
 
@@ -178,6 +225,9 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<string>("DayStudy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<TimeSpan?>("EndTime")
+                        .HasColumnType("time");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -187,14 +237,14 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<TimeSpan?>("StartTime")
+                        .HasColumnType("time");
+
                     b.Property<Guid>("StudentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("SubjectId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<TimeSpan?>("TimeStudy")
-                        .HasColumnType("time");
 
                     b.HasKey("Id");
 
@@ -203,6 +253,20 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.HasIndex("SubjectId");
 
                     b.ToTable("Classes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("381d2e33-67e5-4ce5-b8cc-c39bd523fe8b"),
+                            ClassName = "SE1603",
+                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(8926),
+                            DayStudy = "Thứ 2;Thứ 4",
+                            EndTime = new TimeSpan(0, 18, 0, 0, 0),
+                            IsDeleted = false,
+                            StartTime = new TimeSpan(0, 15, 0, 0, 0),
+                            StudentId = new Guid("2b9d9aca-27da-415b-a468-b367613a2488"),
+                            SubjectId = new Guid("54eebe9e-2a5b-4a82-8522-1e7cd2aa4d57")
+                        });
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.ClassSchedule", b =>
@@ -243,9 +307,26 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClassId");
+
                     b.HasIndex("ClassRoomID");
 
+                    b.HasIndex("TeacherId");
+
                     b.ToTable("ClassSchedule");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("4e1cba33-b0cf-4274-8797-6ab39788141f"),
+                            ClassId = new Guid("381d2e33-67e5-4ce5-b8cc-c39bd523fe8b"),
+                            ClassRoomID = new Guid("d2e283a6-5bf5-4d27-a2c2-994cb6d781e9"),
+                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(8997),
+                            DateStudy = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(8999),
+                            IsDeleted = false,
+                            NumberOfSudent = 40,
+                            TeacherId = new Guid("776afbe6-9133-4dbe-b8c0-f5a23f3fe505")
+                        });
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Classroom", b =>
@@ -284,6 +365,44 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.HasIndex("TrungTamRoboticId");
 
                     b.ToTable("Classrooms");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("d2e283a6-5bf5-4d27-a2c2-994cb6d781e9"),
+                            ClassRoomName = "P.403",
+                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(9029),
+                            Description = "Tầng 4, phòng số 3",
+                            IsDeleted = false,
+                            TrungTamRoboticId = new Guid("5f4e0944-497b-4c33-9d5d-86f8824c8b95")
+                        },
+                        new
+                        {
+                            Id = new Guid("5f59c98d-50f9-4f5e-911e-d28648ec43b1"),
+                            ClassRoomName = "P.303",
+                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(9033),
+                            Description = "Tầng 3, phòng số 3",
+                            IsDeleted = false,
+                            TrungTamRoboticId = new Guid("5f4e0944-497b-4c33-9d5d-86f8824c8b95")
+                        },
+                        new
+                        {
+                            Id = new Guid("29f67cfd-ba37-4b70-852a-4af223b7788a"),
+                            ClassRoomName = "P.203",
+                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(9036),
+                            Description = "Tầng 2, phòng số 3",
+                            IsDeleted = false,
+                            TrungTamRoboticId = new Guid("5f4e0944-497b-4c33-9d5d-86f8824c8b95")
+                        },
+                        new
+                        {
+                            Id = new Guid("a9770be8-9b13-4d63-a78d-c9d2efaa79ec"),
+                            ClassRoomName = "P.103",
+                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(9040),
+                            Description = "Tầng 1, phòng số 3",
+                            IsDeleted = false,
+                            TrungTamRoboticId = new Guid("5f4e0944-497b-4c33-9d5d-86f8824c8b95")
+                        });
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Device", b =>
@@ -404,6 +523,17 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("GiaoTrinhs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c12ea77c-c707-44c0-b3ce-420f2ff4ecd9"),
+                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(8739),
+                            Description = "",
+                            FilePDF = "firebaseStorage",
+                            GiaoTrinhName = "Toan cao cap 10",
+                            IsDeleted = false
+                        });
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Parent", b =>
@@ -412,14 +542,8 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("AppUserId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Birthday")
-                        .HasColumnType("date");
 
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
@@ -434,12 +558,6 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -455,15 +573,8 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("AppUserId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Birthday")
-                        .HasColumnType("date");
 
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
@@ -478,14 +589,6 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastModifiedBy")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -531,9 +634,9 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("21f8abb6-34b9-44d2-a320-ef2988075dc2"),
+                            Id = new Guid("2b9d9aca-27da-415b-a468-b367613a2488"),
                             AppUserId = new Guid("2a22d7f6-6d94-4587-84d2-921c78970a91"),
-                            Created = new DateTime(2024, 2, 25, 16, 43, 15, 710, DateTimeKind.Local).AddTicks(5366),
+                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(9627),
                             IsDeleted = false,
                             ParentId = new Guid("00000000-0000-0000-0000-000000000000")
                         });
@@ -575,6 +678,17 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .IsUnique();
 
                     b.ToTable("Subjects");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("54eebe9e-2a5b-4a82-8522-1e7cd2aa4d57"),
+                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(8905),
+                            GiaoTrinhId = new Guid("c12ea77c-c707-44c0-b3ce-420f2ff4ecd9"),
+                            IsDeleted = false,
+                            SubjectName = "Toan 10",
+                            TotalSlots = 21
+                        });
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Teacher", b =>
@@ -583,15 +697,8 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("AppUserId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Birthday")
-                        .HasColumnType("date");
 
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
@@ -608,15 +715,27 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
 
                     b.ToTable("Teacher");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("776afbe6-9133-4dbe-b8c0-f5a23f3fe505"),
+                            AppUserId = new Guid("bf835a7d-d002-4c9f-8bd6-0e2d321447c4"),
+                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(8961),
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = new Guid("53525c34-3437-4b3b-946c-e9be0a60c0c3"),
+                            AppUserId = new Guid("45b82e13-b1fc-425d-a2b3-8b821405bfd0"),
+                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(8965),
+                            IsDeleted = false
+                        });
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.TrungTamRobotic", b =>
@@ -629,9 +748,6 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("AppUserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -653,9 +769,17 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId");
-
                     b.ToTable("TrungTamRobotics");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("5f4e0944-497b-4c33-9d5d-86f8824c8b95"),
+                            Address = "123 Nguyễn Ảnh Thủ, Hóc Môn",
+                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(9060),
+                            IsDeleted = false,
+                            Name = "Trung Tâm Robotic cơ sở 3"
+                        });
                 });
 
             modelBuilder.Entity("OfficeClassRobotic.BuisnessObject.Models.AppUserRole", b =>
@@ -671,6 +795,66 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.HasIndex("AppUserId");
 
                     b.ToTable("AppUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = new Guid("891e4e1c-bed5-4992-a978-fc969fdaf128"),
+                            AppUserId = new Guid("da053af4-cdf1-4a6b-8506-2e3939ef6351")
+                        });
+                });
+
+            modelBuilder.Entity("OfficeClassRobotic.BuisnessObject.Models.RefreshToken", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreateBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExpiredAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRevoked")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsUsed")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("IssuedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("JwtId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RefreshTOken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UsageCount")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("RefreshToken");
                 });
 
             modelBuilder.Entity("OfficeClassRobotic.BuisnessObject.Models.Role", b =>
@@ -706,42 +890,42 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         new
                         {
                             Id = new Guid("b308c9a8-9a44-4662-b010-e4688fb8e019"),
-                            Created = new DateTime(2024, 2, 25, 16, 43, 15, 711, DateTimeKind.Local).AddTicks(4279),
+                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 155, DateTimeKind.Local).AddTicks(6956),
                             IsDeleted = false,
                             RoleName = "Student"
                         },
                         new
                         {
                             Id = new Guid("1c477667-fbc0-4c85-9d2f-1f5a6da3edac"),
-                            Created = new DateTime(2024, 2, 25, 16, 43, 15, 711, DateTimeKind.Local).AddTicks(4293),
+                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 155, DateTimeKind.Local).AddTicks(6959),
                             IsDeleted = false,
                             RoleName = "Parent"
                         },
                         new
                         {
                             Id = new Guid("dc1c58f1-326b-43c0-a750-263bceee32be"),
-                            Created = new DateTime(2024, 2, 25, 16, 43, 15, 711, DateTimeKind.Local).AddTicks(4295),
+                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 155, DateTimeKind.Local).AddTicks(6962),
                             IsDeleted = false,
                             RoleName = "Staff"
                         },
                         new
                         {
                             Id = new Guid("891e4e1c-bed5-4992-a978-fc969fdaf128"),
-                            Created = new DateTime(2024, 2, 25, 16, 43, 15, 711, DateTimeKind.Local).AddTicks(4297),
+                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 155, DateTimeKind.Local).AddTicks(6964),
                             IsDeleted = false,
                             RoleName = "Admin"
                         },
                         new
                         {
                             Id = new Guid("433ca17d-2bb8-4a98-91e6-5703365cb2fd"),
-                            Created = new DateTime(2024, 2, 25, 16, 43, 15, 711, DateTimeKind.Local).AddTicks(4299),
+                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 155, DateTimeKind.Local).AddTicks(6965),
                             IsDeleted = false,
                             RoleName = "Teacher"
                         },
                         new
                         {
                             Id = new Guid("a53d0cca-65d1-4b81-afe2-e735facd6c38"),
-                            Created = new DateTime(2024, 2, 25, 16, 43, 15, 711, DateTimeKind.Local).AddTicks(4301),
+                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 155, DateTimeKind.Local).AddTicks(6971),
                             IsDeleted = false,
                             RoleName = "TrungTamRobotic"
                         });
@@ -756,10 +940,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<string>("AssesessmentType")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ClassId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("ClassId1")
+                    b.Property<Guid>("ClassId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CreateBy")
@@ -782,7 +963,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClassId1");
+                    b.HasIndex("ClassId");
 
                     b.ToTable("StudentGrades");
                 });
@@ -832,11 +1013,28 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<Guid>("TeacherId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.HasKey("SubjectId", "TeacherId");
 
                     b.HasIndex("TeacherId");
 
                     b.ToTable("TeacherSubjects");
+
+                    b.HasData(
+                        new
+                        {
+                            SubjectId = new Guid("54eebe9e-2a5b-4a82-8522-1e7cd2aa4d57"),
+                            TeacherId = new Guid("776afbe6-9133-4dbe-b8c0-f5a23f3fe505"),
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            SubjectId = new Guid("54eebe9e-2a5b-4a82-8522-1e7cd2aa4d57"),
+                            TeacherId = new Guid("53525c34-3437-4b3b-946c-e9be0a60c0c3"),
+                            IsDeleted = false
+                        });
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Admin", b =>
@@ -882,13 +1080,29 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.ClassSchedule", b =>
                 {
+                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Class", "Class")
+                        .WithMany("ClassSchedule")
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Classroom", "Classroom")
                         .WithMany("ClassSchedules")
                         .HasForeignKey("ClassRoomID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Teacher", "Teacher")
+                        .WithMany("ClassSchedule")
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Class");
+
                     b.Navigation("Classroom");
+
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Classroom", b =>
@@ -979,17 +1193,6 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Navigation("AppUser");
                 });
 
-            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.TrungTamRobotic", b =>
-                {
-                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.AppUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
-                });
-
             modelBuilder.Entity("OfficeClassRobotic.BuisnessObject.Models.AppUserRole", b =>
                 {
                     b.HasOne("Models.OfficeClassRobotic.BuisnessObject.AppUser", "AppUser")
@@ -1009,11 +1212,22 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Navigation("Role");
                 });
 
+            modelBuilder.Entity("OfficeClassRobotic.BuisnessObject.Models.RefreshToken", b =>
+                {
+                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
             modelBuilder.Entity("OfficeClassRobotic.BuisnessObject.Models.StudentGrade", b =>
                 {
                     b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Class", "Class")
                         .WithMany()
-                        .HasForeignKey("ClassId1")
+                        .HasForeignKey("ClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1055,6 +1269,11 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Navigation("AppUserRoles");
                 });
 
+            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Class", b =>
+                {
+                    b.Navigation("ClassSchedule");
+                });
+
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Classroom", b =>
                 {
                     b.Navigation("ClassSchedules");
@@ -1081,6 +1300,8 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Teacher", b =>
                 {
+                    b.Navigation("ClassSchedule");
+
                     b.Navigation("Feedbacks");
 
                     b.Navigation("TeacherSubjects");

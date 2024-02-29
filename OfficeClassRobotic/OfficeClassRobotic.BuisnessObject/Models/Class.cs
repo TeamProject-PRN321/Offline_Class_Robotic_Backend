@@ -13,7 +13,8 @@ namespace Models.OfficeClassRobotic.BuisnessObject
     {
         public string? ClassName { get; set; }
         public List<string>? DayStudy {  get; set; }
-        public TimeSpan? TimeStudy { get; set; }
+        public TimeSpan? StartTime { get; set; }
+        public TimeSpan? EndTime { get; set; }
         [ForeignKey("Student")]
         public Guid StudentId { get; set; }
         [ForeignKey("Subject")]
@@ -21,5 +22,6 @@ namespace Models.OfficeClassRobotic.BuisnessObject
 
         public virtual Student Student { get; set; }
         public virtual Subject Subject { get; set; }
+        public virtual IList<ClassSchedule> ClassSchedule { get; set; }
     }
 }

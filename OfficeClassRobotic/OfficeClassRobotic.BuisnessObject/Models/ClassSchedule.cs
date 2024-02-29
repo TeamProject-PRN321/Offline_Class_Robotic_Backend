@@ -26,16 +26,20 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         public int NumberOfSudent { get; set; }
 
         // Khóa ngoại
-        [ForeignKey("ClassId")]
+        [ForeignKey("Class")]
         public Guid ClassId { get; set; }
 
+        [ForeignKey("Teacher")]
         public Guid TeacherId { get; set; }
 
         [ForeignKey("ClassRoom")]
         public Guid ClassRoomID { get; set; }
 
         // Quan hệ
+        public virtual Class Class { get; set; }
         public virtual Classroom Classroom { get; set; }
+        public virtual Teacher Teacher { get; set; }
+
     }
 }
 

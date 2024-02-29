@@ -11,6 +11,7 @@ namespace OfficeClassRobotic.Repository.Classess
 {
     public interface IClassRepository 
     {
-        public Task<ClassRoboticResponse> CreateClass(ClassDTO request);
+        public Task<ClassRoboticResponse> CreateClass(CreateClassesCommand request);
+        public Task<CheckDataResponse> CheckSchedularTeacher(CheckData request);
     }
 }

@@ -7,11 +7,83 @@ using System.Threading.Tasks;
 
 namespace OfficeClassRobotic.DAO.Classess
 {
-    public class ClassDTO
+    public class CreateClassesCommand
     {
         public string? ClassName { get; set; }
         public List<string>? DayStudy { get; set; }
-        public string StudentId { get; set; }
+        public TimeSpan? StartTime { get; set; }
+        public TimeSpan? EndTime { get; set; }
+        public List<StudentInputData> StudentListId { get; set; }
         public string SubjectId { get; set; }
+
+        // teacherId
+        public string TeacherId { get; set; }
+        public string ClassRoomID { get; set; }
+    }
+
+    public class StudentInputData
+    {
+        public string StudentId { get; set; }
+    }
+    public class DateFreeTime
+    {
+        public DateOnly Date { get; set; }
+    }
+    public class DateFreeTimeForRoom
+    {
+        public DateOnly Date { get; set; }
+        public List<ClassRoomDataResponse> ClassRoomData { get; set; }
+    }
+    public class CheckData
+    {
+        public List<string>? DayStudy { get; set; }
+        public TimeSpan? StartTime { get; set; }
+        public TimeSpan? EndTime { get; set; }
+        public DateOnly DateStudy { get; set; }
+        public string SubjectId { get; set; }
+    }
+    public class CheckSchedularTeacherResponse
+    {
+        // subject
+        public Guid SubjectId { get; set; }
+        public string SubjectName { get; set; }
+        //teacher info 
+        public Guid Id { get; set; }
+        public Guid AppUserId { get; set; }
+        public string FullName { get; set; }
+        public string Email { get; set; }
+        public string? PhotoUrl { get; set; }
+        public string PhoneNumber { get; set; }
+        public string? Message { get; set; } = "";
+        // ngày rảnh
+        public List<DateFreeTime> ListDateFreeTime { get; set; }
+    }
+    public class CheckDataResponse
+    {
+        public Guid SubjectId { get; set; }
+        public string SubjectName { get; set; }
+        public int TotalSlots { get; set; }
+        public string? Message { get; set; } = "";
+        public List<TeacherDataResponse> TeacherData { get; set; }
+        public List<DateFreeTimeForRoom> DateFreeTimeForRoomData { get; set; }
+    }
+    public class ClassRoomDataResponse
+    {
+        public Guid Id { get; set; }
+        public string ClassRoomName { get; set; }
+        public string Description { get; set; }
+        public Guid TrungTamRoboticId { get; set; }
+    }
+    public class TeacherDataResponse
+    {
+        public Guid Id { get; set; }
+        public Guid AppUserId { get; set; }
+        public string FullName { get; set; }
+        public string Email { get; set; }
+        public string? PhotoUrl { get; set; }
+        public string PhoneNumber { get; set; }
+
+        // ngày rảnh
+        public List<DateFreeTime> ListDateFreeTime { get; set; }
     }
 }
