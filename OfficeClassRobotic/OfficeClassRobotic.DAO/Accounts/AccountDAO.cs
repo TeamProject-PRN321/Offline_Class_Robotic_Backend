@@ -52,12 +52,13 @@ namespace OfficeClassRobotic.DAO.Accounts
             // Add App User
             var user = new AppUser
             {
+                PhoneNumber = request.PhoneNumber,
                 Address = request.Address,
                 DateOfBirth = request.DateOfBirth,
                 Email = request.Email,
                 FullName = request.FullName,
                 Gender = request.Gender,
-                PassWordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.Password)),
+                PassWordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.PhoneNumber)),
                 PassWordSalt = hmac.Key,
                 UserName = request.UserName,
                 PhotoUrl = request.PhotoUrl,
@@ -100,12 +101,13 @@ namespace OfficeClassRobotic.DAO.Accounts
             using var hmac = new HMACSHA512();
             var user = new AppUser
             {
+                PhoneNumber = request.PhoneNumber,
                 Address = request.Address,
                 DateOfBirth = request.DateOfBirth,
                 Email = request.Email,
                 FullName = request.FullName,
                 Gender = request.Gender,
-                PassWordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.Password)),
+                PassWordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.PhoneNumber)),
                 PassWordSalt = hmac.Key,
                 UserName = request.UserName,
                 PhotoUrl = request.PhotoUrl,
@@ -146,12 +148,13 @@ namespace OfficeClassRobotic.DAO.Accounts
             using var hmac = new HMACSHA512();
             var user = new AppUser
             {
+                PhoneNumber = request.PhoneNumber,
                 Address = request.Address,
                 DateOfBirth = request.DateOfBirth,
                 Email = request.Email,
                 FullName = request.FullName,
                 Gender = request.Gender,
-                PassWordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.Password)),
+                PassWordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.PhoneNumber)),
                 PassWordSalt = hmac.Key,
                 UserName = request.UserName,
                 PhotoUrl = request.PhotoUrl,
@@ -192,12 +195,13 @@ namespace OfficeClassRobotic.DAO.Accounts
             using var hmac = new HMACSHA512();
             var user = new AppUser
             {
+                PhoneNumber = request.PhoneNumber,
                 Address = request.Address,
                 DateOfBirth = request.DateOfBirth,
                 Email = request.Email,
                 FullName = request.FullName,
                 Gender = request.Gender,
-                PassWordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.Password)),
+                PassWordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.PhoneNumber)),
                 PassWordSalt = hmac.Key,
                 UserName = request.UserName,
                 PhotoUrl = request.PhotoUrl,
@@ -227,7 +231,7 @@ namespace OfficeClassRobotic.DAO.Accounts
         /// <param name="request"></param>
         /// <returns></returns>
         /// <exception cref="BadRequestException"></exception>
-        public async Task CreateTeacherAccount(AccountParentDTO request)
+        public async Task CreateTeacherAccount(AccountTeacherDTO request)
         {
             var checkExist = _dbContext.AppUsers.Where(x => x.UserName == request.UserName || x.Email == request.Email).FirstOrDefault();
             if (checkExist != null)
@@ -237,13 +241,14 @@ namespace OfficeClassRobotic.DAO.Accounts
             using var hmac = new HMACSHA512();
             var user = new AppUser
             {
+                PhoneNumber = request.PhoneNumber,
                 Address = request.Address,
                 DateOfBirth = request.DateOfBirth,
                 Email = request.Email,
                 FullName = request.FullName,
                 Gender = request.Gender,
-                PassWordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.Password)),
-                PassWordSalt = hmac.Key,
+                PassWordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.PhoneNumber)),
+                PassWordSalt = hmac.Key,   
                 UserName = request.UserName,
                 PhotoUrl = request.PhotoUrl,
             };

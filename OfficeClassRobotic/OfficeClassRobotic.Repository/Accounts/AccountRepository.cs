@@ -20,29 +20,49 @@ namespace OfficeClassRobotic.Repository.Accounts
             _jwtSettings = jwtSettings.Value;
         }
 
-        public Task<ClassRoboticResponse> CreateAccountAdmin(AccountAdminDTO request)
+        public async Task<ClassRoboticResponse> CreateAccountAdmin(AccountAdminDTO request)
         {
-            throw new NotImplementedException();
+            await _accountDAO.CreateAdminAccount(request);
+            return new ClassRoboticResponse
+            {
+                Message = ClassRoboticMessage.CreateSuccessfully
+            };
         }
 
-        public Task<ClassRoboticResponse> CreateAccountParent(AccountParentDTO request)
+        public async Task<ClassRoboticResponse> CreateAccountParent(AccountParentDTO request)
         {
-            throw new NotImplementedException();
+            await _accountDAO.CreateParentAccount(request);
+            return new ClassRoboticResponse
+            {
+                Message = ClassRoboticMessage.CreateSuccessfully
+            };
         }
 
-        public Task<ClassRoboticResponse> CreateAccountStaff(AccountStaffDTO request)
+        public async Task<ClassRoboticResponse> CreateAccountStaff(AccountStaffDTO request)
         {
-            throw new NotImplementedException();
+            await _accountDAO.CreateStaffAccount(request);
+            return new ClassRoboticResponse
+            {
+                Message = ClassRoboticMessage.CreateSuccessfully
+            };
         }
 
-        public Task<ClassRoboticResponse> CreateAccountStudent(AccountStudentDTO request)
+        public async Task<ClassRoboticResponse> CreateAccountStudent(AccountStudentDTO request)
         {
-            throw new NotImplementedException();
+            await _accountDAO.CreateStudentAccount(request);
+            return new ClassRoboticResponse
+            {
+                Message = ClassRoboticMessage.CreateSuccessfully
+            };
         }
 
-        public Task<ClassRoboticResponse> CreateAccountTeacher(AccountTeacherDTO request)
+        public async Task<ClassRoboticResponse> CreateAccountTeacher(AccountTeacherDTO request)
         {
-            throw new NotImplementedException();
+            await _accountDAO.CreateTeacherAccount(request);
+            return new ClassRoboticResponse
+            {
+                Message = ClassRoboticMessage.CreateSuccessfully
+            };
         }
 
         private async Task<TokenModel> GenerateTokenModel(AppUserModel user)

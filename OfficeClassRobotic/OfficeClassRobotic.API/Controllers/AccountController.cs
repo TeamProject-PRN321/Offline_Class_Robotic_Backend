@@ -4,9 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Models.OfficeClassRobotic.BuisnessObject;
 using OfficeClassRobotic.API.DTOs;
 using OfficeClassRobotic.DAO.Accounts;
+using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
 using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
 using OfficeClassRobotic.Repository.Accounts;
 using OfficeClassRobotic.Repository.Interfaces;
+using OfficeClassRobotic.Service.Exceptions;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -16,45 +18,76 @@ namespace OfficeClassRobotic.API.Controllers
     [Route("[controller]")]
     public class AccountController : ControllerBase
     {
-        private readonly ApplicationDBContext _context;
-        private readonly ITokenService _tokenService;
-        private readonly IMapper _mapper;
         private readonly IAccountRepository _accountRepository;
 
-        public AccountController(ApplicationDBContext context, ITokenService tokenService, IMapper mapper, IAccountRepository accountRepository)
+        public AccountController(IAccountRepository accountRepository)
         {
             _accountRepository = accountRepository;
-            _context = context;
-            _tokenService = tokenService;
-            _mapper = mapper;
         }
 
-        [HttpPost("register")]
-        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
+        [HttpPost("register-admin-account")]
+        public async Task<ClassRoboticResponse> RegisterAdminAccount(AccountAdminDTO request)
         {
-
-            if (await UserExists(registerDto.Username))
+            try
             {
-                return BadRequest("Username is already taken");
+                return await _accountRepository.CreateAccountAdmin(request);
             }
-
-            var user = _mapper.Map<AppUser>(registerDto);
-
-            using var hmac = new HMACSHA512();
-
-            user.UserName = registerDto.Username.ToLower();
-            user.PassWordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
-            user.PassWordSalt = hmac.Key;
-
-            _context.AppUsers.Add(user);
-            await _context.SaveChangesAsync();
-
-            return new UserDto
+            catch
             {
-                Username = user.UserName,
-                TokenKey = _tokenService.CreateToken(user),
-                Gender = user.Gender
-            };
+                throw new BadRequestException(ClassRoboticMessage.CreateFail);
+            }
+        }
+
+        [HttpPost("register-student-account")]
+        public async Task<ClassRoboticResponse> RegisterStudentAccount(AccountStudentDTO request)
+        {
+            try
+            {
+                return await _accountRepository.CreateAccountStudent(request);
+            }
+            catch
+            {
+                throw new BadRequestException(ClassRoboticMessage.CreateFail);
+            }
+        }
+
+        [HttpPost("register-staff-account")]
+        public async Task<ClassRoboticResponse> RegisterStaffAccount(AccountStaffDTO request)
+        {
+            try
+            {
+                return await _accountRepository.CreateAccountStaff(request);
+            }
+            catch
+            {
+                throw new BadRequestException(ClassRoboticMessage.CreateFail);
+            }
+        }
+
+        [HttpPost("register-parents-account")]
+        public async Task<ClassRoboticResponse> RegisterParentAccount(AccountParentDTO request)
+        {
+            try
+            {
+                return await _accountRepository.CreateAccountParent(request);
+            }
+            catch
+            {
+                throw new BadRequestException(ClassRoboticMessage.CreateFail);
+            }
+        }
+
+        [HttpPost("register-teacher-account")]
+        public async Task<ClassRoboticResponse> RegisterTeacherAccount(AccountTeacherDTO request)
+        {
+            try
+            {
+                return await _accountRepository.CreateAccountTeacher(request);
+            }
+            catch
+            {
+                throw new BadRequestException(ClassRoboticMessage.CreateFail);
+            }
         }
 
         [HttpPost("login")]
@@ -72,11 +105,6 @@ namespace OfficeClassRobotic.API.Controllers
         {
             var response = await _accountRepository.RefreshToken(model);
             return response;
-        }
-
-        private async Task<bool> UserExists(string username)
-        {
-            return await _context.AppUsers.AnyAsync(x => x.UserName.ToLower() == username.ToLower());
         }
     }
 }

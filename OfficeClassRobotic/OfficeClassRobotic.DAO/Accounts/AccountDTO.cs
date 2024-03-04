@@ -9,16 +9,16 @@ namespace OfficeClassRobotic.DAO.Accounts
     public class AccountDTO
     {
         [Required]
-        public string UserName { get; set; }
+        public string UserName { get; set; } = null!;
         [Required]
-        public string FullName { get; set; }
+        public string FullName { get; set; } = null!;
         [Required]
-        public string Email { get; set; }
+        public string Email { get; set; } = null!;
         [Required]
-        public string Password { get; set; }
+        public string PhoneNumber { get; set; } = null!;
         public DateOnly DateOfBirth { get; set; }
-        public string Gender { get; set; }
-        public string Address { get; set; }
+        public string Gender { get; set; } = null!;
+        public string Address { get; set; } = null!;
         public string? PhotoUrl { get; set; }
     }
     public class AccountStaffDTO : AccountDTO { }
