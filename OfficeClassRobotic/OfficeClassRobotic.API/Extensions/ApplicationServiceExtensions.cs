@@ -136,7 +136,7 @@ namespace OfficeClassRobotic.API.Extensions
             //services.AddScoped<IParentRepostitory, ParentRepostitory>();
             services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<IGiaoTrinhRepository, GiaoTrinhRepository>();
-            //services.AddScoped<ITeacherRepository, TeacherRepository>();
+            services.AddScoped<ITeacherRepository, TeacherRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IClassRepository, ClassRepository>();
 

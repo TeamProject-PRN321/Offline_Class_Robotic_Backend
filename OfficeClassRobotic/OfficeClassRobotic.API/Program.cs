@@ -1,9 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using OfficeClassRobotic.API.Extensions;
+﻿using OfficeClassRobotic.API.Extensions;
 using OfficeClassRobotic.API.Middleware;
-using OfficeClassRobotic.BuisnessTier.Implement;
-using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
-using OfficeClassRobotic.Repository.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

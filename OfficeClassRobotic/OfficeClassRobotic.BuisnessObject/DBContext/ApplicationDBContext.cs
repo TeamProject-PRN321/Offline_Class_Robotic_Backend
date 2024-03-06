@@ -40,7 +40,13 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDBContext).Assembly);
 
-            #region class
+            using var hmac = new HMACSHA512();
+
+            var passWordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("Password1@"));
+
+            var passWordSalt = hmac.Key;
+
+            #region Class
             modelBuilder.Entity<Class>(x =>
             {
                 x.Property(y => y.DayStudy)
@@ -55,6 +61,7 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                 );
             });
             #endregion
+
             #region GiaoTrinh
             modelBuilder.Entity<GiaoTrinh>().HasData(
                 new GiaoTrinh
@@ -67,6 +74,7 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
 
             );
             #endregion
+
             #region Subject
             modelBuilder.Entity<Subject>().HasData(
                 new Subject
@@ -79,50 +87,7 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
 
             );
             #endregion
-            #region Class
-            modelBuilder.Entity<Class>().HasData(
-                new Class
-                {
-                    Id = Guid.Parse("381D2E33-67E5-4CE5-B8CC-C39BD523FE8B"),
-                    ClassName = "SE1603",
-                    DayStudy = new List<string> { "Thứ 2", "Thứ 4" },
-                    StartTime = TimeSpan.FromHours(15).Add(TimeSpan.FromMinutes(0)),
-                    EndTime = TimeSpan.FromHours(18).Add(TimeSpan.FromMinutes(0)),
-                    StudentId = Guid.Parse("2B9D9ACA-27DA-415B-A468-B367613A2488"),
-                    SubjectId = Guid.Parse("54EEBE9E-2A5B-4A82-8522-1E7CD2AA4D57")
-                }
 
-            );
-            #endregion
-            #region Teacher
-            modelBuilder.Entity<Teacher>().HasData(
-                new Teacher
-                {
-                    Id = Guid.Parse("776AFBE6-9133-4DBE-B8C0-F5A23F3FE505"),
-                    AppUserId = Guid.Parse("BF835A7D-D002-4C9F-8BD6-0E2D321447C4")
-                },
-                new Teacher
-                {
-                    Id = Guid.Parse("53525C34-3437-4B3B-946C-E9BE0A60C0C3"),
-                    AppUserId = Guid.Parse("45B82E13-B1FC-425D-A2B3-8B821405BFD0")
-                }
-
-            );
-            #endregion
-            #region TeacherSubject
-            modelBuilder.Entity<TeacherSubject>().HasData(
-                new TeacherSubject
-                {
-                    TeacherId = Guid.Parse("776AFBE6-9133-4DBE-B8C0-F5A23F3FE505"),
-                    SubjectId = Guid.Parse("54EEBE9E-2A5B-4A82-8522-1E7CD2AA4D57")
-                },
-                new TeacherSubject
-                {
-                    TeacherId = Guid.Parse("53525C34-3437-4B3B-946C-E9BE0A60C0C3"),
-                    SubjectId = Guid.Parse("54EEBE9E-2A5B-4A82-8522-1E7CD2AA4D57")
-                }
-            );
-            #endregion
             #region ClassSchedular
             modelBuilder.Entity<ClassSchedule>().HasData(
                 new ClassSchedule
@@ -136,38 +101,7 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                 }
             );
             #endregion
-            #region ClassRoom
-            modelBuilder.Entity<Classroom>().HasData(
-                new Classroom
-                {
-                    Id = Guid.Parse("D2E283A6-5BF5-4D27-A2C2-994CB6D781E9"),
-                    ClassRoomName = "P.403",
-                    Description = "Tầng 4, phòng số 3",
-                    TrungTamRoboticId = Guid.Parse("5F4E0944-497B-4C33-9D5D-86F8824C8B95")
-                },
-                new Classroom
-                {
-                    Id = Guid.Parse("5F59C98D-50F9-4F5E-911E-D28648EC43B1"),
-                    ClassRoomName = "P.303",
-                    Description = "Tầng 3, phòng số 3",
-                    TrungTamRoboticId = Guid.Parse("5F4E0944-497B-4C33-9D5D-86F8824C8B95")
-                },
-                new Classroom
-                {
-                    Id = Guid.Parse("29F67CFD-BA37-4B70-852A-4AF223B7788A"),
-                    ClassRoomName = "P.203",
-                    Description = "Tầng 2, phòng số 3",
-                    TrungTamRoboticId = Guid.Parse("5F4E0944-497B-4C33-9D5D-86F8824C8B95")
-                },
-                new Classroom
-                {
-                    Id = Guid.Parse("A9770BE8-9B13-4D63-A78D-C9D2EFAA79EC"),
-                    ClassRoomName = "P.103",
-                    Description = "Tầng 1, phòng số 3",
-                    TrungTamRoboticId = Guid.Parse("5F4E0944-497B-4C33-9D5D-86F8824C8B95")
-                }
-            );
-            #endregion
+
             #region TrungTamRobotic
             modelBuilder.Entity<TrungTamRobotic>().HasData(
                 new TrungTamRobotic
@@ -178,7 +112,8 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                 }
             );
             #endregion
-            using var hmac = new HMACSHA512();
+
+            #region Some Accounts That be created by Nhan^
             modelBuilder.Entity<AppUser>().HasData(
                 // student
                 new AppUser
@@ -225,6 +160,8 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                     PhotoUrl = "132564487asjdhkahsdkj",
                 }
                 );
+            #endregion
+
             #region Student
             modelBuilder.Entity<Student>().HasData(
                 new Student
@@ -235,6 +172,8 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                 }
             );
             #endregion
+
+            #region Relationship
             modelBuilder.Entity<AppUserRole>(entity =>
             {
                 entity.HasKey(ss => new { ss.RoleId, ss.AppUserId });
@@ -264,8 +203,9 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                 .HasForeignKey(tS => tS.SubjectId)
                 .OnDelete(DeleteBehavior.NoAction);
             });
-            var passWordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("Password1@"));
-            var passWordSalt = hmac.Key;
+            #endregion
+
+            #region Admin
             modelBuilder.Entity<AppUser>().HasData(
                 new AppUser
                 {
@@ -289,10 +229,10 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
             modelBuilder.Entity<Admin>().HasData(new Admin
             {
                 AppUserId = Guid.Parse("DA053AF4-CDF1-4A6B-8506-2E3939EF6351"),
-                /*                Address = "Long An",
-                                Birthday = DateOnly.MinValue,
-                                Name = "Nguyễn Ngọc Thái Vĩ"*/
             });
+            #endregion
+
+            #region Role
             modelBuilder.Entity<Role>().HasData(
                 new Role
                 {
@@ -324,6 +264,230 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                     Id = Guid.Parse("A53D0CCA-65D1-4B81-AFE2-E735FACD6C38"),
                     RoleName = "TrungTamRobotic"
                 });
+            #endregion
+
+            #region Student
+            modelBuilder.Entity<AppUser>()
+                .HasData(
+                    new AppUser
+                    {
+                        Id = Guid.Parse("275C605E-3D04-437D-8A7D-208249412CEC"),
+                        Address = "Long An",
+                        DateOfBirth = DateOnly.MinValue,
+                        Email = "vi1@gmail.com",
+                        FullName = "Vĩ 1",
+                        PhoneNumber = "0123456789",
+                        Gender = "Male",
+                        PhotoUrl = "abc",
+                        UserName = "vi1",
+                        PassWordHash = passWordHash,
+                        PassWordSalt = passWordSalt,
+                    },
+                    new AppUser
+                    {
+                        Id = Guid.Parse("4E5E39DC-7A22-4787-9083-70335FA2489C"),
+                        Address = "Long An",
+                        DateOfBirth = DateOnly.MinValue,
+                        Email = "vi2@gmail.com",
+                        FullName = "Vĩ 2",
+                        PhoneNumber = "0123456789",
+                        Gender = "Male",
+                        PhotoUrl = "abc",
+                        UserName = "vi2",
+                        PassWordHash = passWordHash,
+                        PassWordSalt = passWordSalt,
+                    },
+                    new AppUser
+                    {
+                        Id = Guid.Parse("64863E62-104C-49EE-A57E-B066936D8E8D"),
+                        Address = "Long An",
+                        DateOfBirth = DateOnly.MinValue,
+                        Email = "vi3@gmail.com",
+                        FullName = "Vĩ 3",
+                        PhoneNumber = "0123456789",
+                        Gender = "Male",
+                        PhotoUrl = "abc",
+                        UserName = "vi3",
+                        PassWordHash = passWordHash,
+                        PassWordSalt = passWordSalt,
+                    },
+                    new AppUser
+                    {
+                        Id = Guid.Parse("AF7A0942-0459-4364-B8C8-3737A4EDFFF4"),
+                        Address = "Long An",
+                        DateOfBirth = DateOnly.MinValue,
+                        Email = "vi4@gmail.com",
+                        FullName = "Vĩ 4",
+                        PhoneNumber = "0123456789",
+                        Gender = "Male",
+                        PhotoUrl = "abc",
+                        UserName = "vi4",
+                        PassWordHash = passWordHash,
+                        PassWordSalt = passWordSalt,
+                    },
+                    new AppUser
+                    {
+                        Id = Guid.Parse("5DDD65FF-16A1-4FD1-ACBF-C913F0CCE37C"),
+                        Address = "Long An",
+                        DateOfBirth = DateOnly.MinValue,
+                        Email = "vi5@gmail.com",
+                        FullName = "Vĩ 5",
+                        PhoneNumber = "0123456789",
+                        Gender = "Male",
+                        PhotoUrl = "abc",
+                        UserName = "vi5",
+                        PassWordHash = passWordHash,
+                        PassWordSalt = passWordSalt,
+                    },
+                    new AppUser
+                    {
+                        Id = Guid.Parse("AE50067C-00BC-49E2-A20C-500696A2F954"),
+                        Address = "Long An",
+                        DateOfBirth = DateOnly.MinValue,
+                        Email = "vi6@gmail.com",
+                        FullName = "Vĩ 1",
+                        PhoneNumber = "0123456789",
+                        Gender = "Male",
+                        PhotoUrl = "abc",
+                        UserName = "vi1",
+                        PassWordHash = passWordHash,
+                        PassWordSalt = passWordSalt,
+                    },
+                    new AppUser
+                    {
+                        Id = Guid.Parse("75653469-5FDD-4639-9BE7-2C8FCA8CECC5"),
+                        Address = "Long An",
+                        DateOfBirth = DateOnly.MinValue,
+                        Email = "vi7@gmail.com",
+                        FullName = "Vĩ 7",
+                        PhoneNumber = "0123456789",
+                        Gender = "Male",
+                        PhotoUrl = "abc",
+                        UserName = "vi7",
+                        PassWordHash = passWordHash,
+                        PassWordSalt = passWordSalt,
+                    }
+                );
+
+            modelBuilder.Entity<Student>()
+                .HasData(
+                    new Student
+                    {
+                        AppUserId = Guid.Parse("75653469-5FDD-4639-9BE7-2C8FCA8CECC5"),
+                        Id = Guid.Parse("3CE37D46-18E9-492D-A28E-2665B0D95A64")
+                    },
+                    new Student
+                    {
+                        AppUserId = Guid.Parse("AE50067C-00BC-49E2-A20C-500696A2F954"),
+                        Id = Guid.Parse("A2CD9F87-17F7-45CC-A9DA-88502A010042")
+                    },
+                    new Student
+                    {
+                        AppUserId = Guid.Parse("5DDD65FF-16A1-4FD1-ACBF-C913F0CCE37C"),
+                        Id = Guid.Parse("FEC8B32D-BC9A-4FBB-94E6-5871E3EE9A63")
+                    },
+                    new Student
+                    {
+                        AppUserId = Guid.Parse("5DDD65FF-16A1-4FD1-ACBF-C913F0CCE37C"),
+                        Id = Guid.Parse("88DE6BCD-E510-40D8-8F29-A06009CB195C")
+                    },
+                    new Student
+                    {
+                        AppUserId = Guid.Parse("64863E62-104C-49EE-A57E-B066936D8E8D"),
+                        Id = Guid.Parse("07C7D0E7-273E-4819-AD69-0A875EF8F021")
+                    },
+                    new Student
+                    {
+                        AppUserId = Guid.Parse("4E5E39DC-7A22-4787-9083-70335FA2489C"),
+                        Id = Guid.Parse("2B295A2A-4BF5-45C1-BF87-4E04F1EFF028")
+                    },
+                    new Student
+                    {
+                        AppUserId = Guid.Parse("275C605E-3D04-437D-8A7D-208249412CEC"),
+                        Id = Guid.Parse("822EB9C1-D410-4E17-9B70-BB8512112AE3")
+                    }
+                );
+            #endregion
+
+            #region ClassRoom
+            modelBuilder.Entity<Classroom>().HasData(
+                new Classroom
+                {
+                    Id = Guid.Parse("D2E283A6-5BF5-4D27-A2C2-994CB6D781E9"),
+                    ClassRoomName = "P.403",
+                    Description = "Tầng 4, phòng số 3",
+                    TrungTamRoboticId = Guid.Parse("5F4E0944-497B-4C33-9D5D-86F8824C8B95")
+                },
+                new Classroom
+                {
+                    Id = Guid.Parse("5F59C98D-50F9-4F5E-911E-D28648EC43B1"),
+                    ClassRoomName = "P.303",
+                    Description = "Tầng 3, phòng số 3",
+                    TrungTamRoboticId = Guid.Parse("5F4E0944-497B-4C33-9D5D-86F8824C8B95")
+                },
+                new Classroom
+                {
+                    Id = Guid.Parse("29F67CFD-BA37-4B70-852A-4AF223B7788A"),
+                    ClassRoomName = "P.203",
+                    Description = "Tầng 2, phòng số 3",
+                    TrungTamRoboticId = Guid.Parse("5F4E0944-497B-4C33-9D5D-86F8824C8B95")
+                },
+                new Classroom
+                {
+                    Id = Guid.Parse("A9770BE8-9B13-4D63-A78D-C9D2EFAA79EC"),
+                    ClassRoomName = "P.103",
+                    Description = "Tầng 1, phòng số 3",
+                    TrungTamRoboticId = Guid.Parse("5F4E0944-497B-4C33-9D5D-86F8824C8B95")
+                }
+            );
+            #endregion
+
+            #region Teacher
+            modelBuilder.Entity<Teacher>().HasData(
+                new Teacher
+                {
+                    Id = Guid.Parse("776AFBE6-9133-4DBE-B8C0-F5A23F3FE505"),
+                    AppUserId = Guid.Parse("BF835A7D-D002-4C9F-8BD6-0E2D321447C4")
+                },
+                new Teacher
+                {
+                    Id = Guid.Parse("53525C34-3437-4B3B-946C-E9BE0A60C0C3"),
+                    AppUserId = Guid.Parse("45B82E13-B1FC-425D-A2B3-8B821405BFD0")
+                }
+
+            );
+            #endregion
+
+            #region TeacherSubject
+            modelBuilder.Entity<TeacherSubject>().HasData(
+                new TeacherSubject
+                {
+                    TeacherId = Guid.Parse("776AFBE6-9133-4DBE-B8C0-F5A23F3FE505"),
+                    SubjectId = Guid.Parse("54EEBE9E-2A5B-4A82-8522-1E7CD2AA4D57")
+                },
+                new TeacherSubject
+                {
+                    TeacherId = Guid.Parse("53525C34-3437-4B3B-946C-E9BE0A60C0C3"),
+                    SubjectId = Guid.Parse("54EEBE9E-2A5B-4A82-8522-1E7CD2AA4D57")
+                }
+            );
+            #endregion
+
+            #region Class
+            modelBuilder.Entity<Class>().HasData(
+                new Class
+                {
+                    Id = Guid.Parse("381D2E33-67E5-4CE5-B8CC-C39BD523FE8B"),
+                    ClassName = "SE1603",
+                    DayStudy = new List<string> { "Thứ 2", "Thứ 4" },
+                    StartTime = TimeSpan.FromHours(15).Add(TimeSpan.FromMinutes(0)),
+                    EndTime = TimeSpan.FromHours(18).Add(TimeSpan.FromMinutes(0)),
+                    StudentId = Guid.Parse("2B9D9ACA-27DA-415B-A468-B367613A2488"),
+                    SubjectId = Guid.Parse("54EEBE9E-2A5B-4A82-8522-1E7CD2AA4D57")
+                }
+
+            );
+            #endregion
 
             base.OnModelCreating(modelBuilder);
         }
@@ -334,19 +498,23 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                      .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
                      .AddJsonFile("appsettings.json", true, true)
                      .Build();
-            if (!optionsBuilder.IsConfigured) {
+            if (!optionsBuilder.IsConfigured)
+            {
                 optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             }
         }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var entry in base.ChangeTracker.Entries<BaseAuditableEntity>()
-                .Where(q => q.State == EntityState.Added || q.State == EntityState.Modified)) {
-                if (entry.State == EntityState.Added) {
+                .Where(q => q.State == EntityState.Added || q.State == EntityState.Modified))
+            {
+                if (entry.State == EntityState.Added)
+                {
                     entry.Entity.Created = DateTime.Now;
                     entry.Entity.CreateBy = CustomSessionManager.GetString("username");
                 }
-                if (entry.State == EntityState.Modified || entry.State == EntityState.Deleted) {
+                if (entry.State == EntityState.Modified || entry.State == EntityState.Deleted)
+                {
                     entry.Entity.LastModified = DateTime.Now;
                     entry.Entity.LastModifiedBy = CustomSessionManager.GetString("username");
                 }

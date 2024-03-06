@@ -120,7 +120,7 @@ namespace OfficeClassRobotic.DAO.Classess
                 #region List Day of StartDay and EndDate
                 var listDayStudy = new List<DateOnly>();
                 for (var date = request.DateStudy; date <= dateEndStudy; date = date.AddDays(1)) {
-                    if (sortedDayOfWeek.Contains(ConvertDayOfWeekToString(dateEndStudy.DayOfWeek))) {
+                    if (sortedDayOfWeek.Contains(ConvertDayOfWeekToString(date.DayOfWeek))) {
                         listDayStudy.Add(date);
                     }
                 }
@@ -367,6 +367,12 @@ namespace OfficeClassRobotic.DAO.Classess
         /// <returns></returns>
         public async Task CreateClassess(CreateClassesCommand request)
         {
+            //Nguyen Vi Remake CreateClasses
+            
+            // Step 1: Tổng số slot
+
+
+            //
             var studentIds = request.StudentListId.Select(s => s.StudentId).ToList();
             foreach (var studentId in studentIds) {
                 var classess = new Class
