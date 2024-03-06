@@ -180,7 +180,12 @@ namespace OfficeClassRobotic.DAO.Teachers
             }
             return listResult;
         }
-
+        /// <summary>
+        /// Dùng để Update Subject cho Teacher
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        /// <exception cref="NotFoundException"></exception>
         public async Task UpdateteacherWithSubject(ConnectTeacherWithListSubjectRequest request)
         {
             var teacher = _dbContext.Teacher.Where(x => x.Id == request.TeacherId && !x.IsDeleted).FirstOrDefault();
@@ -212,6 +217,46 @@ namespace OfficeClassRobotic.DAO.Teachers
                 _dbContext.TeacherSubjects.Add(teacherSubject);
             }
             await _dbContext.SaveChangesAsync();
+        }
+        public async Task<List<TeacherSchedule>> GetScheduleOfTeacherByTeacherIdAndTime(TeacherScheduleRequest request)
+        {
+            var listResult = new List<TeacherSchedule>();
+            var listClassSchedule = await _dbContext.ClassSchedule
+                .Where(x => x.TeacherId == request.TeacherId &&
+                            x.DateStudy >= request.DateStartOfWeek &&
+                            x.DateStudy <= request.DateEndOfWeek)
+                .GroupBy(x => new { x.DateStudy, x.StartTime,x.ClassRoomID, x.EndTime, x.NumberOfSudent })
+                .Select(x => new
+                {
+                    ClassIdCommon = x.Min(y => y.ClassId),
+                    DateStudy = x.Key.DateStudy,
+                    StartTime = x.Key.StartTime,
+                    EndTime = x.Key.EndTime,
+                    NumberOfSudent = x.Key.NumberOfSudent,
+                    ClassRoomIdCommon = x.Key.ClassRoomID
+                })
+                .OrderBy(x => x.DateStudy)
+                .ThenBy(x => x.StartTime)
+                .ToListAsync();
+            foreach (var item in listClassSchedule)
+            {
+                var classOfStudent = await _dbContext.Classes.Where(x => x.Id == Guid.Parse(item.ClassIdCommon.ToString())).FirstAsync();
+                var classRoom = _dbContext.Classrooms.Where(x => x.Id == item.ClassRoomIdCommon).First();
+                var startTime = item.StartTime!.Value.Hours +":"+(item.StartTime.Value.Minutes < 10 ? item.StartTime.Value.Minutes+"0" : item.StartTime.Value.Minutes) + " " + (item.StartTime.Value.Hours >= 12 ? "PM" : "AM");
+                var endTime = item.EndTime!.Value.Hours + ":" + (item.EndTime.Value.Minutes < 10 ? item.EndTime.Value.Minutes + "0" : item.EndTime.Value.Minutes) + " " + (item.EndTime.Value.Hours >= 12 ? "PM" : "AM"); ;
+                var result = new TeacherSchedule()
+                {
+                    ClassName = classOfStudent.ClassName!,
+                    ClassroomName = classRoom.ClassRoomName,
+                    DayStudy = item.DateStudy.ToString("dd-MM-yyyy"),
+                    StartTime = item.StartTime,
+                    EndTime = item.EndTime,
+                    TimeDetail = $"Lớp học bắt đầu lúc: {startTime} và kết thúc lúc: {endTime}",
+                    TotalStudentInClass = item.NumberOfSudent,
+                };
+                listResult.Add(result);
+            }
+            return listResult;
         }
     }
 }

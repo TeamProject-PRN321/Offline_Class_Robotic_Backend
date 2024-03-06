@@ -29,13 +29,20 @@ namespace OfficeClassRobotic.API.Controllers.Teachers
             return result;
         }
         [HttpGet]
-        [Route("update-teacher-information/subjectId")]
+        [Route("{subjectId}")]
         public async Task<List<TeacherDTO>?> GetAllTeacherBySubjectId(Guid subjectId)
         {
             var result = await _repo.GetAllTeacherBySubjectId(new GetTeacherBySubjectId
             {
                 SubjectId = subjectId
             });
+            return result;
+        }
+        [HttpGet]
+        [Route("get-schedule-of-teacher")]
+        public async Task<List<TeacherSchedule>> GetScheduleOfTeacherByTeacherIdAndTime([FromQuery]TeacherScheduleRequest request)
+        {
+            var result = await _repo.GetScheduleOfTeacherByTeacherIdAndTime(request);
             return result;
         }
     }

@@ -44,4 +44,27 @@
     {
         public Guid SubjectId { get; set; }
     }
+
+    public class TeacherScheduleRequest
+    {
+        public Guid TeacherId { get; set; }
+        public DateTime DateStartOfWeek { get; set; }
+        public DateTime DateEndOfWeek { get; set; }
+    }
+    public class TeacherSchedule
+    {
+        /// <summary>
+        /// Tên Lớp
+        /// </summary>
+        public string ClassName { get; set; } = null!;
+        /// <summary>
+        /// Vị trí phòng học - Tên Phòng Học
+        /// </summary>
+        public string ClassroomName { get; set; } = null!;
+        public string DayStudy { get; set; } = null!;
+        public TimeSpan? StartTime { get; set; }
+        public TimeSpan? EndTime { get; set; }
+        public string TimeDetail { get; set; } = null!;
+        public int TotalStudentInClass { get; set; }
+    }
 }

@@ -29,6 +29,9 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         [ForeignKey("Class")]
         public Guid ClassId { get; set; }
 
+        public TimeSpan? StartTime { get; set; }
+        public TimeSpan? EndTime { get; set; }
+
         [ForeignKey("Teacher")]
         public Guid TeacherId { get; set; }
 

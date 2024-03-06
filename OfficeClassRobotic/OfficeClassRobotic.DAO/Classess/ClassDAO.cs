@@ -436,6 +436,8 @@ namespace OfficeClassRobotic.DAO.Classess
                         DateStudy = day,
                         NumberOfSudent = listStudentID.Count,
                         ClassId = classess.Id,
+                        StartTime = request.StartTime,
+                        EndTime = request.EndTime,
                         TeacherId = Guid.Parse(request.TeacherId),
                         ClassRoomID = Guid.Parse(request.ClassRoomID)
                     };
