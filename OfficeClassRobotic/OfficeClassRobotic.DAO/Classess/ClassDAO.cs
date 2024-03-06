@@ -368,41 +368,120 @@ namespace OfficeClassRobotic.DAO.Classess
         public async Task CreateClassess(CreateClassesCommand request)
         {
             //Nguyen Vi Remake CreateClasses
-            
+
             // Step 1: Tổng số slot
+            var totalSlots = _dbContext.Subjects.Where(x => x.Id == Guid.Parse(request.SubjectId)).Select(x => x.TotalSlots).FirstOrDefault();
+            if(totalSlots == 0)
+            {
+                // Something fail
+            }
+            // Step 2: Số ngày sẽ học trong tuần
+            var daysOfWeekNumber = request.DayStudy!.Count;
+            // Step 3: Tính tổng số tuần sẽ học
+            var weekLearn = totalSlots / daysOfWeekNumber;
+            // Step 4: Tính xem liệu số slot học có đủ trong vòng 1 tuần không
+            var remaining = totalSlots % daysOfWeekNumber;
+            // Step 5: Đặt local date để tính số ngày cuối cùng sẽ học 
+            var dateEndStudy = request.DateStartClass;
 
+            var dayOfWeek = request.DayStudy;
 
-            //
-            var studentIds = request.StudentListId.Select(s => s.StudentId).ToList();
-            foreach (var studentId in studentIds) {
+            var days = dayOfWeek.Select(ConvertDayOfWeek).ToList();
+
+            days.Sort();
+            
+            var sortedDayOfWeek = days.Select(day => ConvertDayOfWeekToString(day)).ToList();
+
+            for (int i = 0; i < 7 * weekLearn; i++)
+            {
+                dateEndStudy = dateEndStudy.AddDays(1);
+            }
+            while (remaining > 0)
+            {
+                dateEndStudy = dateEndStudy.AddDays(1);
+                if (sortedDayOfWeek.Contains(ConvertDayOfWeekToString(dateEndStudy.DayOfWeek)))
+                {
+                    remaining--;
+                }
+            }
+            // Step 6: Đặt local tính list ngày sẽ học
+            var listDayStudy = new List<DateTime>();
+            for (var date = request.DateStartClass; date <= dateEndStudy; date = date.AddDays(1))
+            {
+                if (sortedDayOfWeek.Contains(ConvertDayOfWeekToString(date.DayOfWeek)))
+                {
+                    listDayStudy.Add(date);
+                    if (listDayStudy.Count == totalSlots) break;
+                }
+            }
+            // Step 7: Thêm tất cả học sinh vào lớp
+            var listStudentID = request.StudentListId.Select(s => s.StudentId).ToList();
+            foreach (var studentId in listStudentID)
+            {
                 var classess = new Class
                 {
                     ClassName = request.ClassName,
                     DayStudy = request.DayStudy,
-                    StartTime = null,
-                    EndTime = null,
+                    StartTime = request.StartTime,
+                    EndTime = request.EndTime,
                     StudentId = Guid.Parse(studentId),
                     SubjectId = Guid.Parse(request.SubjectId),
                 };
                 _dbContext.Classes.Add(classess);
-
-                var classSchedular = new ClassSchedule
+                // Step 8: Ứng với mỗi học sinh trong lớp sẽ có schedule riêng
+                foreach (var day in listDayStudy)
                 {
-                    DateStudy = DateTime.Now,
-                    NumberOfSudent = studentIds.Count,
-                    ClassId = classess.Id,
-                    TeacherId = Guid.Parse(request.TeacherId),
-                    ClassRoomID = Guid.Parse(request.ClassRoomID)
-                };
-                _dbContext.ClassSchedule.Add(classSchedular);
+                    var classSchedular = new ClassSchedule
+                    {
+                        DateStudy = day,
+                        NumberOfSudent = listStudentID.Count,
+                        ClassId = classess.Id,
+                        TeacherId = Guid.Parse(request.TeacherId),
+                        ClassRoomID = Guid.Parse(request.ClassRoomID)
+                    };
+                    _dbContext.ClassSchedule.Add(classSchedular);
 
-                var attendence = new Attendance
-                {
-                    ClassScheduleID = classSchedular.Id,
-                };
-                _dbContext.Attendance.Add(attendence);
+                    var attendence = new Attendance
+                    {
+                        ClassScheduleID = classSchedular.Id,
+                    };
+                    _dbContext.Attendance.Add(attendence);
+                }
             }
             await _dbContext.SaveChangesAsync();
+            #region Nhan's code
+            /*
+                        //
+                        var studentIds = request.StudentListId.Select(s => s.StudentId).ToList();
+                        foreach (var studentId in studentIds) {
+                            var classess = new Class
+                            {
+                                ClassName = request.ClassName,
+                                DayStudy = request.DayStudy,
+                                StartTime = null,
+                                EndTime = null,
+                                StudentId = Guid.Parse(studentId),
+                                SubjectId = Guid.Parse(request.SubjectId),
+                            };
+                            _dbContext.Classes.Add(classess);
+            *//*
+                            var classSchedular = new ClassSchedule
+                            {
+                                DateStudy = DateTime.Now,
+                                NumberOfSudent = studentIds.Count,
+                                ClassId = classess.Id,
+                                TeacherId = Guid.Parse(request.TeacherId),
+                                ClassRoomID = Guid.Parse(request.ClassRoomID)
+                            };
+                            _dbContext.ClassSchedule.Add(classSchedular);
+
+                            var attendence = new Attendance
+                            {
+                                ClassScheduleID = classSchedular.Id,
+                            };
+                            _dbContext.Attendance.Add(attendence);*//*
+                        }*/
+            #endregion
         }
     }
 }

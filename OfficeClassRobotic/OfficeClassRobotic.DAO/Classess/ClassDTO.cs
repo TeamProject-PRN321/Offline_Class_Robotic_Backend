@@ -14,7 +14,7 @@ namespace OfficeClassRobotic.DAO.Classess
         public TimeSpan? StartTime { get; set; }
         public TimeSpan? EndTime { get; set; }
         public List<StudentInputData> StudentListId { get; set; }
-        public DateOnly DateStartClass { get; set; }
+        public DateTime DateStartClass { get; set; }
         public string SubjectId { get; set; }
 
         // teacherId
