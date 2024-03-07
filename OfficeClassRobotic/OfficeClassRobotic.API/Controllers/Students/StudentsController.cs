@@ -12,14 +12,22 @@ namespace OfficeClassRobotic.API.Controllers.Students
     [ApiController]
     public class StudentsController : ControllerBase
     {
-        /*private readonly IStudentRepository _studentRepository;
+        private readonly IStudentRepository _studentRepository;
         public StudentsController(IStudentRepository studentRepository)
         {
             _studentRepository = studentRepository;
         }
 
-        [HttpPost]
-        [Route("add")]
+        [HttpGet]
+        [Route("get-schedule-of-student-by-student-id")]
+        public async Task<List<ScheduleOfStudent>?> GetScheduleOfStudentByStudentId([FromQuery]GetStudentScheduleByStudentIdRequest request)
+        {
+
+            return await _studentRepository.GetScheduleOfStudentByStudentId(request);
+        }
+        /*
+
+
         public Task<ClassRoboticResponse> Create(CreateStudentCommand request)
         {
             var result = _studentRepository.CreateStudent(request);

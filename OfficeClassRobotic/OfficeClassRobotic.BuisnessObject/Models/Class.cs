@@ -19,6 +19,12 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         public Guid StudentId { get; set; }
         [ForeignKey("Subject")]
         public Guid SubjectId { get; set; }
+        /// <summary>
+        /// Đánh dấu xem lớp học của học sinh này đã kết thúc chưa
+        /// True là kết thúc rồi
+        /// False là chưa kết thúc
+        /// </summary>
+        public bool IsClassFinish { get; set; } = false;
 
         public virtual Student Student { get; set; }
         public virtual Subject Subject { get; set; }

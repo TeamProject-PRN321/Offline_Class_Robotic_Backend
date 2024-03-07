@@ -2,18 +2,31 @@
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
 using OfficeClassRobotic.DAO.Parents;
 using OfficeClassRobotic.DAO.Students;
+using OfficeClassRobotic.Service.Exceptions;
 
 namespace OfficeClassRobotic.Repository.Students
 {
     public class StudentRepository : IStudentRepository
     {
-        /*private StudentDAO studentDAO;
+        private StudentDAO studentDAO;
         private readonly IMapper _mapper;
         public StudentRepository(IMapper mapper)
         {
             studentDAO = new StudentDAO();
             _mapper = mapper;
         }
+        public async Task<List<ScheduleOfStudent>?> GetScheduleOfStudentByStudentId(GetStudentScheduleByStudentIdRequest request)
+        {
+            try
+            {
+                return await studentDAO.GetScheduleOfStudentByStudentId(request);
+            }
+            catch (Exception ex)
+            {
+                throw new BadRequestException(ex.Message);
+            }
+        }
+        /*
         public async Task<ClassRoboticResponse> CreateStudent(CreateStudentCommand student)
         {
             await studentDAO.CreateStudent(student);
@@ -54,5 +67,6 @@ namespace OfficeClassRobotic.Repository.Students
                 Message = "Update Successfully"
             };
         }*/
+
     }
 }
