@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
+using System.Globalization;
 
 namespace OfficeClassRobotic.DAO.Students
 {
@@ -39,18 +40,18 @@ namespace OfficeClassRobotic.DAO.Students
                         .OrderBy(x => x.DateStudy)
                         .ThenBy(x => x.StartTime)
                         .ToListAsync();
-                    int slotRemaining = subject.TotalSlots ;
+                    int slotRemaining = subject.TotalSlots;
                     foreach (var classSchedule in classSchedules)
                     {
                         var attend = _dbContext.Attendance.Where(x => x.ClassScheduleID == classSchedule.Id).Select(x => x.AttendStatus).FirstOrDefault();
-                        if(attend != 0)
+                        if (attend != 0)
                         {
                             slotRemaining--;
                         }
                     }
                     var teacher = _dbContext.Teacher.Where(x => x.Id == classSchedules.Select(x => x.TeacherId).First()).Single();
-                    
-                    foreach(var item in classSchedules)
+
+                    foreach (var item in classSchedules)
                     {
                         var attendance = _dbContext.Attendance.Where(x => x.ClassScheduleID == item.Id).FirstOrDefault();
                         var userTeacher = _dbContext.AppUsers.Where(x => x.Id == teacher.AppUserId).FirstOrDefault();
@@ -69,7 +70,21 @@ namespace OfficeClassRobotic.DAO.Students
                         listResult.Add(result);
                     }
                 }
-                return listResult;
+                var response = listResult.OrderBy(x =>
+                {
+                    DateTime dateResult;
+                    if (DateTime.TryParseExact(x.DateLearn, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out dateResult))
+                    {
+                        return dateResult;
+                    }
+                    else
+                    {
+                        // Handle invalid date (e.g., return a default value or log it)
+                        return DateTime.MinValue;
+                    }
+                })
+                               .ThenBy(x => x.TimeStart)
+                               .ToList(); return response;
             }
             return null;
         }
