@@ -16,8 +16,7 @@ namespace OfficeClassRobotic.DAO.Students
         {
             get
             {
-                if (instance == null)
-                {
+                 {
                     instance = new StudentDAO();
                 }
                 return instance;
