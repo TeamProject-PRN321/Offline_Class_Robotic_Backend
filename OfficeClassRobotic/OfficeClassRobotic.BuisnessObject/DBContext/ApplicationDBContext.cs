@@ -115,7 +115,22 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
 
             #region Some Accounts That be created by Nhan^
             modelBuilder.Entity<AppUser>().HasData(
-                // student
+                // student QA
+                new AppUser
+                {
+                    Id = Guid.Parse("24e95dd3-0442-41e9-bad7-ea4e207a8703"),
+                    UserName = "anhttq",
+                    FullName = "Tran Thien Quoc Anh",
+                    PhoneNumber = "0358582251",
+                    Email = "at050801@gmail.com",
+                    PassWordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("P@ssw0rd11")),
+                    PassWordSalt = hmac.Key,
+                    DateOfBirth = new DateOnly(1990, 1, 1),
+                    Gender = "Male",
+                    Address = "62 Long An",
+                    PhotoUrl = "050801quocanhdepchoai",
+                },
+                // student nhân
                 new AppUser
                 {
                     Id = Guid.Parse("2A22D7F6-6D94-4587-84D2-921C78970A91"),
@@ -480,6 +495,26 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                     Id = Guid.Parse("381D2E33-67E5-4CE5-B8CC-C39BD523FE8B"),
                     ClassName = "SE1603",
                     DayStudy = new List<string> { "Thứ 2", "Thứ 4" },
+                    StartTime = TimeSpan.FromHours(15).Add(TimeSpan.FromMinutes(0)),
+                    EndTime = TimeSpan.FromHours(18).Add(TimeSpan.FromMinutes(0)),
+                    StudentId = Guid.Parse("2B9D9ACA-27DA-415B-A468-B367613A2488"),
+                    SubjectId = Guid.Parse("54EEBE9E-2A5B-4A82-8522-1E7CD2AA4D57")
+                },
+                new Class
+                {
+                    Id = Guid.Parse("f29374fd-d88e-46cc-9290-0f1ca57c8f03"),
+                    ClassName = "How to Make an Array and it's Type in JAVA",
+                    DayStudy = new List<string> { "Thứ 3", "Thứ 6" },
+                    StartTime = TimeSpan.FromHours(15).Add(TimeSpan.FromMinutes(0)),
+                    EndTime = TimeSpan.FromHours(18).Add(TimeSpan.FromMinutes(0)),
+                    StudentId = Guid.Parse("2B9D9ACA-27DA-415B-A468-B367613A2488"),
+                    SubjectId = Guid.Parse("54EEBE9E-2A5B-4A82-8522-1E7CD2AA4D57")
+                },
+                new Class
+                {
+                    Id = Guid.Parse("e258364f-8a4a-4e51-b816-29d9067c814f"),
+                    ClassName = "How to Make an Array and it's Type in C#",
+                    DayStudy = new List<string> { "Thứ 4", "Thứ 7" },
                     StartTime = TimeSpan.FromHours(15).Add(TimeSpan.FromMinutes(0)),
                     EndTime = TimeSpan.FromHours(18).Add(TimeSpan.FromMinutes(0)),
                     StudentId = Guid.Parse("2B9D9ACA-27DA-415B-A468-B367613A2488"),
