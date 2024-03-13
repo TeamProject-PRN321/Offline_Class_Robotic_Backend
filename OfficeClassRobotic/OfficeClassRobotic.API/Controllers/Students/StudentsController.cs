@@ -20,9 +20,8 @@ namespace OfficeClassRobotic.API.Controllers.Students
 
         [HttpGet]
         [Route("get-schedule-of-student-by-student-id")]
-        public async Task<List<ScheduleOfStudent>?> GetScheduleOfStudentByStudentId([FromQuery]GetStudentScheduleByStudentIdRequest request)
+        public async Task<List<ScheduleOfStudent>?> GetScheduleOfStudentByStudentId([FromQuery] GetStudentScheduleByStudentIdRequest request)
         {
-
             return await _studentRepository.GetScheduleOfStudentByStudentId(request);
         }
 
@@ -36,10 +35,15 @@ namespace OfficeClassRobotic.API.Controllers.Students
         [Route("get-students-by-student-name/{studentName}")]
         public async Task<List<StudentDTO>> GetStudentByStudentName(string studentName)
         {
-
             return await _studentRepository.GetStudentByStudentName(studentName);
         }
-     
-     
+        [HttpGet]
+        [Route("get-all-students")]
+        public async Task<List<StudentDTO>> GetAllStudent()
+        {
+            return await _studentRepository.GetAllStudent();
+        }
+
+
     }
 }
