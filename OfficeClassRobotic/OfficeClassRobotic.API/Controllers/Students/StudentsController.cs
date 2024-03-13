@@ -25,45 +25,21 @@ namespace OfficeClassRobotic.API.Controllers.Students
 
             return await _studentRepository.GetScheduleOfStudentByStudentId(request);
         }
-        /*
-
-
-        public Task<ClassRoboticResponse> Create(CreateStudentCommand request)
-        {
-            var result = _studentRepository.CreateStudent(request);
-            return result;
-        }
-
-        [HttpPut]
-        [Route("edit")]
-        public Task<ClassRoboticResponse> Update(UpdateStudentCommand request)
-        {
-            var result = _studentRepository.UpdateStudent(request);
-            return result;
-        }
-
-        [HttpDelete]
-        [Route("remove")]
-        public Task<ClassRoboticResponse> Delete(DeleteStudentCommand request)
-        {
-            var result = _studentRepository.DeleteStudent(request);
-            return result;
-        }
 
         [HttpGet]
-        [Route("all")]
-        public Task<List<StudentResponse>> GetAll()
+        [Route("get-student-by-student-id/{studentId}")]
+        public async Task<StudentDTO> GetStudentByStudentId(Guid studentId)
         {
-            var result = _studentRepository.GetAllStudent();
-            return result;
+            return await _studentRepository.GetStudentByStudentId(studentId);
         }
-
         [HttpGet]
-        [Route("{parentId}")]
-        public Task<StudentResponse> GetById(string parentId)
+        [Route("get-students-by-student-name/{studentName}")]
+        public async Task<List<StudentDTO>> GetStudentByStudentName(string studentName)
         {
-            var result = _studentRepository.GetStudentById(parentId);
-            return result;
-        }*/
+
+            return await _studentRepository.GetStudentByStudentName(studentName);
+        }
+     
+     
     }
 }

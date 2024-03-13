@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
 using System.Globalization;
+using System.Xml.Linq;
 
 namespace OfficeClassRobotic.DAO.Students
 {
@@ -16,7 +17,7 @@ namespace OfficeClassRobotic.DAO.Students
         {
             get
             {
-                 {
+                {
                     instance = new StudentDAO();
                 }
                 return instance;
@@ -189,5 +190,106 @@ namespace OfficeClassRobotic.DAO.Students
                 throw new BadRequestException(ex.Message);
             }
         }*/
+
+        public Task<StudentDTO> GetStudentByStudentId(Guid studentId)
+        {
+            // Ưu tiên dùng Name
+            var response = new StudentDTO();
+            var s = _dbContext.Students.Where(x => x.Id == studentId).FirstOrDefault();
+            if (s != null)
+            {
+                var appUserStudent = _dbContext.AppUsers.Where(x => x.Id == s.AppUserId).FirstOrDefault();
+                if (appUserStudent != null)
+                {
+                    var student = new StudentDTO()
+                    {
+                        StudentId = s.Id,
+                        Address = appUserStudent.Address,
+                        DateOfBirth = appUserStudent.DateOfBirth,
+                        Email = appUserStudent.Email,
+                        FullName = appUserStudent.FullName,
+                        Gender = appUserStudent.Gender,
+                        PhoneNumber = appUserStudent.PhoneNumber,
+                        PhotoUrl = appUserStudent.PhotoUrl,
+                        UserName = appUserStudent.UserName,
+                    };
+                    var parent = _dbContext.Parents.Where(x => x.Id == s.ParentId).FirstOrDefault();
+                    if (parent != null)
+                    {
+                        var appUserParent = _dbContext.AppUsers.Where(x => x.Id == parent.AppUserId).FirstOrDefault();
+                        if (parent != null && appUserParent != null)
+                        {
+                            student.Parent = new ParentDTO()
+                            {
+                                Address = appUserParent.Address,
+                                DateOfBirth = appUserParent.DateOfBirth,
+                                Email = appUserParent.Email,
+                                FullName = appUserParent.FullName,
+                                Gender = appUserParent.Gender,
+                                ParentId = parent.Id,
+                                PhoneNumber = appUserParent.PhoneNumber,
+                                PhotoUrl = appUserParent.PhotoUrl,
+                                UserName = appUserParent.UserName,
+                            };
+                        }
+                    }
+                    response = student;
+                }
+            }
+            return Task.FromResult(response);
+        }
+        public Task<List<StudentDTO>> GetStudentByStudentName(string studentName)
+        {
+            var listResult = new List<StudentDTO>();
+            var listAppUserStudent = _dbContext.AppUsers.Where(x => x.FullName.ToLower().Trim().Contains(studentName.ToLower().Trim())).ToList();
+            foreach (var item in listAppUserStudent)
+            {
+                //Check coi nó có là account student hay không
+                var s = _dbContext.Students.Where(x => x.AppUserId == item.Id).FirstOrDefault();
+                if (s != null)
+                {
+                    var response = new StudentDTO();
+                    var appUserStudent = _dbContext.AppUsers.Where(x => x.Id == s.AppUserId).FirstOrDefault();
+                    if (appUserStudent != null)
+                    {
+                        var student = new StudentDTO()
+                        {
+                            StudentId = s.Id,
+                            Address = appUserStudent.Address,
+                            DateOfBirth = appUserStudent.DateOfBirth,
+                            Email = appUserStudent.Email,
+                            FullName = appUserStudent.FullName,
+                            Gender = appUserStudent.Gender,
+                            PhoneNumber = appUserStudent.PhoneNumber,
+                            PhotoUrl = appUserStudent.PhotoUrl,
+                            UserName = appUserStudent.UserName,
+                        };
+                        var parent = _dbContext.Parents.Where(x => x.Id == s.ParentId).FirstOrDefault();
+                        if(parent != null)
+                        {
+                            var appUserParent = _dbContext.AppUsers.Where(x => x.Id == parent.AppUserId).FirstOrDefault();
+                            if (parent != null && appUserParent != null)
+                            {
+                                student.Parent = new ParentDTO()
+                                {
+                                    Address = appUserParent.Address,
+                                    DateOfBirth = appUserParent.DateOfBirth,
+                                    Email = appUserParent.Email,
+                                    FullName = appUserParent.FullName,
+                                    Gender = appUserParent.Gender,
+                                    ParentId = parent.Id,
+                                    PhoneNumber = appUserParent.PhoneNumber,
+                                    PhotoUrl = appUserParent.PhotoUrl,
+                                    UserName = appUserParent.UserName,
+                                };
+                            }
+                        }
+                        response = student;
+                        listResult.Add(response);
+                    }
+                }
+            }
+            return Task.FromResult(listResult);
+        }
     }
 }

@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OfficeClassRobotic.DAO.Accounts;
 
 namespace OfficeClassRobotic.DAO.Students
 {
+    public class StudentDTO : AccountDTO
+    {
+        public Guid StudentId { get; set; }
+        public ParentDTO? Parent { get; set; }
+    }
+    public class ParentDTO : AccountDTO
+    {
+        public Guid ParentId { get; set; }
+    }
     public class CreateStudentCommand
     {
         public string? Name { get; set; }
