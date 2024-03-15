@@ -31,6 +31,14 @@ namespace OfficeClassRobotic.API.Controllers.Students
         {
             return await _studentRepository.GetStudentByStudentId(studentId);
         }
+
+        [HttpGet]
+        [Route("get-student-by-appuser-id/{appUserId}")]
+        public async Task<StudentDTO> GetStudentByAppUserId(Guid appUserId)
+        {
+            return await _studentRepository.GetStudentByAppUserId(appUserId);
+        }
+
         [HttpGet]
         [Route("get-students-by-student-name/{studentName}")]
         public async Task<List<StudentDTO>> GetStudentByStudentName(string studentName)

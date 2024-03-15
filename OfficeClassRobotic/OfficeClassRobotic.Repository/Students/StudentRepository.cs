@@ -41,6 +41,19 @@ namespace OfficeClassRobotic.Repository.Students
             }
         }
 
+
+        public async Task<StudentDTO> GetStudentByAppUserId(Guid appUserId)
+        {
+            try
+            {
+                return await studentDAO.GetStudentByAppUserId(appUserId);
+            }
+            catch (Exception ex)
+            {
+                throw new BadRequestException(ex.Message);
+            }
+        }
+
         public async Task<List<StudentDTO>> GetStudentByStudentName(string studentName)
         {
             try
@@ -64,6 +77,8 @@ namespace OfficeClassRobotic.Repository.Students
                 throw new BadRequestException(ex.Message);
             }
         }
+
+        
         /*
 public async Task<ClassRoboticResponse> CreateStudent(CreateStudentCommand student)
 {
