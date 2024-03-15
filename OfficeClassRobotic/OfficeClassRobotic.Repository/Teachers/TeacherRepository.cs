@@ -1,4 +1,4 @@
-﻿/*using Azure.Core;
+﻿using Azure.Core;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
 using OfficeClassRobotic.DAO.Teachers;
 using OfficeClassRobotic.Service.Exceptions;
@@ -12,15 +12,6 @@ namespace OfficeClassRobotic.Repository.Teachers
         public TeacherRepository()
         {
             _dao = new TeacherDAO();
-        }
-
-        public async Task<ClassRoboticResponse> CreateTeacher(CreateTeacherDTO request)
-        {
-            await _dao.CreateTeacher(request);
-            return new ClassRoboticResponse
-            {
-                Message = "Create Successfully"
-            };
         }
 
         public async Task<List<TeacherDTO>?> GetAllTeacherBySubjectId(GetTeacherBySubjectId request)
@@ -49,6 +40,19 @@ namespace OfficeClassRobotic.Repository.Teachers
             }
         }
 
+        public async Task<List<TeacherSchedule>> GetScheduleOfTeacherByTeacherIdAndTime(TeacherScheduleRequest request)
+        {
+            try
+            {
+                var result = await _dao.GetScheduleOfTeacherByTeacherIdAndTime(request);
+                return result;
+            }
+            catch(Exception ex) 
+            {
+                throw new BadRequestException(ex.Message);
+            }
+        }
+
         public async Task<TeacherDTO> GetTeacherByTeacherId(GetTeacherOrDeleteTeacherByTeacherId request)
         {
             try
@@ -62,14 +66,20 @@ namespace OfficeClassRobotic.Repository.Teachers
             }
         }
 
-        public async Task<ClassRoboticResponse> UpdateTeacher(UpdateTeacherDTO request)
+        public async Task<ClassRoboticResponse> UpdateteacherWithSubject(ConnectTeacherWithListSubjectRequest request)
         {
-            await _dao.UpdateTeacher(request);
-            return new ClassRoboticResponse
+            try
             {
-                Message = "Update Successfully"
-            };
+                await _dao.UpdateteacherWithSubject(request);
+                return new ClassRoboticResponse
+                {
+                    Message = ClassRoboticMessage.UpdateSuccessfully
+                };
+            }
+            catch
+            {
+                throw new BadRequestException("Something has wrong!");
+            }
         }
     }
 }
-*/

@@ -12,50 +12,38 @@ namespace OfficeClassRobotic.API.Controllers.Students
     [ApiController]
     public class StudentsController : ControllerBase
     {
-        /*private readonly IStudentRepository _studentRepository;
+        private readonly IStudentRepository _studentRepository;
         public StudentsController(IStudentRepository studentRepository)
         {
             _studentRepository = studentRepository;
         }
 
-        [HttpPost]
-        [Route("add")]
-        public Task<ClassRoboticResponse> Create(CreateStudentCommand request)
+        [HttpGet]
+        [Route("get-schedule-of-student-by-student-id")]
+        public async Task<List<ScheduleOfStudent>?> GetScheduleOfStudentByStudentId([FromQuery] GetStudentScheduleByStudentIdRequest request)
         {
-            var result = _studentRepository.CreateStudent(request);
-            return result;
-        }
-
-        [HttpPut]
-        [Route("edit")]
-        public Task<ClassRoboticResponse> Update(UpdateStudentCommand request)
-        {
-            var result = _studentRepository.UpdateStudent(request);
-            return result;
-        }
-
-        [HttpDelete]
-        [Route("remove")]
-        public Task<ClassRoboticResponse> Delete(DeleteStudentCommand request)
-        {
-            var result = _studentRepository.DeleteStudent(request);
-            return result;
+            return await _studentRepository.GetScheduleOfStudentByStudentId(request);
         }
 
         [HttpGet]
-        [Route("all")]
-        public Task<List<StudentResponse>> GetAll()
+        [Route("get-student-by-student-id/{studentId}")]
+        public async Task<StudentDTO> GetStudentByStudentId(Guid studentId)
         {
-            var result = _studentRepository.GetAllStudent();
-            return result;
+            return await _studentRepository.GetStudentByStudentId(studentId);
+        }
+        [HttpGet]
+        [Route("get-students-by-student-name/{studentName}")]
+        public async Task<List<StudentDTO>> GetStudentByStudentName(string studentName)
+        {
+            return await _studentRepository.GetStudentByStudentName(studentName);
+        }
+        [HttpGet]
+        [Route("get-all-students")]
+        public async Task<List<StudentDTO>> GetAllStudent()
+        {
+            return await _studentRepository.GetAllStudent();
         }
 
-        [HttpGet]
-        [Route("{parentId}")]
-        public Task<StudentResponse> GetById(string parentId)
-        {
-            var result = _studentRepository.GetStudentById(parentId);
-            return result;
-        }*/
+
     }
 }

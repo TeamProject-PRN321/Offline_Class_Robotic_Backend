@@ -16,5 +16,9 @@ namespace OfficeClassRobotic.Repository.Students
         public Task<ClassRoboticResponse> DeleteStudent(DeleteStudentCommand student);
         public Task<List<StudentResponse>> GetAllStudent();
         public Task<StudentResponse> GetStudentById(string studentId);*/
+        public Task<List<ScheduleOfStudent>?> GetScheduleOfStudentByStudentId(GetStudentScheduleByStudentIdRequest request);
+        public Task<StudentDTO> GetStudentByStudentId(Guid studentId);
+        public Task<List<StudentDTO>> GetStudentByStudentName(string studentName);
+        public Task<List<StudentDTO>> GetAllStudent();
     }
 }
