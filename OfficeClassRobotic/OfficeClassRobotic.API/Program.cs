@@ -40,6 +40,8 @@ builder.Services.AddControllers()
 
 ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
 
+ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+
 var app = builder.Build();
 app.UseCors(MyAllowSpecificOrigins);
 app.UseMiddleware<ExceptionMiddleware>();
