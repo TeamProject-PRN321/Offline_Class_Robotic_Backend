@@ -30,5 +30,12 @@ namespace OfficeClassRobotic.API.Controllers.Classess
             var result = _classRepository.CheckSchedularTeacher(request);
             return result;
         }
+        [HttpGet]
+        [Route("get-all-classes-are-not-finshed")]
+        public async Task<List<ClassDTO>> GetAllClassesAreNotFinished()
+        {
+            var result = await _classRepository.GetAllClassesAreNotFinished();
+            return result;
+        }
     }
 }

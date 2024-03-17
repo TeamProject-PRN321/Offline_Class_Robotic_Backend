@@ -87,4 +87,17 @@ namespace OfficeClassRobotic.DAO.Classess
         // ngày rảnh
         public List<DateFreeTime> ListDateFreeTime { get; set; }
     }
+    public class ClassDTO
+    {
+        public string? ClassName { get; set; }
+        public List<string>? DayStudy { get; set; }
+        public TimeSpan? StartTime { get; set; }
+        public TimeSpan? EndTime { get; set; }
+        public int TotalStudentInClass { get; set; }
+        public Guid SubjectId { get; set; }
+        public string? SubjectName { get; set; }
+        public Guid TeacherId { get;set; }
+        public Guid AppUserTeacherId { get; set; }
+        public string? TeacherName { get;set; }
+    }
 }

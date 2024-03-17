@@ -27,7 +27,8 @@ namespace OfficeClassRobotic.DAO.Classess
         {
             get
             {
-                if (instance == null) {
+                if (instance == null)
+                {
                     instance = new ClassDAO();
                 }
                 return instance;
@@ -38,7 +39,8 @@ namespace OfficeClassRobotic.DAO.Classess
         #region private function date
         private static string ConvertDayOfWeekToString(DayOfWeek dayOfWeek)
         {
-            switch (dayOfWeek) {
+            switch (dayOfWeek)
+            {
                 case DayOfWeek.Sunday:
                     return "Chủ Nhật";
                 case DayOfWeek.Monday:
@@ -60,7 +62,8 @@ namespace OfficeClassRobotic.DAO.Classess
 
         private static DayOfWeek ConvertDayOfWeek(string day)
         {
-            switch (day) {
+            switch (day)
+            {
                 case "Chủ Nhật":
                     return DayOfWeek.Sunday;
                 case "Thứ 2":
@@ -88,12 +91,14 @@ namespace OfficeClassRobotic.DAO.Classess
         /// <returns></returns>
         public async Task<CheckDataResponse> CheckSchedularTeacher(CheckData request)
         {
-            try {
+            try
+            {
                 #region endDate
                 var subject = await _dbContext.Subjects
                     .Where(s => s.Id == Guid.Parse(request.SubjectId) && !s.IsDeleted)
                     .SingleOrDefaultAsync();
-                if (subject == null) {
+                if (subject == null)
+                {
                     throw new NotFoundException("SubjectId not found");
                 }
                 var slots = subject.TotalSlots;
@@ -107,20 +112,25 @@ namespace OfficeClassRobotic.DAO.Classess
                 days.Sort();
                 var sortedDayOfWeek = days.Select(day => ConvertDayOfWeekToString(day)).ToList();
 
-                for (int i = 0; i < 7 * week; i++) {
+                for (int i = 0; i < 7 * week; i++)
+                {
                     dateEndStudy = dateEndStudy.AddDays(1);
                 }
-                while (remaining > 0) {
+                while (remaining > 0)
+                {
                     dateEndStudy = dateEndStudy.AddDays(1);
-                    if (sortedDayOfWeek.Contains(ConvertDayOfWeekToString(dateEndStudy.DayOfWeek))) {
+                    if (sortedDayOfWeek.Contains(ConvertDayOfWeekToString(dateEndStudy.DayOfWeek)))
+                    {
                         remaining--;
                     }
                 }
                 #endregion
                 #region List Day of StartDay and EndDate
                 var listDayStudy = new List<DateOnly>();
-                for (var date = request.DateStudy; date <= dateEndStudy; date = date.AddDays(1)) {
-                    if (sortedDayOfWeek.Contains(ConvertDayOfWeekToString(date.DayOfWeek))) {
+                for (var date = request.DateStudy; date <= dateEndStudy; date = date.AddDays(1))
+                {
+                    if (sortedDayOfWeek.Contains(ConvertDayOfWeekToString(date.DayOfWeek)))
+                    {
                         listDayStudy.Add(date);
                     }
                 }
@@ -130,7 +140,8 @@ namespace OfficeClassRobotic.DAO.Classess
                 var teachers = await _dbContext.TeacherSubjects
                     .Where(s => s.SubjectId == Guid.Parse(request.SubjectId) && !s.IsDeleted)
                     .ToListAsync();
-                if (teachers == null) {
+                if (teachers == null)
+                {
                     throw new NotFoundException("Chưa có teacher nào được tạo với môn học này, bạn hãy tạo đi");
                 }
                 // check list giáo viên bộ môn này với thời gian, ngày, coi có lịch chưa. Có rồi thì hiển thị, chưa có thi bo qua
@@ -140,12 +151,15 @@ namespace OfficeClassRobotic.DAO.Classess
                 var seenIds = new HashSet<Guid>();
                 var teacherSchedules = new List<DateFreeTime>();
                 var teacherSchedulesDictionary = new Dictionary<Guid, List<DateFreeTime>>();
-                foreach (var teacher in teachers) {
-                    if (!teacherSchedulesDictionary.ContainsKey(teacher.TeacherId)) {
+                foreach (var teacher in teachers)
+                {
+                    if (!teacherSchedulesDictionary.ContainsKey(teacher.TeacherId))
+                    {
                         teacherSchedulesDictionary[teacher.TeacherId] = new List<DateFreeTime>();
                     }
                     var teacherFreeTime = teacherSchedulesDictionary[teacher.TeacherId];
-                    foreach (var dateStudy in listDayStudy) {
+                    foreach (var dateStudy in listDayStudy)
+                    {
                         var schedulars = await _dbContext.ClassSchedule
                             .Where(cs => cs.TeacherId == teacher.TeacherId
                                         && cs.DateStudy.Year == dateStudy.Year
@@ -154,11 +168,14 @@ namespace OfficeClassRobotic.DAO.Classess
                                         && !cs.IsDeleted)
                             .ToListAsync();
                         // TH taecher chưa có lịch dạy, lấy thông tin của teacher, lấy ngày add thành 1 list
-                        if (schedulars.Count == 0) {
+                        if (schedulars.Count == 0)
+                        {
                             teacherFreeTime.Add(new DateFreeTime { Date = dateStudy });
                         }
-                        else {
-                            foreach (var schedular in schedulars) {
+                        else
+                        {
+                            foreach (var schedular in schedulars)
+                            {
                                 var startTimeOfClass = await _dbContext.Classes
                                     .Where(c => c.Id == schedular.ClassId &&
                                             (
@@ -170,12 +187,14 @@ namespace OfficeClassRobotic.DAO.Classess
                                             ) && !c.IsDeleted)
                                     .SingleOrDefaultAsync();
                                 // teacher này trống slot cho ngày hôm nay
-                                if (startTimeOfClass == null && !teacherFreeTime.Any(ft => ft.Date == dateStudy)) {
+                                if (startTimeOfClass == null && !teacherFreeTime.Any(ft => ft.Date == dateStudy))
+                                {
                                     schedularListEmptySlot.Add(schedular);
                                     teacherFreeTime.Add(new DateFreeTime { Date = dateStudy });
                                 }
                                 // teacher có slot cho ngày hôm nay, để dành nếu muốn hiện ngày làm việc thì code tiếp chỗ này
-                                else {
+                                else
+                                {
                                     schedularListHaveSlot.Add(schedular);
                                 }
                             }
@@ -184,19 +203,22 @@ namespace OfficeClassRobotic.DAO.Classess
                     teacherSchedulesDictionary[teacher.TeacherId] = teacherFreeTime;
                 }
 
-                foreach (var kvp in teacherSchedulesDictionary) {
+                foreach (var kvp in teacherSchedulesDictionary)
+                {
                     var teacherId = kvp.Key;
                     var teacherFreeTime = kvp.Value;
                     var teacherExistResponse = await _dbContext.Teacher
                                 .Where(t => t.Id == teacherId && !t.IsDeleted)
                                 .SingleOrDefaultAsync();
-                    if (teacherExistResponse == null) {
+                    if (teacherExistResponse == null)
+                    {
                         throw new NotFoundException("Error at teacherExistResponse no have teacherId");
                     }
                     var appUser = await _dbContext.AppUsers
                         .Where(a => a.Id == teacherExistResponse.AppUserId)
                         .SingleOrDefaultAsync();
-                    if (appUser == null) {
+                    if (appUser == null)
+                    {
                         throw new NotFoundException("Error at appUser no have AppUserId");
                     }
 
@@ -252,7 +274,8 @@ namespace OfficeClassRobotic.DAO.Classess
                 var availableClassroom = new List<DateFreeTimeForRoom>();
                 HashSet<DateOnly> processedDates = new HashSet<DateOnly>();
                 var getAllRoom = await _dbContext.Classrooms.Where(c => !c.IsDeleted).ToListAsync();
-                foreach (var dateStudy in listDayStudy) {
+                foreach (var dateStudy in listDayStudy)
+                {
                     var date = dateStudy;
                     var schedulars = await _dbContext.ClassSchedule
                             .Where(cs => cs.DateStudy.Year == dateStudy.Year
@@ -261,10 +284,13 @@ namespace OfficeClassRobotic.DAO.Classess
                                         && !cs.IsDeleted)
                             .ToListAsync();
                     // ngày này tất cả room còn trống
-                    if (schedulars.Count == 0) {
-                        if (processedDates.Add(dateStudy)) {
+                    if (schedulars.Count == 0)
+                    {
+                        if (processedDates.Add(dateStudy))
+                        {
                             var availableRooms = new List<ClassRoomDataResponse>();
-                            foreach (var room in getAllRoom) {
+                            foreach (var room in getAllRoom)
+                            {
                                 var addRoom = new ClassRoomDataResponse
                                 {
                                     Id = room.Id,
@@ -283,11 +309,13 @@ namespace OfficeClassRobotic.DAO.Classess
 
                     }
                     // ngày này có sài room , duyệt tiếp thời gian để xác định room số mấy
-                    else {
+                    else
+                    {
                         // phòng đang sử dụng
                         var occupiedRooms = new List<ClassRoomDataResponse>();
                         var availableRooms = new List<ClassRoomDataResponse>();
-                        foreach (var schedular in schedulars) {
+                        foreach (var schedular in schedulars)
+                        {
                             var startTimeOfClass = await _dbContext.Classes
                                 .Where(c => c.Id == schedular.ClassId &&
                                         (
@@ -300,7 +328,8 @@ namespace OfficeClassRobotic.DAO.Classess
                                         && !c.IsDeleted)
                                 .SingleOrDefaultAsync();
                             // slot này đã những có room, lấy những room còn trống
-                            if (startTimeOfClass != null) {
+                            if (startTimeOfClass != null)
+                            {
                                 // check làm sao để lấy được danh sách các room còn trống đây
                                 // tương tự trong cái list này sẽ còn nhiều room khác đang sử dụng,
                                 // add thành 1 list room đang sử dụng cho ngày hôm nay
@@ -308,7 +337,8 @@ namespace OfficeClassRobotic.DAO.Classess
                                 var room = await _dbContext.Classrooms
                                                     .Where(cr => cr.Id == schedular.ClassRoomID && !cr.IsDeleted)
                                                     .SingleOrDefaultAsync();
-                                if (room != null) {
+                                if (room != null)
+                                {
                                     occupiedRooms.Add(new ClassRoomDataResponse
                                     {
                                         Id = room.Id,
@@ -352,7 +382,8 @@ namespace OfficeClassRobotic.DAO.Classess
 
                 return response;
             }
-            catch(Exception ex) {
+            catch (Exception ex)
+            {
                 throw new BadRequestException(ex.Message);
             }
         }
@@ -371,7 +402,7 @@ namespace OfficeClassRobotic.DAO.Classess
 
             // Step 1: Tổng số slot
             var totalSlots = _dbContext.Subjects.Where(x => x.Id == Guid.Parse(request.SubjectId)).Select(x => x.TotalSlots).FirstOrDefault();
-            if(totalSlots == 0)
+            if (totalSlots == 0)
             {
                 // Something fail
             }
@@ -389,7 +420,7 @@ namespace OfficeClassRobotic.DAO.Classess
             var days = dayOfWeek.Select(ConvertDayOfWeek).ToList();
 
             days.Sort();
-            
+
             var sortedDayOfWeek = days.Select(day => ConvertDayOfWeekToString(day)).ToList();
 
             for (int i = 0; i < 7 * weekLearn; i++)
@@ -484,6 +515,48 @@ namespace OfficeClassRobotic.DAO.Classess
                             _dbContext.Attendance.Add(attendence);*//*
                         }*/
             #endregion
+        }
+
+        /// <summary>
+        /// Get All
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<ClassDTO>> GetAllClassesAreNotFinished()
+        {
+            var listResult = await _dbContext.Classes
+                .Where(s => !s.IsClassFinish)
+                .Join(_dbContext.ClassSchedule,
+                c => c.Id,
+                cs => cs.ClassId,
+                (c, cs) => new { c, cs })
+                .Join(_dbContext.Subjects,
+                x => x.c.SubjectId,
+                s => s.Id,
+                (x, s) => new { x.cs, x.c, s })
+                .Join(_dbContext.Teacher,
+                x => x.cs.TeacherId,
+                t => t.Id,
+                (x, t) => new { x.cs, x.s, x.c, t })
+                .Join(_dbContext.AppUsers,
+                x => x.t.AppUserId,
+                a => a.Id,
+                (x, a) => new { x.cs, x.c, x.t, x.s, a })
+                .GroupBy(x => new { x.a.FullName, x.cs.NumberOfSudent, x.cs.TeacherId, x.c.ClassName, x.c.DayStudy, x.c.StartTime, x.c.EndTime, x.s.SubjectName, x.s.Id, x.t.AppUserId })
+                .Select(g => new ClassDTO
+                {
+                    TotalStudentInClass = g.Key.NumberOfSudent,
+                    ClassName = g.Key.ClassName,
+                    DayStudy = g.Key.DayStudy,
+                    StartTime = g.Key.StartTime,
+                    EndTime = g.Key.EndTime,
+                    TeacherId = g.Key.TeacherId,
+                    TeacherName = g.Key.FullName,
+                    SubjectName = g.Key.SubjectName,
+                    SubjectId = g.Key.Id,
+                    AppUserTeacherId = g.Key.AppUserId
+                })
+                .ToListAsync();
+            return listResult;
         }
     }
 }

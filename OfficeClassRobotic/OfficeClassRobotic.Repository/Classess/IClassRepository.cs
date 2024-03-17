@@ -13,5 +13,6 @@ namespace OfficeClassRobotic.Repository.Classess
     {
         public Task<ClassRoboticResponse> CreateClass(CreateClassesCommand request);
         public Task<CheckDataResponse> CheckSchedularTeacher(CheckData request);
+        public Task<List<ClassDTO>> GetAllClassesAreNotFinished();
     }
 }

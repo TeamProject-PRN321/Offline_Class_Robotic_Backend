@@ -47,7 +47,7 @@
 
     public class TeacherScheduleRequest
     {
-        public Guid TeacherId { get; set; }
+        public Guid AppUserId { get; set; }
         public DateTime DateStartOfWeek { get; set; }
         public DateTime DateEndOfWeek { get; set; }
     }
