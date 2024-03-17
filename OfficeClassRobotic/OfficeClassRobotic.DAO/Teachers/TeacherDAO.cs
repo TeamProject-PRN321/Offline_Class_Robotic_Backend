@@ -259,6 +259,23 @@ namespace OfficeClassRobotic.DAO.Teachers
                     TimeDetail = $"Lớp học bắt đầu lúc: {startTime} và kết thúc lúc: {endTime}",
                     TotalStudentInClass = item.NumberOfSudent,
                 };
+                var checkAttend = _dbContext.Classes.Where(x => x.ClassName == classOfStudent.ClassName)
+                                                    .Join(_dbContext.ClassSchedule.Where(x => x.DateStudy == item.DateStudy),
+                                                    c => c.Id,
+                                                    cs => cs.ClassId,
+                                                    (c,cs) => new {c,cs})
+                                                    .Join(_dbContext.Attendance.Where(x => x.LastModified != null),
+                                                    x => x.cs.Id,
+                                                    a => a.ClassScheduleID,
+                                                    (x,a) => new {x.c,x.cs,a }).Count();
+                if(checkAttend == item.NumberOfSudent)
+                {
+                    result.ClassWasCheckedAttendant = 1;
+                }
+                else
+                {
+                    result.ClassWasCheckedAttendant = 0;
+                }
                 listResult.Add(result);
             }
             return listResult;

@@ -66,5 +66,10 @@
         public TimeSpan? EndTime { get; set; }
         public string TimeDetail { get; set; } = null!;
         public int TotalStudentInClass { get; set; }
+        /// <summary>
+        /// 0. Là chưa
+        /// 1. Là rồi
+        /// </summary>
+        public int ClassWasCheckedAttendant { get; set; }
     }
 }

@@ -406,6 +406,11 @@ namespace OfficeClassRobotic.DAO.Classess
             {
                 // Something fail
             }
+            var classNameExisted = _dbContext.Classes.Where(x => x.ClassName == request.ClassName).FirstOrDefault();
+            if (classNameExisted != null)
+            {
+                throw new BadRequestException("Class name " + request.ClassName + " đã tồn tại, vui lòng chọn class name khác!!");
+            }
             // Step 2: Số ngày sẽ học trong tuần
             var daysOfWeekNumber = request.DayStudy!.Count;
             // Step 3: Tính tổng số tuần sẽ học
