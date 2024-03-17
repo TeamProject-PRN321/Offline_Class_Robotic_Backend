@@ -489,6 +489,39 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
             );
             #endregion
 
+            #region Device
+            modelBuilder.Entity<Device>().HasData(
+                new Device
+                {
+                    Id = Guid.Parse("DFF2458C-3F40-423B-8AA9-D7588A4AE4FE"),
+                    DeviceName = "Bàn học",
+                    Description = "bàn 1 người ngồi",
+                    PriceOfDevice = 120000,
+                    StatusOfDevice = 1,
+                    ClassRoomId = Guid.Parse("D2E283A6-5BF5-4D27-A2C2-994CB6D781E9")
+                },
+                new Device
+                {
+                    Id = Guid.Parse("958E60A2-FA2D-4437-B639-316A569F3AB9"),
+                    DeviceName = "Ghế",
+                    Description = "Ghế 1 người ngồi",
+                    PriceOfDevice = 200000,
+                    StatusOfDevice = 2,
+                    ClassRoomId = Guid.Parse("D2E283A6-5BF5-4D27-A2C2-994CB6D781E9")
+                },
+                new Device
+                {
+                    Id = Guid.Parse("BF5B9E8E-4B5D-4FD2-8F45-B070558C64C0"),
+                    DeviceName = "Quạt",
+                    Description = "Quạt trần",
+                    PriceOfDevice = 200000,
+                    StatusOfDevice = 3,
+                    ClassRoomId = Guid.Parse("D2E283A6-5BF5-4D27-A2C2-994CB6D781E9")
+                }
+
+            );
+            #endregion
+
             base.OnModelCreating(modelBuilder);
         }
 

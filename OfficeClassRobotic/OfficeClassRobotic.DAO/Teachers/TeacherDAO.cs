@@ -280,5 +280,51 @@ namespace OfficeClassRobotic.DAO.Teachers
             }
             return listResult;
         }
+
+        /// <summary>
+        /// Dùng Get danh sách giáo viên theo SubjectName
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        /// <exception cref="NotFoundException"></exception>
+        public async Task<TeacherSubjectResponse> GetListTeacherBySubjectName(string keyword)
+        {
+            var subjectExist = await _dbContext.Subjects.Where(s => s.SubjectName.Contains(keyword)).SingleOrDefaultAsync();
+            if (subjectExist == null)
+            {
+                throw new NotFoundException("Not exist subject");
+            }
+            var subjectTeacher = await _dbContext.TeacherSubjects.Where(ts => ts.SubjectId == subjectExist.Id).ToListAsync();
+            var responseData = new List<TeacherData>();
+            foreach (var subject in subjectTeacher)
+            {
+                var teacherData = await _dbContext.Teacher.Where(a => a.Id == subject.TeacherId).SingleOrDefaultAsync();
+                var appUser = await _dbContext.AppUsers.Where(a => a.Id == teacherData.AppUserId).SingleOrDefaultAsync();
+                var teacher = new TeacherData
+                {
+                    TeacherId = subject.TeacherId,
+                    AppUserId = appUser.Id,
+                    UserName = appUser.UserName,
+                    FullName = appUser.FullName,
+                    PhoneNumber = appUser.PhoneNumber,
+                    Email = appUser.Email,
+                    DateOfBirth = appUser.DateOfBirth,
+                    Gender = appUser.Gender,
+                    Address = appUser.Address,
+                    PhotoUrl = appUser.PhotoUrl,
+                };
+                responseData.Add(teacher);
+            }
+
+            return new TeacherSubjectResponse
+            {
+                SubjectId = subjectExist.Id,
+                SubjectName = subjectExist.SubjectName,
+                TotalSlots = subjectExist.TotalSlots,
+                GiaoTrinhId = subjectExist.GiaoTrinhId,
+
+                TeacherResponse = responseData
+            };
+        }
     }
 }
