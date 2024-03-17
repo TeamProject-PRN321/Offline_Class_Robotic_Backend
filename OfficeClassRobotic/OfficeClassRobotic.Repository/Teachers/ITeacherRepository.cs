@@ -12,6 +12,7 @@ namespace OfficeClassRobotic.Repository.Teachers
         public Task<List<TeacherDTO>?> GetAllTeacherBySubjectId(GetTeacherBySubjectId request);
         public Task<ClassRoboticResponse> UpdateteacherWithSubject(ConnectTeacherWithListSubjectRequest request);
         public Task<List<TeacherSchedule>> GetScheduleOfTeacherByTeacherIdAndTime(TeacherScheduleRequest request);
+        public Task<TeacherSubjectResponse> GetListTeacherBySubjectName(string keyword);
 
     }
 }

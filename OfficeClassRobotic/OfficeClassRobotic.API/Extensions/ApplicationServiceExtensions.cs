@@ -9,9 +9,11 @@ using OfficeClassRobotic.DAO.Accounts;
 using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
 using OfficeClassRobotic.Repository.Accounts;
 using OfficeClassRobotic.Repository.Classess;
+using OfficeClassRobotic.Repository.Classrooms;
 using OfficeClassRobotic.Repository.GiaoTrinhForSubject;
 using OfficeClassRobotic.Repository.GiaoTrinhs;
 using OfficeClassRobotic.Repository.Interfaces;
+using OfficeClassRobotic.Repository.IStudentGrades;
 using OfficeClassRobotic.Repository.Parents;
 using OfficeClassRobotic.Repository.Students;
 using OfficeClassRobotic.Repository.Teachers;
@@ -139,6 +141,8 @@ namespace OfficeClassRobotic.API.Extensions
             services.AddScoped<ITeacherRepository, TeacherRepository>();
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IClassRepository, ClassRepository>();
+            services.AddScoped<IClassroomRepository, ClassroomRepository>();
+            services.AddScoped<IStudentGradeRepository, StudentGradeRepository>();
 
 
 

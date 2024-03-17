@@ -22,6 +22,19 @@ namespace OfficeClassRobotic.DAO.Classess
         public string ClassRoomID { get; set; }
     }
 
+    public class CreateClassStudentExcel
+    {
+        public string? ClassName { get; set; }
+        public List<StudentExcelData> StudentListIds { get; set; }
+    }
+    public class StudentExcelData
+    {
+        public string StudentId { get; set; }
+        public string StudentName { get; set; }
+        public string Email { get; set; }
+        public string Score { get; set; }
+    }
+
     public class StudentInputData
     {
         public string StudentId { get; set; }

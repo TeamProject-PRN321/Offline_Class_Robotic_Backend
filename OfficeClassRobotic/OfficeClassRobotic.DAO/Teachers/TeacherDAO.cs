@@ -189,7 +189,7 @@ namespace OfficeClassRobotic.DAO.Teachers
         public async Task UpdateteacherWithSubject(ConnectTeacherWithListSubjectRequest request)
         {
             var teacher = _dbContext.Teacher.Where(x => x.Id == request.TeacherId && !x.IsDeleted).FirstOrDefault();
-            if(teacher == null)
+            if (teacher == null)
             {
                 throw new NotFoundException("Không tìm thấy giảng viên nào có tên như trên!");
             }
@@ -198,7 +198,7 @@ namespace OfficeClassRobotic.DAO.Teachers
             {
                 throw new NotFoundException("Không tìm thấy môn học nào có tên như trên!");
             }
-            if(flagSubject.Count != request.ListSubjectId.Count)
+            if (flagSubject.Count != request.ListSubjectId.Count)
             {
                 throw new NotFoundException("Đã có môn học nào đó trong danh sách bị xóa, vui lòng kiểm tra lại!!");
             }
@@ -207,7 +207,7 @@ namespace OfficeClassRobotic.DAO.Teachers
             {
                 _dbContext.TeacherSubjects.RemoveRange(listTeacherSubjectOld);
             }
-            foreach(var item in request.ListSubjectId)
+            foreach (var item in request.ListSubjectId)
             {
                 var teacherSubject = new TeacherSubject
                 {
@@ -225,7 +225,7 @@ namespace OfficeClassRobotic.DAO.Teachers
                 .Where(x => x.TeacherId == request.TeacherId &&
                             x.DateStudy >= request.DateStartOfWeek &&
                             x.DateStudy <= request.DateEndOfWeek)
-                .GroupBy(x => new { x.DateStudy, x.StartTime,x.ClassRoomID, x.EndTime, x.NumberOfSudent })
+                .GroupBy(x => new { x.DateStudy, x.StartTime, x.ClassRoomID, x.EndTime, x.NumberOfSudent })
                 .Select(x => new
                 {
                     ClassIdCommon = x.Min(y => y.ClassId),
@@ -242,7 +242,7 @@ namespace OfficeClassRobotic.DAO.Teachers
             {
                 var classOfStudent = await _dbContext.Classes.Where(x => x.Id == Guid.Parse(item.ClassIdCommon.ToString())).FirstAsync();
                 var classRoom = _dbContext.Classrooms.Where(x => x.Id == item.ClassRoomIdCommon).First();
-                var startTime = item.StartTime!.Value.Hours +":"+(item.StartTime.Value.Minutes < 10 ? item.StartTime.Value.Minutes+"0" : item.StartTime.Value.Minutes) + " " + (item.StartTime.Value.Hours >= 12 ? "PM" : "AM");
+                var startTime = item.StartTime!.Value.Hours + ":" + (item.StartTime.Value.Minutes < 10 ? item.StartTime.Value.Minutes + "0" : item.StartTime.Value.Minutes) + " " + (item.StartTime.Value.Hours >= 12 ? "PM" : "AM");
                 var endTime = item.EndTime!.Value.Hours + ":" + (item.EndTime.Value.Minutes < 10 ? item.EndTime.Value.Minutes + "0" : item.EndTime.Value.Minutes) + " " + (item.EndTime.Value.Hours >= 12 ? "PM" : "AM"); ;
                 var result = new TeacherSchedule()
                 {
@@ -257,6 +257,52 @@ namespace OfficeClassRobotic.DAO.Teachers
                 listResult.Add(result);
             }
             return listResult;
+        }
+
+        /// <summary>
+        /// Dùng Get danh sách giáo viên theo SubjectName
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        /// <exception cref="NotFoundException"></exception>
+        public async Task<TeacherSubjectResponse> GetListTeacherBySubjectName(string keyword)
+        {
+            var subjectExist = await _dbContext.Subjects.Where(s => s.SubjectName.Contains(keyword)).SingleOrDefaultAsync();
+            if (subjectExist == null)
+            {
+                throw new NotFoundException("Not exist subject");
+            }
+            var subjectTeacher = await _dbContext.TeacherSubjects.Where(ts => ts.SubjectId == subjectExist.Id).ToListAsync();
+            var responseData = new List<TeacherData>();
+            foreach (var subject in subjectTeacher)
+            {
+                var teacherData = await _dbContext.Teacher.Where(a => a.Id == subject.TeacherId).SingleOrDefaultAsync();
+                var appUser = await _dbContext.AppUsers.Where(a => a.Id == teacherData.AppUserId).SingleOrDefaultAsync();
+                var teacher = new TeacherData
+                {
+                    TeacherId = subject.TeacherId,
+                    AppUserId = appUser.Id,
+                    UserName = appUser.UserName,
+                    FullName = appUser.FullName,
+                    PhoneNumber = appUser.PhoneNumber,
+                    Email = appUser.Email,
+                    DateOfBirth = appUser.DateOfBirth,
+                    Gender = appUser.Gender,
+                    Address = appUser.Address,
+                    PhotoUrl = appUser.PhotoUrl,
+                };
+                responseData.Add(teacher);
+            }
+
+            return new TeacherSubjectResponse
+            {
+                SubjectId = subjectExist.Id,
+                SubjectName = subjectExist.SubjectName,
+                TotalSlots = subjectExist.TotalSlots,
+                GiaoTrinhId = subjectExist.GiaoTrinhId,
+
+                TeacherResponse = responseData
+            };
         }
     }
 }
