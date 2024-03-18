@@ -94,9 +94,9 @@ namespace OfficeClassRobotic.DAO.SudentGrades
             return subject;
         }
 
-        public async Task SaveGradeToDatabase(string studentId, List<GradeSubjectOfStudent> listGrade)
+        public async Task SaveGradeToDatabase(string studentId, List<GradeSubjectOfStudent> listGrade, string className)
         {
-            var classId = await _dbContext.Classes.Where(c => c.StudentId == Guid.Parse(studentId)).SingleOrDefaultAsync();
+            var classId = await _dbContext.Classes.Where(c => c.StudentId == Guid.Parse(studentId) && c.ClassName == className).SingleOrDefaultAsync();
             foreach (var grade in listGrade)
             {
                 var studentGrade = await _dbContext.StudentGrades
