@@ -189,7 +189,7 @@ namespace OfficeClassRobotic.DAO.Teachers
         public async Task UpdateteacherWithSubject(ConnectTeacherWithListSubjectRequest request)
         {
             var teacher = _dbContext.Teacher.Where(x => x.Id == request.TeacherId && !x.IsDeleted).FirstOrDefault();
-            if(teacher == null)
+            if (teacher == null)
             {
                 throw new NotFoundException("Không tìm thấy giảng viên nào có tên như trên!");
             }
@@ -198,7 +198,7 @@ namespace OfficeClassRobotic.DAO.Teachers
             {
                 throw new NotFoundException("Không tìm thấy môn học nào có tên như trên!");
             }
-            if(flagSubject.Count != request.ListSubjectId.Count)
+            if (flagSubject.Count != request.ListSubjectId.Count)
             {
                 throw new NotFoundException("Đã có môn học nào đó trong danh sách bị xóa, vui lòng kiểm tra lại!!");
             }
@@ -207,7 +207,7 @@ namespace OfficeClassRobotic.DAO.Teachers
             {
                 _dbContext.TeacherSubjects.RemoveRange(listTeacherSubjectOld);
             }
-            foreach(var item in request.ListSubjectId)
+            foreach (var item in request.ListSubjectId)
             {
                 var teacherSubject = new TeacherSubject
                 {
@@ -221,11 +221,16 @@ namespace OfficeClassRobotic.DAO.Teachers
         public async Task<List<TeacherSchedule>> GetScheduleOfTeacherByTeacherIdAndTime(TeacherScheduleRequest request)
         {
             var listResult = new List<TeacherSchedule>();
+            var teacher = await _dbContext.Teacher.Where(x => x.AppUserId == request.AppUserId).FirstOrDefaultAsync();
+            if (teacher == null)
+            {
+                throw new BadRequestException("Không tìm thấy Teacher nào có Appuser ID như: " + request.AppUserId);
+            }
             var listClassSchedule = await _dbContext.ClassSchedule
-                .Where(x => x.TeacherId == request.TeacherId &&
+                .Where(x => x.TeacherId == teacher.Id &&
                             x.DateStudy >= request.DateStartOfWeek &&
                             x.DateStudy <= request.DateEndOfWeek)
-                .GroupBy(x => new { x.DateStudy, x.StartTime,x.ClassRoomID, x.EndTime, x.NumberOfSudent })
+                .GroupBy(x => new { x.DateStudy, x.StartTime, x.ClassRoomID, x.EndTime, x.NumberOfSudent })
                 .Select(x => new
                 {
                     ClassIdCommon = x.Min(y => y.ClassId),
@@ -242,7 +247,7 @@ namespace OfficeClassRobotic.DAO.Teachers
             {
                 var classOfStudent = await _dbContext.Classes.Where(x => x.Id == Guid.Parse(item.ClassIdCommon.ToString())).FirstAsync();
                 var classRoom = _dbContext.Classrooms.Where(x => x.Id == item.ClassRoomIdCommon).First();
-                var startTime = item.StartTime!.Value.Hours +":"+(item.StartTime.Value.Minutes < 10 ? item.StartTime.Value.Minutes+"0" : item.StartTime.Value.Minutes) + " " + (item.StartTime.Value.Hours >= 12 ? "PM" : "AM");
+                var startTime = item.StartTime!.Value.Hours + ":" + (item.StartTime.Value.Minutes < 10 ? item.StartTime.Value.Minutes + "0" : item.StartTime.Value.Minutes) + " " + (item.StartTime.Value.Hours >= 12 ? "PM" : "AM");
                 var endTime = item.EndTime!.Value.Hours + ":" + (item.EndTime.Value.Minutes < 10 ? item.EndTime.Value.Minutes + "0" : item.EndTime.Value.Minutes) + " " + (item.EndTime.Value.Hours >= 12 ? "PM" : "AM"); ;
                 var result = new TeacherSchedule()
                 {
@@ -254,6 +259,23 @@ namespace OfficeClassRobotic.DAO.Teachers
                     TimeDetail = $"Lớp học bắt đầu lúc: {startTime} và kết thúc lúc: {endTime}",
                     TotalStudentInClass = item.NumberOfSudent,
                 };
+                var checkAttend = _dbContext.Classes.Where(x => x.ClassName == classOfStudent.ClassName)
+                                                    .Join(_dbContext.ClassSchedule.Where(x => x.DateStudy == item.DateStudy),
+                                                    c => c.Id,
+                                                    cs => cs.ClassId,
+                                                    (c,cs) => new {c,cs})
+                                                    .Join(_dbContext.Attendance.Where(x => x.LastModified != null),
+                                                    x => x.cs.Id,
+                                                    a => a.ClassScheduleID,
+                                                    (x,a) => new {x.c,x.cs,a }).Count();
+                if(checkAttend == item.NumberOfSudent)
+                {
+                    result.ClassWasCheckedAttendant = 1;
+                }
+                else
+                {
+                    result.ClassWasCheckedAttendant = 0;
+                }
                 listResult.Add(result);
             }
             return listResult;

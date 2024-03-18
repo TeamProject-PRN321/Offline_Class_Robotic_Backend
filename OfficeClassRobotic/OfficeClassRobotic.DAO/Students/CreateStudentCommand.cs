@@ -4,6 +4,7 @@ namespace OfficeClassRobotic.DAO.Students
 {
     public class StudentDTO : AccountDTO
     {
+        public Guid AppUserId { get; set; }
         public Guid StudentId { get; set; }
         public ParentDTO? Parent { get; set; }
     }
@@ -11,6 +12,7 @@ namespace OfficeClassRobotic.DAO.Students
     {
         public Guid ParentId { get; set; }
     }
+   
     public class CreateStudentCommand
     {
         public string? Name { get; set; }

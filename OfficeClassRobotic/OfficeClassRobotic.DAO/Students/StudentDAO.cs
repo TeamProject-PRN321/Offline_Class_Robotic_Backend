@@ -290,6 +290,54 @@ namespace OfficeClassRobotic.DAO.Students
             }
             return Task.FromResult(response);
         }
+
+        public Task<StudentDTO> GetStudentByAppUserId(Guid appUserId)
+        {
+            // Ưu tiên dùng Name
+            var response = new StudentDTO();
+            var s = _dbContext.Students.Where(x => x.AppUserId == appUserId && !x.IsDeleted).FirstOrDefault();
+            if (s != null)
+            {
+                var appUserStudent = _dbContext.AppUsers.Where(x => x.Id == s.AppUserId).FirstOrDefault();
+                if (appUserStudent != null)
+                {
+                    var student = new StudentDTO()
+                    {
+                        StudentId = s.Id,
+                        Address = appUserStudent.Address,
+                        DateOfBirth = appUserStudent.DateOfBirth,
+                        Email = appUserStudent.Email,
+                        FullName = appUserStudent.FullName,
+                        Gender = appUserStudent.Gender,
+                        PhoneNumber = appUserStudent.PhoneNumber,
+                        PhotoUrl = appUserStudent.PhotoUrl,
+                        UserName = appUserStudent.UserName,
+                    };
+                    var parent = _dbContext.Parents.Where(x => x.Id == s.ParentId).FirstOrDefault();
+                    if (parent != null)
+                    {
+                        var appUserParent = _dbContext.AppUsers.Where(x => x.Id == parent.AppUserId).FirstOrDefault();
+                        if (parent != null && appUserParent != null)
+                        {
+                            student.Parent = new ParentDTO()
+                            {
+                                Address = appUserParent.Address,
+                                DateOfBirth = appUserParent.DateOfBirth,
+                                Email = appUserParent.Email,
+                                FullName = appUserParent.FullName,
+                                Gender = appUserParent.Gender,
+                                ParentId = parent.Id,
+                                PhoneNumber = appUserParent.PhoneNumber,
+                                PhotoUrl = appUserParent.PhotoUrl,
+                                UserName = appUserParent.UserName,
+                            };
+                        }
+                    }
+                    response = student;
+                }
+            }
+            return Task.FromResult(response);
+        }
         public Task<List<StudentDTO>> GetStudentByStudentName(string studentName)
         {
             var listResult = new List<StudentDTO>();

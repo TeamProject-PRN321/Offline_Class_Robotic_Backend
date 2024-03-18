@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Azure.Core;
 using OfficeClassRobotic.DAO.Classess;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
 using OfficeClassRobotic.DAO.GiaoTrinhs;
@@ -31,6 +32,12 @@ namespace OfficeClassRobotic.Repository.Classess
         public async Task<CheckDataResponse> CheckSchedularTeacher(CheckData request)
         {
             var response = await _classDAO.CheckSchedularTeacher(request);
+            return response;
+        }
+
+        public async Task<List<ClassDTO>> GetAllClassesAreNotFinished()
+        {
+            var response = await _classDAO.GetAllClassesAreNotFinished();
             return response;
         }
     }
