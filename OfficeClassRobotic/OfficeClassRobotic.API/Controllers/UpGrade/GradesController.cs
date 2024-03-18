@@ -193,13 +193,20 @@ namespace OfficeClassRobotic.API.Controllers.UpGrade
                     // Autofit columns
                     worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
 
-                    // Lưu file Excel
-                    var directoryPath = @"C:\Users\ADMIN\Downloads";
-                    var filePath = Path.Combine(directoryPath, $"{classname}_Students.xlsx");
-                    System.IO.File.WriteAllBytes(filePath, package.GetAsByteArray());
-                }
+                    /*          // Lưu file Excel
+                              var directoryPath = @"C:\Users\ADMIN\Downloads";
+                              var filePath = Path.Combine(directoryPath, $"{classname}_Students.xlsx");
+                              System.IO.File.WriteAllBytes(filePath, package.GetAsByteArray());*/
 
-                return Ok("File Excel đã được tạo thành công.");
+                    var filePath = $"{classname}_Students.xlsx";
+
+
+                    // Lưu file
+                    var bytes = package.GetAsByteArray();
+
+                    // Trả về file
+                    return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", filePath);
+                }
             }
             catch (Exception ex)
             {
