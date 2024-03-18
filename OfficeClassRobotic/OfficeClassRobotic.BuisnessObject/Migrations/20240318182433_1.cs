@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OfficeClassRobotic.BuisnessObject.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class _1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -107,7 +107,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         column: x => x.AppUserId,
                         principalTable: "AppUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -130,7 +130,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         column: x => x.AppUserId,
                         principalTable: "AppUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -160,7 +160,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         column: x => x.AppUserId,
                         principalTable: "AppUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -183,7 +183,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         column: x => x.AppUserId,
                         principalTable: "AppUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -207,7 +207,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         column: x => x.AppUserId,
                         principalTable: "AppUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -230,7 +230,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         column: x => x.AppUserId,
                         principalTable: "AppUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -279,7 +279,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         column: x => x.SubjectId,
                         principalTable: "Subjects",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -304,7 +304,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         column: x => x.SubjectID,
                         principalTable: "Subjects",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -329,7 +329,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         column: x => x.TrungTamRoboticId,
                         principalTable: "TrungTamRobotics",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -358,13 +358,13 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         column: x => x.StudentId,
                         principalTable: "Students",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Classes_Subjects_SubjectId",
                         column: x => x.SubjectId,
                         principalTable: "Subjects",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -390,7 +390,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         column: x => x.TeacherId,
                         principalTable: "Teacher",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -440,7 +440,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         column: x => x.ClassRoomId,
                         principalTable: "Classrooms",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -469,19 +469,19 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         column: x => x.ClassId,
                         principalTable: "Classes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ClassSchedule_Classrooms_ClassRoomID",
                         column: x => x.ClassRoomID,
                         principalTable: "Classrooms",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ClassSchedule_Teacher_TeacherId",
                         column: x => x.TeacherId,
                         principalTable: "Teacher",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -506,7 +506,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         column: x => x.ClassId,
                         principalTable: "Classes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -531,7 +531,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         column: x => x.ClassScheduleID,
                         principalTable: "ClassSchedule",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -539,17 +539,17 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                 columns: new[] { "Id", "Address", "DateOfBirth", "Email", "FullName", "Gender", "PassWordHash", "PassWordSalt", "PhoneNumber", "PhotoUrl", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("275c605e-3d04-437d-8a7d-208249412cec"), "Long An", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "vi1@gmail.com", "Vĩ 1", "Male", new byte[] { 158, 157, 190, 205, 56, 127, 125, 11, 139, 234, 10, 248, 164, 149, 118, 32, 36, 124, 138, 104, 93, 128, 181, 129, 210, 63, 193, 149, 44, 206, 234, 141, 21, 73, 194, 230, 125, 230, 70, 235, 185, 79, 79, 129, 138, 47, 6, 104, 72, 184, 185, 193, 108, 29, 196, 244, 162, 177, 254, 248, 187, 103, 173, 192 }, new byte[] { 47, 51, 53, 12, 198, 229, 207, 117, 42, 134, 215, 197, 205, 4, 105, 139, 158, 10, 161, 249, 38, 125, 146, 51, 130, 17, 116, 251, 180, 119, 192, 124, 13, 184, 8, 254, 191, 2, 152, 39, 77, 138, 211, 83, 182, 248, 6, 0, 26, 63, 241, 87, 55, 2, 218, 77, 146, 175, 109, 235, 1, 165, 8, 148, 14, 195, 87, 111, 138, 216, 121, 254, 52, 130, 221, 198, 129, 42, 30, 173, 100, 214, 235, 246, 196, 235, 49, 112, 95, 190, 241, 35, 32, 34, 126, 131, 42, 34, 215, 46, 190, 155, 250, 17, 248, 236, 4, 43, 222, 197, 50, 113, 164, 17, 165, 42, 49, 149, 53, 125, 90, 106, 133, 141, 174, 80, 47, 89 }, "0123456789", "abc", "vi1" },
-                    { new Guid("2a22d7f6-6d94-4587-84d2-921c78970a91"), "23 Hcm", new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "nguyenthanhn537@gmail.com", "Nguyen Thanh Nhan", "Male", new byte[] { 160, 39, 124, 10, 246, 154, 151, 96, 142, 216, 221, 144, 98, 226, 20, 171, 228, 10, 166, 255, 102, 84, 156, 180, 193, 14, 233, 11, 30, 59, 102, 213, 120, 239, 64, 212, 34, 248, 81, 6, 100, 151, 39, 146, 55, 84, 174, 90, 38, 98, 223, 66, 244, 216, 81, 223, 138, 134, 238, 88, 58, 119, 216, 99 }, new byte[] { 47, 51, 53, 12, 198, 229, 207, 117, 42, 134, 215, 197, 205, 4, 105, 139, 158, 10, 161, 249, 38, 125, 146, 51, 130, 17, 116, 251, 180, 119, 192, 124, 13, 184, 8, 254, 191, 2, 152, 39, 77, 138, 211, 83, 182, 248, 6, 0, 26, 63, 241, 87, 55, 2, 218, 77, 146, 175, 109, 235, 1, 165, 8, 148, 14, 195, 87, 111, 138, 216, 121, 254, 52, 130, 221, 198, 129, 42, 30, 173, 100, 214, 235, 246, 196, 235, 49, 112, 95, 190, 241, 35, 32, 34, 126, 131, 42, 34, 215, 46, 190, 155, 250, 17, 248, 236, 4, 43, 222, 197, 50, 113, 164, 17, 165, 42, 49, 149, 53, 125, 90, 106, 133, 141, 174, 80, 47, 89 }, "0912345678", "132564487asjdhkahsdkj", "nhannt" },
-                    { new Guid("45b82e13-b1fc-425d-a2b3-8b821405bfd0"), "23 Hcm", new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "lylynp537@gmail.com", "Nguyen Phuong LyLy", "Female", new byte[] { 160, 39, 124, 10, 246, 154, 151, 96, 142, 216, 221, 144, 98, 226, 20, 171, 228, 10, 166, 255, 102, 84, 156, 180, 193, 14, 233, 11, 30, 59, 102, 213, 120, 239, 64, 212, 34, 248, 81, 6, 100, 151, 39, 146, 55, 84, 174, 90, 38, 98, 223, 66, 244, 216, 81, 223, 138, 134, 238, 88, 58, 119, 216, 99 }, new byte[] { 47, 51, 53, 12, 198, 229, 207, 117, 42, 134, 215, 197, 205, 4, 105, 139, 158, 10, 161, 249, 38, 125, 146, 51, 130, 17, 116, 251, 180, 119, 192, 124, 13, 184, 8, 254, 191, 2, 152, 39, 77, 138, 211, 83, 182, 248, 6, 0, 26, 63, 241, 87, 55, 2, 218, 77, 146, 175, 109, 235, 1, 165, 8, 148, 14, 195, 87, 111, 138, 216, 121, 254, 52, 130, 221, 198, 129, 42, 30, 173, 100, 214, 235, 246, 196, 235, 49, 112, 95, 190, 241, 35, 32, 34, 126, 131, 42, 34, 215, 46, 190, 155, 250, 17, 248, 236, 4, 43, 222, 197, 50, 113, 164, 17, 165, 42, 49, 149, 53, 125, 90, 106, 133, 141, 174, 80, 47, 89 }, "0912345678", "132564487asjdhkahsdkj", "lylynp" },
-                    { new Guid("4e5e39dc-7a22-4787-9083-70335fa2489c"), "Long An", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "vi2@gmail.com", "Vĩ 2", "Male", new byte[] { 158, 157, 190, 205, 56, 127, 125, 11, 139, 234, 10, 248, 164, 149, 118, 32, 36, 124, 138, 104, 93, 128, 181, 129, 210, 63, 193, 149, 44, 206, 234, 141, 21, 73, 194, 230, 125, 230, 70, 235, 185, 79, 79, 129, 138, 47, 6, 104, 72, 184, 185, 193, 108, 29, 196, 244, 162, 177, 254, 248, 187, 103, 173, 192 }, new byte[] { 47, 51, 53, 12, 198, 229, 207, 117, 42, 134, 215, 197, 205, 4, 105, 139, 158, 10, 161, 249, 38, 125, 146, 51, 130, 17, 116, 251, 180, 119, 192, 124, 13, 184, 8, 254, 191, 2, 152, 39, 77, 138, 211, 83, 182, 248, 6, 0, 26, 63, 241, 87, 55, 2, 218, 77, 146, 175, 109, 235, 1, 165, 8, 148, 14, 195, 87, 111, 138, 216, 121, 254, 52, 130, 221, 198, 129, 42, 30, 173, 100, 214, 235, 246, 196, 235, 49, 112, 95, 190, 241, 35, 32, 34, 126, 131, 42, 34, 215, 46, 190, 155, 250, 17, 248, 236, 4, 43, 222, 197, 50, 113, 164, 17, 165, 42, 49, 149, 53, 125, 90, 106, 133, 141, 174, 80, 47, 89 }, "0123456789", "abc", "vi2" },
-                    { new Guid("5ddd65ff-16a1-4fd1-acbf-c913f0cce37c"), "Long An", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "vi5@gmail.com", "Vĩ 5", "Male", new byte[] { 158, 157, 190, 205, 56, 127, 125, 11, 139, 234, 10, 248, 164, 149, 118, 32, 36, 124, 138, 104, 93, 128, 181, 129, 210, 63, 193, 149, 44, 206, 234, 141, 21, 73, 194, 230, 125, 230, 70, 235, 185, 79, 79, 129, 138, 47, 6, 104, 72, 184, 185, 193, 108, 29, 196, 244, 162, 177, 254, 248, 187, 103, 173, 192 }, new byte[] { 47, 51, 53, 12, 198, 229, 207, 117, 42, 134, 215, 197, 205, 4, 105, 139, 158, 10, 161, 249, 38, 125, 146, 51, 130, 17, 116, 251, 180, 119, 192, 124, 13, 184, 8, 254, 191, 2, 152, 39, 77, 138, 211, 83, 182, 248, 6, 0, 26, 63, 241, 87, 55, 2, 218, 77, 146, 175, 109, 235, 1, 165, 8, 148, 14, 195, 87, 111, 138, 216, 121, 254, 52, 130, 221, 198, 129, 42, 30, 173, 100, 214, 235, 246, 196, 235, 49, 112, 95, 190, 241, 35, 32, 34, 126, 131, 42, 34, 215, 46, 190, 155, 250, 17, 248, 236, 4, 43, 222, 197, 50, 113, 164, 17, 165, 42, 49, 149, 53, 125, 90, 106, 133, 141, 174, 80, 47, 89 }, "0123456789", "abc", "vi5" },
-                    { new Guid("64863e62-104c-49ee-a57e-b066936d8e8d"), "Long An", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "vi3@gmail.com", "Vĩ 3", "Male", new byte[] { 158, 157, 190, 205, 56, 127, 125, 11, 139, 234, 10, 248, 164, 149, 118, 32, 36, 124, 138, 104, 93, 128, 181, 129, 210, 63, 193, 149, 44, 206, 234, 141, 21, 73, 194, 230, 125, 230, 70, 235, 185, 79, 79, 129, 138, 47, 6, 104, 72, 184, 185, 193, 108, 29, 196, 244, 162, 177, 254, 248, 187, 103, 173, 192 }, new byte[] { 47, 51, 53, 12, 198, 229, 207, 117, 42, 134, 215, 197, 205, 4, 105, 139, 158, 10, 161, 249, 38, 125, 146, 51, 130, 17, 116, 251, 180, 119, 192, 124, 13, 184, 8, 254, 191, 2, 152, 39, 77, 138, 211, 83, 182, 248, 6, 0, 26, 63, 241, 87, 55, 2, 218, 77, 146, 175, 109, 235, 1, 165, 8, 148, 14, 195, 87, 111, 138, 216, 121, 254, 52, 130, 221, 198, 129, 42, 30, 173, 100, 214, 235, 246, 196, 235, 49, 112, 95, 190, 241, 35, 32, 34, 126, 131, 42, 34, 215, 46, 190, 155, 250, 17, 248, 236, 4, 43, 222, 197, 50, 113, 164, 17, 165, 42, 49, 149, 53, 125, 90, 106, 133, 141, 174, 80, 47, 89 }, "0123456789", "abc", "vi3" },
-                    { new Guid("75653469-5fdd-4639-9be7-2c8fca8cecc5"), "Long An", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "vi7@gmail.com", "Vĩ 7", "Male", new byte[] { 158, 157, 190, 205, 56, 127, 125, 11, 139, 234, 10, 248, 164, 149, 118, 32, 36, 124, 138, 104, 93, 128, 181, 129, 210, 63, 193, 149, 44, 206, 234, 141, 21, 73, 194, 230, 125, 230, 70, 235, 185, 79, 79, 129, 138, 47, 6, 104, 72, 184, 185, 193, 108, 29, 196, 244, 162, 177, 254, 248, 187, 103, 173, 192 }, new byte[] { 47, 51, 53, 12, 198, 229, 207, 117, 42, 134, 215, 197, 205, 4, 105, 139, 158, 10, 161, 249, 38, 125, 146, 51, 130, 17, 116, 251, 180, 119, 192, 124, 13, 184, 8, 254, 191, 2, 152, 39, 77, 138, 211, 83, 182, 248, 6, 0, 26, 63, 241, 87, 55, 2, 218, 77, 146, 175, 109, 235, 1, 165, 8, 148, 14, 195, 87, 111, 138, 216, 121, 254, 52, 130, 221, 198, 129, 42, 30, 173, 100, 214, 235, 246, 196, 235, 49, 112, 95, 190, 241, 35, 32, 34, 126, 131, 42, 34, 215, 46, 190, 155, 250, 17, 248, 236, 4, 43, 222, 197, 50, 113, 164, 17, 165, 42, 49, 149, 53, 125, 90, 106, 133, 141, 174, 80, 47, 89 }, "0123456789", "abc", "vi7" },
-                    { new Guid("ae50067c-00bc-49e2-a20c-500696a2f954"), "Long An", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "vi6@gmail.com", "Vĩ 1", "Male", new byte[] { 158, 157, 190, 205, 56, 127, 125, 11, 139, 234, 10, 248, 164, 149, 118, 32, 36, 124, 138, 104, 93, 128, 181, 129, 210, 63, 193, 149, 44, 206, 234, 141, 21, 73, 194, 230, 125, 230, 70, 235, 185, 79, 79, 129, 138, 47, 6, 104, 72, 184, 185, 193, 108, 29, 196, 244, 162, 177, 254, 248, 187, 103, 173, 192 }, new byte[] { 47, 51, 53, 12, 198, 229, 207, 117, 42, 134, 215, 197, 205, 4, 105, 139, 158, 10, 161, 249, 38, 125, 146, 51, 130, 17, 116, 251, 180, 119, 192, 124, 13, 184, 8, 254, 191, 2, 152, 39, 77, 138, 211, 83, 182, 248, 6, 0, 26, 63, 241, 87, 55, 2, 218, 77, 146, 175, 109, 235, 1, 165, 8, 148, 14, 195, 87, 111, 138, 216, 121, 254, 52, 130, 221, 198, 129, 42, 30, 173, 100, 214, 235, 246, 196, 235, 49, 112, 95, 190, 241, 35, 32, 34, 126, 131, 42, 34, 215, 46, 190, 155, 250, 17, 248, 236, 4, 43, 222, 197, 50, 113, 164, 17, 165, 42, 49, 149, 53, 125, 90, 106, 133, 141, 174, 80, 47, 89 }, "0123456789", "abc", "vi1" },
-                    { new Guid("af7a0942-0459-4364-b8c8-3737a4edfff4"), "Long An", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "vi4@gmail.com", "Vĩ 4", "Male", new byte[] { 158, 157, 190, 205, 56, 127, 125, 11, 139, 234, 10, 248, 164, 149, 118, 32, 36, 124, 138, 104, 93, 128, 181, 129, 210, 63, 193, 149, 44, 206, 234, 141, 21, 73, 194, 230, 125, 230, 70, 235, 185, 79, 79, 129, 138, 47, 6, 104, 72, 184, 185, 193, 108, 29, 196, 244, 162, 177, 254, 248, 187, 103, 173, 192 }, new byte[] { 47, 51, 53, 12, 198, 229, 207, 117, 42, 134, 215, 197, 205, 4, 105, 139, 158, 10, 161, 249, 38, 125, 146, 51, 130, 17, 116, 251, 180, 119, 192, 124, 13, 184, 8, 254, 191, 2, 152, 39, 77, 138, 211, 83, 182, 248, 6, 0, 26, 63, 241, 87, 55, 2, 218, 77, 146, 175, 109, 235, 1, 165, 8, 148, 14, 195, 87, 111, 138, 216, 121, 254, 52, 130, 221, 198, 129, 42, 30, 173, 100, 214, 235, 246, 196, 235, 49, 112, 95, 190, 241, 35, 32, 34, 126, 131, 42, 34, 215, 46, 190, 155, 250, 17, 248, 236, 4, 43, 222, 197, 50, 113, 164, 17, 165, 42, 49, 149, 53, 125, 90, 106, 133, 141, 174, 80, 47, 89 }, "0123456789", "abc", "vi4" },
-                    { new Guid("bf835a7d-d002-4c9f-8bd6-0e2d321447c4"), "23 Hcm", new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "vinnt537@gmail.com", "Nguyen Ngoc Thai Vi", "Male", new byte[] { 160, 39, 124, 10, 246, 154, 151, 96, 142, 216, 221, 144, 98, 226, 20, 171, 228, 10, 166, 255, 102, 84, 156, 180, 193, 14, 233, 11, 30, 59, 102, 213, 120, 239, 64, 212, 34, 248, 81, 6, 100, 151, 39, 146, 55, 84, 174, 90, 38, 98, 223, 66, 244, 216, 81, 223, 138, 134, 238, 88, 58, 119, 216, 99 }, new byte[] { 47, 51, 53, 12, 198, 229, 207, 117, 42, 134, 215, 197, 205, 4, 105, 139, 158, 10, 161, 249, 38, 125, 146, 51, 130, 17, 116, 251, 180, 119, 192, 124, 13, 184, 8, 254, 191, 2, 152, 39, 77, 138, 211, 83, 182, 248, 6, 0, 26, 63, 241, 87, 55, 2, 218, 77, 146, 175, 109, 235, 1, 165, 8, 148, 14, 195, 87, 111, 138, 216, 121, 254, 52, 130, 221, 198, 129, 42, 30, 173, 100, 214, 235, 246, 196, 235, 49, 112, 95, 190, 241, 35, 32, 34, 126, 131, 42, 34, 215, 46, 190, 155, 250, 17, 248, 236, 4, 43, 222, 197, 50, 113, 164, 17, 165, 42, 49, 149, 53, 125, 90, 106, 133, 141, 174, 80, 47, 89 }, "0912345678", "132564487asjdhkahsdkj", "vinnt" },
-                    { new Guid("da053af4-cdf1-4a6b-8506-2e3939ef6351"), "Long An", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "vinnt060402@gmail.com", "Nguyễn Ngọc Thái Vĩ", "Male", new byte[] { 158, 157, 190, 205, 56, 127, 125, 11, 139, 234, 10, 248, 164, 149, 118, 32, 36, 124, 138, 104, 93, 128, 181, 129, 210, 63, 193, 149, 44, 206, 234, 141, 21, 73, 194, 230, 125, 230, 70, 235, 185, 79, 79, 129, 138, 47, 6, 104, 72, 184, 185, 193, 108, 29, 196, 244, 162, 177, 254, 248, 187, 103, 173, 192 }, new byte[] { 47, 51, 53, 12, 198, 229, 207, 117, 42, 134, 215, 197, 205, 4, 105, 139, 158, 10, 161, 249, 38, 125, 146, 51, 130, 17, 116, 251, 180, 119, 192, 124, 13, 184, 8, 254, 191, 2, 152, 39, 77, 138, 211, 83, 182, 248, 6, 0, 26, 63, 241, 87, 55, 2, 218, 77, 146, 175, 109, 235, 1, 165, 8, 148, 14, 195, 87, 111, 138, 216, 121, 254, 52, 130, 221, 198, 129, 42, 30, 173, 100, 214, 235, 246, 196, 235, 49, 112, 95, 190, 241, 35, 32, 34, 126, 131, 42, 34, 215, 46, 190, 155, 250, 17, 248, 236, 4, 43, 222, 197, 50, 113, 164, 17, 165, 42, 49, 149, 53, 125, 90, 106, 133, 141, 174, 80, 47, 89 }, "0123456789", "abc", "vinnt060402" }
+                    { new Guid("275c605e-3d04-437d-8a7d-208249412cec"), "Long An", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "vi1@gmail.com", "Vĩ 1", "Male", new byte[] { 176, 101, 56, 149, 187, 10, 165, 252, 0, 139, 19, 4, 137, 255, 149, 21, 250, 221, 36, 119, 224, 255, 77, 42, 146, 212, 44, 101, 216, 34, 89, 81, 131, 66, 10, 115, 204, 50, 111, 73, 227, 60, 62, 199, 228, 152, 247, 133, 1, 98, 230, 45, 99, 136, 147, 120, 177, 81, 133, 41, 112, 31, 224, 52 }, new byte[] { 111, 26, 109, 14, 166, 209, 28, 5, 105, 56, 61, 130, 19, 30, 14, 214, 213, 68, 236, 128, 134, 86, 96, 89, 224, 72, 242, 196, 191, 184, 77, 131, 116, 116, 78, 74, 235, 199, 4, 158, 59, 154, 254, 172, 230, 217, 232, 111, 183, 99, 177, 179, 129, 219, 104, 101, 111, 81, 167, 23, 157, 177, 70, 105, 226, 250, 139, 123, 3, 249, 242, 208, 73, 215, 85, 243, 24, 137, 102, 174, 199, 246, 138, 234, 58, 184, 212, 188, 133, 73, 209, 136, 123, 33, 2, 7, 163, 58, 115, 172, 23, 26, 152, 4, 173, 232, 169, 149, 62, 139, 48, 251, 130, 117, 157, 234, 191, 143, 41, 129, 53, 188, 251, 33, 125, 84, 201, 141 }, "0123456789", "abc", "vi1" },
+                    { new Guid("2a22d7f6-6d94-4587-84d2-921c78970a91"), "23 Hcm", new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "nguyenthanhn537@gmail.com", "Nguyen Thanh Nhan", "Male", new byte[] { 235, 75, 84, 126, 24, 191, 47, 132, 182, 93, 119, 230, 127, 131, 101, 27, 141, 26, 237, 137, 93, 89, 148, 95, 187, 251, 210, 24, 169, 135, 166, 245, 222, 98, 72, 51, 239, 131, 17, 104, 111, 4, 34, 144, 79, 213, 182, 245, 151, 156, 42, 57, 26, 28, 47, 247, 239, 195, 10, 101, 32, 51, 150, 109 }, new byte[] { 111, 26, 109, 14, 166, 209, 28, 5, 105, 56, 61, 130, 19, 30, 14, 214, 213, 68, 236, 128, 134, 86, 96, 89, 224, 72, 242, 196, 191, 184, 77, 131, 116, 116, 78, 74, 235, 199, 4, 158, 59, 154, 254, 172, 230, 217, 232, 111, 183, 99, 177, 179, 129, 219, 104, 101, 111, 81, 167, 23, 157, 177, 70, 105, 226, 250, 139, 123, 3, 249, 242, 208, 73, 215, 85, 243, 24, 137, 102, 174, 199, 246, 138, 234, 58, 184, 212, 188, 133, 73, 209, 136, 123, 33, 2, 7, 163, 58, 115, 172, 23, 26, 152, 4, 173, 232, 169, 149, 62, 139, 48, 251, 130, 117, 157, 234, 191, 143, 41, 129, 53, 188, 251, 33, 125, 84, 201, 141 }, "0912345678", "132564487asjdhkahsdkj", "nhannt" },
+                    { new Guid("45b82e13-b1fc-425d-a2b3-8b821405bfd0"), "23 Hcm", new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "lylynp537@gmail.com", "Nguyen Phuong LyLy", "Female", new byte[] { 235, 75, 84, 126, 24, 191, 47, 132, 182, 93, 119, 230, 127, 131, 101, 27, 141, 26, 237, 137, 93, 89, 148, 95, 187, 251, 210, 24, 169, 135, 166, 245, 222, 98, 72, 51, 239, 131, 17, 104, 111, 4, 34, 144, 79, 213, 182, 245, 151, 156, 42, 57, 26, 28, 47, 247, 239, 195, 10, 101, 32, 51, 150, 109 }, new byte[] { 111, 26, 109, 14, 166, 209, 28, 5, 105, 56, 61, 130, 19, 30, 14, 214, 213, 68, 236, 128, 134, 86, 96, 89, 224, 72, 242, 196, 191, 184, 77, 131, 116, 116, 78, 74, 235, 199, 4, 158, 59, 154, 254, 172, 230, 217, 232, 111, 183, 99, 177, 179, 129, 219, 104, 101, 111, 81, 167, 23, 157, 177, 70, 105, 226, 250, 139, 123, 3, 249, 242, 208, 73, 215, 85, 243, 24, 137, 102, 174, 199, 246, 138, 234, 58, 184, 212, 188, 133, 73, 209, 136, 123, 33, 2, 7, 163, 58, 115, 172, 23, 26, 152, 4, 173, 232, 169, 149, 62, 139, 48, 251, 130, 117, 157, 234, 191, 143, 41, 129, 53, 188, 251, 33, 125, 84, 201, 141 }, "0912345678", "132564487asjdhkahsdkj", "lylynp" },
+                    { new Guid("4e5e39dc-7a22-4787-9083-70335fa2489c"), "Long An", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "vi2@gmail.com", "Vĩ 2", "Male", new byte[] { 176, 101, 56, 149, 187, 10, 165, 252, 0, 139, 19, 4, 137, 255, 149, 21, 250, 221, 36, 119, 224, 255, 77, 42, 146, 212, 44, 101, 216, 34, 89, 81, 131, 66, 10, 115, 204, 50, 111, 73, 227, 60, 62, 199, 228, 152, 247, 133, 1, 98, 230, 45, 99, 136, 147, 120, 177, 81, 133, 41, 112, 31, 224, 52 }, new byte[] { 111, 26, 109, 14, 166, 209, 28, 5, 105, 56, 61, 130, 19, 30, 14, 214, 213, 68, 236, 128, 134, 86, 96, 89, 224, 72, 242, 196, 191, 184, 77, 131, 116, 116, 78, 74, 235, 199, 4, 158, 59, 154, 254, 172, 230, 217, 232, 111, 183, 99, 177, 179, 129, 219, 104, 101, 111, 81, 167, 23, 157, 177, 70, 105, 226, 250, 139, 123, 3, 249, 242, 208, 73, 215, 85, 243, 24, 137, 102, 174, 199, 246, 138, 234, 58, 184, 212, 188, 133, 73, 209, 136, 123, 33, 2, 7, 163, 58, 115, 172, 23, 26, 152, 4, 173, 232, 169, 149, 62, 139, 48, 251, 130, 117, 157, 234, 191, 143, 41, 129, 53, 188, 251, 33, 125, 84, 201, 141 }, "0123456789", "abc", "vi2" },
+                    { new Guid("5ddd65ff-16a1-4fd1-acbf-c913f0cce37c"), "Long An", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "vi5@gmail.com", "Vĩ 5", "Male", new byte[] { 176, 101, 56, 149, 187, 10, 165, 252, 0, 139, 19, 4, 137, 255, 149, 21, 250, 221, 36, 119, 224, 255, 77, 42, 146, 212, 44, 101, 216, 34, 89, 81, 131, 66, 10, 115, 204, 50, 111, 73, 227, 60, 62, 199, 228, 152, 247, 133, 1, 98, 230, 45, 99, 136, 147, 120, 177, 81, 133, 41, 112, 31, 224, 52 }, new byte[] { 111, 26, 109, 14, 166, 209, 28, 5, 105, 56, 61, 130, 19, 30, 14, 214, 213, 68, 236, 128, 134, 86, 96, 89, 224, 72, 242, 196, 191, 184, 77, 131, 116, 116, 78, 74, 235, 199, 4, 158, 59, 154, 254, 172, 230, 217, 232, 111, 183, 99, 177, 179, 129, 219, 104, 101, 111, 81, 167, 23, 157, 177, 70, 105, 226, 250, 139, 123, 3, 249, 242, 208, 73, 215, 85, 243, 24, 137, 102, 174, 199, 246, 138, 234, 58, 184, 212, 188, 133, 73, 209, 136, 123, 33, 2, 7, 163, 58, 115, 172, 23, 26, 152, 4, 173, 232, 169, 149, 62, 139, 48, 251, 130, 117, 157, 234, 191, 143, 41, 129, 53, 188, 251, 33, 125, 84, 201, 141 }, "0123456789", "abc", "vi5" },
+                    { new Guid("64863e62-104c-49ee-a57e-b066936d8e8d"), "Long An", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "vi3@gmail.com", "Vĩ 3", "Male", new byte[] { 176, 101, 56, 149, 187, 10, 165, 252, 0, 139, 19, 4, 137, 255, 149, 21, 250, 221, 36, 119, 224, 255, 77, 42, 146, 212, 44, 101, 216, 34, 89, 81, 131, 66, 10, 115, 204, 50, 111, 73, 227, 60, 62, 199, 228, 152, 247, 133, 1, 98, 230, 45, 99, 136, 147, 120, 177, 81, 133, 41, 112, 31, 224, 52 }, new byte[] { 111, 26, 109, 14, 166, 209, 28, 5, 105, 56, 61, 130, 19, 30, 14, 214, 213, 68, 236, 128, 134, 86, 96, 89, 224, 72, 242, 196, 191, 184, 77, 131, 116, 116, 78, 74, 235, 199, 4, 158, 59, 154, 254, 172, 230, 217, 232, 111, 183, 99, 177, 179, 129, 219, 104, 101, 111, 81, 167, 23, 157, 177, 70, 105, 226, 250, 139, 123, 3, 249, 242, 208, 73, 215, 85, 243, 24, 137, 102, 174, 199, 246, 138, 234, 58, 184, 212, 188, 133, 73, 209, 136, 123, 33, 2, 7, 163, 58, 115, 172, 23, 26, 152, 4, 173, 232, 169, 149, 62, 139, 48, 251, 130, 117, 157, 234, 191, 143, 41, 129, 53, 188, 251, 33, 125, 84, 201, 141 }, "0123456789", "abc", "vi3" },
+                    { new Guid("75653469-5fdd-4639-9be7-2c8fca8cecc5"), "Long An", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "vi7@gmail.com", "Vĩ 7", "Male", new byte[] { 176, 101, 56, 149, 187, 10, 165, 252, 0, 139, 19, 4, 137, 255, 149, 21, 250, 221, 36, 119, 224, 255, 77, 42, 146, 212, 44, 101, 216, 34, 89, 81, 131, 66, 10, 115, 204, 50, 111, 73, 227, 60, 62, 199, 228, 152, 247, 133, 1, 98, 230, 45, 99, 136, 147, 120, 177, 81, 133, 41, 112, 31, 224, 52 }, new byte[] { 111, 26, 109, 14, 166, 209, 28, 5, 105, 56, 61, 130, 19, 30, 14, 214, 213, 68, 236, 128, 134, 86, 96, 89, 224, 72, 242, 196, 191, 184, 77, 131, 116, 116, 78, 74, 235, 199, 4, 158, 59, 154, 254, 172, 230, 217, 232, 111, 183, 99, 177, 179, 129, 219, 104, 101, 111, 81, 167, 23, 157, 177, 70, 105, 226, 250, 139, 123, 3, 249, 242, 208, 73, 215, 85, 243, 24, 137, 102, 174, 199, 246, 138, 234, 58, 184, 212, 188, 133, 73, 209, 136, 123, 33, 2, 7, 163, 58, 115, 172, 23, 26, 152, 4, 173, 232, 169, 149, 62, 139, 48, 251, 130, 117, 157, 234, 191, 143, 41, 129, 53, 188, 251, 33, 125, 84, 201, 141 }, "0123456789", "abc", "vi7" },
+                    { new Guid("ae50067c-00bc-49e2-a20c-500696a2f954"), "Long An", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "vi6@gmail.com", "Vĩ 1", "Male", new byte[] { 176, 101, 56, 149, 187, 10, 165, 252, 0, 139, 19, 4, 137, 255, 149, 21, 250, 221, 36, 119, 224, 255, 77, 42, 146, 212, 44, 101, 216, 34, 89, 81, 131, 66, 10, 115, 204, 50, 111, 73, 227, 60, 62, 199, 228, 152, 247, 133, 1, 98, 230, 45, 99, 136, 147, 120, 177, 81, 133, 41, 112, 31, 224, 52 }, new byte[] { 111, 26, 109, 14, 166, 209, 28, 5, 105, 56, 61, 130, 19, 30, 14, 214, 213, 68, 236, 128, 134, 86, 96, 89, 224, 72, 242, 196, 191, 184, 77, 131, 116, 116, 78, 74, 235, 199, 4, 158, 59, 154, 254, 172, 230, 217, 232, 111, 183, 99, 177, 179, 129, 219, 104, 101, 111, 81, 167, 23, 157, 177, 70, 105, 226, 250, 139, 123, 3, 249, 242, 208, 73, 215, 85, 243, 24, 137, 102, 174, 199, 246, 138, 234, 58, 184, 212, 188, 133, 73, 209, 136, 123, 33, 2, 7, 163, 58, 115, 172, 23, 26, 152, 4, 173, 232, 169, 149, 62, 139, 48, 251, 130, 117, 157, 234, 191, 143, 41, 129, 53, 188, 251, 33, 125, 84, 201, 141 }, "0123456789", "abc", "vi1" },
+                    { new Guid("af7a0942-0459-4364-b8c8-3737a4edfff4"), "Long An", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "vi4@gmail.com", "Vĩ 4", "Male", new byte[] { 176, 101, 56, 149, 187, 10, 165, 252, 0, 139, 19, 4, 137, 255, 149, 21, 250, 221, 36, 119, 224, 255, 77, 42, 146, 212, 44, 101, 216, 34, 89, 81, 131, 66, 10, 115, 204, 50, 111, 73, 227, 60, 62, 199, 228, 152, 247, 133, 1, 98, 230, 45, 99, 136, 147, 120, 177, 81, 133, 41, 112, 31, 224, 52 }, new byte[] { 111, 26, 109, 14, 166, 209, 28, 5, 105, 56, 61, 130, 19, 30, 14, 214, 213, 68, 236, 128, 134, 86, 96, 89, 224, 72, 242, 196, 191, 184, 77, 131, 116, 116, 78, 74, 235, 199, 4, 158, 59, 154, 254, 172, 230, 217, 232, 111, 183, 99, 177, 179, 129, 219, 104, 101, 111, 81, 167, 23, 157, 177, 70, 105, 226, 250, 139, 123, 3, 249, 242, 208, 73, 215, 85, 243, 24, 137, 102, 174, 199, 246, 138, 234, 58, 184, 212, 188, 133, 73, 209, 136, 123, 33, 2, 7, 163, 58, 115, 172, 23, 26, 152, 4, 173, 232, 169, 149, 62, 139, 48, 251, 130, 117, 157, 234, 191, 143, 41, 129, 53, 188, 251, 33, 125, 84, 201, 141 }, "0123456789", "abc", "vi4" },
+                    { new Guid("bf835a7d-d002-4c9f-8bd6-0e2d321447c4"), "23 Hcm", new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "vinnt537@gmail.com", "Nguyen Ngoc Thai Vi", "Male", new byte[] { 235, 75, 84, 126, 24, 191, 47, 132, 182, 93, 119, 230, 127, 131, 101, 27, 141, 26, 237, 137, 93, 89, 148, 95, 187, 251, 210, 24, 169, 135, 166, 245, 222, 98, 72, 51, 239, 131, 17, 104, 111, 4, 34, 144, 79, 213, 182, 245, 151, 156, 42, 57, 26, 28, 47, 247, 239, 195, 10, 101, 32, 51, 150, 109 }, new byte[] { 111, 26, 109, 14, 166, 209, 28, 5, 105, 56, 61, 130, 19, 30, 14, 214, 213, 68, 236, 128, 134, 86, 96, 89, 224, 72, 242, 196, 191, 184, 77, 131, 116, 116, 78, 74, 235, 199, 4, 158, 59, 154, 254, 172, 230, 217, 232, 111, 183, 99, 177, 179, 129, 219, 104, 101, 111, 81, 167, 23, 157, 177, 70, 105, 226, 250, 139, 123, 3, 249, 242, 208, 73, 215, 85, 243, 24, 137, 102, 174, 199, 246, 138, 234, 58, 184, 212, 188, 133, 73, 209, 136, 123, 33, 2, 7, 163, 58, 115, 172, 23, 26, 152, 4, 173, 232, 169, 149, 62, 139, 48, 251, 130, 117, 157, 234, 191, 143, 41, 129, 53, 188, 251, 33, 125, 84, 201, 141 }, "0912345678", "132564487asjdhkahsdkj", "vinnt" },
+                    { new Guid("da053af4-cdf1-4a6b-8506-2e3939ef6351"), "Long An", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "vinnt060402@gmail.com", "Nguyễn Ngọc Thái Vĩ", "Male", new byte[] { 176, 101, 56, 149, 187, 10, 165, 252, 0, 139, 19, 4, 137, 255, 149, 21, 250, 221, 36, 119, 224, 255, 77, 42, 146, 212, 44, 101, 216, 34, 89, 81, 131, 66, 10, 115, 204, 50, 111, 73, 227, 60, 62, 199, 228, 152, 247, 133, 1, 98, 230, 45, 99, 136, 147, 120, 177, 81, 133, 41, 112, 31, 224, 52 }, new byte[] { 111, 26, 109, 14, 166, 209, 28, 5, 105, 56, 61, 130, 19, 30, 14, 214, 213, 68, 236, 128, 134, 86, 96, 89, 224, 72, 242, 196, 191, 184, 77, 131, 116, 116, 78, 74, 235, 199, 4, 158, 59, 154, 254, 172, 230, 217, 232, 111, 183, 99, 177, 179, 129, 219, 104, 101, 111, 81, 167, 23, 157, 177, 70, 105, 226, 250, 139, 123, 3, 249, 242, 208, 73, 215, 85, 243, 24, 137, 102, 174, 199, 246, 138, 234, 58, 184, 212, 188, 133, 73, 209, 136, 123, 33, 2, 7, 163, 58, 115, 172, 23, 26, 152, 4, 173, 232, 169, 149, 62, 139, 48, 251, 130, 117, 157, 234, 191, 143, 41, 129, 53, 188, 251, 33, 125, 84, 201, 141 }, "0123456789", "abc", "vinnt060402" }
                 });
 
             migrationBuilder.InsertData(
@@ -557,28 +557,28 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                 columns: new[] { "Id", "CreateBy", "Created", "IsDeleted", "LastModified", "LastModifiedBy", "RoleName" },
                 values: new object[,]
                 {
-                    { new Guid("1c477667-fbc0-4c85-9d2f-1f5a6da3edac"), null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6086), false, null, null, "Parent" },
-                    { new Guid("433ca17d-2bb8-4a98-91e6-5703365cb2fd"), null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6095), false, null, null, "Teacher" },
-                    { new Guid("891e4e1c-bed5-4992-a978-fc969fdaf128"), null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6092), false, null, null, "Admin" },
-                    { new Guid("a53d0cca-65d1-4b81-afe2-e735facd6c38"), null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6097), false, null, null, "TrungTamRobotic" },
-                    { new Guid("b308c9a8-9a44-4662-b010-e4688fb8e019"), null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6082), false, null, null, "Student" },
-                    { new Guid("dc1c58f1-326b-43c0-a750-263bceee32be"), null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6089), false, null, null, "Staff" }
+                    { new Guid("1c477667-fbc0-4c85-9d2f-1f5a6da3edac"), null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(1847), false, null, null, "Parent" },
+                    { new Guid("433ca17d-2bb8-4a98-91e6-5703365cb2fd"), null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(1858), false, null, null, "Teacher" },
+                    { new Guid("891e4e1c-bed5-4992-a978-fc969fdaf128"), null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(1856), false, null, null, "Admin" },
+                    { new Guid("a53d0cca-65d1-4b81-afe2-e735facd6c38"), null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(1860), false, null, null, "TrungTamRobotic" },
+                    { new Guid("b308c9a8-9a44-4662-b010-e4688fb8e019"), null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(1844), false, null, null, "Student" },
+                    { new Guid("dc1c58f1-326b-43c0-a750-263bceee32be"), null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(1854), false, null, null, "Staff" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Subjects",
                 columns: new[] { "Id", "CreateBy", "Created", "IsDeleted", "LastModified", "LastModifiedBy", "SubjectName", "TotalSlots" },
-                values: new object[] { new Guid("54eebe9e-2a5b-4a82-8522-1e7cd2aa4d57"), null, new DateTime(2024, 3, 18, 23, 31, 44, 784, DateTimeKind.Local).AddTicks(3915), false, null, null, "Toan 10", 21 });
+                values: new object[] { new Guid("54eebe9e-2a5b-4a82-8522-1e7cd2aa4d57"), null, new DateTime(2024, 3, 19, 1, 24, 33, 390, DateTimeKind.Local).AddTicks(4108), false, null, null, "Toan 10", 21 });
 
             migrationBuilder.InsertData(
                 table: "TrungTamRobotics",
                 columns: new[] { "Id", "Address", "CreateBy", "Created", "IsDeleted", "LastModified", "LastModifiedBy", "Name" },
-                values: new object[] { new Guid("5f4e0944-497b-4c33-9d5d-86f8824c8b95"), "123 Nguyễn Ảnh Thủ, Hóc Môn", null, new DateTime(2024, 3, 18, 23, 31, 44, 784, DateTimeKind.Local).AddTicks(4060), false, null, null, "Trung Tâm Robotic cơ sở 3" });
+                values: new object[] { new Guid("5f4e0944-497b-4c33-9d5d-86f8824c8b95"), "123 Nguyễn Ảnh Thủ, Hóc Môn", null, new DateTime(2024, 3, 19, 1, 24, 33, 390, DateTimeKind.Local).AddTicks(4150), false, null, null, "Trung Tâm Robotic cơ sở 3" });
 
             migrationBuilder.InsertData(
                 table: "Admins",
                 columns: new[] { "Id", "AppUserId", "CreateBy", "Created", "IsDeleted", "LastModified", "LastModifiedBy" },
-                values: new object[] { new Guid("687fb4f4-115a-4766-862b-dae59864bfe9"), new Guid("da053af4-cdf1-4a6b-8506-2e3939ef6351"), null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6041), false, null, null });
+                values: new object[] { new Guid("f9bdcbda-76d8-4a2a-9910-77ec954f942c"), new Guid("da053af4-cdf1-4a6b-8506-2e3939ef6351"), null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(1823), false, null, null });
 
             migrationBuilder.InsertData(
                 table: "AppUserRoles",
@@ -590,30 +590,39 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                 columns: new[] { "Id", "ClassRoomName", "CreateBy", "Created", "Description", "IsDeleted", "LastModified", "LastModifiedBy", "TrungTamRoboticId" },
                 values: new object[,]
                 {
-                    { new Guid("29f67cfd-ba37-4b70-852a-4af223b7788a"), "P.203", null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6300), "Tầng 2, phòng số 3", false, null, null, new Guid("5f4e0944-497b-4c33-9d5d-86f8824c8b95") },
-                    { new Guid("5f59c98d-50f9-4f5e-911e-d28648ec43b1"), "P.303", null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6294), "Tầng 3, phòng số 3", false, null, null, new Guid("5f4e0944-497b-4c33-9d5d-86f8824c8b95") },
-                    { new Guid("a9770be8-9b13-4d63-a78d-c9d2efaa79ec"), "P.103", null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6304), "Tầng 1, phòng số 3", false, null, null, new Guid("5f4e0944-497b-4c33-9d5d-86f8824c8b95") },
-                    { new Guid("d2e283a6-5bf5-4d27-a2c2-994cb6d781e9"), "P.403", null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6287), "Tầng 4, phòng số 3", false, null, null, new Guid("5f4e0944-497b-4c33-9d5d-86f8824c8b95") }
+                    { new Guid("29f67cfd-ba37-4b70-852a-4af223b7788a"), "P.203", null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(1995), "Tầng 2, phòng số 3", false, null, null, new Guid("5f4e0944-497b-4c33-9d5d-86f8824c8b95") },
+                    { new Guid("5f59c98d-50f9-4f5e-911e-d28648ec43b1"), "P.303", null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(1992), "Tầng 3, phòng số 3", false, null, null, new Guid("5f4e0944-497b-4c33-9d5d-86f8824c8b95") },
+                    { new Guid("a9770be8-9b13-4d63-a78d-c9d2efaa79ec"), "P.103", null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(1997), "Tầng 1, phòng số 3", false, null, null, new Guid("5f4e0944-497b-4c33-9d5d-86f8824c8b95") },
+                    { new Guid("d2e283a6-5bf5-4d27-a2c2-994cb6d781e9"), "P.403", null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(1952), "Tầng 4, phòng số 3", false, null, null, new Guid("5f4e0944-497b-4c33-9d5d-86f8824c8b95") }
                 });
 
             migrationBuilder.InsertData(
                 table: "GiaoTrinhs",
                 columns: new[] { "Id", "CreateBy", "Created", "Description", "FilePDF", "FilePDFName", "GiaoTrinhName", "IsDeleted", "LastModified", "LastModifiedBy", "SubjectId" },
-                values: new object[] { new Guid("c12ea77c-c707-44c0-b3ce-420f2ff4ecd9"), null, new DateTime(2024, 3, 18, 23, 31, 44, 784, DateTimeKind.Local).AddTicks(3681), "", null, null, "Toan cao cap 10", false, null, null, new Guid("54eebe9e-2a5b-4a82-8522-1e7cd2aa4d57") });
+                values: new object[] { new Guid("c12ea77c-c707-44c0-b3ce-420f2ff4ecd9"), null, new DateTime(2024, 3, 19, 1, 24, 33, 390, DateTimeKind.Local).AddTicks(4081), "", null, null, "Toan cao cap 10", false, null, null, new Guid("54eebe9e-2a5b-4a82-8522-1e7cd2aa4d57") });
 
             migrationBuilder.InsertData(
                 table: "Students",
                 columns: new[] { "Id", "AppUserId", "CreateBy", "Created", "IsDeleted", "LastModified", "LastModifiedBy", "ParentId" },
                 values: new object[,]
                 {
-                    { new Guid("07c7d0e7-273e-4819-ad69-0a875ef8f021"), new Guid("64863e62-104c-49ee-a57e-b066936d8e8d"), null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6245), false, null, null, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { new Guid("2b295a2a-4bf5-45c1-bf87-4e04f1eff028"), new Guid("4e5e39dc-7a22-4787-9083-70335fa2489c"), null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6248), false, null, null, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { new Guid("2b9d9aca-27da-415b-a468-b367613a2488"), new Guid("2a22d7f6-6d94-4587-84d2-921c78970a91"), null, new DateTime(2024, 3, 18, 23, 31, 44, 784, DateTimeKind.Local).AddTicks(4319), false, null, null, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { new Guid("3ce37d46-18e9-492d-a28e-2665b0d95a64"), new Guid("75653469-5fdd-4639-9be7-2c8fca8cecc5"), null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6228), false, null, null, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { new Guid("822eb9c1-d410-4e17-9b70-bb8512112ae3"), new Guid("275c605e-3d04-437d-8a7d-208249412cec"), null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6252), false, null, null, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { new Guid("88de6bcd-e510-40d8-8f29-a06009cb195c"), new Guid("5ddd65ff-16a1-4fd1-acbf-c913f0cce37c"), null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6241), false, null, null, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { new Guid("a2cd9f87-17f7-45cc-a9da-88502a010042"), new Guid("ae50067c-00bc-49e2-a20c-500696a2f954"), null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6236), false, null, null, new Guid("00000000-0000-0000-0000-000000000000") },
-                    { new Guid("fec8b32d-bc9a-4fbb-94e6-5871e3ee9a63"), new Guid("5ddd65ff-16a1-4fd1-acbf-c913f0cce37c"), null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6239), false, null, null, new Guid("00000000-0000-0000-0000-000000000000") }
+                    { new Guid("07c7d0e7-273e-4819-ad69-0a875ef8f021"), new Guid("64863e62-104c-49ee-a57e-b066936d8e8d"), null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(1925), false, null, null, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { new Guid("2b295a2a-4bf5-45c1-bf87-4e04f1eff028"), new Guid("4e5e39dc-7a22-4787-9083-70335fa2489c"), null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(1929), false, null, null, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { new Guid("2b9d9aca-27da-415b-a468-b367613a2488"), new Guid("2a22d7f6-6d94-4587-84d2-921c78970a91"), null, new DateTime(2024, 3, 19, 1, 24, 33, 390, DateTimeKind.Local).AddTicks(4341), false, null, null, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { new Guid("3ce37d46-18e9-492d-a28e-2665b0d95a64"), new Guid("75653469-5fdd-4639-9be7-2c8fca8cecc5"), null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(1914), false, null, null, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { new Guid("822eb9c1-d410-4e17-9b70-bb8512112ae3"), new Guid("275c605e-3d04-437d-8a7d-208249412cec"), null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(1931), false, null, null, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { new Guid("88de6bcd-e510-40d8-8f29-a06009cb195c"), new Guid("5ddd65ff-16a1-4fd1-acbf-c913f0cce37c"), null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(1922), false, null, null, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { new Guid("a2cd9f87-17f7-45cc-a9da-88502a010042"), new Guid("ae50067c-00bc-49e2-a20c-500696a2f954"), null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(1918), false, null, null, new Guid("00000000-0000-0000-0000-000000000000") },
+                    { new Guid("fec8b32d-bc9a-4fbb-94e6-5871e3ee9a63"), new Guid("5ddd65ff-16a1-4fd1-acbf-c913f0cce37c"), null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(1920), false, null, null, new Guid("00000000-0000-0000-0000-000000000000") }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SubjectGradingWeights",
+                columns: new[] { "Id", "AssesessmentType", "CreateBy", "Created", "IsDeleted", "LastModified", "LastModifiedBy", "SubjectID", "WeightPercentage" },
+                values: new object[,]
+                {
+                    { new Guid("048f786e-f84f-4341-ae89-0d373f604596"), "Kiem tra 1T", null, new DateTime(2024, 3, 19, 1, 24, 33, 390, DateTimeKind.Local).AddTicks(3968), false, null, null, new Guid("54eebe9e-2a5b-4a82-8522-1e7cd2aa4d57"), 0 },
+                    { new Guid("768175a0-688f-4972-ab8c-260f6fe43c35"), "Kiem tra 15p", null, new DateTime(2024, 3, 19, 1, 24, 33, 390, DateTimeKind.Local).AddTicks(3964), false, null, null, new Guid("54eebe9e-2a5b-4a82-8522-1e7cd2aa4d57"), 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -621,23 +630,23 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                 columns: new[] { "Id", "AppUserId", "CreateBy", "Created", "IsDeleted", "LastModified", "LastModifiedBy" },
                 values: new object[,]
                 {
-                    { new Guid("53525c34-3437-4b3b-946c-e9be0a60c0c3"), new Guid("45b82e13-b1fc-425d-a2b3-8b821405bfd0"), null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6339), false, null, null },
-                    { new Guid("776afbe6-9133-4dbe-b8c0-f5a23f3fe505"), new Guid("bf835a7d-d002-4c9f-8bd6-0e2d321447c4"), null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6334), false, null, null }
+                    { new Guid("53525c34-3437-4b3b-946c-e9be0a60c0c3"), new Guid("45b82e13-b1fc-425d-a2b3-8b821405bfd0"), null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(2021), false, null, null },
+                    { new Guid("776afbe6-9133-4dbe-b8c0-f5a23f3fe505"), new Guid("bf835a7d-d002-4c9f-8bd6-0e2d321447c4"), null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(2018), false, null, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Classes",
                 columns: new[] { "Id", "ClassName", "CreateBy", "Created", "DayStudy", "EndTime", "IsClassFinish", "IsDeleted", "LastModified", "LastModifiedBy", "StartTime", "StudentId", "SubjectId" },
-                values: new object[] { new Guid("381d2e33-67e5-4ce5-b8cc-c39bd523fe8b"), "SE1603", null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6381), "Thứ 2;Thứ 4", new TimeSpan(0, 18, 0, 0, 0), false, false, null, null, new TimeSpan(0, 15, 0, 0, 0), new Guid("2b9d9aca-27da-415b-a468-b367613a2488"), new Guid("54eebe9e-2a5b-4a82-8522-1e7cd2aa4d57") });
+                values: new object[] { new Guid("381d2e33-67e5-4ce5-b8cc-c39bd523fe8b"), "SE1603", null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(2056), "Thứ 2;Thứ 4", new TimeSpan(0, 18, 0, 0, 0), false, false, null, null, new TimeSpan(0, 15, 0, 0, 0), new Guid("2b9d9aca-27da-415b-a468-b367613a2488"), new Guid("54eebe9e-2a5b-4a82-8522-1e7cd2aa4d57") });
 
             migrationBuilder.InsertData(
                 table: "Devices",
                 columns: new[] { "Id", "ClassRoomId", "CreateBy", "Created", "Description", "DeviceName", "IsDeleted", "LastModified", "LastModifiedBy", "PriceOfDevice", "StatusOfDevice" },
                 values: new object[,]
                 {
-                    { new Guid("958e60a2-fa2d-4437-b639-316a569f3ab9"), new Guid("d2e283a6-5bf5-4d27-a2c2-994cb6d781e9"), null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6445), "Ghế 1 người ngồi", "Ghế", false, null, null, 200000.0, 2 },
-                    { new Guid("bf5b9e8e-4b5d-4fd2-8f45-b070558c64c0"), new Guid("d2e283a6-5bf5-4d27-a2c2-994cb6d781e9"), null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6450), "Quạt trần", "Quạt", false, null, null, 200000.0, 3 },
-                    { new Guid("dff2458c-3f40-423b-8aa9-d7588a4ae4fe"), new Guid("d2e283a6-5bf5-4d27-a2c2-994cb6d781e9"), null, new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6436), "bàn 1 người ngồi", "Bàn học", false, null, null, 120000.0, 1 }
+                    { new Guid("958e60a2-fa2d-4437-b639-316a569f3ab9"), new Guid("d2e283a6-5bf5-4d27-a2c2-994cb6d781e9"), null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(2106), "Ghế 1 người ngồi", "Ghế", false, null, null, 200000.0, 2 },
+                    { new Guid("bf5b9e8e-4b5d-4fd2-8f45-b070558c64c0"), new Guid("d2e283a6-5bf5-4d27-a2c2-994cb6d781e9"), null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(2109), "Quạt trần", "Quạt", false, null, null, 200000.0, 3 },
+                    { new Guid("dff2458c-3f40-423b-8aa9-d7588a4ae4fe"), new Guid("d2e283a6-5bf5-4d27-a2c2-994cb6d781e9"), null, new DateTime(2024, 3, 19, 1, 24, 33, 391, DateTimeKind.Local).AddTicks(2099), "bàn 1 người ngồi", "Bàn học", false, null, null, 120000.0, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -652,7 +661,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
             migrationBuilder.InsertData(
                 table: "ClassSchedule",
                 columns: new[] { "Id", "ClassId", "ClassRoomID", "CreateBy", "Created", "DateStudy", "EndTime", "IsDeleted", "LastModified", "LastModifiedBy", "NumberOfSudent", "StartTime", "TeacherId" },
-                values: new object[] { new Guid("4e1cba33-b0cf-4274-8797-6ab39788141f"), new Guid("381d2e33-67e5-4ce5-b8cc-c39bd523fe8b"), new Guid("d2e283a6-5bf5-4d27-a2c2-994cb6d781e9"), null, new DateTime(2024, 3, 18, 23, 31, 44, 784, DateTimeKind.Local).AddTicks(3959), new DateTime(2024, 3, 18, 23, 31, 44, 784, DateTimeKind.Local).AddTicks(3961), null, false, null, null, 40, null, new Guid("776afbe6-9133-4dbe-b8c0-f5a23f3fe505") });
+                values: new object[] { new Guid("4e1cba33-b0cf-4274-8797-6ab39788141f"), new Guid("381d2e33-67e5-4ce5-b8cc-c39bd523fe8b"), new Guid("d2e283a6-5bf5-4d27-a2c2-994cb6d781e9"), null, new DateTime(2024, 3, 19, 1, 24, 33, 390, DateTimeKind.Local).AddTicks(4126), new DateTime(2024, 3, 19, 1, 24, 33, 390, DateTimeKind.Local).AddTicks(4128), null, false, null, null, 40, null, new Guid("776afbe6-9133-4dbe-b8c0-f5a23f3fe505") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Admins_AppUserId",
