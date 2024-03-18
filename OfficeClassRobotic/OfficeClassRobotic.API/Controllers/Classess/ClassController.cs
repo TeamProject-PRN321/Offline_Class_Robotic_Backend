@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OfficeClassRobotic.DAO.Classess;
+using OfficeClassRobotic.DAO.Classrooms;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
 using OfficeClassRobotic.Repository.Classess;
 
@@ -20,6 +21,22 @@ namespace OfficeClassRobotic.API.Controllers.Classess
         public Task<ClassRoboticResponse> Create(CreateClassesCommand request)
         {
             var result = _classRepository.CreateClass(request);
+            return result;
+        }
+
+        [HttpPut]
+        [Route("edit")]
+        public Task<ClassRoboticResponse> Update(ClassDTO request)
+        {
+            var result = _classRepository.UpdateClass(request);
+            return result;
+        }
+
+        [HttpDelete]
+        [Route("remove")]
+        public Task<ClassRoboticResponse> Delete(ClassDTO request)
+        {
+            var result = _classRepository.DeleteClass(request);
             return result;
         }
 

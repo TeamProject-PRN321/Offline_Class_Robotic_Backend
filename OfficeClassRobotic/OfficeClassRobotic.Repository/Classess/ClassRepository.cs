@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Azure.Core;
 using OfficeClassRobotic.DAO.Classess;
+using OfficeClassRobotic.DAO.Classrooms;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
 using OfficeClassRobotic.DAO.GiaoTrinhs;
 using System;
@@ -39,6 +40,18 @@ namespace OfficeClassRobotic.Repository.Classess
         {
             var response = await _classDAO.GetAllClassesAreNotFinished();
             return response;
+        }
+
+        public async Task<ClassRoboticResponse> UpdateClass(ClassDTO request)
+        {
+            await ClassDAO.Instance.UpdateClassInfo(request);
+            return new ClassRoboticResponse { Message = ClassRoboticMessage.UpdateSuccessfully };
+        }
+
+        public async Task<ClassRoboticResponse> DeleteClass(ClassDTO request)
+        {
+            await ClassDAO.Instance.DeleteClass(request);
+            return new ClassRoboticResponse { Message = ClassRoboticMessage.DeleteSuccessfully };
         }
     }
 }

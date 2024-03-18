@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Models.OfficeClassRobotic.BuisnessObject;
+using OfficeClassRobotic.DAO.Classrooms;
 using OfficeClassRobotic.DAO.Subjects;
 using OfficeClassRobotic.DAO.Teachers;
 using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
@@ -563,5 +564,34 @@ namespace OfficeClassRobotic.DAO.Classess
                 .ToListAsync();
             return listResult;
         }
+
+        public async Task UpdateClassInfo(ClassDTO request)
+        {
+            var classExist = await _dbContext.Classes.Where(d => d.ClassName.Equals(request.ClassName) && !d.IsDeleted).SingleOrDefaultAsync();
+            if (classExist == null)
+            {
+                throw new NotFoundException("ClassId not existed");
+            }
+            classExist.ClassName = request.ClassName;
+            classExist.DayStudy = request.DayStudy;
+            classExist.StartTime = classExist.StartTime;
+            classExist.EndTime = classExist.EndTime;
+            classExist.SubjectId = request.SubjectId;
+            _dbContext.Classes.Update(classExist);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteClass(ClassDTO request)
+        {
+            var classExist = await _dbContext.Classes.Where(d => d.ClassName.Equals(request.ClassName) && !d.IsDeleted).SingleOrDefaultAsync();
+            if (classExist == null)
+            {
+                throw new NotFoundException("Class not existed");
+            }
+            classExist.IsDeleted = true;
+            _dbContext.Classes.Update(classExist);
+            await _dbContext.SaveChangesAsync();
+        }
     }
+
 }
