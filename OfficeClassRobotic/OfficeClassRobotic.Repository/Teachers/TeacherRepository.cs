@@ -26,7 +26,7 @@ namespace OfficeClassRobotic.Repository.Teachers
             }
             catch
             {
-                throw new BadRequestException("Something has wrong!");
+                throw new BadRequestException("Không tìm thấy danh sách teacher dạy môn này!");
             }
         }
 
@@ -39,7 +39,7 @@ namespace OfficeClassRobotic.Repository.Teachers
             }
             catch
             {
-                throw new BadRequestException("Something has wrong!");
+                throw new BadRequestException("Không thể lấy danh sách teacher!");
             }
         }
 
@@ -65,7 +65,7 @@ namespace OfficeClassRobotic.Repository.Teachers
             }
             catch
             {
-                throw new BadRequestException("Something has wrong!");
+                throw new BadRequestException("Không thể tìm thấy teacher!");
             }
         }
 
@@ -81,7 +81,7 @@ namespace OfficeClassRobotic.Repository.Teachers
             }
             catch
             {
-                throw new BadRequestException("Something has wrong!");
+                throw new BadRequestException("Update fail!!");
             }
         }
 
@@ -102,6 +102,11 @@ namespace OfficeClassRobotic.Repository.Teachers
             {
                 throw new BadRequestException("Something has wrong!");
             }
+        }
+
+        public Task<ClassRoboticResponse> CreateTeacher(CreateTeacherDTO request)
+        {
+            throw new NotImplementedException();
         }
     }
 }

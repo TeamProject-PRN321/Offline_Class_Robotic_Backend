@@ -2,6 +2,7 @@
 using Models.OfficeClassRobotic.BuisnessObject;
 using OfficeClassRobotic.BuisnessObject.Models;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
+using OfficeClassRobotic.DAO.GiaoTrinhs;
 using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
 using OfficeClassRobotic.Service.Exceptions;
 
@@ -71,6 +72,9 @@ namespace OfficeClassRobotic.DAO.Teachers
         /// Get All teacher
         /// </summary>
         /// <returns></returns>
+        /// 
+
+       
         public async Task<List<TeacherDTO>?> GetAllTeacher()
         {
             var listResult = new List<TeacherDTO>();

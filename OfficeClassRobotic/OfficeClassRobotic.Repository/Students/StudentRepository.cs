@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Azure.Core;
 using Models.OfficeClassRobotic.BuisnessObject;
+using OfficeClassRobotic.DAO.Classrooms;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
 using OfficeClassRobotic.DAO.Parents;
 using OfficeClassRobotic.DAO.Students;
@@ -13,6 +14,7 @@ namespace OfficeClassRobotic.Repository.Students
     {
         private StudentDAO studentDAO;
         private readonly IMapper _mapper;
+        
         public StudentRepository(IMapper mapper)
         {
             studentDAO = new StudentDAO();
@@ -79,7 +81,15 @@ namespace OfficeClassRobotic.Repository.Students
             }
         }
 
-        
+        public Task<List<StudentDTO>> SearchStudent(string studentName)
+        {
+            var list = studentDAO.GetStudentByStudentName(studentName);
+           
+            return list;
+        }
+
+       
+
         /*
 public async Task<ClassRoboticResponse> CreateStudent(CreateStudentCommand student)
 {
