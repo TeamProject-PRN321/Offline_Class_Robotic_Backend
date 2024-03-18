@@ -1,0 +1,10 @@
+﻿namespace OfficeClassRobotic.API.DTOs
+{
+    public class UserDto
+    {
+        public string Username { get; set; }
+        public string TokenKey { get; set; }
+        public string PhotoUrl { get; set; }
+        public string Gender { get; set; }
+    }
+}
