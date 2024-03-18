@@ -22,7 +22,7 @@ namespace OfficeClassRobotic.Repository.IStudentGrades
         public Task<Subject> GetSubjectByClassName(string className)
             => StudentGradesDAO.Instance.GetSubjectByClassName(className);
 
-        public Task SaveToDatabase(string studentId, List<GradeSubjectOfStudent> listGrade)
-            => StudentGradesDAO.Instance.SaveGradeToDatabase(studentId, listGrade);
+        public Task SaveToDatabase(string studentId, List<GradeSubjectOfStudent> listGrade, string className)
+            => StudentGradesDAO.Instance.SaveGradeToDatabase(studentId, listGrade, className);
     }
 }

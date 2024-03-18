@@ -276,7 +276,7 @@ namespace OfficeClassRobotic.API.Controllers.UpGrade
                                             listGrade.Add(addGradeFromExcel);
                                         }
                                         // Lưu dữ liệu vào cơ sở dữ liệu
-                                        await _repo.SaveToDatabase(studentId, listGrade);
+                                        await _repo.SaveToDatabase(studentId, listGrade, className);
                                     }
                                 }
                             }

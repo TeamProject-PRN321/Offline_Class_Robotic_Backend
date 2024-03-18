@@ -32,14 +32,14 @@ namespace OfficeClassRobotic.API.Extensions
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
             var secretKey = configuration["JwtSettings:Key"];
             var secretKeyBytes = Encoding.UTF8.GetBytes(secretKey);
-            services.AddAuthentication(options =>
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme/*options =>
             {
                 //các loại chứng thực (authentication scheme) mặc định được sử dụng. 
                 //CookieAuthenticationDefaults.AuthenticationScheme để sử dụng chứng thực Cookie.
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            }).AddCookie(options =>
+            }*/)/*.AddCookie(options =>
             {
                 // Thời gian hết hạn: 20P
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
@@ -54,7 +54,7 @@ namespace OfficeClassRobotic.API.Extensions
                 options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
                 // Xác định giá trị SameSite của cookie, ở đây là SameSiteMode.Lax (giảm thiểu sự chia sẻ cookie).
                 options.Cookie.SameSite = SameSiteMode.Lax;
-            }).AddJwtBearer(opt =>
+            })*/.AddJwtBearer(opt =>
             {
                 // Cho phép lưu trữ token trong AuthenticationProperties của HttpContext sau khi chứng thực thành công.
                 opt.SaveToken = true;
