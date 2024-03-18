@@ -69,7 +69,8 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                     Id = Guid.Parse("C12EA77C-C707-44C0-B3CE-420F2FF4ECD9"),
                     GiaoTrinhName = "Toan cao cap 10",
                     Description = "",
-                    FilePDF = "firebaseStorage"
+                    //FilePDF = "firebaseStorage",
+                    SubjectId = Guid.Parse("54EEBE9E-2A5B-4A82-8522-1E7CD2AA4D57"),
                 }
 
             );
@@ -81,8 +82,7 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                 {
                     Id = Guid.Parse("54EEBE9E-2A5B-4A82-8522-1E7CD2AA4D57"),
                     SubjectName = "Toan 10",
-                    TotalSlots = 21,
-                    GiaoTrinhId = Guid.Parse("C12EA77C-C707-44C0-B3CE-420F2FF4ECD9")
+                    TotalSlots = 21
                 }
 
             );

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Azure;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
 using OfficeClassRobotic.DAO.GiaoTrinhs;
 
@@ -38,10 +39,10 @@ namespace OfficeClassRobotic.Repository.GiaoTrinhs
             return data;
         }
 
-        public async Task<GiaoTrinhResponse> GetGiaoTrinhById(string giaoTrinhId)
+        public async Task<GiaoTrinhPDFResponse> GetGiaoTrinhById(string giaoTrinhId)
         {
             var response = await _giaoTrinhDAO.GetGiaoTrinhById(giaoTrinhId);
-            var data = _mapper.Map<GiaoTrinhResponse>(response);
+            var data = _mapper.Map<GiaoTrinhPDFResponse>(response);
             return data;
         }
 
@@ -52,6 +53,13 @@ namespace OfficeClassRobotic.Repository.GiaoTrinhs
             {
                 Message = "Update Successfully"
             };
+        }
+
+        public async Task<List<GiaoTrinhPDFResponse>> GetPdfFilesFromDatabase(string subjectId)
+        {
+            var response = await _giaoTrinhDAO.GetGiaoTrinhPDFBySubjectId(subjectId);
+            var data = _mapper.Map<List<GiaoTrinhPDFResponse>>(response);
+            return data;
         }
     }
 }

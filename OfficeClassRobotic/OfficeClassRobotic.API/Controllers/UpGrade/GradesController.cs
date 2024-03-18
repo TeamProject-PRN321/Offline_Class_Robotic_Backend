@@ -194,7 +194,7 @@ namespace OfficeClassRobotic.API.Controllers.UpGrade
                     worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
 
                     // Lưu file Excel
-                    var directoryPath = @"D:\Classromm\";
+                    var directoryPath = @"C:\Users\ADMIN\Downloads";
                     var filePath = Path.Combine(directoryPath, $"{classname}_Students.xlsx");
                     System.IO.File.WriteAllBytes(filePath, package.GetAsByteArray());
                 }

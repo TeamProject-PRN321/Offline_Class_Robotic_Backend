@@ -18,6 +18,7 @@ namespace OfficeClassRobotic.API.Helpers
             CreateMap<GiaoTrinh, GiaoTrinhResponse>();
             CreateMap<Device, DeviceResponse>();
             CreateMap<TrungTamRobotic, TrungTamRoboticResponse>();
+            CreateMap<GiaoTrinh, GiaoTrinhPDFResponse>();
         }
     }
 }

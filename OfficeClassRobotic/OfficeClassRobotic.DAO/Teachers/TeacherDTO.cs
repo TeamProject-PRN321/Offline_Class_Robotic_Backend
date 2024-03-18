@@ -81,7 +81,7 @@ namespace OfficeClassRobotic.DAO.Teachers
         public Guid SubjectId { get; set; }
         public string? SubjectName { get; set; }
         public int TotalSlots { get; set; }
-        public Guid GiaoTrinhId { get; set; }
+        //public Guid GiaoTrinhId { get; set; }
 
         public List<TeacherData> TeacherResponse { get; set; }
     }
