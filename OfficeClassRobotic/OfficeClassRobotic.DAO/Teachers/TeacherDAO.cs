@@ -73,8 +73,6 @@ namespace OfficeClassRobotic.DAO.Teachers
         /// </summary>
         /// <returns></returns>
         /// 
-
-       
         public async Task<List<TeacherDTO>?> GetAllTeacher()
         {
             var listResult = new List<TeacherDTO>();
@@ -267,12 +265,12 @@ namespace OfficeClassRobotic.DAO.Teachers
                                                     .Join(_dbContext.ClassSchedule.Where(x => x.DateStudy == item.DateStudy),
                                                     c => c.Id,
                                                     cs => cs.ClassId,
-                                                    (c,cs) => new {c,cs})
+                                                    (c, cs) => new { c, cs })
                                                     .Join(_dbContext.Attendance.Where(x => x.LastModified != null),
                                                     x => x.cs.Id,
                                                     a => a.ClassScheduleID,
-                                                    (x,a) => new {x.c,x.cs,a }).Count();
-                if(checkAttend == item.NumberOfSudent)
+                                                    (x, a) => new { x.c, x.cs, a }).Count();
+                if (checkAttend == item.NumberOfSudent)
                 {
                     result.ClassWasCheckedAttendant = 1;
                 }
