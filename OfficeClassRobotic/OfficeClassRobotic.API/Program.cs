@@ -1,5 +1,7 @@
-﻿using OfficeClassRobotic.API.Extensions;
+﻿using NuGet.Protocol.Core.Types;
+using OfficeClassRobotic.API.Extensions;
 using OfficeClassRobotic.API.Middleware;
+using OfficeClassRobotic.Repository.Parents;
 using OfficeOpenXml;
 using System.ComponentModel;
 using System.Text.Json.Serialization;
@@ -20,6 +22,8 @@ builder.Services.AddControllers()
         .AddJsonOptions(options => {
             options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
         });
+
+builder.Services.AddScoped<IParentRepostitory ,ParentRepostitory>();
 
 //cấu hình kết nối db và cấu hình khác
 builder.Services.AddApplicationServices(builder.Configuration);

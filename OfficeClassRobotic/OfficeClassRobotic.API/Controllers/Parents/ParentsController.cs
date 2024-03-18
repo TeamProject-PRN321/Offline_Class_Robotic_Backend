@@ -41,10 +41,9 @@ namespace OfficeClassRobotic.API.Controllers.Parents
 
         [HttpGet]
         [Route("get-all-parent")]
-        public Task<List<ParentResponse>> GetAll()
+        public async Task<List<ParentResponse>> GetAllParent()
         {
-            var result = _parentRepostitory.GetAllParent();
-            return result;
+            return await _parentRepostitory.GetAllParent();
         }
 
         [HttpGet]
