@@ -28,7 +28,7 @@ namespace OfficeClassRobotic.Repository.Students
             }
             catch (Exception ex)
             {
-                throw new BadRequestException(ex.Message);
+                throw new BadRequestException("Không tìm thấy sinh viên");
             }
         }
 
@@ -40,7 +40,7 @@ namespace OfficeClassRobotic.Repository.Students
             }
             catch (Exception ex)
             {
-                throw new BadRequestException(ex.Message);
+                throw new BadRequestException("Không tìm thấy sinh viên");
             }
         }
 
@@ -53,7 +53,7 @@ namespace OfficeClassRobotic.Repository.Students
             }
             catch (Exception ex)
             {
-                throw new BadRequestException(ex.Message);
+                throw new BadRequestException("Không tìm thấy sinh viên");
             }
         }
 
@@ -65,7 +65,7 @@ namespace OfficeClassRobotic.Repository.Students
             }
             catch (Exception ex)
             {
-                throw new BadRequestException(ex.Message);
+                throw new BadRequestException("Không tìm thấy sinh viên");
             }
         }
 
@@ -77,15 +77,21 @@ namespace OfficeClassRobotic.Repository.Students
             }
             catch (Exception ex)
             {
-                throw new BadRequestException(ex.Message);
+                throw new BadRequestException("Không tìm thấy danh sách sinh viên");
             }
         }
 
         public Task<List<StudentDTO>> SearchStudent(string studentName)
         {
-            var list = studentDAO.GetStudentByStudentName(studentName);
-           
-            return list;
+            try
+            {
+                var list = studentDAO.GetStudentByStudentName(studentName);
+
+                return list;
+            }catch(Exception ex)
+            {
+                throw new BadRequestException("Không tìm thấy sinh viên");
+            }
         }
 
        
