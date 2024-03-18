@@ -1,14 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Mvc;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
-using OfficeClassRobotic.DAO.Parents;
-using OfficeClassRobotic.Repository.GiaoTrinhForSubject;
 using OfficeClassRobotic.DAO.GiaoTrinhs;
 using OfficeClassRobotic.Repository.GiaoTrinhs;
-using Microsoft.Data.SqlClient;
-using Azure.Core;
-using Models.OfficeClassRobotic.BuisnessObject;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace OfficeClassRobotic.API.Controllers.GiaoTrinhs
 {
@@ -60,7 +55,14 @@ namespace OfficeClassRobotic.API.Controllers.GiaoTrinhs
             try
             {
                 var result = await _giaoTrinhRepository.GetGiaoTrinhById(giaoTrinhId);
-                // ổ C
+
+                if (result == null || result.FilePDF == null || result.FilePDF.Length == 0)
+                {
+                    return NotFound("Không tìm thấy tệp PDF.");
+                }
+
+                MemoryStream stream = new MemoryStream();
+                /*// ổ C
                 string directoryPath = @"C:\Users\ADMIN\Downloads";
 
                 // tạo thư mục
@@ -70,7 +72,12 @@ namespace OfficeClassRobotic.API.Controllers.GiaoTrinhs
 
                 System.IO.File.WriteAllBytes(filePath, result.FilePDF);
 
-                return Ok($"Tệp PDF đã được tải về thành công và lưu tại {filePath}");
+                return Ok($"Tệp PDF đã được tải về thành công và lưu tại {filePath}");*/
+                
+                byte[] byteInfo = result.FilePDF;
+                stream.Write(byteInfo, 0, byteInfo.Length);
+                stream.Position = 0;
+                return File(stream, "application/pdf", $"{result.FilePDFName}");
             }
             catch (Exception ex)
             {
