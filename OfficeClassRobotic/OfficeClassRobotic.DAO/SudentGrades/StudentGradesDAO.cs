@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Models.OfficeClassRobotic.BuisnessObject;
 using OfficeClassRobotic.BuisnessObject.Models;
 using OfficeClassRobotic.DAO.Teachers;
 using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
 using OfficeClassRobotic.Service.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -81,6 +83,42 @@ namespace OfficeClassRobotic.DAO.SudentGrades
             }
 
             return listGradeSubjectOfStudent;
+        }
+
+        public async Task<Subject> GetSubjectByClassName(string className)
+        {
+            var classStudents = await _dbContext.Classes
+                .Where(c => c.ClassName.Contains(className)).FirstOrDefaultAsync();
+
+            var subject = await _dbContext.Subjects.Where(s => s.Id == classStudents.SubjectId).FirstOrDefaultAsync();
+            return subject;
+        }
+
+        public async Task SaveGradeToDatabase(string studentId, List<GradeSubjectOfStudent> listGrade)
+        {
+            var classId = await _dbContext.Classes.Where(c => c.StudentId == Guid.Parse(studentId)).SingleOrDefaultAsync();
+            foreach (var grade in listGrade)
+            {
+                var studentGrade = await _dbContext.StudentGrades
+                    .Where(s => s.ClassId == classId.Id && s.AssesessmentType == grade.AssesessmentType)
+                    .SingleOrDefaultAsync();
+                if (studentGrade == null)
+                {
+                    studentGrade = new StudentGrade
+                    {
+                        ClassId = classId.Id,
+                        AssesessmentType = grade.AssesessmentType,
+                        Grade = grade.Grade
+                    };
+                    _dbContext.StudentGrades.Add(studentGrade);
+                }
+                else
+                {
+                    studentGrade.Grade = grade.Grade;
+                    _dbContext.StudentGrades.Update(studentGrade);
+                }
+            }
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

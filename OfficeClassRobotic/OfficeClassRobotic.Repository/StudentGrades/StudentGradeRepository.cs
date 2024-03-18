@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Models.OfficeClassRobotic.BuisnessObject;
 using OfficeClassRobotic.DAO.Students;
 using OfficeClassRobotic.DAO.SudentGrades;
 using OfficeClassRobotic.Service.Exceptions;
@@ -17,5 +18,11 @@ namespace OfficeClassRobotic.Repository.IStudentGrades
 
         public Task<List<StudentGradeDTO>> GetStudentOfClassWithTemplateExcel(string className) 
             => StudentGradesDAO.Instance.GetStudentOfClassWithTemplateExcel(className);
+
+        public Task<Subject> GetSubjectByClassName(string className)
+            => StudentGradesDAO.Instance.GetSubjectByClassName(className);
+
+        public Task SaveToDatabase(string studentId, List<GradeSubjectOfStudent> listGrade)
+            => StudentGradesDAO.Instance.SaveGradeToDatabase(studentId, listGrade);
     }
 }

@@ -100,27 +100,4 @@ namespace OfficeClassRobotic.DAO.Teachers
         public string? PhotoUrl { get; set; }
     }
 
-    public class TeacherSubjectResponse
-    {
-        public Guid SubjectId { get; set; }
-        public string? SubjectName { get; set; }
-        public int TotalSlots { get; set; }
-        public Guid GiaoTrinhId { get; set; }
-
-        public List<TeacherData> TeacherResponse { get; set; }
-    }
-
-    public class TeacherData
-    {
-        public Guid TeacherId { get; set; }
-        public Guid AppUserId { get; set; }
-        public string UserName { get; set; }
-        public string FullName { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Email { get; set; }
-        public DateOnly DateOfBirth { get; set; }
-        public string Gender { get; set; }
-        public string Address { get; set; }
-        public string? PhotoUrl { get; set; }
-    }
 }

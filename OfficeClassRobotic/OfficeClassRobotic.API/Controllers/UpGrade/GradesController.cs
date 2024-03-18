@@ -6,6 +6,7 @@ using OfficeClassRobotic.DAO.Teachers;
 using OfficeClassRobotic.Repository.IStudentGrades;
 using OfficeClassRobotic.Repository.Teachers;
 using OfficeOpenXml;
+using System.Diagnostics;
 
 namespace OfficeClassRobotic.API.Controllers.UpGrade
 {
@@ -154,8 +155,8 @@ namespace OfficeClassRobotic.API.Controllers.UpGrade
                     worksheet.Cells[1, 1].Value = "Mã SV";
                     worksheet.Cells[1, 2].Value = "Tên Sinh viên";
                     worksheet.Cells[1, 3].Value = "Email";
-                    worksheet.Cells[1, 4].Value = "Điểm 15p";
-                    worksheet.Cells[1, 5].Value = "Điểm 1T";
+                    worksheet.Cells[1, 4].Value = "Kiem tra 15p";
+                    worksheet.Cells[1, 5].Value = "Kiem tra 1T";
 
                     // Format header
                     using (var range = worksheet.Cells["A1:E1"])
@@ -174,7 +175,7 @@ namespace OfficeClassRobotic.API.Controllers.UpGrade
                         worksheet.Cells[rowIndex, 1].Value = student.StudentId;
                         worksheet.Cells[rowIndex, 2].Value = student.StudentName;
                         worksheet.Cells[rowIndex, 3].Value = student.Email;
-                        
+
                         foreach (var grade in student.GradeSubjectOfStudents)
                         {
                             if (grade.AssesessmentType == "Kiem tra 15p")
@@ -203,6 +204,106 @@ namespace OfficeClassRobotic.API.Controllers.UpGrade
             catch (Exception ex)
             {
                 return StatusCode(500, $"Lỗi: {ex.Message}");
+            }
+        }
+
+        [HttpPost]
+        [Route("api/upload/excel")]
+        public async Task<IActionResult> UploadExcel([FromForm] IFormFile file)
+        {
+            if (file != null && file.Length > 0)
+            {
+                try
+                {
+                    string fileName = file.FileName;
+
+                    // Tách tên lớp học từ tên file
+                    string[] parts = fileName.Split('_');
+                    if (parts.Length >= 2)
+                    {
+                        string className = parts[0];
+                        var subject = await _repo.GetSubjectByClassName(className);
+                        var subjectId = subject.Id;
+
+                        // Đọc dữ liệu từ file Excel
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            await file.CopyToAsync(memoryStream);
+                            memoryStream.Position = 0;
+
+                            // Xử lý dữ liệu từ file Excel, ví dụ: lưu vào database
+                            // đọc dữ liệu từ file Excel và lưu vào database
+
+                            // Ví dụ: Sử dụng EPPlus để đọc dữ liệu từ file Excel
+                            using (var package = new ExcelPackage(memoryStream))
+                            {
+                                var workbook = package.Workbook;
+                                var worksheet = workbook.Worksheets.FirstOrDefault();
+
+                                if (worksheet != null)
+                                {
+                                    int rowCount = worksheet.Dimension.Rows;
+                                    int columnCount = worksheet.Dimension.Columns;
+
+                                    for (int row = 2; row <= rowCount; row++)
+                                    {
+                                        // Đọc dữ liệu từ từng ô trong hàng hiện tại
+                                        string studentId = worksheet.Cells[row, 1].Value?.ToString();
+                                        string studentName = worksheet.Cells[row, 2].Value?.ToString();
+                                        string email = worksheet.Cells[row, 3].Value?.ToString();
+
+                                        var listGrade = new List<GradeSubjectOfStudent>();
+                                        for (int column = 4; column <= columnCount; column++)
+                                        {
+                                            double? gradeValue = worksheet.Cells[row, column].Value as double?;
+                                            var assessmentType = worksheet.Cells[1, column].Value?.ToString();
+
+                                            var addGradeFromExcel = new GradeSubjectOfStudent
+                                            {
+                                                SubjetcId = subjectId,
+                                                AssesessmentType = worksheet.Cells[1, column].Value?.ToString(),
+                                                WeightPercentage = GetWeightPercentage(assessmentType),
+                                                Grade = gradeValue.Value,
+                                            };
+
+                                            listGrade.Add(addGradeFromExcel);
+                                        }
+                                        // Lưu dữ liệu vào cơ sở dữ liệu
+                                        await _repo.SaveToDatabase(studentId, listGrade);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        return BadRequest("Invalid file name format.");
+                    }
+
+                    return Ok("File uploaded successfully.");
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(500, $"Internal server error: {ex}");
+                }
+            }
+            else
+            {
+                return BadRequest("No file uploaded.");
+            }
+        }
+
+        private int GetWeightPercentage(string assessmentType)
+        {
+            switch (assessmentType)
+            {
+                case "Kiem tra 15p":
+                    return 15;
+                case "Kiem tra 1T":
+                    return 20;
+                
+                default:
+                    return 0;
             }
         }
     }

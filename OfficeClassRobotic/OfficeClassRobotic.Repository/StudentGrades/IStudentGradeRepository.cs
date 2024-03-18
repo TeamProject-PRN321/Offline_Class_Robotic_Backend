@@ -1,4 +1,5 @@
-﻿using OfficeClassRobotic.DAO.SudentGrades;
+﻿using Models.OfficeClassRobotic.BuisnessObject;
+using OfficeClassRobotic.DAO.SudentGrades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,8 @@ namespace OfficeClassRobotic.Repository.IStudentGrades
     public interface IStudentGradeRepository
     {
         public Task<List<StudentGradeDTO>> GetStudentOfClassWithTemplateExcel(string className);
+        public Task<Subject> GetSubjectByClassName(string className);
+        public Task SaveToDatabase(string studentId, List<GradeSubjectOfStudent> listGrade);
+
     }
 }
