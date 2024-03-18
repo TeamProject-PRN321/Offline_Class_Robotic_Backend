@@ -255,7 +255,7 @@ namespace OfficeClassRobotic.API.Controllers.UpGrade
                                         var listGrade = new List<GradeSubjectOfStudent>();
                                         for (int column = 4; column <= columnCount; column++)
                                         {
-                                            double? gradeValue = worksheet.Cells[row, column].Value as double?;
+                                            double? gradeValue = double.Parse(worksheet.Cells[row, column].Value?.ToString());
                                             var assessmentType = worksheet.Cells[1, column].Value?.ToString();
 
                                             var addGradeFromExcel = new GradeSubjectOfStudent
