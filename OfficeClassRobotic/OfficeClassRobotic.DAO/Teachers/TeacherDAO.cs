@@ -296,7 +296,7 @@ namespace OfficeClassRobotic.DAO.Teachers
             var subjectExist = await _dbContext.Subjects.Where(s => s.SubjectName.Contains(keyword)).SingleOrDefaultAsync();
             if (subjectExist == null)
             {
-                throw new NotFoundException("Not exist subject");
+                throw new NotFoundException("Not exist subject ne");
             }
             var subjectTeacher = await _dbContext.TeacherSubjects.Where(ts => ts.SubjectId == subjectExist.Id).ToListAsync();
             var responseData = new List<TeacherData>();
