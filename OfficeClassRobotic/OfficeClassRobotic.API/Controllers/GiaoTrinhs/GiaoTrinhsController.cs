@@ -86,7 +86,8 @@ namespace OfficeClassRobotic.API.Controllers.GiaoTrinhs
             try
             {
                 var pdfList = await _giaoTrinhRepository.GetPdfFilesFromDatabase(subjectId);
-                var response = new List<FileContentResult>();
+                // cái này làm chiêu khác nha
+                /*var response = new List<FileContentResult>();*/
                 foreach (var file in pdfList)
                 {
                     string directoryPath = @"C:\Users\ADMIN\Downloads";
@@ -158,6 +159,7 @@ namespace OfficeClassRobotic.API.Controllers.GiaoTrinhs
                 return StatusCode(500, $"An error occurred: {ex.Message}");
             }
         }
+
         public class CreateGiaoTrinhCommands
         {
             public string? GiaoTrinhName { get; set; }
