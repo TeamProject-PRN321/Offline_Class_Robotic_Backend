@@ -58,7 +58,7 @@ namespace OfficeClassRobotic.Repository.GiaoTrinhForSubject
                     Id = subject.Id,
                     SubjectName = subject.SubjectName,
                     TotalSlots = subject.TotalSlots,
-                    GiaoTrinhData = _mapper.Map<GiaoTrinhResponse>(await _subjectDAO.GetGiaoTrinhById(subject.GiaoTrinhId))
+                    //GiaoTrinhData = _mapper.Map<GiaoTrinhResponse>(await _subjectDAO.GetGiaoTrinhById(subject.GiaoTrinhId))
                 };
                 subjectListResponse.Add(subjectResponse);
             }
@@ -73,7 +73,7 @@ namespace OfficeClassRobotic.Repository.GiaoTrinhForSubject
                 Id = subject.Id,
                 SubjectName = subject.SubjectName,
                 TotalSlots = subject.TotalSlots,
-                GiaoTrinhData = _mapper.Map<GiaoTrinhResponse>(await _subjectDAO.GetGiaoTrinhById(subject.GiaoTrinhId))
+                //GiaoTrinhData = _mapper.Map<GiaoTrinhResponse>(await _subjectDAO.GetGiaoTrinhById(subject.GiaoTrinhId))
             };
             return subjectResponse;
         }

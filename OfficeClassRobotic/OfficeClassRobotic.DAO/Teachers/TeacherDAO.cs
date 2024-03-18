@@ -73,8 +73,6 @@ namespace OfficeClassRobotic.DAO.Teachers
         /// </summary>
         /// <returns></returns>
         /// 
-
-
         public async Task<List<TeacherDTO>?> GetAllTeacher()
         {
             var listResult = new List<TeacherDTO>();
@@ -325,7 +323,8 @@ namespace OfficeClassRobotic.DAO.Teachers
                 SubjectId = subjectExist.Id,
                 SubjectName = subjectExist.SubjectName,
                 TotalSlots = subjectExist.TotalSlots,
-                GiaoTrinhId = subjectExist.GiaoTrinhId,
+                // vì chỗ này sẽ lấy 1 list giáo trình ra với 1 list pdf
+                //GiaoTrinhId = subjectExist.GiaoTrinhId,
 
                 TeacherResponse = responseData
             };

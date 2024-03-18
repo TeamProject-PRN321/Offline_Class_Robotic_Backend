@@ -62,6 +62,27 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
             });
             #endregion
 
+            #region SubjectGradWeight
+            modelBuilder.Entity<SubjectGradingWeight>().HasData(
+                new SubjectGradingWeight
+                {
+                    Id = Guid.Parse("768175a0-688f-4972-ab8c-260f6fe43c35"),
+                    SubjectID = Guid.Parse("54eebe9e-2a5b-4a82-8522-1e7cd2aa4d57"),
+                    AssesessmentType = "Kiem tra 15p",
+                    Created = DateTime.Now,
+                    IsDeleted = false,
+                },
+                new SubjectGradingWeight
+                {
+                    Id = Guid.Parse("048f786e-f84f-4341-ae89-0d373f604596"),
+                    SubjectID = Guid.Parse("54eebe9e-2a5b-4a82-8522-1e7cd2aa4d57"),
+                    AssesessmentType = "Kiem tra 1T",
+                    Created = DateTime.Now,
+                    IsDeleted = false,
+                }
+            );
+            #endregion
+
             #region GiaoTrinh
             modelBuilder.Entity<GiaoTrinh>().HasData(
                 new GiaoTrinh
@@ -69,7 +90,8 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                     Id = Guid.Parse("C12EA77C-C707-44C0-B3CE-420F2FF4ECD9"),
                     GiaoTrinhName = "Toan cao cap 10",
                     Description = "",
-                    FilePDF = "firebaseStorage"
+                    //FilePDF = "firebaseStorage",
+                    SubjectId = Guid.Parse("54EEBE9E-2A5B-4A82-8522-1E7CD2AA4D57"),
                 }
 
             );
@@ -81,8 +103,7 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                 {
                     Id = Guid.Parse("54EEBE9E-2A5B-4A82-8522-1E7CD2AA4D57"),
                     SubjectName = "Toan 10",
-                    TotalSlots = 21,
-                    GiaoTrinhId = Guid.Parse("C12EA77C-C707-44C0-B3CE-420F2FF4ECD9")
+                    TotalSlots = 21
                 }
 
             );

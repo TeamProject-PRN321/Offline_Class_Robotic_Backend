@@ -48,19 +48,23 @@ namespace OfficeClassRobotic.DAO.GiaoTrinhs
         public async Task CreateGiaoTrinh(CreateGiaoTrinhCommand request)
         {
             try {
-                var giaoTrinh = new GiaoTrinh
+                foreach(var pdf in request.ListFilePDFs)
                 {
-                    GiaoTrinhName = request.GiaoTrinhName,
-                    Description = request.Description,
-                    FilePDF = request.FilePDF
-                };
-                _dbContext.Add(giaoTrinh);
+                    var giaoTrinh = new GiaoTrinh
+                    {
+                        GiaoTrinhName = request.GiaoTrinhName,
+                        Description = request.Description,
+                        FilePDFName = pdf.FilePDFName,
+                        FilePDF = pdf.FilePDF,
+                        SubjectId = Guid.Parse(request.SubjectId),
+                    };
+                    _dbContext.Add(giaoTrinh);
+                }
                 await _dbContext.SaveChangesAsync();
             }
             catch (Exception ex) {
                 throw new BadRequestException(ex.Message);
             }
-
         }
 
         public async Task UpdateGiaoTrinh(UpdateGiaoTrinhCommand request)
@@ -74,7 +78,7 @@ namespace OfficeClassRobotic.DAO.GiaoTrinhs
                 }
                 giaoTrinhExist.GiaoTrinhName = request.GiaoTrinhName;
                 giaoTrinhExist.Description = request.Description;
-                giaoTrinhExist.FilePDF = request.FilePDF;
+                //giaoTrinhExist.FilePDF = request.FilePDF;
                 giaoTrinhExist.LastModified = DateTime.Now;
 
                 _dbContext.Update(giaoTrinhExist);
@@ -115,6 +119,22 @@ namespace OfficeClassRobotic.DAO.GiaoTrinhs
                 return giaoTrinhExist;
             }
             catch (Exception ex) {
+                throw new BadRequestException(ex.Message);
+            }
+        }
+
+        public async Task<List<GiaoTrinh>> GetGiaoTrinhPDFBySubjectId(string subjectId)
+        {
+            try
+            {
+                var giaoTrinhExist = await _dbContext.GiaoTrinhs
+                    .Where(g => g.SubjectId == Guid.Parse(subjectId) && !g.IsDeleted)
+                    .ToListAsync();
+                
+                return giaoTrinhExist;
+            }
+            catch (Exception ex)
+            {
                 throw new BadRequestException(ex.Message);
             }
         }

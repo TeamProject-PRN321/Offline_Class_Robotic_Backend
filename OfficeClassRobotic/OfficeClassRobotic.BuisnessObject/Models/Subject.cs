@@ -14,13 +14,9 @@ namespace Models.OfficeClassRobotic.BuisnessObject
     {
         public string? SubjectName { get; set; }
         public int TotalSlots { get; set; }
-        [ForeignKey("GiaoTrinh")]
-        public Guid GiaoTrinhId { get; set; }
-        
-      //  public virtual Class? Class { get; set; }
-        public virtual GiaoTrinh? GiaoTrinh { get; set; }
 
         public ICollection<Class> Class { get; set; }
+        public ICollection<GiaoTrinh> GiaoTrinh { get; set; }
         public ICollection<TeacherSubject> TeacherSubjects { get; set; }
 
     }

@@ -400,12 +400,16 @@ namespace OfficeClassRobotic.DAO.Classess
         public async Task CreateClassess(CreateClassesCommand request)
         {
             //Nguyen Vi Remake CreateClasses
-
+            var subject = _dbContext.Subjects.Where(x => x.Id == Guid.Parse(request.SubjectId) && !x.IsDeleted).FirstOrDefault();
+            if(subject == null)
+            {
+                throw new BadRequestException("Môn học bạn yêu cầu chưa từng tồn tại");
+            }
             // Step 1: Tổng số slot
-            var totalSlots = _dbContext.Subjects.Where(x => x.Id == Guid.Parse(request.SubjectId)).Select(x => x.TotalSlots).FirstOrDefault();
+            var totalSlots = subject.TotalSlots;
             if (totalSlots == 0)
             {
-                // Something fail
+                throw new BadRequestException("Môn học bạn yêu cầu đã bị lỗi");
             }
             var classNameExisted = _dbContext.Classes.Where(x => x.ClassName == request.ClassName).FirstOrDefault();
             if (classNameExisted != null)
