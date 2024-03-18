@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
+using OfficeClassRobotic.Service.Exceptions;
 using System.Globalization;
+using Models.OfficeClassRobotic.BuisnessObject;
 using System.Xml.Linq;
 
 namespace OfficeClassRobotic.DAO.Students
@@ -88,37 +90,11 @@ namespace OfficeClassRobotic.DAO.Students
             }
             return null;
         }
+        
+
+        
+
         /*
-
-        public async Task CreateStudent(CreateStudentCommand student)
-        {
-            try {
-                var parentExist = await dbContext.Parents.Where(p => p.Id == Guid.Parse(student.ParentID) && !p.IsDeleted).SingleOrDefaultAsync();
-                if(parentExist == null) {
-                    throw new NotFoundException("Parent doesn't existed");
-                }
-                var studentExist = await dbContext.Students
-                .Where(s => s.Name == student.Name && s.ParentId == Guid.Parse(student.ParentID))
-                .SingleOrDefaultAsync();
-                if (studentExist != null) {
-                    throw new BadRequestException("Student is existed");
-                }
-                var newStudent = new Student
-                {
-                    Name = student.Name,
-                    Address = student.Address,
-                    Birthday = student.Birthday,
-                    ParentId = Guid.Parse(student.ParentID)
-                };
-
-                dbContext.Students.Add(newStudent);
-                await dbContext.SaveChangesAsync();
-            }
-            catch (Exception ex) {
-                throw new BadRequestException(ex.Message);
-            }
-        }
-
         public async Task UpdateStudent(UpdateStudentCommand student)
         {
             try {
