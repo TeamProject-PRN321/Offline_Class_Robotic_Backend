@@ -34,21 +34,23 @@ namespace OfficeClassRobotic.DAO.Subjects
                 if (checkExist != null) {
                     throw new BadRequestException($"Subject has been existed!");
                 }
-                var giaoTrinh = new GiaoTrinh
-                {
-                    GiaoTrinhName = request.GiaoTrinhDTO.GiaoTrinhName,
-                    Description = request.GiaoTrinhDTO.Description,
-                    FilePDF = request.GiaoTrinhDTO.FilePDF,
-                };
-                dBContext.GiaoTrinhs.Add(giaoTrinh);
                 var newSubject = new Subject
                 {
                     SubjectName = request.SubjectName,
                     TotalSlots = request.TotalSlots,
-                    GiaoTrinhId = giaoTrinh.Id,
                 };
                 dBContext.Subjects.Add(newSubject);
                 await dBContext.SaveChangesAsync();
+                // để đây từ từ sửa, 1 môn học sẽ tạo với 1 list giáo trình, ok
+                var giaoTrinh = new GiaoTrinh
+                {
+                    GiaoTrinhName = request.GiaoTrinhDTO.GiaoTrinhName,
+                    Description = request.GiaoTrinhDTO.Description,
+                    //FilePDF = request.GiaoTrinhDTO.FilePDF,
+                    SubjectId = newSubject.Id
+                };
+                dBContext.GiaoTrinhs.Add(giaoTrinh);
+                
             }
             catch (Exception ex) {
                 throw new BadRequestException(ex.Message);
@@ -66,7 +68,6 @@ namespace OfficeClassRobotic.DAO.Subjects
                 }
                 checkSubjectExist.SubjectName = request.SubjectName;
                 checkSubjectExist.TotalSlots = request.TotalSlots;
-                checkSubjectExist.GiaoTrinhId = Guid.Parse(request.GiaoTrinhId);
                 dBContext.Subjects.Update(checkSubjectExist);
                 await dBContext.SaveChangesAsync();
             }

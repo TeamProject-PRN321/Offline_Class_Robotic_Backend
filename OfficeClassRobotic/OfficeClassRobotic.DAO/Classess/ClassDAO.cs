@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Models.OfficeClassRobotic.BuisnessObject;
+using OfficeClassRobotic.DAO.Classrooms;
 using OfficeClassRobotic.DAO.Subjects;
 using OfficeClassRobotic.DAO.Teachers;
 using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
@@ -399,12 +400,16 @@ namespace OfficeClassRobotic.DAO.Classess
         public async Task CreateClassess(CreateClassesCommand request)
         {
             //Nguyen Vi Remake CreateClasses
-
+            var subject = _dbContext.Subjects.Where(x => x.Id == Guid.Parse(request.SubjectId) && !x.IsDeleted).FirstOrDefault();
+            if(subject == null)
+            {
+                throw new BadRequestException("Môn học bạn yêu cầu chưa từng tồn tại");
+            }
             // Step 1: Tổng số slot
-            var totalSlots = _dbContext.Subjects.Where(x => x.Id == Guid.Parse(request.SubjectId)).Select(x => x.TotalSlots).FirstOrDefault();
+            var totalSlots = subject.TotalSlots;
             if (totalSlots == 0)
             {
-                // Something fail
+                throw new BadRequestException("Môn học bạn yêu cầu đã bị lỗi");
             }
             var classNameExisted = _dbContext.Classes.Where(x => x.ClassName == request.ClassName).FirstOrDefault();
             if (classNameExisted != null)
@@ -563,5 +568,34 @@ namespace OfficeClassRobotic.DAO.Classess
                 .ToListAsync();
             return listResult;
         }
+
+        public async Task UpdateClassInfo(ClassDTO request)
+        {
+            var classExist = await _dbContext.Classes.Where(d => d.ClassName.Equals(request.ClassName) && !d.IsDeleted).SingleOrDefaultAsync();
+            if (classExist == null)
+            {
+                throw new NotFoundException("ClassId not existed");
+            }
+            classExist.ClassName = request.ClassName;
+            classExist.DayStudy = request.DayStudy;
+            classExist.StartTime = classExist.StartTime;
+            classExist.EndTime = classExist.EndTime;
+            classExist.SubjectId = request.SubjectId;
+            _dbContext.Classes.Update(classExist);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteClass(ClassDTO request)
+        {
+            var classExist = await _dbContext.Classes.Where(d => d.ClassName.Equals(request.ClassName) && !d.IsDeleted).SingleOrDefaultAsync();
+            if (classExist == null)
+            {
+                throw new NotFoundException("Class not existed");
+            }
+            classExist.IsDeleted = true;
+            _dbContext.Classes.Update(classExist);
+            await _dbContext.SaveChangesAsync();
+        }
     }
+
 }

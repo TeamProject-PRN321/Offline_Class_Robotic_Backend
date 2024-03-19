@@ -16,6 +16,7 @@ namespace OfficeClassRobotic.Repository.GiaoTrinhs
         public Task<ClassRoboticResponse> UpdateGiaoTrinh(UpdateGiaoTrinhCommand giaoTrinh);
         public Task<ClassRoboticResponse> DeleteGiaoTrinh(DeleteGiaoTrinhCommand giaoTrinh);
         public Task<List<GiaoTrinhResponse>> GetAllGiaoTrinh();
-        public Task<GiaoTrinhResponse> GetGiaoTrinhById(string giaoTrinhId);
+        public Task<GiaoTrinhPDFResponse> GetGiaoTrinhById(string giaoTrinhId);
+        public Task<List<GiaoTrinhPDFResponse>> GetPdfFilesFromDatabase(string subjectId);
     }
 }

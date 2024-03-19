@@ -2,6 +2,7 @@
 using Models.OfficeClassRobotic.BuisnessObject;
 using OfficeClassRobotic.BuisnessObject.Models;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
+using OfficeClassRobotic.DAO.GiaoTrinhs;
 using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
 using OfficeClassRobotic.Service.Exceptions;
 
@@ -71,6 +72,7 @@ namespace OfficeClassRobotic.DAO.Teachers
         /// Get All teacher
         /// </summary>
         /// <returns></returns>
+        /// 
         public async Task<List<TeacherDTO>?> GetAllTeacher()
         {
             var listResult = new List<TeacherDTO>();
@@ -263,12 +265,12 @@ namespace OfficeClassRobotic.DAO.Teachers
                                                     .Join(_dbContext.ClassSchedule.Where(x => x.DateStudy == item.DateStudy),
                                                     c => c.Id,
                                                     cs => cs.ClassId,
-                                                    (c,cs) => new {c,cs})
+                                                    (c, cs) => new { c, cs })
                                                     .Join(_dbContext.Attendance.Where(x => x.LastModified != null),
                                                     x => x.cs.Id,
                                                     a => a.ClassScheduleID,
-                                                    (x,a) => new {x.c,x.cs,a }).Count();
-                if(checkAttend == item.NumberOfSudent)
+                                                    (x, a) => new { x.c, x.cs, a }).Count();
+                if (checkAttend == item.NumberOfSudent)
                 {
                     result.ClassWasCheckedAttendant = 1;
                 }
@@ -279,6 +281,53 @@ namespace OfficeClassRobotic.DAO.Teachers
                 listResult.Add(result);
             }
             return listResult;
+        }
+
+        /// <summary>
+        /// Dùng Get danh sách giáo viên theo SubjectName
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        /// <exception cref="NotFoundException"></exception>
+        public async Task<TeacherSubjectResponse> GetListTeacherBySubjectName(string keyword)
+        {
+            var subjectExist = await _dbContext.Subjects.Where(s => s.SubjectName.Contains(keyword)).SingleOrDefaultAsync();
+            if (subjectExist == null)
+            {
+                throw new NotFoundException("Not exist subject ne");
+            }
+            var subjectTeacher = await _dbContext.TeacherSubjects.Where(ts => ts.SubjectId == subjectExist.Id).ToListAsync();
+            var responseData = new List<TeacherData>();
+            foreach (var subject in subjectTeacher)
+            {
+                var teacherData = await _dbContext.Teacher.Where(a => a.Id == subject.TeacherId).SingleOrDefaultAsync();
+                var appUser = await _dbContext.AppUsers.Where(a => a.Id == teacherData.AppUserId).SingleOrDefaultAsync();
+                var teacher = new TeacherData
+                {
+                    TeacherId = subject.TeacherId,
+                    AppUserId = appUser.Id,
+                    UserName = appUser.UserName,
+                    FullName = appUser.FullName,
+                    PhoneNumber = appUser.PhoneNumber,
+                    Email = appUser.Email,
+                    DateOfBirth = appUser.DateOfBirth,
+                    Gender = appUser.Gender,
+                    Address = appUser.Address,
+                    PhotoUrl = appUser.PhotoUrl,
+                };
+                responseData.Add(teacher);
+            }
+
+            return new TeacherSubjectResponse
+            {
+                SubjectId = subjectExist.Id,
+                SubjectName = subjectExist.SubjectName,
+                TotalSlots = subjectExist.TotalSlots,
+                // vì chỗ này sẽ lấy 1 list giáo trình ra với 1 list pdf
+                //GiaoTrinhId = subjectExist.GiaoTrinhId,
+
+                TeacherResponse = responseData
+            };
         }
     }
 }

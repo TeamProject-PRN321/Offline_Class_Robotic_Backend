@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Azure.Core;
 using Models.OfficeClassRobotic.BuisnessObject;
+using OfficeClassRobotic.DAO.Classrooms;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
 using OfficeClassRobotic.DAO.Parents;
 using OfficeClassRobotic.DAO.Students;
+using OfficeClassRobotic.DAO.SudentGrades;
 using OfficeClassRobotic.Service.Exceptions;
 
 namespace OfficeClassRobotic.Repository.Students
@@ -12,6 +14,7 @@ namespace OfficeClassRobotic.Repository.Students
     {
         private StudentDAO studentDAO;
         private readonly IMapper _mapper;
+        
         public StudentRepository(IMapper mapper)
         {
             studentDAO = new StudentDAO();
@@ -25,7 +28,7 @@ namespace OfficeClassRobotic.Repository.Students
             }
             catch (Exception ex)
             {
-                throw new BadRequestException(ex.Message);
+                throw new BadRequestException("Không tìm thấy sinh viên");
             }
         }
 
@@ -37,7 +40,7 @@ namespace OfficeClassRobotic.Repository.Students
             }
             catch (Exception ex)
             {
-                throw new BadRequestException(ex.Message);
+                throw new BadRequestException("Không tìm thấy sinh viên");
             }
         }
 
@@ -50,7 +53,7 @@ namespace OfficeClassRobotic.Repository.Students
             }
             catch (Exception ex)
             {
-                throw new BadRequestException(ex.Message);
+                throw new BadRequestException("Không tìm thấy sinh viên");
             }
         }
 
@@ -62,7 +65,7 @@ namespace OfficeClassRobotic.Repository.Students
             }
             catch (Exception ex)
             {
-                throw new BadRequestException(ex.Message);
+                throw new BadRequestException("Không tìm thấy sinh viên");
             }
         }
 
@@ -74,11 +77,25 @@ namespace OfficeClassRobotic.Repository.Students
             }
             catch (Exception ex)
             {
-                throw new BadRequestException(ex.Message);
+                throw new BadRequestException("Không tìm thấy danh sách sinh viên");
             }
         }
 
-        
+        public Task<List<StudentDTO>> SearchStudent(string studentName)
+        {
+            try
+            {
+                var list = studentDAO.GetStudentByStudentName(studentName);
+
+                return list;
+            }catch(Exception ex)
+            {
+                throw new BadRequestException("Không tìm thấy sinh viên");
+            }
+        }
+
+       
+
         /*
 public async Task<ClassRoboticResponse> CreateStudent(CreateStudentCommand student)
 {

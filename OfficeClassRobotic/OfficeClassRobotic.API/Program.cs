@@ -1,5 +1,7 @@
 ﻿using OfficeClassRobotic.API.Extensions;
 using OfficeClassRobotic.API.Middleware;
+using OfficeOpenXml;
+using System.ComponentModel;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,8 +16,10 @@ builder.Services.AddCors(options =>
                       });
 });
 // Add services to the container.
-
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+        .AddJsonOptions(options => {
+            options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+        });
 
 //cấu hình kết nối db và cấu hình khác
 builder.Services.AddApplicationServices(builder.Configuration);
@@ -33,6 +37,10 @@ builder.Services.AddControllers()
         .AddJsonOptions(options => {
             options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
         });
+
+ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+
+ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
 
 var app = builder.Build();
 app.UseCors(MyAllowSpecificOrigins);

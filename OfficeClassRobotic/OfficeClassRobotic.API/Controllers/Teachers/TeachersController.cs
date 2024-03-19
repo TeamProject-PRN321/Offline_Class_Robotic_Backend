@@ -45,5 +45,13 @@ namespace OfficeClassRobotic.API.Controllers.Teachers
             var result = await _repo.GetScheduleOfTeacherByTeacherIdAndTime(request);
             return result;
         }
+
+        [HttpGet]
+        [Route("get-list-teacher-by-subject/{subjectname}")]
+        public async Task<TeacherSubjectResponse> GetListTeacherBySubject(string subjectname)
+        {
+            var result = await _repo.GetListTeacherBySubjectName(subjectname);
+            return result;
+        }
     }
 }

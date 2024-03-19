@@ -55,9 +55,9 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("34521f3a-a7bf-4262-be95-63a247371583"),
+                            Id = new Guid("687fb4f4-115a-4766-862b-dae59864bfe9"),
                             AppUserId = new Guid("da053af4-cdf1-4a6b-8506-2e3939ef6351"),
-                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 155, DateTimeKind.Local).AddTicks(6938),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6041),
                             IsDeleted = false
                         });
                 });
@@ -119,8 +119,8 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                             Email = "nguyenthanhn537@gmail.com",
                             FullName = "Nguyen Thanh Nhan",
                             Gender = "Male",
-                            PassWordHash = new byte[] { 157, 36, 79, 129, 21, 225, 228, 127, 150, 245, 31, 82, 201, 250, 49, 201, 72, 232, 149, 212, 156, 158, 247, 133, 172, 230, 109, 132, 119, 198, 148, 184, 146, 213, 179, 173, 149, 17, 28, 203, 123, 72, 180, 220, 159, 161, 117, 71, 61, 8, 150, 19, 212, 42, 25, 133, 216, 205, 8, 191, 107, 43, 198, 100 },
-                            PassWordSalt = new byte[] { 214, 232, 177, 145, 246, 92, 117, 85, 91, 69, 159, 245, 51, 93, 94, 85, 89, 2, 114, 128, 83, 255, 51, 221, 83, 141, 121, 131, 145, 240, 50, 149, 30, 139, 33, 82, 140, 46, 59, 174, 176, 66, 127, 26, 128, 88, 6, 210, 74, 13, 185, 14, 140, 34, 176, 19, 196, 146, 60, 172, 24, 196, 149, 16, 66, 208, 158, 1, 112, 160, 198, 214, 76, 70, 167, 122, 98, 140, 44, 255, 128, 49, 115, 137, 119, 1, 100, 103, 201, 40, 179, 254, 35, 203, 195, 40, 241, 169, 59, 102, 123, 97, 57, 125, 110, 225, 193, 159, 112, 198, 32, 202, 80, 6, 1, 43, 157, 31, 18, 193, 198, 202, 13, 21, 107, 242, 240, 138 },
+                            PassWordHash = new byte[] { 160, 39, 124, 10, 246, 154, 151, 96, 142, 216, 221, 144, 98, 226, 20, 171, 228, 10, 166, 255, 102, 84, 156, 180, 193, 14, 233, 11, 30, 59, 102, 213, 120, 239, 64, 212, 34, 248, 81, 6, 100, 151, 39, 146, 55, 84, 174, 90, 38, 98, 223, 66, 244, 216, 81, 223, 138, 134, 238, 88, 58, 119, 216, 99 },
+                            PassWordSalt = new byte[] { 47, 51, 53, 12, 198, 229, 207, 117, 42, 134, 215, 197, 205, 4, 105, 139, 158, 10, 161, 249, 38, 125, 146, 51, 130, 17, 116, 251, 180, 119, 192, 124, 13, 184, 8, 254, 191, 2, 152, 39, 77, 138, 211, 83, 182, 248, 6, 0, 26, 63, 241, 87, 55, 2, 218, 77, 146, 175, 109, 235, 1, 165, 8, 148, 14, 195, 87, 111, 138, 216, 121, 254, 52, 130, 221, 198, 129, 42, 30, 173, 100, 214, 235, 246, 196, 235, 49, 112, 95, 190, 241, 35, 32, 34, 126, 131, 42, 34, 215, 46, 190, 155, 250, 17, 248, 236, 4, 43, 222, 197, 50, 113, 164, 17, 165, 42, 49, 149, 53, 125, 90, 106, 133, 141, 174, 80, 47, 89 },
                             PhoneNumber = "0912345678",
                             PhotoUrl = "132564487asjdhkahsdkj",
                             UserName = "nhannt"
@@ -133,8 +133,8 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                             Email = "vinnt537@gmail.com",
                             FullName = "Nguyen Ngoc Thai Vi",
                             Gender = "Male",
-                            PassWordHash = new byte[] { 157, 36, 79, 129, 21, 225, 228, 127, 150, 245, 31, 82, 201, 250, 49, 201, 72, 232, 149, 212, 156, 158, 247, 133, 172, 230, 109, 132, 119, 198, 148, 184, 146, 213, 179, 173, 149, 17, 28, 203, 123, 72, 180, 220, 159, 161, 117, 71, 61, 8, 150, 19, 212, 42, 25, 133, 216, 205, 8, 191, 107, 43, 198, 100 },
-                            PassWordSalt = new byte[] { 214, 232, 177, 145, 246, 92, 117, 85, 91, 69, 159, 245, 51, 93, 94, 85, 89, 2, 114, 128, 83, 255, 51, 221, 83, 141, 121, 131, 145, 240, 50, 149, 30, 139, 33, 82, 140, 46, 59, 174, 176, 66, 127, 26, 128, 88, 6, 210, 74, 13, 185, 14, 140, 34, 176, 19, 196, 146, 60, 172, 24, 196, 149, 16, 66, 208, 158, 1, 112, 160, 198, 214, 76, 70, 167, 122, 98, 140, 44, 255, 128, 49, 115, 137, 119, 1, 100, 103, 201, 40, 179, 254, 35, 203, 195, 40, 241, 169, 59, 102, 123, 97, 57, 125, 110, 225, 193, 159, 112, 198, 32, 202, 80, 6, 1, 43, 157, 31, 18, 193, 198, 202, 13, 21, 107, 242, 240, 138 },
+                            PassWordHash = new byte[] { 160, 39, 124, 10, 246, 154, 151, 96, 142, 216, 221, 144, 98, 226, 20, 171, 228, 10, 166, 255, 102, 84, 156, 180, 193, 14, 233, 11, 30, 59, 102, 213, 120, 239, 64, 212, 34, 248, 81, 6, 100, 151, 39, 146, 55, 84, 174, 90, 38, 98, 223, 66, 244, 216, 81, 223, 138, 134, 238, 88, 58, 119, 216, 99 },
+                            PassWordSalt = new byte[] { 47, 51, 53, 12, 198, 229, 207, 117, 42, 134, 215, 197, 205, 4, 105, 139, 158, 10, 161, 249, 38, 125, 146, 51, 130, 17, 116, 251, 180, 119, 192, 124, 13, 184, 8, 254, 191, 2, 152, 39, 77, 138, 211, 83, 182, 248, 6, 0, 26, 63, 241, 87, 55, 2, 218, 77, 146, 175, 109, 235, 1, 165, 8, 148, 14, 195, 87, 111, 138, 216, 121, 254, 52, 130, 221, 198, 129, 42, 30, 173, 100, 214, 235, 246, 196, 235, 49, 112, 95, 190, 241, 35, 32, 34, 126, 131, 42, 34, 215, 46, 190, 155, 250, 17, 248, 236, 4, 43, 222, 197, 50, 113, 164, 17, 165, 42, 49, 149, 53, 125, 90, 106, 133, 141, 174, 80, 47, 89 },
                             PhoneNumber = "0912345678",
                             PhotoUrl = "132564487asjdhkahsdkj",
                             UserName = "vinnt"
@@ -147,8 +147,8 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                             Email = "lylynp537@gmail.com",
                             FullName = "Nguyen Phuong LyLy",
                             Gender = "Female",
-                            PassWordHash = new byte[] { 157, 36, 79, 129, 21, 225, 228, 127, 150, 245, 31, 82, 201, 250, 49, 201, 72, 232, 149, 212, 156, 158, 247, 133, 172, 230, 109, 132, 119, 198, 148, 184, 146, 213, 179, 173, 149, 17, 28, 203, 123, 72, 180, 220, 159, 161, 117, 71, 61, 8, 150, 19, 212, 42, 25, 133, 216, 205, 8, 191, 107, 43, 198, 100 },
-                            PassWordSalt = new byte[] { 214, 232, 177, 145, 246, 92, 117, 85, 91, 69, 159, 245, 51, 93, 94, 85, 89, 2, 114, 128, 83, 255, 51, 221, 83, 141, 121, 131, 145, 240, 50, 149, 30, 139, 33, 82, 140, 46, 59, 174, 176, 66, 127, 26, 128, 88, 6, 210, 74, 13, 185, 14, 140, 34, 176, 19, 196, 146, 60, 172, 24, 196, 149, 16, 66, 208, 158, 1, 112, 160, 198, 214, 76, 70, 167, 122, 98, 140, 44, 255, 128, 49, 115, 137, 119, 1, 100, 103, 201, 40, 179, 254, 35, 203, 195, 40, 241, 169, 59, 102, 123, 97, 57, 125, 110, 225, 193, 159, 112, 198, 32, 202, 80, 6, 1, 43, 157, 31, 18, 193, 198, 202, 13, 21, 107, 242, 240, 138 },
+                            PassWordHash = new byte[] { 160, 39, 124, 10, 246, 154, 151, 96, 142, 216, 221, 144, 98, 226, 20, 171, 228, 10, 166, 255, 102, 84, 156, 180, 193, 14, 233, 11, 30, 59, 102, 213, 120, 239, 64, 212, 34, 248, 81, 6, 100, 151, 39, 146, 55, 84, 174, 90, 38, 98, 223, 66, 244, 216, 81, 223, 138, 134, 238, 88, 58, 119, 216, 99 },
+                            PassWordSalt = new byte[] { 47, 51, 53, 12, 198, 229, 207, 117, 42, 134, 215, 197, 205, 4, 105, 139, 158, 10, 161, 249, 38, 125, 146, 51, 130, 17, 116, 251, 180, 119, 192, 124, 13, 184, 8, 254, 191, 2, 152, 39, 77, 138, 211, 83, 182, 248, 6, 0, 26, 63, 241, 87, 55, 2, 218, 77, 146, 175, 109, 235, 1, 165, 8, 148, 14, 195, 87, 111, 138, 216, 121, 254, 52, 130, 221, 198, 129, 42, 30, 173, 100, 214, 235, 246, 196, 235, 49, 112, 95, 190, 241, 35, 32, 34, 126, 131, 42, 34, 215, 46, 190, 155, 250, 17, 248, 236, 4, 43, 222, 197, 50, 113, 164, 17, 165, 42, 49, 149, 53, 125, 90, 106, 133, 141, 174, 80, 47, 89 },
                             PhoneNumber = "0912345678",
                             PhotoUrl = "132564487asjdhkahsdkj",
                             UserName = "lylynp"
@@ -161,11 +161,109 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                             Email = "vinnt060402@gmail.com",
                             FullName = "Nguyễn Ngọc Thái Vĩ",
                             Gender = "Male",
-                            PassWordHash = new byte[] { 155, 5, 184, 160, 50, 126, 28, 32, 187, 154, 24, 158, 194, 115, 53, 189, 236, 80, 121, 211, 4, 41, 175, 41, 172, 150, 113, 131, 147, 24, 24, 113, 86, 121, 129, 71, 51, 136, 242, 166, 148, 56, 60, 35, 42, 226, 240, 12, 180, 242, 227, 227, 127, 88, 123, 144, 53, 101, 119, 89, 25, 97, 10, 70 },
-                            PassWordSalt = new byte[] { 214, 232, 177, 145, 246, 92, 117, 85, 91, 69, 159, 245, 51, 93, 94, 85, 89, 2, 114, 128, 83, 255, 51, 221, 83, 141, 121, 131, 145, 240, 50, 149, 30, 139, 33, 82, 140, 46, 59, 174, 176, 66, 127, 26, 128, 88, 6, 210, 74, 13, 185, 14, 140, 34, 176, 19, 196, 146, 60, 172, 24, 196, 149, 16, 66, 208, 158, 1, 112, 160, 198, 214, 76, 70, 167, 122, 98, 140, 44, 255, 128, 49, 115, 137, 119, 1, 100, 103, 201, 40, 179, 254, 35, 203, 195, 40, 241, 169, 59, 102, 123, 97, 57, 125, 110, 225, 193, 159, 112, 198, 32, 202, 80, 6, 1, 43, 157, 31, 18, 193, 198, 202, 13, 21, 107, 242, 240, 138 },
+                            PassWordHash = new byte[] { 158, 157, 190, 205, 56, 127, 125, 11, 139, 234, 10, 248, 164, 149, 118, 32, 36, 124, 138, 104, 93, 128, 181, 129, 210, 63, 193, 149, 44, 206, 234, 141, 21, 73, 194, 230, 125, 230, 70, 235, 185, 79, 79, 129, 138, 47, 6, 104, 72, 184, 185, 193, 108, 29, 196, 244, 162, 177, 254, 248, 187, 103, 173, 192 },
+                            PassWordSalt = new byte[] { 47, 51, 53, 12, 198, 229, 207, 117, 42, 134, 215, 197, 205, 4, 105, 139, 158, 10, 161, 249, 38, 125, 146, 51, 130, 17, 116, 251, 180, 119, 192, 124, 13, 184, 8, 254, 191, 2, 152, 39, 77, 138, 211, 83, 182, 248, 6, 0, 26, 63, 241, 87, 55, 2, 218, 77, 146, 175, 109, 235, 1, 165, 8, 148, 14, 195, 87, 111, 138, 216, 121, 254, 52, 130, 221, 198, 129, 42, 30, 173, 100, 214, 235, 246, 196, 235, 49, 112, 95, 190, 241, 35, 32, 34, 126, 131, 42, 34, 215, 46, 190, 155, 250, 17, 248, 236, 4, 43, 222, 197, 50, 113, 164, 17, 165, 42, 49, 149, 53, 125, 90, 106, 133, 141, 174, 80, 47, 89 },
                             PhoneNumber = "0123456789",
                             PhotoUrl = "abc",
                             UserName = "vinnt060402"
+                        },
+                        new
+                        {
+                            Id = new Guid("275c605e-3d04-437d-8a7d-208249412cec"),
+                            Address = "Long An",
+                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "vi1@gmail.com",
+                            FullName = "Vĩ 1",
+                            Gender = "Male",
+                            PassWordHash = new byte[] { 158, 157, 190, 205, 56, 127, 125, 11, 139, 234, 10, 248, 164, 149, 118, 32, 36, 124, 138, 104, 93, 128, 181, 129, 210, 63, 193, 149, 44, 206, 234, 141, 21, 73, 194, 230, 125, 230, 70, 235, 185, 79, 79, 129, 138, 47, 6, 104, 72, 184, 185, 193, 108, 29, 196, 244, 162, 177, 254, 248, 187, 103, 173, 192 },
+                            PassWordSalt = new byte[] { 47, 51, 53, 12, 198, 229, 207, 117, 42, 134, 215, 197, 205, 4, 105, 139, 158, 10, 161, 249, 38, 125, 146, 51, 130, 17, 116, 251, 180, 119, 192, 124, 13, 184, 8, 254, 191, 2, 152, 39, 77, 138, 211, 83, 182, 248, 6, 0, 26, 63, 241, 87, 55, 2, 218, 77, 146, 175, 109, 235, 1, 165, 8, 148, 14, 195, 87, 111, 138, 216, 121, 254, 52, 130, 221, 198, 129, 42, 30, 173, 100, 214, 235, 246, 196, 235, 49, 112, 95, 190, 241, 35, 32, 34, 126, 131, 42, 34, 215, 46, 190, 155, 250, 17, 248, 236, 4, 43, 222, 197, 50, 113, 164, 17, 165, 42, 49, 149, 53, 125, 90, 106, 133, 141, 174, 80, 47, 89 },
+                            PhoneNumber = "0123456789",
+                            PhotoUrl = "abc",
+                            UserName = "vi1"
+                        },
+                        new
+                        {
+                            Id = new Guid("4e5e39dc-7a22-4787-9083-70335fa2489c"),
+                            Address = "Long An",
+                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "vi2@gmail.com",
+                            FullName = "Vĩ 2",
+                            Gender = "Male",
+                            PassWordHash = new byte[] { 158, 157, 190, 205, 56, 127, 125, 11, 139, 234, 10, 248, 164, 149, 118, 32, 36, 124, 138, 104, 93, 128, 181, 129, 210, 63, 193, 149, 44, 206, 234, 141, 21, 73, 194, 230, 125, 230, 70, 235, 185, 79, 79, 129, 138, 47, 6, 104, 72, 184, 185, 193, 108, 29, 196, 244, 162, 177, 254, 248, 187, 103, 173, 192 },
+                            PassWordSalt = new byte[] { 47, 51, 53, 12, 198, 229, 207, 117, 42, 134, 215, 197, 205, 4, 105, 139, 158, 10, 161, 249, 38, 125, 146, 51, 130, 17, 116, 251, 180, 119, 192, 124, 13, 184, 8, 254, 191, 2, 152, 39, 77, 138, 211, 83, 182, 248, 6, 0, 26, 63, 241, 87, 55, 2, 218, 77, 146, 175, 109, 235, 1, 165, 8, 148, 14, 195, 87, 111, 138, 216, 121, 254, 52, 130, 221, 198, 129, 42, 30, 173, 100, 214, 235, 246, 196, 235, 49, 112, 95, 190, 241, 35, 32, 34, 126, 131, 42, 34, 215, 46, 190, 155, 250, 17, 248, 236, 4, 43, 222, 197, 50, 113, 164, 17, 165, 42, 49, 149, 53, 125, 90, 106, 133, 141, 174, 80, 47, 89 },
+                            PhoneNumber = "0123456789",
+                            PhotoUrl = "abc",
+                            UserName = "vi2"
+                        },
+                        new
+                        {
+                            Id = new Guid("64863e62-104c-49ee-a57e-b066936d8e8d"),
+                            Address = "Long An",
+                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "vi3@gmail.com",
+                            FullName = "Vĩ 3",
+                            Gender = "Male",
+                            PassWordHash = new byte[] { 158, 157, 190, 205, 56, 127, 125, 11, 139, 234, 10, 248, 164, 149, 118, 32, 36, 124, 138, 104, 93, 128, 181, 129, 210, 63, 193, 149, 44, 206, 234, 141, 21, 73, 194, 230, 125, 230, 70, 235, 185, 79, 79, 129, 138, 47, 6, 104, 72, 184, 185, 193, 108, 29, 196, 244, 162, 177, 254, 248, 187, 103, 173, 192 },
+                            PassWordSalt = new byte[] { 47, 51, 53, 12, 198, 229, 207, 117, 42, 134, 215, 197, 205, 4, 105, 139, 158, 10, 161, 249, 38, 125, 146, 51, 130, 17, 116, 251, 180, 119, 192, 124, 13, 184, 8, 254, 191, 2, 152, 39, 77, 138, 211, 83, 182, 248, 6, 0, 26, 63, 241, 87, 55, 2, 218, 77, 146, 175, 109, 235, 1, 165, 8, 148, 14, 195, 87, 111, 138, 216, 121, 254, 52, 130, 221, 198, 129, 42, 30, 173, 100, 214, 235, 246, 196, 235, 49, 112, 95, 190, 241, 35, 32, 34, 126, 131, 42, 34, 215, 46, 190, 155, 250, 17, 248, 236, 4, 43, 222, 197, 50, 113, 164, 17, 165, 42, 49, 149, 53, 125, 90, 106, 133, 141, 174, 80, 47, 89 },
+                            PhoneNumber = "0123456789",
+                            PhotoUrl = "abc",
+                            UserName = "vi3"
+                        },
+                        new
+                        {
+                            Id = new Guid("af7a0942-0459-4364-b8c8-3737a4edfff4"),
+                            Address = "Long An",
+                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "vi4@gmail.com",
+                            FullName = "Vĩ 4",
+                            Gender = "Male",
+                            PassWordHash = new byte[] { 158, 157, 190, 205, 56, 127, 125, 11, 139, 234, 10, 248, 164, 149, 118, 32, 36, 124, 138, 104, 93, 128, 181, 129, 210, 63, 193, 149, 44, 206, 234, 141, 21, 73, 194, 230, 125, 230, 70, 235, 185, 79, 79, 129, 138, 47, 6, 104, 72, 184, 185, 193, 108, 29, 196, 244, 162, 177, 254, 248, 187, 103, 173, 192 },
+                            PassWordSalt = new byte[] { 47, 51, 53, 12, 198, 229, 207, 117, 42, 134, 215, 197, 205, 4, 105, 139, 158, 10, 161, 249, 38, 125, 146, 51, 130, 17, 116, 251, 180, 119, 192, 124, 13, 184, 8, 254, 191, 2, 152, 39, 77, 138, 211, 83, 182, 248, 6, 0, 26, 63, 241, 87, 55, 2, 218, 77, 146, 175, 109, 235, 1, 165, 8, 148, 14, 195, 87, 111, 138, 216, 121, 254, 52, 130, 221, 198, 129, 42, 30, 173, 100, 214, 235, 246, 196, 235, 49, 112, 95, 190, 241, 35, 32, 34, 126, 131, 42, 34, 215, 46, 190, 155, 250, 17, 248, 236, 4, 43, 222, 197, 50, 113, 164, 17, 165, 42, 49, 149, 53, 125, 90, 106, 133, 141, 174, 80, 47, 89 },
+                            PhoneNumber = "0123456789",
+                            PhotoUrl = "abc",
+                            UserName = "vi4"
+                        },
+                        new
+                        {
+                            Id = new Guid("5ddd65ff-16a1-4fd1-acbf-c913f0cce37c"),
+                            Address = "Long An",
+                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "vi5@gmail.com",
+                            FullName = "Vĩ 5",
+                            Gender = "Male",
+                            PassWordHash = new byte[] { 158, 157, 190, 205, 56, 127, 125, 11, 139, 234, 10, 248, 164, 149, 118, 32, 36, 124, 138, 104, 93, 128, 181, 129, 210, 63, 193, 149, 44, 206, 234, 141, 21, 73, 194, 230, 125, 230, 70, 235, 185, 79, 79, 129, 138, 47, 6, 104, 72, 184, 185, 193, 108, 29, 196, 244, 162, 177, 254, 248, 187, 103, 173, 192 },
+                            PassWordSalt = new byte[] { 47, 51, 53, 12, 198, 229, 207, 117, 42, 134, 215, 197, 205, 4, 105, 139, 158, 10, 161, 249, 38, 125, 146, 51, 130, 17, 116, 251, 180, 119, 192, 124, 13, 184, 8, 254, 191, 2, 152, 39, 77, 138, 211, 83, 182, 248, 6, 0, 26, 63, 241, 87, 55, 2, 218, 77, 146, 175, 109, 235, 1, 165, 8, 148, 14, 195, 87, 111, 138, 216, 121, 254, 52, 130, 221, 198, 129, 42, 30, 173, 100, 214, 235, 246, 196, 235, 49, 112, 95, 190, 241, 35, 32, 34, 126, 131, 42, 34, 215, 46, 190, 155, 250, 17, 248, 236, 4, 43, 222, 197, 50, 113, 164, 17, 165, 42, 49, 149, 53, 125, 90, 106, 133, 141, 174, 80, 47, 89 },
+                            PhoneNumber = "0123456789",
+                            PhotoUrl = "abc",
+                            UserName = "vi5"
+                        },
+                        new
+                        {
+                            Id = new Guid("ae50067c-00bc-49e2-a20c-500696a2f954"),
+                            Address = "Long An",
+                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "vi6@gmail.com",
+                            FullName = "Vĩ 1",
+                            Gender = "Male",
+                            PassWordHash = new byte[] { 158, 157, 190, 205, 56, 127, 125, 11, 139, 234, 10, 248, 164, 149, 118, 32, 36, 124, 138, 104, 93, 128, 181, 129, 210, 63, 193, 149, 44, 206, 234, 141, 21, 73, 194, 230, 125, 230, 70, 235, 185, 79, 79, 129, 138, 47, 6, 104, 72, 184, 185, 193, 108, 29, 196, 244, 162, 177, 254, 248, 187, 103, 173, 192 },
+                            PassWordSalt = new byte[] { 47, 51, 53, 12, 198, 229, 207, 117, 42, 134, 215, 197, 205, 4, 105, 139, 158, 10, 161, 249, 38, 125, 146, 51, 130, 17, 116, 251, 180, 119, 192, 124, 13, 184, 8, 254, 191, 2, 152, 39, 77, 138, 211, 83, 182, 248, 6, 0, 26, 63, 241, 87, 55, 2, 218, 77, 146, 175, 109, 235, 1, 165, 8, 148, 14, 195, 87, 111, 138, 216, 121, 254, 52, 130, 221, 198, 129, 42, 30, 173, 100, 214, 235, 246, 196, 235, 49, 112, 95, 190, 241, 35, 32, 34, 126, 131, 42, 34, 215, 46, 190, 155, 250, 17, 248, 236, 4, 43, 222, 197, 50, 113, 164, 17, 165, 42, 49, 149, 53, 125, 90, 106, 133, 141, 174, 80, 47, 89 },
+                            PhoneNumber = "0123456789",
+                            PhotoUrl = "abc",
+                            UserName = "vi1"
+                        },
+                        new
+                        {
+                            Id = new Guid("75653469-5fdd-4639-9be7-2c8fca8cecc5"),
+                            Address = "Long An",
+                            DateOfBirth = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "vi7@gmail.com",
+                            FullName = "Vĩ 7",
+                            Gender = "Male",
+                            PassWordHash = new byte[] { 158, 157, 190, 205, 56, 127, 125, 11, 139, 234, 10, 248, 164, 149, 118, 32, 36, 124, 138, 104, 93, 128, 181, 129, 210, 63, 193, 149, 44, 206, 234, 141, 21, 73, 194, 230, 125, 230, 70, 235, 185, 79, 79, 129, 138, 47, 6, 104, 72, 184, 185, 193, 108, 29, 196, 244, 162, 177, 254, 248, 187, 103, 173, 192 },
+                            PassWordSalt = new byte[] { 47, 51, 53, 12, 198, 229, 207, 117, 42, 134, 215, 197, 205, 4, 105, 139, 158, 10, 161, 249, 38, 125, 146, 51, 130, 17, 116, 251, 180, 119, 192, 124, 13, 184, 8, 254, 191, 2, 152, 39, 77, 138, 211, 83, 182, 248, 6, 0, 26, 63, 241, 87, 55, 2, 218, 77, 146, 175, 109, 235, 1, 165, 8, 148, 14, 195, 87, 111, 138, 216, 121, 254, 52, 130, 221, 198, 129, 42, 30, 173, 100, 214, 235, 246, 196, 235, 49, 112, 95, 190, 241, 35, 32, 34, 126, 131, 42, 34, 215, 46, 190, 155, 250, 17, 248, 236, 4, 43, 222, 197, 50, 113, 164, 17, 165, 42, 49, 149, 53, 125, 90, 106, 133, 141, 174, 80, 47, 89 },
+                            PhoneNumber = "0123456789",
+                            PhotoUrl = "abc",
+                            UserName = "vi7"
                         });
                 });
 
@@ -175,9 +273,8 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AttendaceName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("AttendStatus")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("ClassScheduleID")
                         .HasColumnType("uniqueidentifier");
@@ -228,6 +325,9 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<TimeSpan?>("EndTime")
                         .HasColumnType("time");
 
+                    b.Property<bool>("IsClassFinish")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -259,9 +359,10 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         {
                             Id = new Guid("381d2e33-67e5-4ce5-b8cc-c39bd523fe8b"),
                             ClassName = "SE1603",
-                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(8926),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6381),
                             DayStudy = "Thứ 2;Thứ 4",
                             EndTime = new TimeSpan(0, 18, 0, 0, 0),
+                            IsClassFinish = false,
                             IsDeleted = false,
                             StartTime = new TimeSpan(0, 15, 0, 0, 0),
                             StudentId = new Guid("2b9d9aca-27da-415b-a468-b367613a2488"),
@@ -290,6 +391,9 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<DateTime>("DateStudy")
                         .HasColumnType("datetime2");
 
+                    b.Property<TimeSpan?>("EndTime")
+                        .HasColumnType("time");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -301,6 +405,9 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
                     b.Property<int>("NumberOfSudent")
                         .HasColumnType("int");
+
+                    b.Property<TimeSpan?>("StartTime")
+                        .HasColumnType("time");
 
                     b.Property<Guid>("TeacherId")
                         .HasColumnType("uniqueidentifier");
@@ -321,8 +428,8 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                             Id = new Guid("4e1cba33-b0cf-4274-8797-6ab39788141f"),
                             ClassId = new Guid("381d2e33-67e5-4ce5-b8cc-c39bd523fe8b"),
                             ClassRoomID = new Guid("d2e283a6-5bf5-4d27-a2c2-994cb6d781e9"),
-                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(8997),
-                            DateStudy = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(8999),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 784, DateTimeKind.Local).AddTicks(3959),
+                            DateStudy = new DateTime(2024, 3, 18, 23, 31, 44, 784, DateTimeKind.Local).AddTicks(3961),
                             IsDeleted = false,
                             NumberOfSudent = 40,
                             TeacherId = new Guid("776afbe6-9133-4dbe-b8c0-f5a23f3fe505")
@@ -371,7 +478,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         {
                             Id = new Guid("d2e283a6-5bf5-4d27-a2c2-994cb6d781e9"),
                             ClassRoomName = "P.403",
-                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(9029),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6287),
                             Description = "Tầng 4, phòng số 3",
                             IsDeleted = false,
                             TrungTamRoboticId = new Guid("5f4e0944-497b-4c33-9d5d-86f8824c8b95")
@@ -380,7 +487,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         {
                             Id = new Guid("5f59c98d-50f9-4f5e-911e-d28648ec43b1"),
                             ClassRoomName = "P.303",
-                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(9033),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6294),
                             Description = "Tầng 3, phòng số 3",
                             IsDeleted = false,
                             TrungTamRoboticId = new Guid("5f4e0944-497b-4c33-9d5d-86f8824c8b95")
@@ -389,7 +496,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         {
                             Id = new Guid("29f67cfd-ba37-4b70-852a-4af223b7788a"),
                             ClassRoomName = "P.203",
-                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(9036),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6300),
                             Description = "Tầng 2, phòng số 3",
                             IsDeleted = false,
                             TrungTamRoboticId = new Guid("5f4e0944-497b-4c33-9d5d-86f8824c8b95")
@@ -398,7 +505,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         {
                             Id = new Guid("a9770be8-9b13-4d63-a78d-c9d2efaa79ec"),
                             ClassRoomName = "P.103",
-                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(9040),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6304),
                             Description = "Tầng 1, phòng số 3",
                             IsDeleted = false,
                             TrungTamRoboticId = new Guid("5f4e0944-497b-4c33-9d5d-86f8824c8b95")
@@ -439,14 +546,49 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<double?>("PriceOfDevice")
                         .HasColumnType("float");
 
-                    b.Property<bool?>("StatusOfDevice")
-                        .HasColumnType("bit");
+                    b.Property<int>("StatusOfDevice")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ClassRoomId");
 
                     b.ToTable("Devices");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("dff2458c-3f40-423b-8aa9-d7588a4ae4fe"),
+                            ClassRoomId = new Guid("d2e283a6-5bf5-4d27-a2c2-994cb6d781e9"),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6436),
+                            Description = "bàn 1 người ngồi",
+                            DeviceName = "Bàn học",
+                            IsDeleted = false,
+                            PriceOfDevice = 120000.0,
+                            StatusOfDevice = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("958e60a2-fa2d-4437-b639-316a569f3ab9"),
+                            ClassRoomId = new Guid("d2e283a6-5bf5-4d27-a2c2-994cb6d781e9"),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6445),
+                            Description = "Ghế 1 người ngồi",
+                            DeviceName = "Ghế",
+                            IsDeleted = false,
+                            PriceOfDevice = 200000.0,
+                            StatusOfDevice = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("bf5b9e8e-4b5d-4fd2-8f45-b070558c64c0"),
+                            ClassRoomId = new Guid("d2e283a6-5bf5-4d27-a2c2-994cb6d781e9"),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6450),
+                            Description = "Quạt trần",
+                            DeviceName = "Quạt",
+                            IsDeleted = false,
+                            PriceOfDevice = 200000.0,
+                            StatusOfDevice = 3
+                        });
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.FeedBack", b =>
@@ -505,7 +647,10 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FilePDF")
+                    b.Property<byte[]>("FilePDF")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("FilePDFName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("GiaoTrinhName")
@@ -520,7 +665,12 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("SubjectId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("SubjectId");
 
                     b.ToTable("GiaoTrinhs");
 
@@ -528,11 +678,11 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         new
                         {
                             Id = new Guid("c12ea77c-c707-44c0-b3ce-420f2ff4ecd9"),
-                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(8739),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 784, DateTimeKind.Local).AddTicks(3681),
                             Description = "",
-                            FilePDF = "firebaseStorage",
                             GiaoTrinhName = "Toan cao cap 10",
-                            IsDeleted = false
+                            IsDeleted = false,
+                            SubjectId = new Guid("54eebe9e-2a5b-4a82-8522-1e7cd2aa4d57")
                         });
                 });
 
@@ -636,7 +786,63 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         {
                             Id = new Guid("2b9d9aca-27da-415b-a468-b367613a2488"),
                             AppUserId = new Guid("2a22d7f6-6d94-4587-84d2-921c78970a91"),
-                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(9627),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 784, DateTimeKind.Local).AddTicks(4319),
+                            IsDeleted = false,
+                            ParentId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("3ce37d46-18e9-492d-a28e-2665b0d95a64"),
+                            AppUserId = new Guid("75653469-5fdd-4639-9be7-2c8fca8cecc5"),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6228),
+                            IsDeleted = false,
+                            ParentId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("a2cd9f87-17f7-45cc-a9da-88502a010042"),
+                            AppUserId = new Guid("ae50067c-00bc-49e2-a20c-500696a2f954"),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6236),
+                            IsDeleted = false,
+                            ParentId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("fec8b32d-bc9a-4fbb-94e6-5871e3ee9a63"),
+                            AppUserId = new Guid("5ddd65ff-16a1-4fd1-acbf-c913f0cce37c"),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6239),
+                            IsDeleted = false,
+                            ParentId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("88de6bcd-e510-40d8-8f29-a06009cb195c"),
+                            AppUserId = new Guid("5ddd65ff-16a1-4fd1-acbf-c913f0cce37c"),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6241),
+                            IsDeleted = false,
+                            ParentId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("07c7d0e7-273e-4819-ad69-0a875ef8f021"),
+                            AppUserId = new Guid("64863e62-104c-49ee-a57e-b066936d8e8d"),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6245),
+                            IsDeleted = false,
+                            ParentId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("2b295a2a-4bf5-45c1-bf87-4e04f1eff028"),
+                            AppUserId = new Guid("4e5e39dc-7a22-4787-9083-70335fa2489c"),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6248),
+                            IsDeleted = false,
+                            ParentId = new Guid("00000000-0000-0000-0000-000000000000")
+                        },
+                        new
+                        {
+                            Id = new Guid("822eb9c1-d410-4e17-9b70-bb8512112ae3"),
+                            AppUserId = new Guid("275c605e-3d04-437d-8a7d-208249412cec"),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6252),
                             IsDeleted = false,
                             ParentId = new Guid("00000000-0000-0000-0000-000000000000")
                         });
@@ -653,9 +859,6 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
-
-                    b.Property<Guid>("GiaoTrinhId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -674,17 +877,13 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GiaoTrinhId")
-                        .IsUnique();
-
                     b.ToTable("Subjects");
 
                     b.HasData(
                         new
                         {
                             Id = new Guid("54eebe9e-2a5b-4a82-8522-1e7cd2aa4d57"),
-                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(8905),
-                            GiaoTrinhId = new Guid("c12ea77c-c707-44c0-b3ce-420f2ff4ecd9"),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 784, DateTimeKind.Local).AddTicks(3915),
                             IsDeleted = false,
                             SubjectName = "Toan 10",
                             TotalSlots = 21
@@ -726,14 +925,14 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         {
                             Id = new Guid("776afbe6-9133-4dbe-b8c0-f5a23f3fe505"),
                             AppUserId = new Guid("bf835a7d-d002-4c9f-8bd6-0e2d321447c4"),
-                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(8961),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6334),
                             IsDeleted = false
                         },
                         new
                         {
                             Id = new Guid("53525c34-3437-4b3b-946c-e9be0a60c0c3"),
                             AppUserId = new Guid("45b82e13-b1fc-425d-a2b3-8b821405bfd0"),
-                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(8965),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6339),
                             IsDeleted = false
                         });
                 });
@@ -776,7 +975,7 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         {
                             Id = new Guid("5f4e0944-497b-4c33-9d5d-86f8824c8b95"),
                             Address = "123 Nguyễn Ảnh Thủ, Hóc Môn",
-                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 154, DateTimeKind.Local).AddTicks(9060),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 784, DateTimeKind.Local).AddTicks(4060),
                             IsDeleted = false,
                             Name = "Trung Tâm Robotic cơ sở 3"
                         });
@@ -890,42 +1089,42 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         new
                         {
                             Id = new Guid("b308c9a8-9a44-4662-b010-e4688fb8e019"),
-                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 155, DateTimeKind.Local).AddTicks(6956),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6082),
                             IsDeleted = false,
                             RoleName = "Student"
                         },
                         new
                         {
                             Id = new Guid("1c477667-fbc0-4c85-9d2f-1f5a6da3edac"),
-                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 155, DateTimeKind.Local).AddTicks(6959),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6086),
                             IsDeleted = false,
                             RoleName = "Parent"
                         },
                         new
                         {
                             Id = new Guid("dc1c58f1-326b-43c0-a750-263bceee32be"),
-                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 155, DateTimeKind.Local).AddTicks(6962),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6089),
                             IsDeleted = false,
                             RoleName = "Staff"
                         },
                         new
                         {
                             Id = new Guid("891e4e1c-bed5-4992-a978-fc969fdaf128"),
-                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 155, DateTimeKind.Local).AddTicks(6964),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6092),
                             IsDeleted = false,
                             RoleName = "Admin"
                         },
                         new
                         {
                             Id = new Guid("433ca17d-2bb8-4a98-91e6-5703365cb2fd"),
-                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 155, DateTimeKind.Local).AddTicks(6965),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6095),
                             IsDeleted = false,
                             RoleName = "Teacher"
                         },
                         new
                         {
                             Id = new Guid("a53d0cca-65d1-4b81-afe2-e735facd6c38"),
-                            Created = new DateTime(2024, 2, 29, 1, 53, 7, 155, DateTimeKind.Local).AddTicks(6971),
+                            Created = new DateTime(2024, 3, 18, 23, 31, 44, 785, DateTimeKind.Local).AddTicks(6097),
                             IsDeleted = false,
                             RoleName = "TrungTamRobotic"
                         });
@@ -1138,6 +1337,17 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Navigation("Teacher");
                 });
 
+            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.GiaoTrinh", b =>
+                {
+                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.Subject", "Subject")
+                        .WithMany("GiaoTrinh")
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Subject");
+                });
+
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Parent", b =>
                 {
                     b.HasOne("Models.OfficeClassRobotic.BuisnessObject.AppUser", "AppUser")
@@ -1169,17 +1379,6 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                         .IsRequired();
 
                     b.Navigation("AppUser");
-                });
-
-            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Subject", b =>
-                {
-                    b.HasOne("Models.OfficeClassRobotic.BuisnessObject.GiaoTrinh", "GiaoTrinh")
-                        .WithOne("Subject")
-                        .HasForeignKey("Models.OfficeClassRobotic.BuisnessObject.Subject", "GiaoTrinhId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("GiaoTrinh");
                 });
 
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Teacher", b =>
@@ -1281,11 +1480,6 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
                     b.Navigation("Devices");
                 });
 
-            modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.GiaoTrinh", b =>
-                {
-                    b.Navigation("Subject");
-                });
-
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Student", b =>
                 {
                     b.Navigation("Classs");
@@ -1294,6 +1488,8 @@ namespace OfficeClassRobotic.BuisnessObject.Migrations
             modelBuilder.Entity("Models.OfficeClassRobotic.BuisnessObject.Subject", b =>
                 {
                     b.Navigation("Class");
+
+                    b.Navigation("GiaoTrinh");
 
                     b.Navigation("TeacherSubjects");
                 });

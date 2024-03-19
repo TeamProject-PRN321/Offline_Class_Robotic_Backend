@@ -17,7 +17,12 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         public string DeviceName { get; set; }
         public string? Description { get; set; }
         public double? PriceOfDevice { get; set; }
-        public bool? StatusOfDevice { get; set; }
+        /// <summary>
+        /// 1. Bình thường, sử dụng được
+        /// 2. Đang chờ sửa chữa
+        /// 3. Không sử dụng được
+        /// </summary>
+        public int StatusOfDevice { get; set; }
         [ForeignKey("Classroom")]
         public Guid ClassRoomId { get; set; }
 

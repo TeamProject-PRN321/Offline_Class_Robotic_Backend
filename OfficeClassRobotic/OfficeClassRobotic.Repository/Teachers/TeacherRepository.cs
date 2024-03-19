@@ -1,4 +1,5 @@
-﻿using Azure.Core;
+﻿using AutoMapper;
+using Azure.Core;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
 using OfficeClassRobotic.DAO.Teachers;
 using OfficeClassRobotic.Service.Exceptions;
@@ -8,10 +9,12 @@ namespace OfficeClassRobotic.Repository.Teachers
     public class TeacherRepository : ITeacherRepository
     {
         private TeacherDAO _dao;
+        private readonly IMapper _mapper;
 
-        public TeacherRepository()
+        public TeacherRepository(IMapper mapper)
         {
             _dao = new TeacherDAO();
+            _mapper = mapper;
         }
 
         public async Task<List<TeacherDTO>?> GetAllTeacherBySubjectId(GetTeacherBySubjectId request)
@@ -23,7 +26,7 @@ namespace OfficeClassRobotic.Repository.Teachers
             }
             catch
             {
-                throw new BadRequestException("Something has wrong!");
+                throw new BadRequestException("Không tìm thấy danh sách teacher dạy môn này!");
             }
         }
 
@@ -36,7 +39,7 @@ namespace OfficeClassRobotic.Repository.Teachers
             }
             catch
             {
-                throw new BadRequestException("Something has wrong!");
+                throw new BadRequestException("Không thể lấy danh sách teacher!");
             }
         }
 
@@ -47,7 +50,7 @@ namespace OfficeClassRobotic.Repository.Teachers
                 var result = await _dao.GetScheduleOfTeacherByTeacherIdAndTime(request);
                 return result;
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 throw new BadRequestException(ex.Message);
             }
@@ -62,7 +65,7 @@ namespace OfficeClassRobotic.Repository.Teachers
             }
             catch
             {
-                throw new BadRequestException("Something has wrong!");
+                throw new BadRequestException("Không thể tìm thấy teacher!");
             }
         }
 
@@ -78,8 +81,32 @@ namespace OfficeClassRobotic.Repository.Teachers
             }
             catch
             {
+                throw new BadRequestException("Update fail!!");
+            }
+        }
+
+        /// <summary>
+        /// Dùng Get danh sách giáo viên theo SubjectName
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        /// <exception cref="NotFoundException"></exception>
+        public async Task<TeacherSubjectResponse> GetListTeacherBySubjectName(string keyword)
+        {
+            try
+            {
+                var result = await _dao.GetListTeacherBySubjectName(keyword);
+                return result;
+            }
+            catch
+            {
                 throw new BadRequestException("Something has wrong!");
             }
+        }
+
+        public Task<ClassRoboticResponse> CreateTeacher(CreateTeacherDTO request)
+        {
+            throw new NotImplementedException();
         }
     }
 }

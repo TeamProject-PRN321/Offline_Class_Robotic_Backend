@@ -1,9 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
-using OfficeClassRobotic.DAO.Parents;
+﻿using Microsoft.AspNetCore.Mvc;
 using OfficeClassRobotic.DAO.Students;
-using OfficeClassRobotic.Repository.Parents;
 using OfficeClassRobotic.Repository.Students;
 
 namespace OfficeClassRobotic.API.Controllers.Students
@@ -51,6 +47,7 @@ namespace OfficeClassRobotic.API.Controllers.Students
         {
             return await _studentRepository.GetAllStudent();
         }
+
 
 
     }

@@ -62,6 +62,27 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
             });
             #endregion
 
+            #region SubjectGradWeight
+            modelBuilder.Entity<SubjectGradingWeight>().HasData(
+                new SubjectGradingWeight
+                {
+                    Id = Guid.Parse("768175a0-688f-4972-ab8c-260f6fe43c35"),
+                    SubjectID = Guid.Parse("54eebe9e-2a5b-4a82-8522-1e7cd2aa4d57"),
+                    AssesessmentType = "Kiem tra 15p",
+                    Created = DateTime.Now,
+                    IsDeleted = false,
+                },
+                new SubjectGradingWeight
+                {
+                    Id = Guid.Parse("048f786e-f84f-4341-ae89-0d373f604596"),
+                    SubjectID = Guid.Parse("54eebe9e-2a5b-4a82-8522-1e7cd2aa4d57"),
+                    AssesessmentType = "Kiem tra 1T",
+                    Created = DateTime.Now,
+                    IsDeleted = false,
+                }
+            );
+            #endregion
+
             #region GiaoTrinh
             modelBuilder.Entity<GiaoTrinh>().HasData(
                 new GiaoTrinh
@@ -69,7 +90,8 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                     Id = Guid.Parse("C12EA77C-C707-44C0-B3CE-420F2FF4ECD9"),
                     GiaoTrinhName = "Toan cao cap 10",
                     Description = "",
-                    FilePDF = "firebaseStorage"
+                    //FilePDF = "firebaseStorage",
+                    SubjectId = Guid.Parse("54EEBE9E-2A5B-4A82-8522-1E7CD2AA4D57"),
                 }
 
             );
@@ -81,8 +103,7 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                 {
                     Id = Guid.Parse("54EEBE9E-2A5B-4A82-8522-1E7CD2AA4D57"),
                     SubjectName = "Toan 10",
-                    TotalSlots = 21,
-                    GiaoTrinhId = Guid.Parse("C12EA77C-C707-44C0-B3CE-420F2FF4ECD9")
+                    TotalSlots = 21
                 }
 
             );
@@ -484,6 +505,39 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                     EndTime = TimeSpan.FromHours(18).Add(TimeSpan.FromMinutes(0)),
                     StudentId = Guid.Parse("2B9D9ACA-27DA-415B-A468-B367613A2488"),
                     SubjectId = Guid.Parse("54EEBE9E-2A5B-4A82-8522-1E7CD2AA4D57")
+                }
+
+            );
+            #endregion
+
+            #region Device
+            modelBuilder.Entity<Device>().HasData(
+                new Device
+                {
+                    Id = Guid.Parse("DFF2458C-3F40-423B-8AA9-D7588A4AE4FE"),
+                    DeviceName = "Bàn học",
+                    Description = "bàn 1 người ngồi",
+                    PriceOfDevice = 120000,
+                    StatusOfDevice = 1,
+                    ClassRoomId = Guid.Parse("D2E283A6-5BF5-4D27-A2C2-994CB6D781E9")
+                },
+                new Device
+                {
+                    Id = Guid.Parse("958E60A2-FA2D-4437-B639-316A569F3AB9"),
+                    DeviceName = "Ghế",
+                    Description = "Ghế 1 người ngồi",
+                    PriceOfDevice = 200000,
+                    StatusOfDevice = 2,
+                    ClassRoomId = Guid.Parse("D2E283A6-5BF5-4D27-A2C2-994CB6D781E9")
+                },
+                new Device
+                {
+                    Id = Guid.Parse("BF5B9E8E-4B5D-4FD2-8F45-B070558C64C0"),
+                    DeviceName = "Quạt",
+                    Description = "Quạt trần",
+                    PriceOfDevice = 200000,
+                    StatusOfDevice = 3,
+                    ClassRoomId = Guid.Parse("D2E283A6-5BF5-4D27-A2C2-994CB6D781E9")
                 }
 
             );
