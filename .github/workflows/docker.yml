@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Add migration
+      - name: Add migration1
         run: dotnet ef --project OfficeClassRobotic.BuisnessObject --startup-project OfficeClassRobotic.API migrations add Initial1
 
       - name: Update database
