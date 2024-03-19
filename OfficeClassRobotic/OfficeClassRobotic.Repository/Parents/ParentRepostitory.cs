@@ -1,4 +1,4 @@
-﻿/*using AutoMapper;
+﻿using AutoMapper;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
 using OfficeClassRobotic.DAO.Parents;
 
@@ -13,29 +13,15 @@ namespace OfficeClassRobotic.Repository.Parents
             parentDAO = new ParentDAO();
             _mapper = mapper;
         }
-        public async Task<ClassRoboticResponse> CreateParent(CreateParentCommand parent)
-        {
-            await parentDAO.CreateParent(parent);
-            return new ClassRoboticResponse
-            {
-                Message = "Create Successfully"
-            };
-        }
-
-        public async Task<ClassRoboticResponse> DeleteParent(DeleteParentCommand parent)
-        {
-            await parentDAO.DeleteParent(parent);
-            return new ClassRoboticResponse
-            {
-                Message = "Delete Successfully"
-            };
-        }
+       
 
         public async Task<List<ParentResponse>> GetAllParent()
         {
             var listParent = await parentDAO.GetAllParent();
             var response = _mapper.Map<List<ParentResponse>>(listParent);
             return response;
+
+
         }
 
         public async Task<ParentResponse> GetParentById(string parentId)
@@ -45,14 +31,29 @@ namespace OfficeClassRobotic.Repository.Parents
             return response;
         }
 
-        public async Task<ClassRoboticResponse> UpdateParent(UpdateParentCommand parent)
+        public Task<ClassRoboticResponse> CreateParent(CreateParentCommand parent)
         {
-            await parentDAO.UpdateParent(parent);
-            return new ClassRoboticResponse
-            {
-                Message = "Update Successfully"
-            };
+            throw new NotImplementedException();
+        }
+
+        public Task<ClassRoboticResponse> UpdateParent(UpdateParentCommand parent)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ClassRoboticResponse> DeleteParent(DeleteParentCommand parent)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ParentResponse> GetParentByAppUserId(string appUserId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ParentResponse> GetParentByName(string name)
+        {
+            throw new NotImplementedException();
         }
     }
 }
-*/

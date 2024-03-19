@@ -42,14 +42,14 @@ namespace OfficeClassRobotic.DAO.Subjects
                 dBContext.Subjects.Add(newSubject);
                 await dBContext.SaveChangesAsync();
                 // để đây từ từ sửa, 1 môn học sẽ tạo với 1 list giáo trình, ok
-                var giaoTrinh = new GiaoTrinh
+                /*var giaoTrinh = new GiaoTrinh
                 {
                     GiaoTrinhName = request.GiaoTrinhDTO.GiaoTrinhName,
                     Description = request.GiaoTrinhDTO.Description,
                     //FilePDF = request.GiaoTrinhDTO.FilePDF,
                     SubjectId = newSubject.Id
-                };
-                dBContext.GiaoTrinhs.Add(giaoTrinh);
+                };*/
+                /*dBContext.GiaoTrinhs.Add(giaoTrinh);*/
                 
             }
             catch (Exception ex) {
