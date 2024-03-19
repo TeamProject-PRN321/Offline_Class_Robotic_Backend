@@ -16,12 +16,12 @@ jobs:
       - name: Add migration
         shell: pwsh
         run: |
-          Add-Migration Init -Project OfficeClassRobotic.BuisnessObject -StartupProject OfficeClassRobotic.API
+          dotnet ef --project OfficeClassRobotic.BuisnessObject --startup-project OfficeClassRobotic.API migrations add Initial1
 
       - name: Update database
         shell: pwsh
         run: |
-          Update-database -Project OfficeClassRobotic.BuisnessObject -StartupProject OfficeClassRobotic.API
+          dotnet ef --project OfficeClassRobotic.BuisnessObject --startup-project OfficeClassRobotic.API database update
 
       - name: Run Docker compose command
         run: docker compose up --build -d

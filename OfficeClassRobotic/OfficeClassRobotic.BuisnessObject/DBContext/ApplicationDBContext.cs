@@ -6,7 +6,6 @@ using OfficeClassRobotic.BuisnessObject.ConvertTer;
 using OfficeClassRobotic.BuisnessObject.Models;
 using OfficeClassRobotic.BuisnessObject.Models.Common;
 using OfficeClassRobotic.DataTier.ConvertTer;
-using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -14,6 +13,14 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
 {
     public class ApplicationDBContext : DbContext
     {
+        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
+        {
+
+        }
+
+        public ApplicationDBContext()
+        {
+        }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Attendance> Attendance { get; set; }
@@ -584,14 +591,7 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
 
             base.ConfigureConventions(builder);
         }
-        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
-        {
-
-        }
-
-        public ApplicationDBContext()
-        {
-        }
+        
     }
 
 }
