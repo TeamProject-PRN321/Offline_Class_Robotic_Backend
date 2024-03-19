@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using OfficeClassRobotic.BuisnessTier.Implement;
 using OfficeClassRobotic.DAO.Accounts;
 using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
 using OfficeClassRobotic.Repository.Accounts;
@@ -13,7 +12,6 @@ using OfficeClassRobotic.Repository.Classess;
 using OfficeClassRobotic.Repository.Classrooms;
 using OfficeClassRobotic.Repository.GiaoTrinhForSubject;
 using OfficeClassRobotic.Repository.GiaoTrinhs;
-using OfficeClassRobotic.Repository.Interfaces;
 using OfficeClassRobotic.Repository.IStudentGrades;
 using OfficeClassRobotic.Repository.Parents;
 using OfficeClassRobotic.Repository.Students;
@@ -135,7 +133,7 @@ namespace OfficeClassRobotic.API.Extensions
             });
             services.AddCors();
             //add jwt
-            services.AddScoped<ITokenService, TokenService>();
+            //services.AddScoped<IToken, TokenService>();
             services.AddScoped<ISubjectRepository, SubjectRepository>();
             //services.AddScoped<IParentRepostitory, ParentRepostitory>();
             services.AddScoped<IParentRepostitory, ParentRepostitory>();
