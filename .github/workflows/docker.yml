@@ -13,13 +13,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up .NET Core environment
-        run: |
-          $env:PATH += ";${{ env.DotnetPath }}"
-        env:
-          DotnetPath: "C:/Program Files/dotnet"
+      # - name: Set up .NET Core environment
+      #   run: |
+      #     $env:PATH += ";${{ env.DotnetPath }}"
+      #   env:
+      #     DotnetPath: "C:/Program Files/dotnet"
 
-      - name: Add migration1
+      - name: Add migration
         run: dotnet ef --project OfficeClassRobotic.BuisnessObject --startup-project OfficeClassRobotic.API migrations add Initial1
 
       - name: Update database
