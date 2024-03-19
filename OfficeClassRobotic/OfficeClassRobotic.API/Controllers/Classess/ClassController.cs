@@ -54,5 +54,13 @@ namespace OfficeClassRobotic.API.Controllers.Classess
             var result = await _classRepository.GetAllClassesAreNotFinished();
             return result;
         }
+
+        [HttpGet]
+        [Route("get-list-student-of-class/{classname}")]
+        public async Task<StudentsOfClassesResponse> GetListStudentByClassname(string classname)
+        {
+            var result = await _classRepository.GetListStudentOfClassByClassName(classname);
+            return result;
+        }
     }
 }

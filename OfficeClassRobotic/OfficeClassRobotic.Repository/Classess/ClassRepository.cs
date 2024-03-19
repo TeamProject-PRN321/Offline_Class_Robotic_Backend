@@ -53,5 +53,8 @@ namespace OfficeClassRobotic.Repository.Classess
             await ClassDAO.Instance.DeleteClass(request);
             return new ClassRoboticResponse { Message = ClassRoboticMessage.DeleteSuccessfully };
         }
+
+        public Task<StudentsOfClassesResponse> GetListStudentOfClassByClassName(string className)
+            => ClassDAO.Instance.GetListStudentOfClassByClassName(className);
     }
 }
