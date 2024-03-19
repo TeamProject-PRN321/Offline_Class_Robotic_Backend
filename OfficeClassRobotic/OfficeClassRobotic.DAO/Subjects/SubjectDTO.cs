@@ -6,7 +6,6 @@ namespace OfficeClassRobotic.DAO.Subjects
     {
         public string? SubjectName { get; set; }
         public int TotalSlots { get; set; }
-        public CreateGiaoTrinhCommand? GiaoTrinhDTO { get; set; }
     }
 
     public class UpdateSubjectCommand
