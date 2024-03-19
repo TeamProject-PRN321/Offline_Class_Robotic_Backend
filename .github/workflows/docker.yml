@@ -13,6 +13,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Navigate to project directory
+        run: cd C:\actions-runner\Nhan\_work\Offline_Class_Robotic_Backend\Offline_Class_Robotic_Backend\OfficeClassRobotic
+
       - name: Add migration
         run: dotnet ef --project OfficeClassRobotic.BuisnessObject --startup-project OfficeClassRobotic.API migrations add Initial1
 
