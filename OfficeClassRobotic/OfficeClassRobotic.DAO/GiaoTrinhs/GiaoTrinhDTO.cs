@@ -11,7 +11,8 @@ namespace OfficeClassRobotic.DAO.GiaoTrinhs
         public Guid Id { get; set; }
         public string? GiaoTrinhName { get; set; }
         public string? Description { get; set; }
-        public string? FilePDF { get; set; }
+        public string? FilePDFName { get; set; }
+        public byte[]? FilePDF { get; set; }
         public DateTime Created { get; set; }
     }
 
