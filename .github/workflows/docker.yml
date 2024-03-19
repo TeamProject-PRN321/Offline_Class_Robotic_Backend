@@ -20,10 +20,10 @@ jobs:
       #     DotnetPath: "C:/Program Files/dotnet"
 
       - name: Add migration
-        run: dotnet ef --project OfficeClassRobotic.BuisnessObject --startup-project OfficeClassRobotic.API migrations add Initial1
+        run: cd C:\actions-runner\Nhan\_work\Offline_Class_Robotic_Backend\Offline_Class_Robotic_Backend\OfficeClassRobotic dotnet ef --project OfficeClassRobotic.BuisnessObject --startup-project OfficeClassRobotic.API migrations add Initial1
 
       - name: Update database
-        run: dotnet ef --project OfficeClassRobotic.BuisnessObject --startup-project OfficeClassRobotic.API database update
+        run: cd C:\actions-runner\Nhan\_work\Offline_Class_Robotic_Backend\Offline_Class_Robotic_Backend\OfficeClassRobotic dotnet ef --project OfficeClassRobotic.BuisnessObject --startup-project OfficeClassRobotic.API database update
 
       - name: Run Docker compose command
         run: docker compose up --build -d
