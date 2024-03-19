@@ -26,6 +26,6 @@ namespace OfficeClassRobotic.DAO.Subjects
         public Guid Id { get; set; }
         public string? SubjectName { get; set; }
         public int TotalSlots { get; set; }
-        public GiaoTrinhResponse? GiaoTrinhData { get; set; }
+        /*public GiaoTrinhResponse? GiaoTrinhData { get; set; }*/
     }
 }

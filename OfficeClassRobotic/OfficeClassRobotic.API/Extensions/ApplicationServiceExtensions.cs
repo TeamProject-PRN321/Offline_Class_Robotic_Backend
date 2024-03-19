@@ -32,14 +32,15 @@ namespace OfficeClassRobotic.API.Extensions
             services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
             var secretKey = configuration["JwtSettings:Key"];
             var secretKeyBytes = Encoding.UTF8.GetBytes(secretKey);
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme/*options =>
+
+            services.AddAuthentication(options =>
             {
                 //các loại chứng thực (authentication scheme) mặc định được sử dụng. 
                 //CookieAuthenticationDefaults.AuthenticationScheme để sử dụng chứng thực Cookie.
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            }*/)/*.AddCookie(options =>
+            }).AddCookie(options =>
             {
                 // Thời gian hết hạn: 20P
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
@@ -54,7 +55,7 @@ namespace OfficeClassRobotic.API.Extensions
                 options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
                 // Xác định giá trị SameSite của cookie, ở đây là SameSiteMode.Lax (giảm thiểu sự chia sẻ cookie).
                 options.Cookie.SameSite = SameSiteMode.Lax;
-            })*/.AddJwtBearer(opt =>
+            }).AddJwtBearer(opt =>
             {
                 // Cho phép lưu trữ token trong AuthenticationProperties của HttpContext sau khi chứng thực thành công.
                 opt.SaveToken = true;
@@ -81,16 +82,16 @@ namespace OfficeClassRobotic.API.Extensions
             });
             services.AddSwaggerGen(c =>
             {
-                c.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme()
+                c.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, new Microsoft.OpenApi.Models.OpenApiSecurityScheme()
                 {
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.Http,
+                    In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+                    Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
                     BearerFormat = "JwtSettings",
                     Scheme = JwtBearerDefaults.AuthenticationScheme,
                     Name = "Authorization",
                     Description = "Insert JWT Token"
                 });
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
                 {
                     {
                         new OpenApiSecurityScheme
@@ -137,6 +138,7 @@ namespace OfficeClassRobotic.API.Extensions
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ISubjectRepository, SubjectRepository>();
             //services.AddScoped<IParentRepostitory, ParentRepostitory>();
+            services.AddScoped<IParentRepostitory, ParentRepostitory>();
             services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<IGiaoTrinhRepository, GiaoTrinhRepository>();
             services.AddScoped<ITeacherRepository, TeacherRepository>();
@@ -145,8 +147,6 @@ namespace OfficeClassRobotic.API.Extensions
             services.AddScoped<IAttendanceRepository, AttendanceRepository>();
             services.AddScoped<IClassroomRepository, ClassroomRepository>();
             services.AddScoped<IStudentGradeRepository, StudentGradeRepository>();
-
-
 
             return services;
         }
