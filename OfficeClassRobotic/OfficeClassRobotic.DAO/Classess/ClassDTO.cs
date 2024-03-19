@@ -113,4 +113,27 @@ namespace OfficeClassRobotic.DAO.Classess
         public Guid AppUserTeacherId { get; set; }
         public string? TeacherName { get;set; }
     }
+
+    public class ClassDataResponse
+    {
+        public Guid ClassId { get; set; }
+        public string? ClassName { get; set; }
+        public List<string>? DayStudy { get; set; }
+        public TimeSpan? StartTime { get; set; }
+        public TimeSpan? EndTime { get; set; }
+        public Guid SubjectId { get; set; }
+        public string? SubjectName { get; set; }
+        public Guid TeacherId { get; set; }
+        public string? TeacherName { get; set; }
+        public Guid StudentId { get; set; }
+        public string? StudentName { get; set;}
+        public DateTime DateStartStudy { get; set; }
+        public DateTime DateEndStudy { get; set; }
+    }
+
+    public class StudentsOfClassesResponse
+    {
+        public int TotalStudentsInClass { get; set; }
+        public List<ClassDataResponse> ClassDataResponses { get; set; }
+    }
 }

@@ -8,6 +8,7 @@ using OfficeClassRobotic.Service.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -401,7 +402,7 @@ namespace OfficeClassRobotic.DAO.Classess
         {
             //Nguyen Vi Remake CreateClasses
             var subject = _dbContext.Subjects.Where(x => x.Id == Guid.Parse(request.SubjectId) && !x.IsDeleted).FirstOrDefault();
-            if(subject == null)
+            if (subject == null)
             {
                 throw new BadRequestException("Môn học bạn yêu cầu chưa từng tồn tại");
             }
@@ -492,39 +493,6 @@ namespace OfficeClassRobotic.DAO.Classess
                 }
             }
             await _dbContext.SaveChangesAsync();
-            #region Nhan's code
-            /*
-                        //
-                        var studentIds = request.StudentListId.Select(s => s.StudentId).ToList();
-                        foreach (var studentId in studentIds) {
-                            var classess = new Class
-                            {
-                                ClassName = request.ClassName,
-                                DayStudy = request.DayStudy,
-                                StartTime = null,
-                                EndTime = null,
-                                StudentId = Guid.Parse(studentId),
-                                SubjectId = Guid.Parse(request.SubjectId),
-                            };
-                            _dbContext.Classes.Add(classess);
-            *//*
-                            var classSchedular = new ClassSchedule
-                            {
-                                DateStudy = DateTime.Now,
-                                NumberOfSudent = studentIds.Count,
-                                ClassId = classess.Id,
-                                TeacherId = Guid.Parse(request.TeacherId),
-                                ClassRoomID = Guid.Parse(request.ClassRoomID)
-                            };
-                            _dbContext.ClassSchedule.Add(classSchedular);
-
-                            var attendence = new Attendance
-                            {
-                                ClassScheduleID = classSchedular.Id,
-                            };
-                            _dbContext.Attendance.Add(attendence);*//*
-                        }*/
-            #endregion
         }
 
         /// <summary>
@@ -595,6 +563,61 @@ namespace OfficeClassRobotic.DAO.Classess
             classExist.IsDeleted = true;
             _dbContext.Classes.Update(classExist);
             await _dbContext.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// lấy ra danh sách lớp với số lượng sinh viên, gồm 1 danh sách sinh viên, sỉ sô
+        /// trong danh sách siên là các thông tin về sinh của 1 lớp học
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public async Task<StudentsOfClassesResponse> GetListStudentOfClassByClassName(string className)
+        {
+            var listStudentOfClass = await (from c in _dbContext.Classes
+                                            join cs in (
+                                                from cs in _dbContext.ClassSchedule
+                                                group cs by new { cs.ClassId, cs.TeacherId } into g
+                                                select new
+                                                {
+                                                    ClassId = g.Key.ClassId,
+                                                    TeacherId = g.Key.TeacherId,
+                                                    DateStartStudy = g.Min(d => d.DateStudy),
+                                                    DateEndStudy = g.Max(d => d.DateStudy),
+                                                }
+                                            ) on c.Id equals cs.ClassId
+                                            join subject in _dbContext.Subjects on c.SubjectId equals subject.Id
+                                            join stu in _dbContext.Students on c.StudentId equals stu.Id
+                                            join studentAppUser in _dbContext.AppUsers on stu.AppUserId equals studentAppUser.Id
+                                            join teacher in _dbContext.Teacher on cs.TeacherId equals teacher.Id
+                                            join teacherAppUser in _dbContext.AppUsers on teacher.AppUserId equals teacherAppUser.Id
+                                            where c.ClassName == className
+                                            orderby studentAppUser.FullName
+                                            select new ClassDataResponse
+                                            {
+                                                ClassId = c.Id,
+                                                ClassName = c.ClassName,
+                                                DayStudy = c.DayStudy,
+                                                StartTime = c.StartTime, 
+                                                EndTime = c.EndTime,
+                                                StudentId = c.StudentId,
+                                                StudentName = studentAppUser.FullName,
+                                                SubjectId = c.SubjectId,
+                                                SubjectName = subject.SubjectName,
+                                                TeacherId = cs.TeacherId,
+                                                TeacherName = teacherAppUser.FullName,
+                                                DateStartStudy = cs.DateStartStudy,
+                                                DateEndStudy = cs.DateEndStudy,
+                                            }
+                                            ).ToListAsync();
+
+            var response = new StudentsOfClassesResponse
+            {
+                TotalStudentsInClass = listStudentOfClass.Count(),
+                ClassDataResponses = listStudentOfClass
+            };
+
+
+            return response;
         }
     }
 
