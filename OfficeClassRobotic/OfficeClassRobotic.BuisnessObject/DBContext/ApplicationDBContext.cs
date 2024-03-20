@@ -28,6 +28,9 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
         public DbSet<Classroom> Classrooms { get; set; }
         public DbSet<ClassSchedule> ClassSchedule { get; set; }
         public DbSet<Device> Devices { get; set; }
+        public DbSet<DeviceCategory> DeviceCategories { get; set; }
+        public DbSet<BorrowDevice> BorrowDevices { get; set; }
+        public DbSet<BorrowDeviceHistory> BorrowDeviceHistories { get; set; }
         public DbSet<FeedBack> FeedBacks { get; set; }
         public DbSet<GiaoTrinh> GiaoTrinhs { get; set; }
         public DbSet<Parent> Parents { get; set; }
@@ -513,7 +516,7 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
             #endregion
 
             #region Device
-            modelBuilder.Entity<Device>().HasData(
+         /*   modelBuilder.Entity<Device>().HasData(
                 new Device
                 {
                     Id = Guid.Parse("DFF2458C-3F40-423B-8AA9-D7588A4AE4FE"),
@@ -542,7 +545,7 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                     ClassRoomId = Guid.Parse("D2E283A6-5BF5-4D27-A2C2-994CB6D781E9")
                 }
 
-            );
+            );*/
             #endregion
 
             base.OnModelCreating(modelBuilder);

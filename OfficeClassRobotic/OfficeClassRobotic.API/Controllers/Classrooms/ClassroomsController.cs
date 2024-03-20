@@ -39,7 +39,7 @@ namespace OfficeClassRobotic.API.Controllers.Classrooms
         [HttpGet("search/{keyword}")]
         public Task<List<ClassroomResponse>> Search(string keyword) => _classroomRepository.SearchClassroom(keyword);
 
-        [HttpPost]
+/*        [HttpPost]
         [Route("add")]
         public Task<ClassRoboticResponse> Create(CreateDeviceForClassroomCommand request)
         {
@@ -61,6 +61,6 @@ namespace OfficeClassRobotic.API.Controllers.Classrooms
         {
             var result = _classroomRepository.DeleteDeviceForClassroom(request);
             return result;
-        }
+        }*/
     }
 }

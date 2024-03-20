@@ -14,6 +14,7 @@ namespace Models.OfficeClassRobotic.BuisnessObject
 
         public virtual IList<FeedBack> Feedbacks { get; set; }
         public virtual IList<ClassSchedule> ClassSchedule { get; set; }
+        public virtual IList<BorrowDevice> BorrowDevices { get; set; }
         public ICollection<TeacherSubject> TeacherSubjects { get; set; }
 
     }

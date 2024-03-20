@@ -37,7 +37,7 @@ namespace OfficeClassRobotic.DAO.Classrooms
         public string? Description { get; set; }
 
         public TrungTamRobotic TrungTamRoboticData { get; set; }
-        public List<Device> ListDevice { get; set; }
+        //public List<Device> ListDevice { get; set; }
     }
 
     public class DeviceResponse

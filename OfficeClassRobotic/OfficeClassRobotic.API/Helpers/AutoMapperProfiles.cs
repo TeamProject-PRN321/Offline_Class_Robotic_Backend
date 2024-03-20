@@ -16,7 +16,7 @@ namespace OfficeClassRobotic.API.Helpers
             CreateMap<Parent, ParentResponse>();
             CreateMap<Student, StudentResponse>();
             CreateMap<GiaoTrinh, GiaoTrinhResponse>();
-            CreateMap<Device, DeviceResponse>();
+            //CreateMap<Device, DeviceResponse>();
             CreateMap<TrungTamRobotic, TrungTamRoboticResponse>();
             CreateMap<GiaoTrinh, GiaoTrinhPDFResponse>();
         }

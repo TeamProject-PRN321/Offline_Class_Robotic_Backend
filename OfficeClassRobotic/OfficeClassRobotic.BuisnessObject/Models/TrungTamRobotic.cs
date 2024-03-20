@@ -1,4 +1,5 @@
-﻿using OfficeClassRobotic.BuisnessObject.Models.Common;
+﻿using OfficeClassRobotic.BuisnessObject.Models;
+using OfficeClassRobotic.BuisnessObject.Models.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,5 +16,6 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         public string Address { get; set; }
         
         public virtual IList<Classroom> Classrooms { get; set; }
+        public virtual IList<DeviceCategory> Devices { get; set; }
     }
 }

@@ -31,7 +31,7 @@ namespace OfficeClassRobotic.Repository.Classrooms
                     ClassRoomName = item.ClassRoomName,
                     Description = item.Description,
                     TrungTamRoboticData = _mapper.Map<TrungTamRoboticResponse>(item.TrungTamRoboticData),
-                    ListDevice = _mapper.Map<List<DeviceResponse>>(item.ListDevice)
+                  //  ListDevice = _mapper.Map<List<DeviceResponse>>(item.ListDevice)
                 };
                 response.Add(responseItem);
             }
@@ -50,21 +50,21 @@ namespace OfficeClassRobotic.Repository.Classrooms
                     ClassRoomName = item.ClassRoomName,
                     Description = item.Description,
                     TrungTamRoboticData = _mapper.Map<TrungTamRoboticResponse>(item.TrungTamRoboticData),
-                    ListDevice = _mapper.Map<List<DeviceResponse>>(item.ListDevice),
-                    QuantityDevice = item.ListDevice.Count(),
-                    Price = item.ListDevice/*.GroupBy(c => c.PriceOfDevice).Select(g => g.Key)*/.Sum(c => c.PriceOfDevice),
+                   // ListDevice = _mapper.Map<List<DeviceResponse>>(item.ListDevice),
+                    //QuantityDevice = item.ListDevice.Count(),
+                    //Price = item.ListDevice/*.GroupBy(c => c.PriceOfDevice).Select(g => g.Key)*/.Sum(c => c.PriceOfDevice),
                 };
                 response.Add(responseItem);
             }
             return response;
         }
 
-        public async Task<ClassRoboticResponse> CreateDeviceForClassroom(CreateDeviceForClassroomCommand request)
+/*        public async Task<ClassRoboticResponse> CreateDeviceForClassroom(CreateDeviceForClassroomCommand request)
         {
             await ClassroomDAO.Instance.CreateDeviceForClassroom(request);
             return new ClassRoboticResponse { Message = ClassRoboticMessage.CreateSuccessfully };
-        }
-
+        }*/
+/*
         public async Task<ClassRoboticResponse> UpdateDeviceForClassroom(UpdateDeviceForClassroomCommand request)
         {
             await ClassroomDAO.Instance.UpdateDeviceForClassroom(request);
@@ -76,7 +76,7 @@ namespace OfficeClassRobotic.Repository.Classrooms
             await ClassroomDAO.Instance.DeleteDeviceForClassroom(request);
             return new ClassRoboticResponse { Message = ClassRoboticMessage.DeleteSuccessfully };
         }
-
+*/
         public async Task<List<ClassroomResponse>> SearchClassroom(string className)
         {
             var list = await _classroomDAO.GetClassroomByClassCode(className);
@@ -89,7 +89,7 @@ namespace OfficeClassRobotic.Repository.Classrooms
                     ClassRoomName = item.ClassRoomName,
                     Description = item.Description,
                     TrungTamRoboticData = _mapper.Map<TrungTamRoboticResponse>(item.TrungTamRoboticData),
-                    ListDevice = _mapper.Map<List<DeviceResponse>>(item.ListDevice)
+               //     ListDevice = _mapper.Map<List<DeviceResponse>>(item.ListDevice)
                 };
                 response.Add(responseItem);
             }

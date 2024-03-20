@@ -1,4 +1,5 @@
-﻿using OfficeClassRobotic.BuisnessObject.Models.Common;
+﻿using OfficeClassRobotic.BuisnessObject.Models;
+using OfficeClassRobotic.BuisnessObject.Models.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,7 +18,8 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         public Guid TrungTamRoboticId { get; set; }
 
         public virtual TrungTamRobotic TrungTamRobotic { get; set; }
-        public virtual IList<Device> Devices { get; set; }
+        public virtual IList<BorrowDevice> BorrowDevices { get; set; }
         public virtual IList<ClassSchedule> ClassSchedules { get; set; }
+
     }
 }
