@@ -136,4 +136,21 @@ namespace OfficeClassRobotic.DAO.Classess
         public int TotalStudentsInClass { get; set; }
         public List<ClassDataResponse> ClassDataResponses { get; set; }
     }
+
+    public class GetClassesByStudentIdRequest
+    {
+        public Guid StudentId { get; set; }
+    }
+
+    public class GetClassAndGradeByStudentId
+    {
+        public Guid ClassId { get; set; }
+        public string ClassName { get; set; }
+        public string SubjectName { get; set; }
+        public List<string> DayStudy { get; set; }
+        public TimeSpan? StartTime { get; set; }
+        public TimeSpan? EndTime { get; set; }
+        public bool IsClassFinish { get; set; }
+        public double Grade { get; set; }
+    }
 }

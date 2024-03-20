@@ -11,7 +11,8 @@ namespace OfficeClassRobotic.Repository.Classess
         public Task<List<ClassDTO>> GetAllClassesAreNotFinished();
         public Task<ClassRoboticResponse> UpdateClass(ClassDTO request);
         public Task<ClassRoboticResponse> DeleteClass(ClassDTO request);
-
         public Task<StudentsOfClassesResponse> GetListStudentOfClassByClassName(string className);
+        public Task<List<GetClassAndGradeByStudentId>> GetListClassByStudentId(Guid request);
+
     }
 }
