@@ -416,11 +416,6 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                     },
                     new Student
                     {
-                        AppUserId = Guid.Parse("5DDD65FF-16A1-4FD1-ACBF-C913F0CCE37C"),
-                        Id = Guid.Parse("88DE6BCD-E510-40D8-8F29-A06009CB195C")
-                    },
-                    new Student
-                    {
                         AppUserId = Guid.Parse("64863E62-104C-49EE-A57E-B066936D8E8D"),
                         Id = Guid.Parse("07C7D0E7-273E-4819-AD69-0A875EF8F021")
                     },
