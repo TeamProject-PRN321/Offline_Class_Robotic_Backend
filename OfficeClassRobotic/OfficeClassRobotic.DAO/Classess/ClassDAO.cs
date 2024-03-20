@@ -597,7 +597,7 @@ namespace OfficeClassRobotic.DAO.Classess
                                                 ClassId = c.Id,
                                                 ClassName = c.ClassName,
                                                 DayStudy = c.DayStudy,
-                                                StartTime = c.StartTime, 
+                                                StartTime = c.StartTime,
                                                 EndTime = c.EndTime,
                                                 StudentId = c.StudentId,
                                                 StudentName = studentAppUser.FullName,
@@ -619,6 +619,38 @@ namespace OfficeClassRobotic.DAO.Classess
 
             return response;
         }
-    }
 
+
+        public async Task<List<GetClassAndGradeByStudentId>> GetListClassByStudentId(Guid requestID)
+        {
+            var classesOfStudentId = await _dbContext.Classes
+            .Include(c => c.Subject)
+            .Where(c => c.StudentId == requestID)
+            .ToListAsync();
+
+            var classDTOs = new List<GetClassAndGradeByStudentId>();
+
+            foreach (var classes in classesOfStudentId)
+            {
+                var grade = await _dbContext.StudentGrades
+                    .Where(sg => sg.Class.SubjectId == classes.SubjectId && sg.Class.StudentId == requestID)
+                    .Select(sg => sg.Grade)
+                    .FirstOrDefaultAsync();
+
+                var classDTO = new GetClassAndGradeByStudentId
+                {
+                    ClassId = classes.Id,
+                    DayStudy = classes.DayStudy,
+                    ClassName = classes.ClassName,
+                    StartTime = classes.StartTime,
+                    EndTime = classes.EndTime,
+                    IsClassFinish = classes.IsClassFinish,
+                    SubjectName = classes.Subject.SubjectName,
+                    Grade = grade
+                };
+                classDTOs.Add(classDTO);
+            }
+            return classDTOs;
+        }
+    } 
 }

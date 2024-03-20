@@ -48,7 +48,6 @@ namespace OfficeClassRobotic.DAO.Students
         public string? Name { get; set; }
         public string? Address { get; set; }
         public DateOnly Birthday { get; set; }
-
         public string ParentID { get; set; }
     }
 
@@ -58,7 +57,6 @@ namespace OfficeClassRobotic.DAO.Students
         public string? Name { get; set; }
         public string? Address { get; set; }
         public DateOnly Birthday { get; set; }
-
         public Guid ParentId { get; set; }
         public DateTime? Created { get; set; }
     }
