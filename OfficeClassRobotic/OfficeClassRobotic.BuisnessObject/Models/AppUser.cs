@@ -18,7 +18,13 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         public string? PhotoUrl { get; set; }
         public AppUser() => Id = Guid.NewGuid();
 
-        public IList<AppUserRole> AppUserRoles { get; set; }
+        // relationship
+        public virtual Admin Admin { get; set; }
+        public virtual Student Student { get; set; }
+        public virtual Parent Parent { get; set; }
+        public virtual Teacher Teacher { get; set; }
+        public virtual Staff Staff { get; set; }
 
+        public IList<AppUserRole> AppUserRoles { get; set; }
     }
 }
