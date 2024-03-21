@@ -4,6 +4,7 @@ using OfficeClassRobotic.Service.Exceptions;
 using System.Globalization;
 using Models.OfficeClassRobotic.BuisnessObject;
 using System.Xml.Linq;
+using OfficeClassRobotic.DAO.Classess;
 
 namespace OfficeClassRobotic.DAO.Students
 {
@@ -90,7 +91,7 @@ namespace OfficeClassRobotic.DAO.Students
             }
             return null;
         }
-        
+
 
         /*
         public async Task UpdateStudent(UpdateStudentCommand student)
@@ -339,7 +340,7 @@ namespace OfficeClassRobotic.DAO.Students
                             UserName = appUserStudent.UserName,
                         };
                         var parent = _dbContext.Parents.Where(x => x.Id == s.ParentId).FirstOrDefault();
-                        if(parent != null)
+                        if (parent != null)
                         {
                             var appUserParent = _dbContext.AppUsers.Where(x => x.Id == parent.AppUserId).FirstOrDefault();
                             if (parent != null && appUserParent != null)
@@ -365,5 +366,45 @@ namespace OfficeClassRobotic.DAO.Students
             }
             return Task.FromResult(listResult);
         }
+
+        public async Task<List<GetStudentGrade>> GetListGradeByStudentId(Guid studentId)
+        {
+            // Lấy danh sách lớp học của sinh viên
+            var classesOfStudentId = await _dbContext.Classes
+                .Include(c => c.Subject)
+                .Include(c => c.Student)
+                    .ThenInclude(s => s.AppUser)
+                .Where(c => c.StudentId == studentId)
+                .ToListAsync();
+
+            var studentGrades = new List<GetStudentGrade>();
+
+            foreach (var classs in classesOfStudentId)
+            {
+                // Lấy tất cả các điểm của sinh viên trong lớp học đó
+                var gradesInClass = await _dbContext.StudentGrades
+                    .Where(sg => sg.ClassId == classs.Id)
+                    .ToListAsync();
+
+                // Tạo đối tượng GetStudentGrade cho mỗi điểm số
+                foreach (var grade in gradesInClass)
+                {
+                    var studentGrade = new GetStudentGrade
+                    {
+                        StudentName = classs.Student.AppUser.UserName,
+                        ClassName = classs.ClassName,
+                        SubjectName = classs.Subject.SubjectName,
+                        Grade = grade.Grade
+                    };
+
+                    studentGrades.Add(studentGrade);
+                }
+            }
+
+            return studentGrades;
+        }
+
+
+
     }
 }
