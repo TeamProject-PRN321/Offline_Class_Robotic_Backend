@@ -56,5 +56,13 @@ namespace OfficeClassRobotic.API.Controllers.Students
             return await _studentRepository.GetStudentGrades(studentId);
         }
 
+
+        [HttpGet]
+        [Route("get-all-studentsAttendance/{studentId}")]
+        public async Task<List<GetStudentAttendance>> GetStudentAttendance(Guid studentId)
+        {
+            return await _studentRepository.GetStudentAttendance(studentId);
+        }
+
     }
 }

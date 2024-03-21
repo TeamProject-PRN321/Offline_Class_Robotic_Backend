@@ -147,10 +147,11 @@ namespace OfficeClassRobotic.DAO.Classess
         public Guid ClassId { get; set; }
         public string ClassName { get; set; }
         public string SubjectName { get; set; }
+        public List<Dictionary<string, double>> Grades { get; set; }
         public List<string> DayStudy { get; set; }
         public TimeSpan? StartTime { get; set; }
         public TimeSpan? EndTime { get; set; }
         public bool IsClassFinish { get; set; }
-        public double Grade { get; set; }
+
     }
 }

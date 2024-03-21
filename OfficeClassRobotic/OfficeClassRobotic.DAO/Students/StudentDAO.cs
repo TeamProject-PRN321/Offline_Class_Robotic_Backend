@@ -5,6 +5,7 @@ using System.Globalization;
 using Models.OfficeClassRobotic.BuisnessObject;
 using System.Xml.Linq;
 using OfficeClassRobotic.DAO.Classess;
+using OfficeClassRobotic.DAO.Attendances;
 
 namespace OfficeClassRobotic.DAO.Students
 {
@@ -369,6 +370,8 @@ namespace OfficeClassRobotic.DAO.Students
 
         public async Task<List<GetStudentGrade>> GetListGradeByStudentId(Guid studentId)
         {
+            var studentGrades = new List<GetStudentGrade>();
+
             // Lấy danh sách lớp học của sinh viên
             var classesOfStudentId = await _dbContext.Classes
                 .Include(c => c.Subject)
@@ -377,34 +380,53 @@ namespace OfficeClassRobotic.DAO.Students
                 .Where(c => c.StudentId == studentId)
                 .ToListAsync();
 
-            var studentGrades = new List<GetStudentGrade>();
-
             foreach (var classs in classesOfStudentId)
             {
+                var studentGradeDTO = new GetStudentGrade
+                {
+                    StudentName = classs.Student.AppUser.UserName,
+                    ClassName = classs.ClassName,
+                    SubjectName = classs.Subject.SubjectName,
+                    Grades = new List<Dictionary<string, double>>() // Khởi tạo danh sách Grade Dictionary cho mỗi lớp học
+                };
+
                 // Lấy tất cả các điểm của sinh viên trong lớp học đó
                 var gradesInClass = await _dbContext.StudentGrades
                     .Where(sg => sg.ClassId == classs.Id)
                     .ToListAsync();
 
-                // Tạo đối tượng GetStudentGrade cho mỗi điểm số
+                // Tạo đối tượng Grade Dictionary cho mỗi điểm số
                 foreach (var grade in gradesInClass)
                 {
-                    var studentGrade = new GetStudentGrade
+                    var gradeDictionary = new Dictionary<string, double>
                     {
-                        StudentName = classs.Student.AppUser.UserName,
-                        ClassName = classs.ClassName,
-                        SubjectName = classs.Subject.SubjectName,
-                        Grade = grade.Grade
+                        { grade.AssesessmentType, grade.Grade }
                     };
-
-                    studentGrades.Add(studentGrade);
+                    studentGradeDTO.Grades.Add(gradeDictionary); // Thêm Grade Dictionary vào danh sách Grades của môn học
                 }
-            }
 
+                studentGrades.Add(studentGradeDTO);
+            }
             return studentGrades;
         }
 
 
+        public async Task<List<GetStudentAttendance>> GetAttendanceByStudentId(Guid studentId)
+        {
+            var attendanceList = await _dbContext.Attendance
+                .Include(a => a.ClassSchedule)
+                    .ThenInclude(cs => cs.Class)
+                .Where(a => a.ClassSchedule.Class.StudentId == studentId)
+                .Select(a => new GetStudentAttendance
+                {
+                    DateStudy = a.ClassSchedule.DateStudy,
+                    AttendStatus = a.AttendStatus,
+                    Description = a.Description
+                })
+                .ToListAsync();
+
+            return attendanceList;
+        }
 
     }
 }
