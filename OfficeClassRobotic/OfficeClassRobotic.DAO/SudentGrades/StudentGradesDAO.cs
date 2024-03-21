@@ -40,7 +40,7 @@ namespace OfficeClassRobotic.DAO.SudentGrades
             try
             {
                 var listStudentGradeDto = new List<StudentGradeDTO>();
-                var classStudents = await _dbContext.Classes.Where(c => c.ClassName.Contains(className)).ToListAsync();
+                var classStudents = await _dbContext.Classes.Where(c => c.ClassName.ToLower().Contains(className.ToLower())).ToListAsync();
                 foreach (var classStudent in classStudents)
                 {
                     var subjectGrade = await _dbContext.StudentGrades.Where(sg => sg.ClassId == classStudent.Id).ToListAsync();
