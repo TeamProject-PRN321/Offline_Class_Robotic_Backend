@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Models.OfficeClassRobotic.BuisnessObject;
 using OfficeClassRobotic.DAO.Students;
 using OfficeClassRobotic.Repository.Students;
 
@@ -48,7 +49,12 @@ namespace OfficeClassRobotic.API.Controllers.Students
             return await _studentRepository.GetAllStudent();
         }
 
-
+        [HttpGet]
+        [Route("get-all-studentsGrades/{studentId}")]
+        public async Task<List<GetStudentGrade>> GetStudentGrades(Guid studentId)
+        {
+            return await _studentRepository.GetStudentGrades(studentId);
+        }
 
     }
 }

@@ -11,9 +11,7 @@ namespace OfficeClassRobotic.BuisnessObject.Models
 
         [ForeignKey("Class")]
         public Guid ClassId { get; set; }
-
         public double Grade { get; set; }
-
         public virtual Class Class { get; set; }
     }
 }

@@ -60,4 +60,13 @@ namespace OfficeClassRobotic.DAO.Students
         public Guid ParentId { get; set; }
         public DateTime? Created { get; set; }
     }
+
+
+    public class GetStudentGrade
+    {
+        public string? StudentName { get; set; }
+        public string? ClassName { get; set; }
+        public string? SubjectName { get; set; }
+        public double Grade { get; set; }
+    }
 }

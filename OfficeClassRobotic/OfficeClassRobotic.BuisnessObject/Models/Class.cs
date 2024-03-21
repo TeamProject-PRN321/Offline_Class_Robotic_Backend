@@ -25,7 +25,6 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         /// False là chưa kết thúc
         /// </summary>
         public bool IsClassFinish { get; set; } = false;
-
         public virtual Student Student { get; set; }
         public virtual Subject Subject { get; set; }
         public virtual IList<ClassSchedule> ClassSchedule { get; set; }
