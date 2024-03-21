@@ -73,8 +73,22 @@ namespace OfficeClassRobotic.DAO.Students
 
     public class GetStudentAttendance
     {
+        public string? StudentName { get; set; }
+        public List<SubjectAttendance> SubjectsAttendance { get; set; }
+    }
+
+    public class SubjectAttendance
+    {
+        public string? ClassName { get; set; }
+        public string? SubjectName { get; set; }
+        public List<AttendanceDetail> AttendanceDetails { get; set; }
+    }
+
+    public class AttendanceDetail
+    {
         public DateTime DateStudy { get; set; }
         public int AttendStatus { get; set; }
         public string? Description { get; set; }
     }
+
 }

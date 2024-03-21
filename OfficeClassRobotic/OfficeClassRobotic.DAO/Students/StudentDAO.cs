@@ -413,20 +413,51 @@ namespace OfficeClassRobotic.DAO.Students
 
         public async Task<List<GetStudentAttendance>> GetAttendanceByStudentId(Guid studentId)
         {
+            var studentAttendances = new List<GetStudentAttendance>();
+
+            // Lấy danh sách điểm danh của sinh viên
             var attendanceList = await _dbContext.Attendance
                 .Include(a => a.ClassSchedule)
                     .ThenInclude(cs => cs.Class)
+                        .ThenInclude(c => c.Student)
+                            .ThenInclude(s => s.AppUser)
+                .Include(a => a.ClassSchedule.Class.Subject)
                 .Where(a => a.ClassSchedule.Class.StudentId == studentId)
-                .Select(a => new GetStudentAttendance
-                {
-                    DateStudy = a.ClassSchedule.DateStudy,
-                    AttendStatus = a.AttendStatus,
-                    Description = a.Description
-                })
                 .ToListAsync();
 
-            return attendanceList;
+            // Nhóm các môn học theo lớp học
+            var groupedAttendances = attendanceList.GroupBy(a => new
+            {
+                ClassName = a.ClassSchedule?.Class?.ClassName,
+                SubjectName = a.ClassSchedule?.Class?.Subject?.SubjectName
+            });
+
+            foreach (var group in groupedAttendances)
+            {
+                var studentAttendance = new GetStudentAttendance
+                {
+                    StudentName = group.First().ClassSchedule.Class.Student.AppUser.FullName,
+                    SubjectsAttendance = new List<SubjectAttendance>
+                    {
+                        new SubjectAttendance
+                        {
+                            ClassName = group.Key.ClassName,
+                            SubjectName = group.Key.SubjectName,
+                            AttendanceDetails = group.Select(a => new AttendanceDetail
+                            {
+                                DateStudy = a.ClassSchedule.DateStudy,
+                                AttendStatus = a.AttendStatus,
+                                Description = a.Description
+                            }).ToList()
+                        }
+                    }
+                };
+                studentAttendances.Add(studentAttendance);
+            }
+
+            return studentAttendances;
         }
+
 
     }
 }
