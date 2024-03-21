@@ -214,6 +214,14 @@ namespace OfficeClassRobotic.API.Controllers.UpGrade
             }
         }
 
+        [HttpGet]
+        [Route("get-list-grade-of-student/{classname}")]
+        public async Task<IActionResult> GetScoreOfStudentByClassname(string classname)
+        {
+            var result = await _repo.GetScoreOfStudentByClassname(classname);
+            return Ok(result);
+        }
+
         [HttpPost]
         [Route("api/upload/excel")]
         public async Task<IActionResult> UploadExcel([FromForm] IFormFile file)

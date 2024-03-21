@@ -50,6 +50,7 @@ namespace OfficeClassRobotic.DAO.Teachers
 
     public class TeacherScheduleRequest
     {
+        public string? Keyword { get; set; }
         public Guid AppUserId { get; set; }
         public DateTime DateStartOfWeek { get; set; }
         public DateTime DateEndOfWeek { get; set; }

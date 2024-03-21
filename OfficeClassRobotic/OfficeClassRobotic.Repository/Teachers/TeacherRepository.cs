@@ -48,7 +48,9 @@ namespace OfficeClassRobotic.Repository.Teachers
             try
             {
                 var result = await _dao.GetScheduleOfTeacherByTeacherIdAndTime(request);
-                return result;
+                if(request.Keyword == null) request.Keyword = string.Empty;
+                var respone = result.Where(x => x.ClassName.ToLower().Contains(request.Keyword.ToLower())).ToList();
+                return respone;
             }
             catch (Exception ex)
             {
