@@ -72,9 +72,11 @@ namespace OfficeClassRobotic.DAO.SudentGrades
             {
                 var subjectGradeExist = _dbContext.SubjectGradingWeights
                     .Where(s => s.SubjectID == subjectId && s.AssesessmentType == studenttGrade.AssesessmentType).SingleOrDefault();
+                var subjectExist = _dbContext.Subjects.Where(s => s.Id == subjectGradeExist.SubjectID).SingleOrDefault();
                 var newSubjectGradingWeight = new GradeSubjectOfStudent
                 {
                     SubjetcId = subjectGradeExist.SubjectID,
+                    SubjetcName = subjectExist.SubjectName,
                     AssesessmentType = studenttGrade.AssesessmentType,
                     WeightPercentage = subjectGradeExist.WeightPercentage,
                     Grade = studenttGrade.Grade,

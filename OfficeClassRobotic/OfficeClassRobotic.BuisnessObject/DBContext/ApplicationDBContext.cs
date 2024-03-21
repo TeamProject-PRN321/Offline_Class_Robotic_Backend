@@ -79,6 +79,7 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                     Id = Guid.Parse("768175a0-688f-4972-ab8c-260f6fe43c35"),
                     SubjectID = Guid.Parse("54eebe9e-2a5b-4a82-8522-1e7cd2aa4d57"),
                     AssesessmentType = "Kiem tra 15p",
+                    WeightPercentage = 15,
                     Created = DateTime.Now,
                     IsDeleted = false,
                 },
@@ -87,6 +88,7 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                     Id = Guid.Parse("048f786e-f84f-4341-ae89-0d373f604596"),
                     SubjectID = Guid.Parse("54eebe9e-2a5b-4a82-8522-1e7cd2aa4d57"),
                     AssesessmentType = "Kiem tra 1T",
+                    WeightPercentage = 20,
                     Created = DateTime.Now,
                     IsDeleted = false,
                 }

@@ -19,6 +19,7 @@ namespace OfficeClassRobotic.DAO.SudentGrades
     public class GradeSubjectOfStudent
     {
         public Guid SubjetcId { get; set; }
+        public string? SubjetcName { get; set; }
         /// <summary>
         /// Dạng kiểm tra : Kiểm tra 15P, Kiểm tra kết thúc môn
         /// </summary>
