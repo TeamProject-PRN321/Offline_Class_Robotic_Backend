@@ -492,7 +492,15 @@ namespace OfficeClassRobotic.DAO.Classess
                     _dbContext.Attendance.Add(attendence);
                 }
             }
-            await _dbContext.SaveChangesAsync();
+            try
+            {
+                await _dbContext.SaveChangesAsync();
+
+            }
+            catch(Exception ex)
+            {
+                throw new BadRequestException(ex.InnerException.Message);
+            }
         }
 
         /// <summary>

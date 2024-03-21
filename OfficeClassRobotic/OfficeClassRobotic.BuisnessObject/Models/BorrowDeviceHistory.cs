@@ -16,7 +16,7 @@ namespace OfficeClassRobotic.BuisnessObject.Models
         /// </summary>
         [ForeignKey("BorrowDevice")]
         public Guid BorrowDeviceId { get; set; }    
-        public int Quantity { get; set; }
+        //public int Quantity { get; set; }
 
         public virtual Device Device { get; set; }
         public virtual BorrowDevice BorrowDevice { get; set; }
