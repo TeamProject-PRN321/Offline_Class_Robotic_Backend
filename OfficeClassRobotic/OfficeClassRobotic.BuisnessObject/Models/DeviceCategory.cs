@@ -17,6 +17,7 @@ namespace OfficeClassRobotic.BuisnessObject.Models
 
 
         public virtual TrungTamRobotic TrungTamRobotic { get; set; }
+        public IList<BorrowDeviceHistory> BorrowDeviceHistory { get; set; }
         public IList<Device> Devices { get; set; }
     }
 }

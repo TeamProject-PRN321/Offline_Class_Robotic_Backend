@@ -33,6 +33,7 @@ namespace OfficeClassRobotic.BuisnessObject.Models
         /// 0. Đang đợi được duyệt cho mượn.
         /// 1. Đã mượn
         /// 2. Đã trả
+        /// 3. Đã bị từ chối
         /// </summary>
         public int BorrowStatus { get; set; }
 

@@ -30,7 +30,7 @@ namespace OfficeClassRobotic.DAO.BorrowDevices
         /// <summary>
         /// Mượn nhiều thiết bị
         /// </summary>
-        public List<DeviceCategoryWithQuantityNeedToBorrow>? ListDeviceCategoryAndQuantity {  get; set; }
+        public List<DeviceCategoryWithQuantityNeedToBorrow>? ListDeviceCategoryAndQuantity { get; set; }
         /// <summary>
         /// Mượn cho nhiều slot khác nhau
         /// </summary>
@@ -44,12 +44,41 @@ namespace OfficeClassRobotic.DAO.BorrowDevices
         public Guid DeviceCategoryId { get; set; }
         public int QuantityTeacherWantToBorrow { get; set; }
     }
+    public class GetDeviceCategoryNeedToBorrow : DeviceCategoryWithQuantityNeedToBorrow
+    {
+        public List<GetDeviceNeedToBorrow>? ListDevice { get; set; }
+        public string? DeviceCategoryName { get; set; }
+
+    }
+    public class GetDeviceNeedToBorrow 
+    {
+        public string? SerialNumber { get; set; }
+        public Guid DeviceId { get; set; }
+    }
     public class BorrowBySlot
     {
-        public string ClassName { get; set; }   
+        public string ClassName { get; set; }
         public string ClassRoomName { get; set; }
         public DateTime DayStudy { get; set; }
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
+    }
+    public class GetBorrowDeviceRequestOfTeacher
+    {
+        public Guid BorrowDeviceId { get; set; }
+        public string? BorrowPurpose { get; set; }
+        public string? ClassName { get; set; }
+        public DateTime DateTimeBorrow { get; set; }
+        public Guid ClassRoomId { get; set; }
+        public string? ClassRoomName { get; set; }
+        public Guid TeacherId { get; set; }
+        public string? TeacherName { get; set; }
+        public int BorrowStatus { get; set; }
+        public string? BorrowStatusString { get; set; }
+        public List<GetDeviceCategoryNeedToBorrow>? ListDeviceDetail { get; set; }
+    }
+    public class AdminAccessRequestOfTeacher
+    {
+        public Guid BorrowDeviceId { get; set; }
     }
 }
