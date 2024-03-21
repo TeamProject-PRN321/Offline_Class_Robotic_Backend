@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Models.OfficeClassRobotic.BuisnessObject;
+using OfficeClassRobotic.BuisnessObject.Models;
 using OfficeClassRobotic.DAO.Classrooms;
 using OfficeClassRobotic.DAO.Subjects;
+using OfficeClassRobotic.DAO.SudentGrades;
 using OfficeClassRobotic.DAO.Teachers;
 using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
 using OfficeClassRobotic.Service.Exceptions;
@@ -623,20 +625,15 @@ namespace OfficeClassRobotic.DAO.Classess
 
         public async Task<List<GetClassAndGradeByStudentId>> GetListClassByStudentId(Guid requestID)
         {
+            var classDTOs = new List<GetClassAndGradeByStudentId>();
+
             var classesOfStudentId = await _dbContext.Classes
             .Include(c => c.Subject)
             .Where(c => c.StudentId == requestID)
             .ToListAsync();
 
-            var classDTOs = new List<GetClassAndGradeByStudentId>();
-
             foreach (var classes in classesOfStudentId)
             {
-                var grade = await _dbContext.StudentGrades
-                    .Where(sg => sg.Class.SubjectId == classes.SubjectId && sg.Class.StudentId == requestID)
-                    .Select(sg => sg.Grade)
-                    .FirstOrDefaultAsync();
-
                 var classDTO = new GetClassAndGradeByStudentId
                 {
                     ClassId = classes.Id,
@@ -646,9 +643,23 @@ namespace OfficeClassRobotic.DAO.Classess
                     EndTime = classes.EndTime,
                     IsClassFinish = classes.IsClassFinish,
                     SubjectName = classes.Subject.SubjectName,
-                    Grade = grade
+                    Grades = new List<Dictionary<string, double>>()
                 };
-                classDTOs.Add(classDTO);
+
+                var gradesInClass = await _dbContext.StudentGrades
+                    .Where(sg => sg.ClassId == classes.Id)
+                    .ToListAsync();
+
+                foreach (var grade in gradesInClass)
+                {
+                    var gradeDictionary = new Dictionary<string, double>
+                    {
+                        { grade.AssesessmentType, grade.Grade }
+                    };
+                    classDTO.Grades.Add(gradeDictionary); // Thêm Grade Dictionary vào danh sách Grades của môn học
+                }
+
+                classDTOs.Add(classDTO); ;
             }
             return classDTOs;
         }

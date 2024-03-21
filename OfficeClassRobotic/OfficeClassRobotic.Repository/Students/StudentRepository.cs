@@ -106,6 +106,18 @@ namespace OfficeClassRobotic.Repository.Students
             }
         }
 
+        public async Task<List<GetStudentAttendance>> GetStudentAttendance(Guid studentId)
+        {
+            try
+            {
+                return await studentDAO.GetAttendanceByStudentId(studentId);
+            }
+            catch (Exception ex)
+            {
+                throw new BadRequestException("No attendance records found for the student.");
+            }
+        }
+
 
 
         /*
