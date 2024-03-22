@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Models.OfficeClassRobotic.BuisnessObject;
 using OfficeClassRobotic.DAO.Classess;
+using OfficeClassRobotic.DAO.Students;
 using OfficeClassRobotic.DAO.SudentGrades;
 using OfficeClassRobotic.DAO.Teachers;
 using OfficeClassRobotic.Repository.IStudentGrades;
@@ -312,6 +313,14 @@ namespace OfficeClassRobotic.API.Controllers.UpGrade
                 default:
                     return 0;
             }
+        }
+
+
+        [HttpGet]
+        [Route("get-all-studentsGrades/{studentId}")]
+        public async Task<List<StudentGradeDTO>> GetStudentGrades(Guid studentId)
+        {
+            return await _repo.GetListGradeByStudentId(studentId);
         }
     }
 }
