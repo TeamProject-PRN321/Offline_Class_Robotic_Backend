@@ -15,13 +15,9 @@ namespace OfficeClassRobotic.BuisnessObject.Models
         /// </summary>
         public string? ClassName { get; set; }
         /// <summary>
-        /// Giờ mượn
+        /// Ngày gửi đơn mượn
         /// </summary>
-        public TimeSpan BorrowTime { get; set; }
-        /// <summary>
-        /// Ngày mượn
-        /// </summary>
-        public Guid DateBorrow { get; set; }
+        public DateTime DateTimeBorrow { get; set; }
         /// <summary>
         /// Mượn tại phòng nào
         /// </summary>
@@ -37,6 +33,7 @@ namespace OfficeClassRobotic.BuisnessObject.Models
         /// 0. Đang đợi được duyệt cho mượn.
         /// 1. Đã mượn
         /// 2. Đã trả
+        /// 3. Đã bị từ chối
         /// </summary>
         public int BorrowStatus { get; set; }
 

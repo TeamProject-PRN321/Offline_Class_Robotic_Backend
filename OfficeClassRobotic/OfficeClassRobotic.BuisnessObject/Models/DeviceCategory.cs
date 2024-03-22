@@ -9,14 +9,15 @@ namespace OfficeClassRobotic.BuisnessObject.Models
     /// </summary>
     public class DeviceCategory : BaseAuditableEntity
     {
-        public string? DeviceName { get; set; }
+        public string? DeviceCategoryName { get; set; }
         public string? DeviceDescription { get; set; }
-
+        public string? DevicePictureURL { get; set; }
         [ForeignKey("TrungTamRobotic")]
         public Guid TrungTamRoboticId { get; set; }
 
 
         public virtual TrungTamRobotic TrungTamRobotic { get; set; }
+        public IList<BorrowDeviceHistory> BorrowDeviceHistory { get; set; }
         public IList<Device> Devices { get; set; }
     }
 }

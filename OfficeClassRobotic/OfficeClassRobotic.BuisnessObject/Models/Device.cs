@@ -12,7 +12,10 @@ namespace Models.OfficeClassRobotic.BuisnessObject
 {
     public class Device : BaseAuditableEntity
     {
-        public double? PriceOfDevice { get; set; }
+        /// <summary>
+        /// Số định dạng khác nhau của mỗi device
+        /// </summary>
+        public string? DeviceSerialNumber { get; set; }
         /// <summary>
         /// 0. Bình thường, sử dụng được
         /// 1. Đã được mượn
