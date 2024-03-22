@@ -14,5 +14,8 @@ namespace OfficeClassRobotic.Repository.IStudentGrades
         public Task<Subject> GetSubjectByClassName(string className);
         public Task SaveToDatabase(string studentId, List<GradeSubjectOfStudent> listGrade, string className);
         public Task<List<StudentGradeDTO>> GetScoreOfStudentByClassname(string className);
+        public Task<List<StudentGradeDTO>> GetListGradeByStudentId(Guid studentId);
+
+
     }
 }

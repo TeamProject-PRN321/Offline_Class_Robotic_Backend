@@ -25,6 +25,12 @@ namespace OfficeClassRobotic.Repository.IStudentGrades
         public Task SaveToDatabase(string studentId, List<GradeSubjectOfStudent> listGrade, string className)
             => StudentGradesDAO.Instance.SaveGradeToDatabase(studentId, listGrade, className);
 
+        public Task<List<StudentGradeDTO>> GetListGradeByStudentId(Guid studentId)
+          => StudentGradesDAO.Instance.GetListGradeByStudentId(studentId);
+        
+            
+
+
         public Task<List<StudentGradeDTO>> GetScoreOfStudentByClassname(string className)
         => StudentGradesDAO.Instance.GetStudentOfClassWithTemplateExcel(className);
     }

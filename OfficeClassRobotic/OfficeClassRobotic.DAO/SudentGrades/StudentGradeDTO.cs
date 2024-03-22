@@ -18,6 +18,7 @@ namespace OfficeClassRobotic.DAO.SudentGrades
 
     public class GradeSubjectOfStudent
     {
+        public string SubjectName { get; set; }
         public Guid SubjetcId { get; set; }
         public string? SubjetcName { get; set; }
         /// <summary>
