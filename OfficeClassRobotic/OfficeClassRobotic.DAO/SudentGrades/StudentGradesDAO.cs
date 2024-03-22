@@ -40,7 +40,7 @@ namespace OfficeClassRobotic.DAO.SudentGrades
             try
             {
                 var listStudentGradeDto = new List<StudentGradeDTO>();
-                var classStudents = await _dbContext.Classes.Where(c => c.ClassName.Contains(className)).ToListAsync();
+                var classStudents = await _dbContext.Classes.Where(c => c.ClassName.ToLower().Contains(className.ToLower())).ToListAsync();
                 foreach (var classStudent in classStudents)
                 {
                     var subjectGrade = await _dbContext.StudentGrades.Where(sg => sg.ClassId == classStudent.Id).ToListAsync();
@@ -72,9 +72,11 @@ namespace OfficeClassRobotic.DAO.SudentGrades
             {
                 var subjectGradeExist = _dbContext.SubjectGradingWeights
                     .Where(s => s.SubjectID == subjectId && s.AssesessmentType == studenttGrade.AssesessmentType).SingleOrDefault();
+                var subjectExist = _dbContext.Subjects.Where(s => s.Id == subjectGradeExist.SubjectID).SingleOrDefault();
                 var newSubjectGradingWeight = new GradeSubjectOfStudent
                 {
                     SubjetcId = subjectGradeExist.SubjectID,
+                    SubjetcName = subjectExist.SubjectName,
                     AssesessmentType = studenttGrade.AssesessmentType,
                     WeightPercentage = subjectGradeExist.WeightPercentage,
                     Grade = studenttGrade.Grade,

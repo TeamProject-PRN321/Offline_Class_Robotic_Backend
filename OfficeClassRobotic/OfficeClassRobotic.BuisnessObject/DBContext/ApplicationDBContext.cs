@@ -28,6 +28,9 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
         public DbSet<Classroom> Classrooms { get; set; }
         public DbSet<ClassSchedule> ClassSchedule { get; set; }
         public DbSet<Device> Devices { get; set; }
+        public DbSet<DeviceCategory> DeviceCategories { get; set; }
+        public DbSet<BorrowDevice> BorrowDevices { get; set; }
+        public DbSet<BorrowDeviceHistory> BorrowDeviceHistories { get; set; }
         public DbSet<FeedBack> FeedBacks { get; set; }
         public DbSet<GiaoTrinh> GiaoTrinhs { get; set; }
         public DbSet<Parent> Parents { get; set; }
@@ -76,6 +79,7 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                     Id = Guid.Parse("768175a0-688f-4972-ab8c-260f6fe43c35"),
                     SubjectID = Guid.Parse("54eebe9e-2a5b-4a82-8522-1e7cd2aa4d57"),
                     AssesessmentType = "Kiem tra 15p",
+                    WeightPercentage = 15,
                     Created = DateTime.Now,
                     IsDeleted = false,
                 },
@@ -84,6 +88,7 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                     Id = Guid.Parse("048f786e-f84f-4341-ae89-0d373f604596"),
                     SubjectID = Guid.Parse("54eebe9e-2a5b-4a82-8522-1e7cd2aa4d57"),
                     AssesessmentType = "Kiem tra 1T",
+                    WeightPercentage = 20,
                     Created = DateTime.Now,
                     IsDeleted = false,
                 }
@@ -513,7 +518,7 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
             #endregion
 
             #region Device
-            modelBuilder.Entity<Device>().HasData(
+         /*   modelBuilder.Entity<Device>().HasData(
                 new Device
                 {
                     Id = Guid.Parse("DFF2458C-3F40-423B-8AA9-D7588A4AE4FE"),
@@ -542,7 +547,7 @@ namespace OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext
                     ClassRoomId = Guid.Parse("D2E283A6-5BF5-4D27-A2C2-994CB6D781E9")
                 }
 
-            );
+            );*/
             #endregion
 
             base.OnModelCreating(modelBuilder);

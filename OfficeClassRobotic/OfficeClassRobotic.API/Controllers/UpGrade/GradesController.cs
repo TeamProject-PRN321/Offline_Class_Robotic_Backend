@@ -130,14 +130,15 @@ namespace OfficeClassRobotic.API.Controllers.UpGrade
             }
         }
 
-        /*[HttpGet]
-        [Route("get-list-grade/{classname}")]
-        public async Task<List<StudentGradeDTO>> GetListTeacherBySubject(string classname)
+        [HttpGet]
+        [Route("get-list-student-of-class/{classname}")]
+        public async Task<List<StudentGradeDTO>> GetListStudentOfClassByClassName(string classname)
         {
             var result = await _repo.GetStudentOfClassWithTemplateExcel(classname);
             return result;
 
-        }*/
+        }
+
         [HttpGet]
         [Route("get-list-grade/{classname}")]
         public async Task<IActionResult> GetListTeacherBySubject(string classname)

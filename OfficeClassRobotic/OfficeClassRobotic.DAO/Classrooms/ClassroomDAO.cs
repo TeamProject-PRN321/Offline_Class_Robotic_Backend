@@ -35,7 +35,7 @@ namespace OfficeClassRobotic.DAO.Classrooms
             private set => instance = value;
         }
         // Thêm xóa sửa các thiết bị cho các phòng học
-        public async Task CreateDeviceForClassroom(CreateDeviceForClassroomCommand request)
+/*        public async Task CreateDeviceForClassroom(CreateDeviceForClassroomCommand request)
         {
             var newDevice = new Device
             {
@@ -47,9 +47,9 @@ namespace OfficeClassRobotic.DAO.Classrooms
             };
             _dbContext.Devices.Add(newDevice);
             await _dbContext.SaveChangesAsync();
-        }
+        }*/
 
-        public async Task UpdateDeviceForClassroom(UpdateDeviceForClassroomCommand request)
+      /*  public async Task UpdateDeviceForClassroom(UpdateDeviceForClassroomCommand request)
         {
             var deviceExist = await _dbContext.Devices.Where(d => d.Id == Guid.Parse(request.DeviceId) && !d.IsDeleted).SingleOrDefaultAsync();
             if(deviceExist == null)
@@ -75,7 +75,7 @@ namespace OfficeClassRobotic.DAO.Classrooms
             deviceExist.IsDeleted = true;
             _dbContext.Devices.Update(deviceExist);
             await _dbContext.SaveChangesAsync();
-        }
+        }*/
 
         // danh sách các thiết bị đã hư, hủy bỏ, gồm cả số tiền, số lượng, phân loại
         public async Task<List<ClassroomDTOResponse>> GetAllClassroomWithDeviceCancel()
@@ -84,7 +84,7 @@ namespace OfficeClassRobotic.DAO.Classrooms
             var classRoomList = new List<ClassroomDTOResponse>();
             foreach (var c in classroom)
             {
-                var devices = await _dbContext.Devices.Where(d => d.ClassRoomId == c.Id && d.StatusOfDevice == 3).ToListAsync();
+               // var devices = await _dbContext.Devices.Where(d => d.ClassRoomId == c.Id && d.StatusOfDevice == 3).ToListAsync();
                 var trungTam = await _dbContext.TrungTamRobotics.Where(t => t.Id == c.TrungTamRoboticId).SingleOrDefaultAsync();
                 var listClassroom = new ClassroomDTOResponse
                 {
@@ -92,7 +92,7 @@ namespace OfficeClassRobotic.DAO.Classrooms
                     ClassRoomName = c.ClassRoomName,
                     Description = c.Description,
                     TrungTamRoboticData = trungTam,
-                    ListDevice = devices
+                   // ListDevice = devices
                 };
                 classRoomList.Add(listClassroom);
             }
@@ -106,7 +106,7 @@ namespace OfficeClassRobotic.DAO.Classrooms
             var classRoomList = new List<ClassroomDTOResponse>();
             foreach (var c in classroom)
             {
-                var devices = await _dbContext.Devices.Where(d => d.ClassRoomId == c.Id && (d.StatusOfDevice == 1 || d.StatusOfDevice == 2)).ToListAsync();
+               // var devices = await _dbContext.Devices.Where(d => d.ClassRoomId == c.Id && (d.StatusOfDevice == 1 || d.StatusOfDevice == 2)).ToListAsync();
                 var trungTam = await _dbContext.TrungTamRobotics.Where(t => t.Id == c.TrungTamRoboticId).SingleOrDefaultAsync();
                 var listClassroom = new ClassroomDTOResponse
                 {
@@ -114,7 +114,7 @@ namespace OfficeClassRobotic.DAO.Classrooms
                     ClassRoomName = c.ClassRoomName,
                     Description = c.Description,
                     TrungTamRoboticData = trungTam,
-                    ListDevice = devices
+                  //  ListDevice = devices
                 };
                 classRoomList.Add(listClassroom);
             }
@@ -128,7 +128,7 @@ namespace OfficeClassRobotic.DAO.Classrooms
             var classRoomList = new List<ClassroomDTOResponse>();
             foreach (var c in classroom)
             {
-                var devices = await _dbContext.Devices.Where(d => d.ClassRoomId == c.Id && (d.StatusOfDevice == 1 || d.StatusOfDevice == 2)).ToListAsync();
+               // var devices = await _dbContext.Devices.Where(d => d.ClassRoomId == c.Id && (d.StatusOfDevice == 1 || d.StatusOfDevice == 2)).ToListAsync();
                 var trungTam = await _dbContext.TrungTamRobotics.Where(t => t.Id == c.TrungTamRoboticId).SingleOrDefaultAsync();
                 var listClassroom = new ClassroomDTOResponse
                 {
@@ -136,7 +136,7 @@ namespace OfficeClassRobotic.DAO.Classrooms
                     ClassRoomName = c.ClassRoomName,
                     Description = c.Description,
                     TrungTamRoboticData = trungTam,
-                    ListDevice = devices
+                   // ListDevice = devices
                 };
                 classRoomList.Add(listClassroom);
             }
