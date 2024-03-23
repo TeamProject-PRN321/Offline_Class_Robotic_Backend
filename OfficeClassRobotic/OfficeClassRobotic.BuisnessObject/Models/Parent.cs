@@ -7,7 +7,6 @@ namespace Models.OfficeClassRobotic.BuisnessObject
     {
         [ForeignKey("AppUser")]
         public Guid AppUserId { get; set; }
-
         public virtual AppUser AppUser { get; set; }
 
     }

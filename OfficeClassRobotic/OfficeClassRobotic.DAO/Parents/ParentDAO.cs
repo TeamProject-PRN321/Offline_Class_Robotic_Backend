@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Models.OfficeClassRobotic.BuisnessObject;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
+using OfficeClassRobotic.DAO.Students;
 using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
 using OfficeClassRobotic.Service.Exceptions;
 
@@ -26,48 +27,96 @@ namespace OfficeClassRobotic.DAO.Parents
             private set => instance = value;
         }
 
-        public async Task<List<Parent>> GetAllParent()
+        public async Task<List<ParentResponse>> GetAllParent()
         {
             try {
-                var parentExist = await _dbContext.Parents
+                var ParentDto = new List<ParentResponse>();
+
+                var parentExist = await _dbContext.Parents.
+                    Include(c => c.AppUser)
                 .Where(p => !p.IsDeleted)
                 .ToListAsync();
 
-                return parentExist;
+                foreach (var parent in parentExist)
+                {
+                    var parentResponse = new ParentResponse()
+                    {
+                        Id = parent.Id,
+                        AppUserId = parent.AppUserId,
+                        Name = parent.AppUser.FullName,
+                        Address = parent.AppUser.Address,
+                        Phone = parent.AppUser.PhoneNumber,
+                        Birthday = parent.AppUser.DateOfBirth,
+                        Created = parent.Created
+                    };
+                    ParentDto.Add(parentResponse);
+                }
+                if (parentExist == null)
+                {
+                    throw new NotFoundException("parent list is empty");
+                }
+                return ParentDto;
             }
             catch (Exception ex) {
                 throw new BadRequestException(ex.Message);
             }
         }
 
-        public async Task<Parent> GetParentById(string parentId)
+        public async Task<ParentResponse> GetParentById(Guid parentId)
         {
             try {
+
                 var parentExist = await _dbContext.Parents
-                .Where(p => p.Id == Guid.Parse(parentId) && !p.IsDeleted)
+                    .Include(c => c.AppUser)
+                .Where(p => p.Id == parentId && !p.IsDeleted)
                 .SingleOrDefaultAsync();
+
+                var parentResponse = new ParentResponse()
+                {
+                    Id = parentExist.Id,
+                    AppUserId = parentExist.AppUserId,
+                    Name = parentExist.AppUser.FullName,
+                    Address = parentExist.AppUser.Address,
+                    Phone = parentExist.AppUser.PhoneNumber,
+                    Birthday = parentExist.AppUser.DateOfBirth,
+                    Created = parentExist.Created
+                };
+
                 if (parentExist == null) {
-                    throw new NotFoundException("ParentId not exist");
+                    throw new NotFoundException(parentId + " not exist");
                 }
-                return parentExist;
+                return parentResponse;
             }
             catch (Exception ex) {
                 throw new BadRequestException(ex.Message);
             }
         }
 
-        public async Task<Parent> GetParentByAppUserId(string appUserId)
+        public async Task<ParentResponse> GetParentByAppUserId(Guid appUserId)
         {
             try
             {
                 var parentExist = await _dbContext.Parents
-                .Where(p => p.AppUserId == Guid.Parse(appUserId) && !p.IsDeleted)
+                    .Include (c => c.AppUser)
+                .Where(p => p.AppUserId == appUserId && !p.IsDeleted)
                 .SingleOrDefaultAsync();
+
+                var parentResponse = new ParentResponse()
+                {
+                    Id = parentExist.Id,
+                    AppUserId = parentExist.AppUserId,
+                    Name = parentExist.AppUser.FullName,
+                    Address = parentExist.AppUser.Address,
+                    Phone = parentExist.AppUser.PhoneNumber,
+                    Birthday = parentExist.AppUser.DateOfBirth,
+                    Created = parentExist.Created
+                };
+
                 if (parentExist == null)
                 {
-                    throw new NotFoundException("ParentId not exist");
+                    throw new NotFoundException(appUserId + " not exist");
                 }
-                return parentExist;
+                return parentResponse;
             }
             catch (Exception ex)
             {
@@ -75,18 +124,36 @@ namespace OfficeClassRobotic.DAO.Parents
             }
         }
 
-        public async Task<Parent> GetParentByName(string name)
+        public async Task<List<ParentResponse>> GetParentByName(string parentName)
         {
             try
             {
+                var parentDtos = new List<ParentResponse>();
+
                 var parentExist = await _dbContext.Parents
-                .Where(p => p.AppUser.FullName.Equals(name) && !p.IsDeleted)
-                .SingleOrDefaultAsync();
+                    .Include(c => c.AppUser)
+                .Where(p => p.AppUser.FullName.Contains(parentName) && !p.IsDeleted)
+                .ToListAsync();
+
+                foreach (var parent in parentExist)
+                {
+                    var parentResponse = new ParentResponse()
+                    {
+                        Id = parent.Id,
+                        AppUserId = parent.AppUserId,
+                        Name = parent.AppUser.FullName,
+                        Address = parent.AppUser.Address,
+                        Phone = parent.AppUser.PhoneNumber,
+                        Birthday = parent.AppUser.DateOfBirth,
+                        Created = parent.Created
+                    };
+                    parentDtos.Add(parentResponse);
+                }
                 if (parentExist == null)
                 {
-                    throw new NotFoundException("ParentId not exist");
+                    throw new NotFoundException(parentName + "does not exist");
                 }
-                return parentExist;
+                return parentDtos;
             }
             catch (Exception ex)
             {

@@ -48,7 +48,7 @@ namespace OfficeClassRobotic.API.Controllers.Parents
 
         [HttpGet]
         [Route("get-parent-by-id/{parentId}")]
-        public Task<ParentResponse> GetById(string parentId)
+        public Task<ParentResponse> GetById(Guid parentId)
         {
             var result = _parentRepostitory.GetParentById(parentId);
             return result;
@@ -56,7 +56,7 @@ namespace OfficeClassRobotic.API.Controllers.Parents
 
         [HttpGet]
         [Route("get-parent-by-appuser-id/{appUserId}")]
-        public Task<ParentResponse> GetByAppUserId(string appUserId)
+        public Task<ParentResponse> GetByAppUserId(Guid appUserId)
         {
             var result = _parentRepostitory.GetParentByAppUserId(appUserId);
             return result;
@@ -64,7 +64,7 @@ namespace OfficeClassRobotic.API.Controllers.Parents
 
         [HttpGet]
         [Route("get-parent-by-name/{name}")]
-        public Task<ParentResponse> GetByName(string name)
+        public Task<List<ParentResponse>> GetByName(string name)
         {
             var result = _parentRepostitory.GetParentByName(name);
             return result;
