@@ -637,47 +637,49 @@ namespace OfficeClassRobotic.DAO.Classess
         /// <returns></returns>
         public async Task<ClassDataResponse> GetClassOfStudentByIdAndClassname(string appUserId, string classname)
         {
-            var appUserExist = await _dbContext.AppUsers.Where(a => a.Id == Guid.Parse(appUserId)).SingleOrDefaultAsync();
-            var studentExist = await _dbContext.Students.Where(s => s.AppUserId == Guid.Parse(appUserId)).SingleOrDefaultAsync();
-            if (studentExist == null)
+            try
             {
-                throw new NotFoundException("Exception not have AppUserId");
+                var appUserExist = await _dbContext.AppUsers.Where(a => a.Id == Guid.Parse(appUserId)).SingleOrDefaultAsync();
+                var studentExist = await _dbContext.Students.Where(s => s.AppUserId == Guid.Parse(appUserId)).SingleOrDefaultAsync();
+                var classExistByStudentId = await _dbContext.Classes
+                    .Where(c => c.ClassName.ToLower().Contains(classname.ToLower()) && c.StudentId == studentExist.Id)
+                    .SingleOrDefaultAsync();
+                var subjectExist = await _dbContext.Subjects.Where(sb => sb.Id == classExistByStudentId.SubjectId).SingleOrDefaultAsync();
+                var classSchedule = await _dbContext.ClassSchedule.Where(cs => cs.ClassId == classExistByStudentId.Id)
+                                                .GroupBy(cs => new { cs.ClassId, cs.TeacherId })
+                                                .Select(g => new
+                                                {
+                                                    ClassId = g.Key.ClassId,
+                                                    TeacherId = g.Key.TeacherId,
+                                                    DateStartStudy = g.Min(cs => cs.DateStudy),
+                                                    DateEndStudy = g.Max(cs => cs.DateStudy)
+                                                }).SingleOrDefaultAsync();
+                var teacherExsit = await _dbContext.Teacher.Where(t => t.Id == classSchedule.TeacherId).SingleOrDefaultAsync();
+                var teacheExistApp = await _dbContext.AppUsers.Where(a => a.Id == teacherExsit.AppUserId).SingleOrDefaultAsync();
+
+                var response = new ClassDataResponse
+                {
+                    ClassId = classExistByStudentId.Id,
+                    ClassName = classExistByStudentId.ClassName,
+                    DayStudy = classExistByStudentId.DayStudy,
+                    StartTime = classExistByStudentId.StartTime,
+                    EndTime = classExistByStudentId.EndTime,
+                    StudentId = classExistByStudentId.StudentId,
+                    StudentName = appUserExist.FullName,
+                    SubjectId = classExistByStudentId.SubjectId,
+                    SubjectName = subjectExist.SubjectName,
+                    TeacherId = classSchedule.TeacherId,
+                    TeacherName = teacheExistApp.FullName,
+                    DateStartStudy = classSchedule.DateStartStudy,
+                    DateEndStudy = classSchedule.DateEndStudy,
+                };
+
+                return response;
             }
-            var classExistByStudentId = await _dbContext.Classes
-                .Where(c => c.ClassName.ToLower().Contains(classname.ToLower()) && c.StudentId == studentExist.Id)
-                .SingleOrDefaultAsync();
-            var subjectExist = await _dbContext.Subjects.Where(sb => sb.Id == classExistByStudentId.SubjectId).SingleOrDefaultAsync();
-
-            var classSchedule = await _dbContext.ClassSchedule.Where(cs => cs.ClassId == classExistByStudentId.Id)
-                                            .GroupBy(cs => new { cs.ClassId, cs.TeacherId })
-                                            .Select(g => new
-                                            {
-                                                ClassId = g.Key.ClassId,
-                                                TeacherId = g.Key.TeacherId,
-                                                DateStartStudy = g.Min(cs => cs.DateStudy),
-                                                DateEndStudy = g.Max(cs => cs.DateStudy)
-                                            }).SingleOrDefaultAsync();
-            var teacherExsit = await _dbContext.Teacher.Where(t => t.Id == classSchedule.TeacherId).SingleOrDefaultAsync();
-            var teacheExistApp = await _dbContext.AppUsers.Where(a => a.Id == teacherExsit.AppUserId).SingleOrDefaultAsync();
-
-            var response = new ClassDataResponse
+            catch(Exception ex)
             {
-                ClassId = classExistByStudentId.Id,
-                ClassName = classExistByStudentId.ClassName,
-                DayStudy = classExistByStudentId.DayStudy,
-                StartTime = classExistByStudentId.StartTime,
-                EndTime = classExistByStudentId.EndTime,
-                StudentId = classExistByStudentId.StudentId,
-                StudentName = appUserExist.FullName,
-                SubjectId = classExistByStudentId.SubjectId,
-                SubjectName = subjectExist.SubjectName,
-                TeacherId = classSchedule.TeacherId,
-                TeacherName = teacheExistApp.FullName,
-                DateStartStudy = classSchedule.DateStartStudy,
-                DateEndStudy = classSchedule.DateEndStudy,
-            };
-
-            return response;
+                throw new BadRequestException(ex.Message);
+            }
         }
 
 
