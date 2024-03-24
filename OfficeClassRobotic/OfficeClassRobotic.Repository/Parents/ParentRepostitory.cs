@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Models.OfficeClassRobotic.BuisnessObject;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
 using OfficeClassRobotic.DAO.Parents;
 
@@ -18,17 +19,15 @@ namespace OfficeClassRobotic.Repository.Parents
         public async Task<List<ParentResponse>> GetAllParent()
         {
             var listParent = await parentDAO.GetAllParent();
-            var response = _mapper.Map<List<ParentResponse>>(listParent);
-            return response;
+            return listParent;
 
 
         }
 
-        public async Task<ParentResponse> GetParentById(string parentId)
+        public async Task<ParentResponse> GetParentById(Guid parentId)
         {
             var parent = await parentDAO.GetParentById(parentId);
-            var response = _mapper.Map<ParentResponse>(parent);
-            return response;
+            return parent;
         }
 
         public Task<ClassRoboticResponse> CreateParent(CreateParentCommand parent)
@@ -46,14 +45,16 @@ namespace OfficeClassRobotic.Repository.Parents
             throw new NotImplementedException();
         }
 
-        public Task<ParentResponse> GetParentByAppUserId(string appUserId)
+        public async Task<ParentResponse> GetParentByAppUserId(Guid appUserId)
         {
-            throw new NotImplementedException();
+            var parent = await parentDAO.GetParentByAppUserId(appUserId);
+            return parent;
         }
 
-        public Task<ParentResponse> GetParentByName(string name)
+        public async Task<List<ParentResponse>> GetParentByName(string parentName)
         {
-            throw new NotImplementedException();
+            var parent = await parentDAO.GetParentByName(parentName);
+            return parent;
         }
     }
 }
