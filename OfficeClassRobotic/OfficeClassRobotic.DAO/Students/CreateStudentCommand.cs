@@ -27,6 +27,7 @@ namespace OfficeClassRobotic.DAO.Students
     }
     public class ScheduleOfStudent
     {
+        public string ClassName { get; set; }
         public Guid SubjectId { get; set; }
         public string SubjectName { get; set; } = null!;
         public string TimeStart { get; set; } = null!;
