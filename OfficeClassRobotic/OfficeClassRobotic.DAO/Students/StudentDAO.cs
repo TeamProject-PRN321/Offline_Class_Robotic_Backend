@@ -59,8 +59,10 @@ namespace OfficeClassRobotic.DAO.Students
                     {
                         var attendance = _dbContext.Attendance.Where(x => x.ClassScheduleID == item.Id).FirstOrDefault();
                         var userTeacher = _dbContext.AppUsers.Where(x => x.Id == teacher.AppUserId).FirstOrDefault();
+                        var classes = _dbContext.Classes.Where(x => x.Id == item.ClassId).FirstOrDefault();
                         var result = new ScheduleOfStudent()
                         {
+                            ClassName = classes.ClassName,
                             SubjectId = classOfStudent.SubjectId,
                             SubjectName = subject!.SubjectName!,
                             TeacherId = teacher.Id,
