@@ -16,7 +16,7 @@ namespace OfficeClassRobotic.DAO.Parents
 
     public class UpdateParentCommand
     {
-        public string ParentId { get; set; }
+        public Guid ParentId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
@@ -25,7 +25,7 @@ namespace OfficeClassRobotic.DAO.Parents
 
     public class DeleteParentCommand
     {
-        public string ParentId { get; set; }
+        public Guid ParentId { get; set; }
     }
 
     public class ParentResponse
