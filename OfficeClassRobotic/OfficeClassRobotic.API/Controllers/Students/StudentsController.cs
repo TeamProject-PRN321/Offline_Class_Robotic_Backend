@@ -19,6 +19,11 @@ namespace OfficeClassRobotic.API.Controllers.Students
         [Route("get-schedule-of-student-by-student-id")]
         public async Task<List<ScheduleOfStudent>?> GetScheduleOfStudentByStudentId([FromQuery] GetStudentScheduleByStudentIdRequest request)
         {
+            var response = await _studentRepository.GetScheduleOfStudentByStudentId(request);
+            if (response == null)
+            {
+                return new List<ScheduleOfStudent>();
+            }
             return await _studentRepository.GetScheduleOfStudentByStudentId(request);
         }
 
