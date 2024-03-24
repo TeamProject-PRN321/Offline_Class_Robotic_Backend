@@ -55,5 +55,8 @@ namespace OfficeClassRobotic.Repository.Classess
             var response = await ClassDAO.Instance.GetListClassByStudentId(request);
             return response;
         }
+
+        public Task<ClassDataResponse> GetClassOfStudentByIdAndClassname(string appUserId, string classname)
+            => ClassDAO.Instance.GetClassOfStudentByIdAndClassname(appUserId, classname);
     }
 }

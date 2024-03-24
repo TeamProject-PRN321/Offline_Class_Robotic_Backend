@@ -13,6 +13,7 @@ namespace OfficeClassRobotic.Repository.Classess
         public Task<ClassRoboticResponse> DeleteClass(ClassDTO request);
         public Task<StudentsOfClassesResponse> GetListStudentOfClassByClassName(string className);
         public Task<List<GetClassAndGradeByStudentId>> GetListClassByStudentId(Guid request);
+        public Task<ClassDataResponse> GetClassOfStudentByIdAndClassname(string appUserId, string classname);
 
     }
 }
