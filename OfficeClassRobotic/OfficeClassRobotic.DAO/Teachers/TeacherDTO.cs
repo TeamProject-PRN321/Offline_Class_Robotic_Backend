@@ -48,6 +48,11 @@ namespace OfficeClassRobotic.DAO.Teachers
         public Guid SubjectId { get; set; }
     }
 
+    public class TeacherScheduleWithOutTImeRequest
+    {
+        public Guid AppUserId { get; set; }
+    }
+
     public class TeacherScheduleRequest
     {
         public string? Keyword { get; set; }
