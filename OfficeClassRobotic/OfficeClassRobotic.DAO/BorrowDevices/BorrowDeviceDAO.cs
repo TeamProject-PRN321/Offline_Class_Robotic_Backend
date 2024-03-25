@@ -169,7 +169,7 @@ namespace OfficeClassRobotic.DAO.BorrowDevices
             /// 1. Đã mượn
             /// 2. Đã trả
             /// </summary>
-            var listBorrowDeviceRequest = await _dbContext.BorrowDevices.Include(x => x.BorrowDeviceHistories).OrderBy(x => x.Created).ToListAsync();
+            var listBorrowDeviceRequest = await _dbContext.BorrowDevices.Include(x => x.BorrowDeviceHistories).OrderByDescending(x => x.Created).ToListAsync();
             var listResponse = new List<GetBorrowDeviceRequestOfTeacher>();
             if (listBorrowDeviceRequest.Any())
             {
@@ -245,7 +245,7 @@ namespace OfficeClassRobotic.DAO.BorrowDevices
             {
                 throw new BadRequestException("Không tìm thấy teacher như trên!");
             }
-            var listBorrowDeviceRequest = await _dbContext.BorrowDevices.Where(x => x.TeacherId == teacher.Id).Include(x => x.BorrowDeviceHistories).OrderBy(x => x.Created).ToListAsync();
+            var listBorrowDeviceRequest = await _dbContext.BorrowDevices.Where(x => x.TeacherId == teacher.Id).Include(x => x.BorrowDeviceHistories).OrderByDescending(x => x.Created).ToListAsync();
             var listResponse = new List<GetBorrowDeviceRequestOfTeacher>();
             if (listBorrowDeviceRequest.Any())
             {
