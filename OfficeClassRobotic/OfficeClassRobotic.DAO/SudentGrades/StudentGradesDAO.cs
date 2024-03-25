@@ -130,7 +130,7 @@ namespace OfficeClassRobotic.DAO.SudentGrades
                 var newSubjectGradingWeight = new GradeSubjectOfStudent
                 {
                     SubjetcId = subjectGradeExist.SubjectID,
-                    SubjetcName = subjectExist.SubjectName,
+                    SubjectName = subjectExist.SubjectName,
                     AssesessmentType = studenttGrade.AssesessmentType,
                     WeightPercentage = subjectGradeExist.WeightPercentage,
                     Grade = studenttGrade.Grade,
