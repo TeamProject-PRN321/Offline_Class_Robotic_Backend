@@ -47,10 +47,13 @@ namespace OfficeClassRobotic.API.Controllers.Teachers
         }
 
         [HttpGet]
-        [Route("get-schedule-of-teacher-for-borrow-devices")]
-        public async Task<List<TeacherSchedule>> GetScheduleOfTeacherByTeacherId([FromQuery] TeacherScheduleWithOutTImeRequest request)
+        [Route("get-schedule-of-teacher-for-borrow-devices/{userid}")]
+        public async Task<List<TeacherSchedule>> GetScheduleOfTeacherByTeacherId(string userid)
         {
-            var result = await _repo.GetScheduleOfTeacherByTeacherId(request);
+            var result = await _repo.GetScheduleOfTeacherByTeacherId(new TeacherScheduleWithOutTImeRequest
+            {
+                AppUserId = userid
+            });
             return result;
         }
 
