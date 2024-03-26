@@ -48,6 +48,20 @@ namespace OfficeClassRobotic.Repository.Teachers
             try
             {
                 var result = await _dao.GetScheduleOfTeacherByTeacherIdAndTime(request);
+                if(request.Keyword == null) request.Keyword = string.Empty;
+                var respone = result.Where(x => x.ClassName.ToLower().Contains(request.Keyword.ToLower())).ToList();
+                return respone;
+            }
+            catch (Exception ex)
+            {
+                throw new BadRequestException(ex.Message);
+            }
+        }
+        public async Task<List<TeacherSchedule>> GetScheduleOfTeacherByTeacherId(TeacherScheduleWithOutTImeRequest request)
+        {
+            try
+            {
+                var result = await _dao.GetScheduleOfTeacherByTeacher(request);
                 return result;
             }
             catch (Exception ex)

@@ -18,6 +18,8 @@ namespace Models.OfficeClassRobotic.BuisnessObject
         public ICollection<Class> Class { get; set; }
         public ICollection<GiaoTrinh> GiaoTrinh { get; set; }
         public ICollection<TeacherSubject> TeacherSubjects { get; set; }
+        public ICollection<SubjectGradingWeight> SubjectGradingWeight { get; set; }
+
 
     }
 }

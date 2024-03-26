@@ -62,5 +62,21 @@ namespace OfficeClassRobotic.API.Controllers.Classess
             var result = await _classRepository.GetListStudentOfClassByClassName(classname);
             return result;
         }
+
+        [HttpGet]
+        [Route("get-list-class-of-studentId/{studentId}")]
+        public async Task<List<GetClassAndGradeByStudentId>> GetListStudentByClassname(Guid studentId)
+        {
+            var result = await _classRepository.GetListClassByStudentId(studentId);
+            return result;
+        }
+
+        [HttpGet]
+        [Route("get-class-of-student-by-id-and-classname/{appuserid}/{classname}")]
+        public async Task<ClassDataResponse> GetListStudentByClassname(string appuserid, string classname)
+        {
+            var result = await _classRepository.GetClassOfStudentByIdAndClassname(appuserid, classname);
+            return result;
+        }
     }
 }

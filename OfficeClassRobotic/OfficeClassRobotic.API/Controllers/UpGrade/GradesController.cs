@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Models.OfficeClassRobotic.BuisnessObject;
 using OfficeClassRobotic.DAO.Classess;
+using OfficeClassRobotic.DAO.Students;
 using OfficeClassRobotic.DAO.SudentGrades;
 using OfficeClassRobotic.DAO.Teachers;
 using OfficeClassRobotic.Repository.IStudentGrades;
@@ -130,14 +131,15 @@ namespace OfficeClassRobotic.API.Controllers.UpGrade
             }
         }
 
-        /*[HttpGet]
-        [Route("get-list-grade/{classname}")]
-        public async Task<List<StudentGradeDTO>> GetListTeacherBySubject(string classname)
+        [HttpGet]
+        [Route("get-list-student-of-class/{classname}")]
+        public async Task<List<StudentGradeDTO>> GetListStudentOfClassByClassName(string classname)
         {
             var result = await _repo.GetStudentOfClassWithTemplateExcel(classname);
             return result;
 
-        }*/
+        }
+
         [HttpGet]
         [Route("get-list-grade/{classname}")]
         public async Task<IActionResult> GetListTeacherBySubject(string classname)
@@ -212,6 +214,14 @@ namespace OfficeClassRobotic.API.Controllers.UpGrade
             {
                 return StatusCode(500, $"Lỗi: {ex.Message}");
             }
+        }
+
+        [HttpGet]
+        [Route("get-list-grade-of-student/{classname}")]
+        public async Task<IActionResult> GetScoreOfStudentByClassname(string classname)
+        {
+            var result = await _repo.GetScoreOfStudentByClassname(classname);
+            return Ok(result);
         }
 
         [HttpPost]
@@ -312,6 +322,14 @@ namespace OfficeClassRobotic.API.Controllers.UpGrade
                 default:
                     return 0;
             }
+        }
+
+
+        [HttpGet]
+        [Route("get-all-studentsGrades/{studentId}")]
+        public async Task<List<StudentGradeDTO>> GetStudentGrades(Guid studentId)
+        {
+            return await _repo.GetListGradeByStudentId(studentId);
         }
     }
 }

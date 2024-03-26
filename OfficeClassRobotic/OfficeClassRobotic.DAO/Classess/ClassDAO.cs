@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Models.OfficeClassRobotic.BuisnessObject;
+using OfficeClassRobotic.BuisnessObject.Models;
 using OfficeClassRobotic.DAO.Classrooms;
 using OfficeClassRobotic.DAO.Subjects;
+using OfficeClassRobotic.DAO.SudentGrades;
 using OfficeClassRobotic.DAO.Teachers;
 using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
 using OfficeClassRobotic.Service.Exceptions;
@@ -492,7 +494,15 @@ namespace OfficeClassRobotic.DAO.Classess
                     _dbContext.Attendance.Add(attendence);
                 }
             }
-            await _dbContext.SaveChangesAsync();
+            try
+            {
+                await _dbContext.SaveChangesAsync();
+
+            }
+            catch (Exception ex)
+            {
+                throw new BadRequestException(ex.InnerException.Message);
+            }
         }
 
         /// <summary>
@@ -597,7 +607,7 @@ namespace OfficeClassRobotic.DAO.Classess
                                                 ClassId = c.Id,
                                                 ClassName = c.ClassName,
                                                 DayStudy = c.DayStudy,
-                                                StartTime = c.StartTime, 
+                                                StartTime = c.StartTime,
                                                 EndTime = c.EndTime,
                                                 StudentId = c.StudentId,
                                                 StudentName = studentAppUser.FullName,
@@ -619,6 +629,99 @@ namespace OfficeClassRobotic.DAO.Classess
 
             return response;
         }
-    }
 
+        /// <summary>
+        /// lấy ra thông tin lớp học của 1 sinh viên qua className và appUserId
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        public async Task<ClassDataResponse> GetClassOfStudentByIdAndClassname(string appUserId, string classname)
+        {
+            try
+            {
+                var appUserExist = await _dbContext.AppUsers.Where(a => a.Id == Guid.Parse(appUserId)).SingleOrDefaultAsync();
+                var studentExist = await _dbContext.Students.Where(s => s.AppUserId == Guid.Parse(appUserId)).SingleOrDefaultAsync();
+                var classExistByStudentId = await _dbContext.Classes
+                    .Where(c => c.ClassName.ToLower().Contains(classname.ToLower()) && c.StudentId == studentExist.Id)
+                    .SingleOrDefaultAsync();
+                var subjectExist = await _dbContext.Subjects.Where(sb => sb.Id == classExistByStudentId.SubjectId).SingleOrDefaultAsync();
+                var classSchedule = await _dbContext.ClassSchedule.Where(cs => cs.ClassId == classExistByStudentId.Id)
+                                                .GroupBy(cs => new { cs.ClassId, cs.TeacherId })
+                                                .Select(g => new
+                                                {
+                                                    ClassId = g.Key.ClassId,
+                                                    TeacherId = g.Key.TeacherId,
+                                                    DateStartStudy = g.Min(cs => cs.DateStudy),
+                                                    DateEndStudy = g.Max(cs => cs.DateStudy)
+                                                }).SingleOrDefaultAsync();
+                var teacherExsit = await _dbContext.Teacher.Where(t => t.Id == classSchedule.TeacherId).SingleOrDefaultAsync();
+                var teacheExistApp = await _dbContext.AppUsers.Where(a => a.Id == teacherExsit.AppUserId).SingleOrDefaultAsync();
+
+                var response = new ClassDataResponse
+                {
+                    ClassId = classExistByStudentId.Id,
+                    ClassName = classExistByStudentId.ClassName,
+                    DayStudy = classExistByStudentId.DayStudy,
+                    StartTime = classExistByStudentId.StartTime,
+                    EndTime = classExistByStudentId.EndTime,
+                    StudentId = classExistByStudentId.StudentId,
+                    StudentName = appUserExist.FullName,
+                    SubjectId = classExistByStudentId.SubjectId,
+                    SubjectName = subjectExist.SubjectName,
+                    TeacherId = classSchedule.TeacherId,
+                    TeacherName = teacheExistApp.FullName,
+                    DateStartStudy = classSchedule.DateStartStudy,
+                    DateEndStudy = classSchedule.DateEndStudy,
+                };
+
+                return response;
+            }
+            catch(Exception ex)
+            {
+                throw new BadRequestException(ex.Message);
+            }
+        }
+
+
+        public async Task<List<GetClassAndGradeByStudentId>> GetListClassByStudentId(Guid requestID)
+        {
+            var classDTOs = new List<GetClassAndGradeByStudentId>();
+
+            var classesOfStudentId = await _dbContext.Classes
+            .Include(c => c.Subject)
+            .Where(c => c.StudentId == requestID)
+            .ToListAsync();
+
+            foreach (var classes in classesOfStudentId)
+            {
+                var classDTO = new GetClassAndGradeByStudentId
+                {
+                    ClassId = classes.Id,
+                    DayStudy = classes.DayStudy,
+                    ClassName = classes.ClassName,
+                    StartTime = classes.StartTime,
+                    EndTime = classes.EndTime,
+                    IsClassFinish = classes.IsClassFinish,
+                    SubjectName = classes.Subject.SubjectName,
+                    Grades = new List<Dictionary<string, double>>()
+                };
+
+                var gradesInClass = await _dbContext.StudentGrades
+                    .Where(sg => sg.ClassId == classes.Id)
+                    .ToListAsync();
+
+                foreach (var grade in gradesInClass)
+                {
+                    var gradeDictionary = new Dictionary<string, double>
+                    {
+                        { grade.AssesessmentType, grade.Grade }
+                    };
+                    classDTO.Grades.Add(gradeDictionary); // Thêm Grade Dictionary vào danh sách Grades của môn học
+                }
+
+                classDTOs.Add(classDTO); ;
+            }
+            return classDTOs;
+        }
+    }
 }

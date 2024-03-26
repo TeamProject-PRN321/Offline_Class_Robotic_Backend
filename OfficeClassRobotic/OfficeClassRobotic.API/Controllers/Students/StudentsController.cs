@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Models.OfficeClassRobotic.BuisnessObject;
 using OfficeClassRobotic.DAO.Students;
 using OfficeClassRobotic.Repository.Students;
 
@@ -18,6 +19,11 @@ namespace OfficeClassRobotic.API.Controllers.Students
         [Route("get-schedule-of-student-by-student-id")]
         public async Task<List<ScheduleOfStudent>?> GetScheduleOfStudentByStudentId([FromQuery] GetStudentScheduleByStudentIdRequest request)
         {
+            var response = await _studentRepository.GetScheduleOfStudentByStudentId(request);
+            if (response == null)
+            {
+                return new List<ScheduleOfStudent>();
+            }
             return await _studentRepository.GetScheduleOfStudentByStudentId(request);
         }
 
@@ -48,7 +54,20 @@ namespace OfficeClassRobotic.API.Controllers.Students
             return await _studentRepository.GetAllStudent();
         }
 
+        [HttpGet]
+        [Route("get-all-studentsGrades/{studentId}")]
+        public async Task<List<GetStudentGrade>> GetStudentGrades(Guid studentId)
+        {
+            return await _studentRepository.GetStudentGrades(studentId);
+        }
 
+
+        [HttpGet]
+        [Route("get-all-studentsAttendance/{studentId}")]
+        public async Task<List<GetStudentAttendance>> GetStudentAttendance(Guid studentId)
+        {
+            return await _studentRepository.GetStudentAttendance(studentId);
+        }
 
     }
 }

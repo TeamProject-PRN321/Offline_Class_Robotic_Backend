@@ -14,5 +14,8 @@ namespace OfficeClassRobotic.Repository.Students
         public Task<List<StudentDTO>> GetStudentByStudentName(string studentName);
         public Task<List<StudentDTO>> GetAllStudent();
         public Task<List<StudentDTO>> SearchStudent(string studentName);
+        public Task<List<GetStudentGrade>> GetStudentGrades(Guid studentId);
+        public Task<List<GetStudentAttendance>> GetStudentAttendance(Guid studentId);
+
     }
 }

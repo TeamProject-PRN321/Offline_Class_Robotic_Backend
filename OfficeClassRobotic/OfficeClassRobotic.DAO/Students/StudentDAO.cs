@@ -4,6 +4,8 @@ using OfficeClassRobotic.Service.Exceptions;
 using System.Globalization;
 using Models.OfficeClassRobotic.BuisnessObject;
 using System.Xml.Linq;
+using OfficeClassRobotic.DAO.Classess;
+using OfficeClassRobotic.DAO.Attendances;
 
 namespace OfficeClassRobotic.DAO.Students
 {
@@ -57,8 +59,10 @@ namespace OfficeClassRobotic.DAO.Students
                     {
                         var attendance = _dbContext.Attendance.Where(x => x.ClassScheduleID == item.Id).FirstOrDefault();
                         var userTeacher = _dbContext.AppUsers.Where(x => x.Id == teacher.AppUserId).FirstOrDefault();
+                        var classes = _dbContext.Classes.Where(x => x.Id == item.ClassId).FirstOrDefault();
                         var result = new ScheduleOfStudent()
                         {
+                            ClassName = classes.ClassName,
                             SubjectId = classOfStudent.SubjectId,
                             SubjectName = subject!.SubjectName!,
                             TeacherId = teacher.Id,
@@ -90,9 +94,7 @@ namespace OfficeClassRobotic.DAO.Students
             }
             return null;
         }
-        
 
-        
 
         /*
         public async Task UpdateStudent(UpdateStudentCommand student)
@@ -341,7 +343,7 @@ namespace OfficeClassRobotic.DAO.Students
                             UserName = appUserStudent.UserName,
                         };
                         var parent = _dbContext.Parents.Where(x => x.Id == s.ParentId).FirstOrDefault();
-                        if(parent != null)
+                        if (parent != null)
                         {
                             var appUserParent = _dbContext.AppUsers.Where(x => x.Id == parent.AppUserId).FirstOrDefault();
                             if (parent != null && appUserParent != null)
@@ -367,5 +369,97 @@ namespace OfficeClassRobotic.DAO.Students
             }
             return Task.FromResult(listResult);
         }
+
+        public async Task<List<GetStudentGrade>> GetListGradeByStudentId(Guid studentId)
+        {
+            var studentGrades = new List<GetStudentGrade>();
+
+            // Lấy danh sách lớp học của sinh viên
+            var classesOfStudentId = await _dbContext.Classes
+                .Include(c => c.Subject)
+                .Include(c => c.Student)
+                    .ThenInclude(s => s.AppUser)
+                .Where(c => c.StudentId == studentId)
+                .ToListAsync();
+
+            foreach (var classs in classesOfStudentId)
+            {
+                var studentGradeDTO = new GetStudentGrade
+                {
+                    StudentName = classs.Student.AppUser.UserName,
+                    ClassName = classs.ClassName,
+                    SubjectName = classs.Subject.SubjectName,
+                    Grades = new List<Dictionary<string, double>>() // Khởi tạo danh sách Grade Dictionary cho mỗi lớp học
+                };
+
+                // Lấy tất cả các điểm của sinh viên trong lớp học đó
+                var gradesInClass = await _dbContext.StudentGrades
+                    .Where(sg => sg.ClassId == classs.Id)
+                    .ToListAsync();
+
+                // Tạo đối tượng Grade Dictionary cho mỗi điểm số
+                foreach (var grade in gradesInClass)
+                {
+                    var gradeDictionary = new Dictionary<string, double>
+                    {
+                        { grade.AssesessmentType, grade.Grade }
+                    };
+                    studentGradeDTO.Grades.Add(gradeDictionary); // Thêm Grade Dictionary vào danh sách Grades của môn học
+                }
+
+                studentGrades.Add(studentGradeDTO);
+            }
+            return studentGrades;
+        }
+
+
+        public async Task<List<GetStudentAttendance>> GetAttendanceByStudentId(Guid studentId)
+        {
+            var studentAttendances = new List<GetStudentAttendance>();
+
+            // Lấy danh sách điểm danh của sinh viên
+            var attendanceList = await _dbContext.Attendance
+                .Include(a => a.ClassSchedule)
+                    .ThenInclude(cs => cs.Class)
+                        .ThenInclude(c => c.Student)
+                            .ThenInclude(s => s.AppUser)
+                .Include(a => a.ClassSchedule.Class.Subject)
+                .Where(a => a.ClassSchedule.Class.StudentId == studentId)
+                .ToListAsync();
+
+            // Nhóm các môn học theo lớp học
+            var groupedAttendances = attendanceList.GroupBy(a => new
+            {
+                ClassName = a.ClassSchedule?.Class?.ClassName,
+                SubjectName = a.ClassSchedule?.Class?.Subject?.SubjectName
+            });
+
+            foreach (var group in groupedAttendances)
+            {
+                var studentAttendance = new GetStudentAttendance
+                {
+                    StudentName = group.First().ClassSchedule.Class.Student.AppUser.FullName,
+                    SubjectsAttendance = new List<SubjectAttendance>
+                    {
+                        new SubjectAttendance
+                        {
+                            ClassName = group.Key.ClassName,
+                            SubjectName = group.Key.SubjectName,
+                            AttendanceDetails = group.Select(a => new AttendanceDetail
+                            {
+                                DateStudy = a.ClassSchedule.DateStudy,
+                                AttendStatus = a.AttendStatus,
+                                Description = a.Description
+                            }).ToList()
+                        }
+                    }
+                };
+                studentAttendances.Add(studentAttendance);
+            }
+
+            return studentAttendances;
+        }
+
+
     }
 }

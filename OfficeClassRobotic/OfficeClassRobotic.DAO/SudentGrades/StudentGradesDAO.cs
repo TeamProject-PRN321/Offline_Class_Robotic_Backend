@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Models.OfficeClassRobotic.BuisnessObject;
 using OfficeClassRobotic.BuisnessObject.Models;
+using OfficeClassRobotic.DAO.Students;
 using OfficeClassRobotic.DAO.Teachers;
 using OfficeClassRobotic.OfficeClassRobotic.BuisnessObject.DBContext;
 using OfficeClassRobotic.Service.Exceptions;
@@ -40,7 +41,7 @@ namespace OfficeClassRobotic.DAO.SudentGrades
             try
             {
                 var listStudentGradeDto = new List<StudentGradeDTO>();
-                var classStudents = await _dbContext.Classes.Where(c => c.ClassName.Contains(className)).ToListAsync();
+                var classStudents = await _dbContext.Classes.Where(c => c.ClassName.ToLower().Contains(className.ToLower())).ToListAsync();
                 foreach (var classStudent in classStudents)
                 {
                     var subjectGrade = await _dbContext.StudentGrades.Where(sg => sg.ClassId == classStudent.Id).ToListAsync();
@@ -65,6 +66,59 @@ namespace OfficeClassRobotic.DAO.SudentGrades
             }
         }
 
+
+        public async Task<List<StudentGradeDTO>> GetListGradeByStudentId(Guid studentId)
+        {
+            var studentGrades = new List<StudentGradeDTO>();
+
+            // Lấy danh sách lớp học của sinh viên
+            var classesOfStudentId = await _dbContext.Classes
+                .Include(c => c.Subject)
+                .Include(c => c.Student)
+                    .ThenInclude(s => s.AppUser)
+                .Where(c => c.StudentId == studentId)
+                .ToListAsync();
+
+
+            foreach (var classs in classesOfStudentId)
+            {
+                var listGradeSubjectOfStudent = new List<GradeSubjectOfStudent>();
+
+                var gradesInClass = await _dbContext.StudentGrades
+                    .Where(sg => sg.ClassId == classs.Id)
+                    .FirstOrDefaultAsync();
+
+                var subjectGradingWeight = _dbContext.SubjectGradingWeights
+                    .Where(s => s.SubjectID == classs.SubjectId)
+                    .ToList();
+
+                foreach (var gradingWeight in subjectGradingWeight)
+                {
+                    var newSubjectGradingWeight = new GradeSubjectOfStudent
+                    {
+                        SubjectName = gradingWeight.Subject.SubjectName,
+                        SubjetcId = gradingWeight.SubjectID,
+                        AssesessmentType = gradingWeight.AssesessmentType,
+                        WeightPercentage = gradingWeight.WeightPercentage,
+                        Grade = gradesInClass.Grade
+                    };
+                    listGradeSubjectOfStudent.Add(newSubjectGradingWeight);
+                }
+
+                var studentGradeDTO = new StudentGradeDTO
+                {
+                    StudentName = classs.Student.AppUser.UserName,
+                    StudentId = classs.StudentId,
+                    ClassName = classs.ClassName,
+                    Email = classs.Student.AppUser.Email,
+                    GradeSubjectOfStudents = listGradeSubjectOfStudent
+                };
+                studentGrades.Add(studentGradeDTO);
+            }
+            return studentGrades;
+        }
+
+
         public List<GradeSubjectOfStudent> GetGradeSubject(List<StudentGrade> listStudentGrade, Guid subjectId)
         {
             var listGradeSubjectOfStudent = new List<GradeSubjectOfStudent>();
@@ -72,16 +126,17 @@ namespace OfficeClassRobotic.DAO.SudentGrades
             {
                 var subjectGradeExist = _dbContext.SubjectGradingWeights
                     .Where(s => s.SubjectID == subjectId && s.AssesessmentType == studenttGrade.AssesessmentType).SingleOrDefault();
+                var subjectExist = _dbContext.Subjects.Where(s => s.Id == subjectGradeExist.SubjectID).SingleOrDefault();
                 var newSubjectGradingWeight = new GradeSubjectOfStudent
                 {
                     SubjetcId = subjectGradeExist.SubjectID,
+                    SubjetcName = subjectExist.SubjectName,
                     AssesessmentType = studenttGrade.AssesessmentType,
                     WeightPercentage = subjectGradeExist.WeightPercentage,
                     Grade = studenttGrade.Grade,
                 };
                 listGradeSubjectOfStudent.Add(newSubjectGradingWeight);
             }
-
             return listGradeSubjectOfStudent;
         }
 

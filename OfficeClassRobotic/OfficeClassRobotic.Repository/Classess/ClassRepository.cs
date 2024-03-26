@@ -1,14 +1,6 @@
 ﻿using AutoMapper;
-using Azure.Core;
 using OfficeClassRobotic.DAO.Classess;
-using OfficeClassRobotic.DAO.Classrooms;
 using OfficeClassRobotic.DAO.Extensions.CRUDMessage;
-using OfficeClassRobotic.DAO.GiaoTrinhs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OfficeClassRobotic.Repository.Classess
 {
@@ -56,5 +48,15 @@ namespace OfficeClassRobotic.Repository.Classess
 
         public Task<StudentsOfClassesResponse> GetListStudentOfClassByClassName(string className)
             => ClassDAO.Instance.GetListStudentOfClassByClassName(className);
+
+
+        public async Task<List<GetClassAndGradeByStudentId>> GetListClassByStudentId(Guid request)
+        {
+            var response = await ClassDAO.Instance.GetListClassByStudentId(request);
+            return response;
+        }
+
+        public Task<ClassDataResponse> GetClassOfStudentByIdAndClassname(string appUserId, string classname)
+            => ClassDAO.Instance.GetClassOfStudentByIdAndClassname(appUserId, classname);
     }
 }
