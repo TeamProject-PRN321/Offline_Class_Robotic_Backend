@@ -323,7 +323,7 @@ namespace OfficeClassRobotic.DAO.BorrowDevices
                 var borrowHistory = await _dbContext.BorrowDeviceHistories.Where(x => x.BorrowDeviceId == borrowDevice.Id).ToListAsync();
                 foreach (var device in borrowHistory)
                 {
-                    var devices = await _dbContext.Devices.Where(x => x.DeviceCategoryId == device.Id).Include(x => x.DeviceCategory).ToListAsync();
+                    var devices = await _dbContext.Devices.Where(x => x.DeviceCategoryId == device.DeviceCategoryId).Include(x => x.DeviceCategory).ToListAsync();
                     var quantityOfDeviceInStorageWantBorrow = borrowHistory.Select(x => x.DeviceCategoryId == device.DeviceCategoryId).Count();
                     var quantityOfDeviceInStorageInTotal = devices.Where(x => x.StatusOfDevice != 2).Count();
                     var deviceName = _dbContext.DeviceCategories.Where(x => x.Id == device.DeviceCategoryId).FirstOrDefault();
