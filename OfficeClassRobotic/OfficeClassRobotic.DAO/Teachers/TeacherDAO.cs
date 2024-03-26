@@ -223,7 +223,7 @@ namespace OfficeClassRobotic.DAO.Teachers
         public async Task<List<TeacherSchedule>> GetScheduleOfTeacherByTeacher(TeacherScheduleWithOutTImeRequest request)
         {
             var listResult = new List<TeacherSchedule>();
-            var teacher = await _dbContext.Teacher.Where(x => x.AppUserId == request.AppUserId).FirstOrDefaultAsync();
+            var teacher = await _dbContext.Teacher.Where(x => x.AppUserId == Guid.Parse(request.AppUserId)).FirstOrDefaultAsync();
             if (teacher == null)
             {
                 throw new BadRequestException("Không tìm thấy Teacher nào có Appuser ID như: " + request.AppUserId);

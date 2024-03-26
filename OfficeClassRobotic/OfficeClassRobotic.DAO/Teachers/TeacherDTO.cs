@@ -50,7 +50,7 @@ namespace OfficeClassRobotic.DAO.Teachers
 
     public class TeacherScheduleWithOutTImeRequest
     {
-        public Guid AppUserId { get; set; }
+        public string AppUserId { get; set; }
     }
 
     public class TeacherScheduleRequest
